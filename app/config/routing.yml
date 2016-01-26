@@ -1,3 +1,8 @@
+custom_fos_user:
+    resource: "@CustomFosUserBundle/Controller/"
+    type:     annotation
+    prefix:   /users
+
 centrale_lille_demo:
     resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
     prefix:   /
@@ -5,3 +10,6 @@ centrale_lille_demo:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
