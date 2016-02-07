@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new CentraleLille\DemoBundle\CentraleLilleDemoBundle(),
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
+            new ProjectPageBundle\ProjectPageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
