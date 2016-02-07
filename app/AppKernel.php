@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new CentraleLille\ReservationBundle\ReservationBundle()
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
+            new ProjectPageBundle\ProjectPageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
