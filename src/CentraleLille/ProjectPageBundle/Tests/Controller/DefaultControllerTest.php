@@ -1,6 +1,6 @@
 <?php
 
-namespace CentraleLilleHomepageBundle\Tests\Controller;
+namespace ProjectPageBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
