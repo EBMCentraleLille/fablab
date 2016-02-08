@@ -28,4 +28,13 @@ class LoadUserData implements FixtureInterface
         $manager->persist($userAdmin);
         $manager->flush();
     }
+
+    /*
+     * The order in which fixtures will be loaded
+     * The lower the number, the sooner that this fixture is loaded
+     */
+    public function getOrder()
+    {
+        return 1;
+    }
 }
