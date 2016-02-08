@@ -8,10 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-
     public function indexAction()
-    {
-        return new Response("Ici on va réserver les machines");
+    { // En attendant de récupérer directement le $user pour avoir ses informations perso.
+        return $this->render('ReservationBundle:Default:index.html.twig',array('prenom'=>'Jean','nom'=>'Baptiste'));
     }
 
     public function salleAction()
