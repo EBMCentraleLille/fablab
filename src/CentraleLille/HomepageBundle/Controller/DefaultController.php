@@ -9,6 +9,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
     	$weeklyProject=[
+            'projectId'=>'3',
     		'projectName'=>'Projet De La semaine',
     		'projectDescription'=>'Ceci est la description du projet de la semaine',
     		'projectPicture'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg'

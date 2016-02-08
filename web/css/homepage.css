@@ -1,7 +1,7 @@
 .weeklyProjectPicture {
 	background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
- 	background-repeat: no-repeat;
- 	background-size: 50%;
+ 	background-repeat: repeat-x;
+ 	background-size: 40%;
  	background-position: right center;
 }
 .panelHome {
@@ -11,7 +11,16 @@
     border-color: #dddddd;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    
+}
+
+.panelThematics {
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    border-color: #dd4814;
+    padding-bottom: 25px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .jumbotronHome {
@@ -27,6 +36,7 @@
 	border-color: #dddddd;
     border-radius: 5px;
     margin: auto;
+    padding-bottom: 10px;
     height: 110px;
     width: 110px;
     background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
@@ -65,4 +75,8 @@ text-align: center;
     background-size: cover;
     background-position: center;
 	height:200px;
+}
+.homeContainer {
+  display: flex; /* or inline-flex */
+  
 }
