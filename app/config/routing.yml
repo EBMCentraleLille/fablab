@@ -9,7 +9,7 @@ custom_fos_user:
     prefix:   /users
 project_page:
     resource: "@ProjectPageBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /project
 
 centrale_lille_homepage:
     resource: "@CentraleLilleHomepageBundle/Resources/config/routing.yml"
