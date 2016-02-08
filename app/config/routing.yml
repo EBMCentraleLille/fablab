@@ -1,3 +1,7 @@
+project_page:
+    resource: "@ProjectPageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 centrale_lille_homepage:
     resource: "@CentraleLilleHomepageBundle/Resources/config/routing.yml"
     prefix:   /
