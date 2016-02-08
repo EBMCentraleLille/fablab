@@ -15,5 +15,4 @@ before_script:
 
 script:
   - phpunit -c app
-  - ./home/travis/build/EBMCentraleLille/fablab/vendor/bin/phpcs -h
-  - phpcs -h
+  - ./vendor/squizlabs/php_codesniffer/scripts/phpcs src/
