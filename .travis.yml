@@ -16,7 +16,4 @@ before_script:
 
 script:
   - phpunit -c app
-  - ./vendor/bin/phpcs /
-
-script:
-  - phpunit -c app
+  - ./vendor/bin/phpcs -h
