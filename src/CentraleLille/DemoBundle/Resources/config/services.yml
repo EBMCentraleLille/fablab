@@ -1,7 +1,3 @@
 services:
     centrale_lille.demo_bundle.demo_service:
         class: CentraleLille\DemoBundle\Service\DemoService
-<<<<<<< HEAD
-=======
-        arguments: ['@security.token_storage']
->>>>>>> 5a7d4b1e2799acb029110b77bdc48d8d8e8f02f9
