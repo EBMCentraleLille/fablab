@@ -10,9 +10,9 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/gdp');
+        $crawler = $client->request('GET', '/gdp/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->get   Response()->getStatusCode());
         $this->assertContains('Hello GDP !', $client->getResponse()->getContent());
     }
 }

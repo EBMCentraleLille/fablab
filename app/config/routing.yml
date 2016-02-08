@@ -1,7 +1,7 @@
 centrale_lille_gdp:
     resource: "@CentraleLilleGdpBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /gdp
 
 centrale_lille_demo:
     resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
