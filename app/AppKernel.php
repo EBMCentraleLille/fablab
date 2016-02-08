@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new CentraleLille\ReservationBundle\ReservationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
