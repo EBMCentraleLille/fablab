@@ -4,7 +4,7 @@ centrale_lille_homepage:
 
 centrale_lille_demo:
     resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /demo
 
 app:
     resource: "@AppBundle/Controller/"
