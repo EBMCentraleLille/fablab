@@ -12,6 +12,8 @@ matrix:
 
 before_script:
   - composer install -n
+  - composer global require "squizlabs/php_codesniffer=*"
 
 script:
   - phpunit -c app
+  - phpcs /
