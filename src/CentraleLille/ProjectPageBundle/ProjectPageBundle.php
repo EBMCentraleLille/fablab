@@ -1,6 +1,6 @@
 <?php
 
-namespace ProjectPageBundle;
+namespace CentraleLille\ProjectPageBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ProjectPageBundle\Controller;
+namespace CentraleLille\ProjectPageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

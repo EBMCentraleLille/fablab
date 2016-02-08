@@ -22,37 +22,35 @@
 
 	<div class="row">
 		<div class="col-md-1"></div>
-		<div class="row">
-			<ul class="list-group col-md-4">
-				<div class="list-group-item active">
-	    			<h4>Dernières Actualités</h4>
-	  			</div>
-	  			{% for new in news %}
-	  				<li class="list-group-item">
-	  					<div class="row">
-		  					<div class="news col-md-3"></div>
-		  					<div class="col-md-9">
-		  						<strong>{{ new.projectName }}:</strong></br>
-		  						{{ new.userName }} {{ new.newsType }}
-		  					</div>
-		  				</div>
-	  				</li>	
-	  			{% endfor %}
-			</ul>
+		<ul class="list-group col-md-4">
+			<div class="list-group-item active">
+    			<h4>Dernières Actualités</h4>
+  			</div>
+  			{% for new in news %}
+  				<li class="list-group-item">
+  					<div class="row">
+	  					<div class="news col-md-3"></div>
+	  					<div class="col-md-9">
+	  						<strong>{{ new.projectName }}:</strong></br>
+	  						{{ new.userName }} {{ new.newsType }}
+	  					</div>
+	  				</div>
+  				</li>	
+  			{% endfor %}
+		</ul>
 
-			<div class="col-md-6">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-		    			<h4>Thématiques</h4>
-		    		</div>
-		    		<div class="panel-body">
-					    {% for thematic in thematics %}
-						    <div class="col-md-4">
-						    	<div class="thematics"></div>
-						    	<h4 class="thematicTitle"> {{ thematic }} </h4>
-						    </div>
-						{% endfor %}
-					</div>
+		<div class="col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+	    			<h4>Thématiques</h4>
+	    		</div>
+	    		<div class="panel-body">
+				    {% for thematic in thematics %}
+					    <div class="col-md-4">
+					    	<div class="thematics"></div>
+					    	<h4 class="thematicTitle"> {{ thematic }} </h4>
+					    </div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
