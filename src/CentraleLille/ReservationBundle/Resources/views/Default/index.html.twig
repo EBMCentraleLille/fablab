@@ -14,10 +14,28 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-12 pull-left">
+    <row>
+    <div class="col-md-8 pull-left">
         <img src="http://centrale.ec-lille.fr/img/logo_site_1.gif" alt="logo fablab"/>
     </div>
+    <div class="col-md-4 pull-right text-center">
+        <h3>Bonjour {{ nom }} {{ prenom }} !</h3>
+        <p>On est le {{date().timestamp |date('d/m/Y h:m')}}</p>
+    </div>
+        </row>
 </div>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Accueil</a></li>
+            <li><a href="http://localhost/fablab/web/app_dev.php/reservation">Réservation Machine</a></li>
+            <li><a href="http://localhost/fablab/web/app_dev.php/casier">Réservation Casier</a></li>
+            <li><a href="http://localhost/fablab/web/app_dev.php/salle">Réservation Salle </a></li>
+        </ul>
+    </div>
+</nav>
 {% block body %} {% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
