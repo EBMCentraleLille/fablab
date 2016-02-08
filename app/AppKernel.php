@@ -1,6 +1,8 @@
 <?php
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -23,11 +25,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new CentraleLille\ReservationBundle\ReservationBundle()
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
-<<<<<<< e85532f1c0392a1048c403d1ef05d49baed2d5db
-            new ProjectPageBundle\ProjectPageBundle(),
-=======
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
->>>>>>> Correction Pb ProjectPage bundle
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
