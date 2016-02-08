@@ -71,3 +71,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: CentraleLille\CustomFosUserBundle\Entity\User
+    registration:
+        form:
+            type: CentraleLille\CustomFosUserBundle\Form\RegistrationType
