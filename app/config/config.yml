@@ -74,3 +74,10 @@ fos_user:
     registration:
         form:
             type: CentraleLille\CustomFosUserBundle\Form\RegistrationType
+    profile:
+        form:
+            type: CentraleLille\CustomFosUserBundle\Form\ProfileType
+
+
+
+
