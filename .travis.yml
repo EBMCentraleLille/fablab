@@ -14,7 +14,7 @@ services:
   - mysql
 
 before_script:
-  - mysql -u root -p -e "CREATE DATABASE fablab"
+  - mysql -u root -e "CREATE DATABASE fablab"
   - cp app/config/parameters.yml.travis app/config/parameters.yml
   - ./composer.phar -v install -n
   - php app/console doctrine:schema:create
