@@ -3,6 +3,11 @@ centrale_lille_gdp:
     type:     annotation
     prefix:   /gdp
 
+custom_fos_user:
+    resource: "@CustomFosUserBundle/Controller/"
+    type:     annotation
+    prefix:   /users
+
 centrale_lille_demo:
     resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,3 +15,22 @@ centrale_lille_demo:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /reset
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
