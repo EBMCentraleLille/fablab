@@ -31,17 +31,6 @@ class User extends BaseUser
      */
     protected $lastname;
 
-    /**
-     * @var string
-     * @ORM\Column(name="birthdate", type="string", length=255, nullable=true)
-     */
-    protected $birthdate;
-
-    /**
-     * @var string
-     * @ORM\Column(name="sex", type="string", length=10, nullable=true)
-     */
-    protected $sex;
 
     /**
      * @var string
@@ -85,38 +74,6 @@ class User extends BaseUser
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBirthdate()
-    {
-        return $this->birthdate;
-    }
-
-    /**
-     * @param string $birthdate
-     */
-    public function setBirthdate($birthdate)
-    {
-        $this->birthdate = $birthdate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSex()
-    {
-        return $this->sex;
-    }
-
-    /**
-     * @param string $sex
-     */
-    public function setSex($sex)
-    {
-        $this->sex = $sex;
     }
 
     /**
