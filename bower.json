@@ -1,0 +1,22 @@
+{
+  "name": "fablab",
+  "homepage": "https://github.com/alxckn/fablab",
+  "authors": [
+    "Mat <mat@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
