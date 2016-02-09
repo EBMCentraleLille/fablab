@@ -15,6 +15,6 @@ Bower will install bootstrap for layout.
 
 ##Gestion des réservations
 
-**par Romain, Medhi, Pierre-Louis**
+**par Romain, Medhi et Pierre-Louis**
 
 Classes Event et Machine
