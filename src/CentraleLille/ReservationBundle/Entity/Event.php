@@ -21,12 +21,28 @@ class Event
      */
     private $id;
 
+    /**
     protected $title;
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="creationDateTime", type="datetime")
+     */
     protected $creationDateTime;
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="startDateTime", type="datetime")
+     */
     protected $startDateTime;
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="endDateTime", type="datetime")
+     */
     protected $endDateTime;
 
     /**
@@ -34,8 +50,18 @@ class Event
      */
     protected $teamMember;
 
+    /**
+     * @var
+     *
+     * @ORM\Column(name="team", type="")
+     */
     protected $team;
 
+    /**
+     * @var
+     *
+     * @ORM\Column(name="machine", type="machine")
+     */
     protected $machine;
 
 
