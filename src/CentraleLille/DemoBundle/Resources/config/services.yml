@@ -1,4 +1,8 @@
 services:
     centrale_lille.demo_bundle.demo_service:
         class: CentraleLille\DemoBundle\Service\DemoService
+<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
         arguments: ['@security.token_storage']
+=======
+        arguments: [@security.token_storage]
+>>>>>>> Fix

@@ -1,4 +1,5 @@
 <?php
+<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * Recipe class file
  *
@@ -10,11 +11,14 @@
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
+=======
+>>>>>>> Fix
 
 namespace CentraleLille\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * DefaultController
  *
@@ -36,6 +40,10 @@ class DefaultController extends Controller
      *
      * @return something
      */
+=======
+class DefaultController extends Controller
+{
+>>>>>>> Fix
     public function indexAction()
     {
         return $this->render('CentraleLilleDemoBundle:Default:index.html.twig');
