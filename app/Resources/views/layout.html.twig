@@ -3,6 +3,8 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Fablab - École Centrale de Lille{% endblock %}</title>
         {% block stylesheets %}
+          <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+          <link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -50,5 +52,9 @@
 </nav>
 
 {% block body %}{% endblock %}
+{% block javascripts %}
+  <script type="text/javascript" src="{{ asset("js/jquery.min.js") }}"></script>
+  <script type="text/javascript" src="{{ asset("js/bootstrap.min.js") }}"></script>
+{% endblock %}
 </body>
 </html>

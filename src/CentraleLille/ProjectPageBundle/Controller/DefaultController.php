@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function displayProjectAction($projectId)
     {
-        return $this->render('ProjectPageBundle:Default:index.html.twig', array(
+        return $this->render('ProjectPageBundle:Default:projectpage.html.twig', array(
             'projectId' =>$projectId)
         );
     }
