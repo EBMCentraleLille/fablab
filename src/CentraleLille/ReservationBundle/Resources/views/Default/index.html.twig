@@ -25,10 +25,10 @@
         </row>
 </div>
 
-<nav class="navbar navbar-default">
-    <div class="container">
+<nav class="navbar navbar-inverse">
+    <div class="container col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8">
 
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav ">
             <li class="active"><a href="#">Accueil</a></li>
             <li><a href="http://localhost/fablab/web/app_dev.php/reservation">Réservation Machine</a></li>
             <li><a href="http://localhost/fablab/web/app_dev.php/casier">Réservation Casier</a></li>
@@ -36,6 +36,16 @@
         </ul>
     </div>
 </nav>
+<div class="clear-fix"></div>
+<div class="container col-lg-2 col-md-2">
+    <div class="list-group">
+        <a href="#" class="list-group-item active">Mon profil</a>
+        <a href="#" class="list-group-item">Mes projets</a>
+        <a href="#" class="list-group-item">FAQ</a>
+        <a href="#" class="list-group-item">HELP</a>
+    </div>
+
+</div>
 {% block body %} {% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
