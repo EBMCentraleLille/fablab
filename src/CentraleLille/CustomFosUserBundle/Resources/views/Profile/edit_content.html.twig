@@ -1,6 +1,8 @@
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit'}}) }}
     {{ form_widget(form) }}
     <div>
-        <input type="submit" value="Modifier" />
+        <input type="submit" class="btn btn-primary" value="Modifier" />
     </div>
-</form>
+ {{ form_end(form) }}
