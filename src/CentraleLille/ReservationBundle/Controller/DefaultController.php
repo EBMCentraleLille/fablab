@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     { // En attendant de récupérer directement le $user pour avoir ses informations perso.
-        return $this->render('ReservationBundle:Default:index.html.twig',array('prenom'=>'Jean','nom'=>'Baptiste'));
+        return $this->render('ReservationBundle:Default:index.html.twig',array('prenom'=>'Michelle','nom'=>'Jean'));
     }
 
     public function salleAction()
