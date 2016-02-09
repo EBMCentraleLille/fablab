@@ -1,11 +1,11 @@
 {% extends "layout.html.twig" %}
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+	
 	<link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
 {% endblock stylesheets %}
 
 {% block body %}
-	<div class="row">
+	<div class="row" style="margin-top:75px">
 		<div class="col-md-1"></div>
         <div class="col-md-10">
           	<div class="row panelHome weeklyProjectPicture panelHome-default">
@@ -45,7 +45,7 @@
 		    		</div>
 		    		<div class="panel-body">
 					    {% for thematic in thematics %}
-						    <div class="col-md-4">
+						    <div id="thematic-column" class="col-md-3">
 						    	<h4 class="thematicTitle"> {{ thematic }} </h4>
 						    	<div class="thematics"></div>
 						    </div>
@@ -72,16 +72,16 @@
 							  	<div class="panel-footer">
 							  		<div class="row">
 								  		<div class="col-md-4 recentProjectSide">
-								  			<img  src="{{ asset('icons/like.svg') }}">
-								  			{{ recentProject.likes }}
+								  			<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+								  			</br>{{ recentProject.likes }}
 								  		</div>
 								  		<div class="col-md-4 recentProjectCenter">
-								  			<img  src="{{ asset('icons/message.svg') }}">
-								  			{{ recentProject.messages }}
+								  			<object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object>
+								  		</br>{{ recentProject.messages }}
 								  		</div>
 								  		<div class="col-md-4 recentProjectSide">
-								  			<img  src="{{ asset('icons/file.svg') }}">
-								  			{{ recentProject.files}}
+								  			<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object>
+								  		</br>{{ recentProject.files}}
 								  		</div>
 								  	</div>
 							  	</div>

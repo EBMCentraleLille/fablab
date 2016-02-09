@@ -45,7 +45,7 @@ class DefaultController extends Controller
     			'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
     			'newsType'=>'a commenté'
     		]];
-    	$thematics=['Mécanique','Impression 3D','Arduino','Électronique','Drone','CAO'];
+    	$thematics=['Mécanique','Impression 3D','Arduino','Électronique','Drone','CAO','Informatique','Réalité Virtuelle'];
     	$recentProjects=[
     		[
     			'userName'=>'Martin Lechaptois',
@@ -76,6 +76,7 @@ class DefaultController extends Controller
         	'news' => $news,
         	'thematics' => $thematics,
         	'recentProjects' => $recentProjects,
+            'username'=>"Martin"
         ]);
     }
 }
