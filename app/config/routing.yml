@@ -7,6 +7,10 @@ custom_fos_user:
     resource: "@CustomFosUserBundle/Controller/"
     type:     annotation
     prefix:   /users
+news_feed:
+    resource: "@CentraleLilleNewsFeedBundle/Resources/config/routing.yml"
+    prefix:   /news-feed
+
 project_page:
     resource: "@ProjectPageBundle/Resources/config/routing.yml"
     prefix:   /project

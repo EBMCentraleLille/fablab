@@ -1,0 +1,9 @@
+.filter{
+	margin-top: 75px; 
+}
+.newsFeed{
+	border: 1px solid;
+    border-radius: 0px;
+    border-color: #dddddd;
+    height:100px;
+}
