@@ -79,6 +79,10 @@ fos_user:
         form:
             type: CentraleLille\CustomFosUserBundle\Form\ProfileType
 
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+
 
 
 
