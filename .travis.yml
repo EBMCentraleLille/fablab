@@ -15,4 +15,4 @@ before_script:
 
 script:
   - phpunit -c app
-  - ./vendor/squizlabs/php_codesniffer/scripts/phpcs src/
+  - ./vendor/squizlabs/php_codesniffer/scripts/phpcs --warning-severity=6 src/
