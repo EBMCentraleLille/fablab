@@ -1,5 +1,14 @@
 # fablab
 Site de gestion du FabLab de CentraleLille
 
-Pull Request OK
-Nouvel PR
+## Installation
+
+Install dependencies:
+
+```
+composer install
+npm install -g bower
+bower install
+```
+
+Bower will install bootstrap for layout.
