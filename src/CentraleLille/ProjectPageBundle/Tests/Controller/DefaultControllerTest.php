@@ -4,14 +4,14 @@ namespace ProjectPageBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class ProjectPageControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testDisplayProject()
     {
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertContains('slide1', $client->getResponse()->getContent());
     }
 }
