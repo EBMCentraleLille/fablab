@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class DemoService implements DemoServiceInterface
 {
 
-    private $_tokenStorage;
+    private $tokenStorage;
     /**
      * Construct
      *
@@ -41,7 +41,7 @@ class DemoService implements DemoServiceInterface
      */
     public function __construct(TokenStorageInterface $_tokenStorage)
     {
-        $this->_tokenStorage = $_tokenStorage;
+        $this->tokenStorage = $_tokenStorage;
     }
 
     /**
@@ -53,7 +53,7 @@ class DemoService implements DemoServiceInterface
      */
     public function getUser()
     {
-        return $this->_tokenStorage->getToken()->getUser();
+        return $this->tokenStorage->getToken()->getUser();
     }
 
     /**
