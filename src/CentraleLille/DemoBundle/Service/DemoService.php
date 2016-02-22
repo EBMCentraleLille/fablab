@@ -53,7 +53,7 @@ class DemoService implements DemoServiceInterface
      */
     public function getUser()
     {
-        return $this->_tokenStorage->getToken()->getUser();
+        return $this->tokenStorage->getToken()->getUser();
     }
 
     /**
