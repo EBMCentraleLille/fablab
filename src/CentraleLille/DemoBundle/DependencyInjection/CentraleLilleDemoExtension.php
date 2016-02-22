@@ -36,8 +36,8 @@ class CentraleLilleDemoExtension extends Extension
      *
      * {@inheritdoc}
      *
-     * @param array            $configs 
-     * @param ContainerBuilder $container 
+     * @param array            $configs
+     * @param ContainerBuilder $container
      *
      * @return something
      */

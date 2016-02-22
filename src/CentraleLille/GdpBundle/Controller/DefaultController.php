@@ -15,6 +15,7 @@ namespace CentraleLille\GdpBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 /**
  * DefaultControllerClass Doc Comment
  *

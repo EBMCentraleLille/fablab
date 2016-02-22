@@ -14,6 +14,7 @@
 namespace CentraleLille\DemoBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 /**
  * CentraleLilleDemoBundle Class Doc Comment
  *

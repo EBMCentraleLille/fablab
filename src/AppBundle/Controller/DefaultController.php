@@ -2,7 +2,7 @@
 /**
  * DefaultController File Doc Comment
  *
- * PHP Version 5.5 
+ * PHP Version 5.5
  *
  * @category DefaultController
  * @package  AppBundle
@@ -41,7 +41,8 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render(
-            'default/index.html.twig', array(
+            'default/index.html.twig',
+            array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             )
         );
