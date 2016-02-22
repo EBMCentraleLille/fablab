@@ -22,4 +22,4 @@ before_script:
 
 script:
   - phpunit -c app
-  - ./vendor/squizlabs/php_codesniffer/scripts/phpcs src/
+  - ./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard="./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/ruleset.xml" src/

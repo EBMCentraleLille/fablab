@@ -12,8 +12,8 @@ class RegistrationType extends AbstractType
     {
         $builder->add('firstname');
         $builder->add('lastname');
-        $builder->add('phone','text', array('required' => false));
-        $builder->add('promo','text', array('required' => false));
+        $builder->add('phone', 'text', array('required' => false));
+        $builder->add('promo', 'text', array('required' => false));
     }
 
     public function getParent()

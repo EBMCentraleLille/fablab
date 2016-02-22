@@ -13,6 +13,7 @@
 namespace CentraleLille\GdpBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 /**
  * DefaultControllerTest Class Doc Comment
  *
