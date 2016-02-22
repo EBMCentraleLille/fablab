@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * DemoServiceInterface Class Doc Comment
- * 
+ *
  * Demo Interface to explain how to define the service flow
  * DO NOT USE
  *

@@ -16,6 +16,7 @@ use CentraleLille\DemoBundle\ServiceInterfaces\DemoServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * DemoService Class Doc Comment
  *
@@ -33,12 +34,12 @@ class DemoService implements DemoServiceInterface
      * Construct
      *
      * Description
-     * 
+     *
      * @param TokenStorageInterface $_tokenStorage token storage
      *
-     * @return 
+     * @return
      */
-    function __construct(TokenStorageInterface $_tokenStorage)
+    public function __construct(TokenStorageInterface $_tokenStorage)
     {
         $this->_tokenStorage = $_tokenStorage;
     }
