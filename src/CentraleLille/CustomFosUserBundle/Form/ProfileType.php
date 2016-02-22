@@ -11,7 +11,6 @@ class ProfileType extends AbstractType
     {
 
         $builder
-        ->remove('username')
         ->remove('current_password')
         ->add('email', 'email', array('label' => 'Email'))
         ->add('promo', null, array('label' => 'Promotion'))
