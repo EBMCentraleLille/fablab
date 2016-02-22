@@ -2,6 +2,10 @@ centrale_lille_machine:
     path: /reservation
     defaults: {_controller:ReservationBundle:Default:index}
 
+centrale_lille_add_machine:
+    path: /reservation/add_machine
+    defaults: {_controller:ReservationBundle:Machine:addMachine}
+
 centrale_lille_salle:
     path: /salle
     defaults: {_controller:ReservationBundle:Default:salle}
@@ -9,5 +13,10 @@ centrale_lille_salle:
 centrale_lille_casier:
     path: /casier
     defaults: {_controller:ReservationBundle:Default:casier}
+
+
+centrale_lille_administration:
+    path: /Admin
+    defaults: {_controller:ReservationBundle:Default:admin}
 
 

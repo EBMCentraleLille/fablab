@@ -1,0 +1,17 @@
+{% extends "ReservationBundle:Default:index.html.twig" %}
+
+{% block title %} Admin - Index {% endblock %}
+
+{% block body %}
+    <h3>  Liste des machines </h3>
+    {% for machine in machines %}
+    <div class="well">
+    <ul>
+
+            <li> {{ machine.machineName}}</li>
+            <li> {{ machine.description }}</li>
+
+    </ul>
+</div>
+    {% endfor %}
+{% endblock %}
