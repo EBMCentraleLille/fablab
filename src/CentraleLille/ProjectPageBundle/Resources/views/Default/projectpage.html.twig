@@ -1,10 +1,24 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-    <h1> {{ projectId }} </h1><br>
-    <div id="projCarousel">
-        slide1
+<div class="row" style="margin-top:75px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <h1> {{ projectId }} </h1><br>
+        <div id="projCarousel">
+            Carousel ici
+
+        </div>
 
     </div>
+    <div  style="margin-left:30px">
+    <div class="btn-group btn-group-justified">
+        <a href="#" class="btn btn-default">Détails</a>
+        <a href="#" class="btn btn-default">Fichiers</a>
+        <a href="#" class="btn btn-default">Commentaires</a>
+        <a href="#" class="btn btn-default">Thématiques</a>
+    </div>
+    </div>
+</div>
 
 {% endblock %}
