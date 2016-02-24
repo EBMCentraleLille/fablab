@@ -11,7 +11,7 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
-=======
+//=======
 
 >>>>>>> Fix
 namespace CentraleLille\DemoBundle\DependencyInjection;

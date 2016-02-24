@@ -1,0 +1,15 @@
+{% extends "ReservationBundle:Default:index.html.twig" %}
+
+{% block title %} Reservation - Index {% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+    <div class="col-md-5 col-lg-5">
+    <h3>  Réserver une machine </h3>
+    </div>
+    </div>
+<div class="well">
+    {{ form(form) }}
+</div>
+
+{% endblock %}
