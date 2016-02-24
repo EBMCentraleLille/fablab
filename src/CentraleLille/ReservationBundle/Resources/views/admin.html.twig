@@ -14,7 +14,7 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
            </button>
 
-        <button type="button" class="btn btn-primary" aria-hidden="true">
+        <button type="button" class="btn btn-primary" aria-hidden="true" onclick="location.href = './reservation/add_machine';">
             Ajouter machine
         </button>
 
@@ -26,10 +26,17 @@
     {% for machine in machines %}
         <div class="well">
     <ul>
-            <li> {{ machine.machineName}}</li>
+            <li> {{ machine.id }} - {{ machine.machineName}}</li>
             <li> {{ machine.description }}</li>
-
     </ul>
+            <div class="btn-group" role="toolbar">
+                <button type="button" class="btn btn-danger" aria-hidden="true" onclick="location.href ='./reservation/delete_machine/{{ machine.id }}';">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-danger" aria-hidden="true" onclick=""location.href = './reservation/delete_machine/{{ machine.id }}'>
+                    Supprimer la machine
+                </button>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}
