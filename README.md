@@ -1,4 +1,4 @@
-# fablab
+#Fablab
 Site de gestion du FabLab de CentraleLille
 
 ## Installation
@@ -12,3 +12,9 @@ bower install
 ```
 
 Bower will install bootstrap for layout.
+
+##Gestion des réservations
+
+**par Romain, Medhi et Pierre-Louis**
+
+Classes Event et Machine
