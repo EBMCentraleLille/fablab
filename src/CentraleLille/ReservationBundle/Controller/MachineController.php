@@ -36,9 +36,17 @@ class MachineController extends Controller
             return $this->redirect($this->generateUrl('centrale_lille_add_machine',array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())));
         }
 
-
         return $this->render('ReservationBundle::add.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView()));
     }
+    public function deleteMachineAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('ReservationBundle:Machine');
 
+        $machine = $repository ->find($id);
+
+        $em->remove($machine);
+        $em->flush();
+        return $this->redirect($this->generateUrl('centrale_lille_administration',array('prenom'=>'Michelle', 'nom'=>'Jean')));
+    }
 
 }

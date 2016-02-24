@@ -43,11 +43,15 @@ class Machine
      */
     protected $lastMaintenance;
     /**
-     * @ORM\Column(name="Requirements",type="string",nullable=true) //
+     * @ORM\Column(name="Requirements",type="string",nullable=true)
      */
     // Pour l'instant on garde en attendant de récupérer la classe Compétence
     protected $requirements;
 
+    /**
+     * @ORM\Column(name="Type",type="string",nullable=true)
+     */
+    protected $type;
     /**
      * Machine constructor.
      */
