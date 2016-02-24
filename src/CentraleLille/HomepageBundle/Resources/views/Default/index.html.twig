@@ -5,54 +5,55 @@
 {% endblock stylesheets %}
 
 {% block body %}
-	<div class="row" style="margin-top:75px">
-		<div class="col-md-1"></div>
-        <div class="col-md-10">
-          	<div class="row panelHome weeklyProjectPicture panelHome-default">
-            	<div class="jumbotronHome col-md-4" >
-            		<h2> {{ weeklyProject.projectName }} </h2>
-  					<p> {{ weeklyProject.projectDescription }} </p>
-  					<p><a class="btn btn-primary btn-lg">En Savoir Plus</a></p>
-            	</div>
-            </div>
-        </div>
-    	<div class="col-md-1"></div>
-    </div>
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-1"></div>
+	        <div class="col-md-10">
+	          	<div class="row panelHome weeklyProjectPicture panelHome-default">
+	            	<div class="jumbotronHome col-md-4" >
+	            		<h2> {{ weeklyProject.projectName }} </h2>
+	  					<p> {{ weeklyProject.projectDescription }} </p>
+	  					<p><a class="btn btn-primary btn-lg">En Savoir Plus</a></p>
+	            	</div>
+	            </div>
+	        </div>
+	    	<div class="col-md-1"></div>
+	    </div>
+    
 
 	<div class="row">
 		<div class="col-md-1"></div>
-			<ul class="list-group col-md-4">
-				<div class="list-group-item active">
-	    			<h4>Dernières Actualités</h4>
-	  			</div>
-	  			{% for new in news %}
-	  				<li class="list-group-item">
-	  					<div class="row">
-		  					<div class="news col-md-3"></div>
-		  					<div class="col-md-9">
-		  						<strong>{{ new.projectName }}:</strong></br>
-		  						{{ new.userName }} {{ new.newsType }}
-		  					</div>
+		<ul class="list-group col-md-4">
+			<div class="list-group-item active">
+	    		<h4>Dernières Actualités</h4>
+	  		</div>
+	  		{% for new in news %}
+	  			<li class="list-group-item">
+	  				<div class="row">
+		  				<div class="news col-md-3"></div>
+		  				<div class="col-md-9">
+		  					<strong>{{ new.projectName }}:</strong></br>
+		  					{{ new.userName }} {{ new.newsType }}
 		  				</div>
-	  				</li>	
-	  			{% endfor %}
-			</ul>
-
-			<div class="col-md-6">
-				<div class="row panelThematics panel-primary">
-					<div class="panel-heading">
-		    			<h4>Thématiques</h4>
-		    		</div>
-		    		<div class="panel-body">
-					    {% for thematic in thematics %}
-						    <div id="thematic-column" class="col-md-3">
-						    	<h4 class="thematicTitle"> {{ thematic }} </h4>
-						    	<div class="thematics"></div>
-						    </div>
-						{% endfor %}
-					</div>
+		  			</div>
+	  			</li>	
+	  		{% endfor %}
+		</ul>
+		<div class="col-md-6">
+			<div class="row panelThematics panel-primary">
+				<div class="panel-heading">
+	    			<h4>Thématiques</h4>
+	    		</div>
+	    		<div class="panel-body">
+				    {% for thematic in thematics %}
+					    <div id="thematic-column" class="col-md-3">
+					    	<h4 class="thematicTitle"> {{ thematic }} </h4>
+					    	<div class="thematics"></div>
+					    </div>
+					{% endfor %}
 				</div>
 			</div>
+		</div>
 		<div class="col-md-1"></div>
 	</div>
 
@@ -92,5 +93,6 @@
 			</div>
 		</div>
 		<div class="col-md-1"></div>
+	</div>
 	</div>
 {% endblock body %}

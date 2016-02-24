@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18,42px" height="21px" viewBox="0 0 21 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    
+    <title>Share icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Share-Icon" sketch:type="MSArtboardGroup" fill="#818181">
+            <g id="Share-icon" sketch:type="MSLayerGroup">
+                <ellipse id="Cercle3" sketch:type="MSShapeGroup" cx="17.0171198" cy="4.00344531" rx="4.0040282" ry="4.00344531"></ellipse>
+                <ellipse id="Cercle2" sketch:type="MSShapeGroup" cx="4.0040282" cy="13.0111972" rx="4.0040282" ry="4.00344531"></ellipse>
+                <ellipse id="Cercle1" sketch:type="MSShapeGroup" cx="17.0171198" cy="20.0172265" rx="4.0040282" ry="4.00344531"></ellipse>
+                <path d="M3.50352467,12.5107666 L17.5176234,20.5176572" id="Line1" stroke="#838383" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+                <path d="M3.50352467,12.5107666 L17.5176234,4.50387597" id="Line2" stroke="#838383" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>
