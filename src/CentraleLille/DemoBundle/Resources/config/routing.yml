@@ -1,4 +1,3 @@
 centrale_lille_demo_homepage:
     path:     /
     defaults: { _controller: CentraleLilleDemoBundle:Default:index }
-

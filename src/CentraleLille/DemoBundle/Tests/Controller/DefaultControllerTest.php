@@ -1,5 +1,4 @@
 <?php
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * CentraleLilleDemoBundle File Doc Comment
  *
@@ -11,14 +10,11 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
-=======
->>>>>>> Fix
 
 namespace CentraleLille\DemoBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * CentraleLilleDemoBundle Class Doc Comment
  *
@@ -37,10 +33,6 @@ class DefaultControllerTest extends WebTestCase
      *
      * @return something
      */
-=======
-class DefaultControllerTest extends WebTestCase
-{
->>>>>>> Fix
     public function testIndex()
     {
         $client = static::createClient();

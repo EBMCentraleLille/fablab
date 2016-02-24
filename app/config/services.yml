@@ -13,7 +13,3 @@ services:
         class: CentraleLille\CustomFosUserBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
