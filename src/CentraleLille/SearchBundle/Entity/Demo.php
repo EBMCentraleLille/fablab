@@ -3,13 +3,11 @@
 namespace CentraleLille\SearchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\ElasticaBundle\Configuration\Search;
 
 /**
 * Demo
 *
 * @ORM\Table(name="demo")
-* @Search(repositoryClass="CentraleLille\SearchBundle\Repository\DemoRepository")
 * @ORM\Entity(repositoryClass="CentraleLille\SearchBundle\Repository\DemoRepository")
 * @ORM\HasLifecycleCallbacks
 */
