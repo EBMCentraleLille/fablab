@@ -23,12 +23,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new CentraleLille\SearchBundle\CentraleLilleSearchBundle(),
-<<<<<<< HEAD
-            new FOS\ElasticaBundle\FOSElasticaBundle()
-=======
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
->>>>>>> maxime
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
