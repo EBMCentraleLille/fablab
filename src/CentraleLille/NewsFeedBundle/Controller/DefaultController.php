@@ -58,7 +58,11 @@ class DefaultController extends Controller
                 'name'=>'Project De Martin'
             ]
             ]; 
-        return $this->render('CentraleLilleNewsFeedBundle:newsFeed.html.twig',[
+
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $projets=$abonnementService->aboProjet('Martin');
+
+        return $this->render('NewsFeedBundle:newsFeed.html.twig',[
         	'recentProjects' => $recentProjects,
             'suggestions' => $suggestions
         ]);

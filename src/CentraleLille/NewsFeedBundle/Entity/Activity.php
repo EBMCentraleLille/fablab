@@ -29,17 +29,13 @@ class Activity
     private $date;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Project", type="string", length=255)
-     */
+    * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+    **/
     private $project;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="User", type="string", length=255)
-     */
+    * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\User"), cascade={"persist"})
+    **/
     private $user;
 
     /**
@@ -186,5 +182,60 @@ class Activity
     {
         return $this->attribute;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->project = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add project
+     *
+     * @param \CentraleLille\DemoBundle\Entity\Projet $project
+     *
+     * @return Activity
+     */
+    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    {
+        $this->project[] = $project;
+
+        return $this;
+    }
+
+    /**
+     * Remove project
+     *
+     * @param \CentraleLille\DemoBundle\Entity\Projet $project
+     */
+    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    {
+        $this->project->removeElement($project);
+    }
+
+    /**
+     * Add user
+     *
+     * @param \CentraleLille\DemoBundle\Entity\User $user
+     *
+     * @return Activity
+     */
+    public function addUser(\CentraleLille\DemoBundle\Entity\User $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \CentraleLille\DemoBundle\Entity\User $user
+     */
+    public function removeUser(\CentraleLille\DemoBundle\Entity\User $user)
+    {
+        $this->user->removeElement($user);
+    }
+}
