@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new CentraleLille\SearchBundle\CentraleLilleSearchBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
