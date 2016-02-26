@@ -87,27 +87,28 @@ services:
 
 # ElasticSearch Bundle configuration
 fos_elastica:
+    serializer: ~
     clients:
         default: { host: %elastic_host%, port: %elastic_port% }
     indexes:
         fablab:
             client: default
             types:
-                article:
-                    mappings:
-                        id:
-                            type: integer
-                        createdAt :
-                            type : date
-                        publishedAt :
-                            type : date
-                        published :
-                            type : boolean
-                        title : ~
-                        content : ~
+                demo:
+                    serializer:
+                        groups: [elastica, Default]
                     persistence:
                         driver: orm
                         model: CentraleLille\SearchBundle\Entity\Demo
-                        finder: ~
                         provider: ~
                         listener: ~
+                        finder: ~
+                user:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\CustomFosUserBundle\Entity\User
+                        provider: ~
+                        listener: ~
+                        finder: ~
