@@ -21,11 +21,9 @@ class MachineController extends Controller
             ->add('machineName', 'text')
             ->add('description', 'textarea')
             ->add('Sauvegarder', 'submit')
-
             ;
 
         $form = $formBuilder->getForm();
-
         $form->handleRequest($request);
 
         if($form->isValid()){
@@ -38,6 +36,8 @@ class MachineController extends Controller
 
         return $this->render('ReservationBundle::add.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView()));
     }
+
+
     public function deleteMachineAction($id){
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ReservationBundle:Machine');

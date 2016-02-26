@@ -1,5 +1,5 @@
 <?php
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
+//<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * CentraleLilleDemoExtension File Doc Comment
  *
@@ -11,9 +11,9 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
-=======
+//=======
 
->>>>>>> Fix
+//>>>>>>> Fix
 namespace CentraleLille\DemoBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;

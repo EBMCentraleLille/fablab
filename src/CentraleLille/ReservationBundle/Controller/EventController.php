@@ -5,34 +5,45 @@ namespace CentraleLille\ReservationBundle\Controller;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use CentraleLille\ReservationBundle\Entity\Event;
 use CentraleLille\ReservationBundle\Entity\Machine;
+use Symfony\Component\HttpFoundation\Request;
 
 
 
 class EventController extends Controller
 {
-    public function reserverAction()
+    public function reserverAction(Request $request)
     {
         $event = new Event();
+        $event->setCreationDateTime();
+        $formBuilder = $this->get('form.factory')->createBuilder('form',$event);
 
-        $formBuilder = $this -> get('form.factory')->createBuilder('form',$event);
-
-        $form = $formBuilder -> add('startDateTime','date')
+         $formBuilder -> add('startDateTime','date')
             ->add('endDateTime','date')
-            ->add('machine', EntityType::class,array(
-                'class'=> 'ReservationBundle:Machine',
-                'choice_label'=>'machineName'))
-            ->add('Sauvegarder','submit')->getForm();
+            ->add('machine','entity',array(
+                'class'=>'ReservationBundle:Machine',
+                'choice_label'=>'machineName',
+                'multiple'=>'false',
+                'required'=>'true'))
+            ->add('Sauvegarder','submit');
 
+        $form = $formBuilder -> getForm();
 
-            $em = $this->getDoctrine()->getManager();
-            $repositoryEvent = $em->getRepository('ReservationBundle:Event');
-            $em->persist($event);
-            $em->flush();
-            return $this->redirect($this->generateUrl('centrale_lille_machine',array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())));
+        $form-> handleRequest($request);
+
+        if ($form->isSubmitted()&& $request->isMethod("POST")){
+
+            if($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($event);
+                $em->flush();
+                return $this->redirectToRoute('ReservationBundle::reservation.html.twig');
+        }
+        }
+
+        return $this->render('ReservationBundle::reservation.html.twig',array('nom'=>'Michelle','prenom'=>'Jean','form'=>$form->createView()));
 
     }
 

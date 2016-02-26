@@ -49,14 +49,14 @@ class Event
     /**
      * @var teamMember
      *
-     * @ORM\Column(name="teamMember",type="string")
+     * @ORM\Column(name="teamMember",type="string",nullable=true)
      */
     protected $teamMember;
 
     /**
      * @var
      *
-     * @ORM\Column(name="project", type="object")
+     * @ORM\Column(name="project", type="object",nullable=true)
      */
     protected $project;
 
@@ -77,15 +77,9 @@ class Event
      * @param $team
      * @param $machine
      */
-    public function __construct($id, datetime $startDateTime, datetime $endDateTime, $teamMember, $team, $machine)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->creationDateTime = date("d-m-Y H:i:s");
-        $this->startDateTime = $startDateTime;
-        $this->endDateTime = $endDateTime;
-        $this->teamMember = $teamMember;
-        $this->team = $team;
-        $this->machine = $machine;
+
     }
 
     /**
@@ -189,9 +183,10 @@ class Event
     /**
      * @param datetime $creationDateTime
      */
-    public function setCreationDateTime($creationDateTime)
+    public function setCreationDateTime()
     {
-        $this->creationDateTime = $creationDateTime;
+        $date = date_create(date("d-M-Y H:i"));
+        $this->creationDateTime = $date ;
     }
 
 

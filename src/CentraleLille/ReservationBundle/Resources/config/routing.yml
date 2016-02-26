@@ -1,6 +1,6 @@
 centrale_lille_machine:
     path: /reservation
-    defaults: {_controller:ReservationBundle:Default:index}
+    defaults: {_controller:ReservationBundle:Event:reserver}
 
 centrale_lille_add_machine:
     path: /reservation/add_machine
