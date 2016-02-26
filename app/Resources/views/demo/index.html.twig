@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Demo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Createdat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demo in demos %}
+            <tr>
+                <td><a href="{{ path('demo_show', { 'id': demo.id }) }}">{{ demo.id }}</a></td>
+                <td>{{ demo.title }}</td>
+                <td>{{ demo.content }}</td>
+                <td>{% if demo.createdAt %}{{ demo.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('demo_show', { 'id': demo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('demo_edit', { 'id': demo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('demo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
