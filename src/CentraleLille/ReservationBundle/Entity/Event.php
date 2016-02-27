@@ -3,6 +3,7 @@
 namespace CentraleLille\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -62,8 +63,7 @@ class Event
 
     /**
      * @var
-     *
-     * @ORM\OneToOne(targetEntity="Machine", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Machine", cascade={"persist"})
      */
     protected $machine;
 

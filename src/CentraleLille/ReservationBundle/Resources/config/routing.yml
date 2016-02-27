@@ -14,7 +14,6 @@ centrale_lille_casier:
     path: /casier
     defaults: {_controller:ReservationBundle:Default:casier}
 
-
 centrale_lille_administration:
     path: /Admin
     defaults: {_controller:ReservationBundle:Default:admin}

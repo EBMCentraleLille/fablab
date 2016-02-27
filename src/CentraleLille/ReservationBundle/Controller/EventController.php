@@ -18,34 +18,50 @@ class EventController extends Controller
     {
         $event = new Event();
         $event->setCreationDateTime();
-        $formBuilder = $this->get('form.factory')->createBuilder('form',$event);
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
 
-         $formBuilder -> add('startDateTime','date')
-            ->add('endDateTime','date')
-            ->add('machine','entity',array(
-                'class'=>'ReservationBundle:Machine',
-                'choice_label'=>'machineName',
-                'multiple'=>'false',
-                'required'=>'true'))
-            ->add('Sauvegarder','submit');
+        $formBuilder->add('startDateTime', 'date')
+            ->add('endDateTime', 'date')
+            ->add('machine', EntityType::class, array(
+                'class' => 'ReservationBundle:Machine',
+                'choice_label' => 'machineName',
+                'multiple' => false,
+                'required' => true,
+                'expanded' => true))
+            ->add('Sauvegarder', 'submit');
 
-        $form = $formBuilder -> getForm();
 
-        $form-> handleRequest($request);
+            $form = $formBuilder->getForm();
 
-        if ($form->isSubmitted()&& $request->isMethod("POST")){
+            $form->handleRequest($request);
 
-            if($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($event);
-                $em->flush();
-                return $this->redirectToRoute('ReservationBundle::reservation.html.twig');
+            if ($form->isSubmitted() && $request->isMethod("POST")) {
+
+                if ($form->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($event);
+                    $em->flush();
+                    $event = new Event();
+                    $formBuilder = $this->get('form.factory')->createBuilder('form',$event);
+                    $formBuilder->add('startDateTime', 'date')
+                        ->add('endDateTime', 'date')
+                        ->add('machine', EntityType::class, array(
+                            'class' => 'ReservationBundle:Machine',
+                            'choice_label' => 'machineName',
+                            'multiple' => false,
+                            'required' => true,
+                            'expanded' => true))
+                        ->add('Sauvegarder', 'submit');
+
+                    $form = $formBuilder ->getForm();
+
+                    return $this->render('ReservationBundle::reservation.html.twig',array('nom'=>"Michelle",'prenom'=>'Jean','form'=> $form->createView()));
+                }
+            }
+
+            return $this->render('ReservationBundle::reservation.html.twig', array('nom' => 'Michelle', 'prenom' => 'Jean', 'form' => $form->createView()));
+
         }
-        }
-
-        return $this->render('ReservationBundle::reservation.html.twig',array('nom'=>'Michelle','prenom'=>'Jean','form'=>$form->createView()));
-
-    }
 
     public function adminAction()
     {
