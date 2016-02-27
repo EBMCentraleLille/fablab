@@ -33,4 +33,15 @@ class DefaultController extends Controller
 
         return $this->render('ReservationBundle::admin.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
     }
+
+    public function profilAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $em->getRepository('ReservationBundle:Event');
+
+        $events = $repository ->findAll();
+
+        return $this->render('ReservationBundle::profil.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','events'=>$events));
+
+    }
 }

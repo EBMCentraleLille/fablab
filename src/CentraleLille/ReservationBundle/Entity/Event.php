@@ -46,21 +46,6 @@ class Event
      */
     protected $endDateTime;
 
-
-    /**
-     * @var teamMember
-     *
-     * @ORM\Column(name="teamMember",type="string",nullable=true)
-     */
-    protected $teamMember;
-
-    /**
-     * @var
-     *
-     * @ORM\Column(name="project", type="object",nullable=true)
-     */
-    protected $project;
-
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="Machine", cascade={"persist"})
@@ -73,8 +58,6 @@ class Event
      * @param $creationDateTime
      * @param datetime $startDateTime
      * @param datetime $endDateTime
-     * @param $teamMember
-     * @param $team
      * @param $machine
      */
     public function __construct()
@@ -106,38 +89,6 @@ class Event
     public function setMachine($machine)
     {
         $this->machine = $machine;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTeamMember()
-    {
-        return $this->teamMember;
-    }
-
-    /**
-     * @param mixed $teamMember
-     */
-    public function setTeamMember($teamMember)
-    {
-        $this->teamMember = $teamMember;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTeam()
-    {
-        return $this->team;
-    }
-
-    /**
-     * @param mixed $team
-     */
-    public function setTeam($team)
-    {
-        $this->team = $team;
     }
 
     /**

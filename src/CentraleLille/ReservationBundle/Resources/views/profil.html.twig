@@ -11,9 +11,10 @@
     {% for event in events %}
     <div class="well">
         <ul>
-            <li>Date de début : {{ event.startDateTime}} </li>
-            <li>Date de fin : {{ event.endDateTime}} </li>
-            <li>Machine : {{ event.machine.machineName }}</li>
+            <li>Date de début : {{ event.startDateTime|date('d-m-Y')}} </li>
+            <li>Date de fin : {{ event.endDateTime|date('d-m-Y')}} </li>
+            <li>Sur la machine : {{ event.machine.getMachineName()  }}</li>
+
         </ul>
     </div>
  {% endfor %}

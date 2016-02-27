@@ -148,6 +148,11 @@ class Machine
         return $this->requirements;
     }
 
+    function __toString()
+    {
+        return (string)$this->getMachineName()+"  "+$this->getDescription();
+    }
+
     /**
      * @param mixed $requirements
      */
