@@ -23,7 +23,7 @@ php app/console doctrine:fixtures:load
 ##### 4 rôles :
 - Rôle de type normal (scope = tout le site) :
   - **ROLE_ADMIN** : Permet d'accéder à tout et d'effectuer toutes les actions
-  - **ROLE_USER** : Permet de voir les projets (rôle par défaut lorsqu'on a possède un compte)
+  - **ROLE_USER** : Permet de voir les projets (rôle par défaut lorsqu'on possède un compte)
 - Rôle de type projet (scope = projet) :
   - **ROLE_MEMBER** : Permet d'accéder aux pages privées du projet (rôle par défaut lorsqu'on est membre du projet)
   - **ROLE_SUPER_MEMBER** : Permet d'effectuer des actions supplémentaires dans les pages privées du projet
