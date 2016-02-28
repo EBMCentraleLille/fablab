@@ -1,1 +1,36 @@
-Hello World!
+{% extends 'CustomFosUserBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+<h2>List of users</h2>
+{% if currentUser %}
+<p> Vous êtes connecté en tant que : {{ currentUser.username }}</p>
+{% endif %}
+<table class="table table-striped">
+    <tr>
+        <th>Username</th>
+        <th>Projects</th>
+        <th>Roles</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+       <td style="vertical-align: middle">{{ user.username }}</td>
+       <td style="vertical-align: middle">
+       {% for group in user.groups %}
+           {{group.name}}
+           (<a href="{{ path('fos_user_group_show', {'groupName' : group.name}) }}">view</a> /
+           <a href="{{ path('fos_user_group_edit', {'groupName' : group.name}) }}">edit</a>)
+           <br>
+       {% endfor %}
+       </td>
+       <td style="vertical-align: middle">
+       {% for role in user.roles %}
+           {{role}}
+           <br>
+       {% endfor %}
+       </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

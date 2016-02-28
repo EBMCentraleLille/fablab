@@ -11,11 +11,10 @@ class ProfileType extends AbstractType
     {
 
         $builder
-        ->remove('current_password')
-        ->add('email', 'email', array('label' => 'Email'))
-        ->add('promo', null, array('label' => 'Promotion'))
-        ->add('phone', null, array('label' => 'Téléphone'))
-        ;
+            ->remove('current_password')
+            ->add('email', 'email', array('label' => 'Email'))
+            ->add('promo', null, array('label' => 'Promotion'))
+            ->add('phone', null, array('label' => 'Téléphone'));
     }
 
     public function getParent()

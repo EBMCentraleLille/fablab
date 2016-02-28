@@ -6,7 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CentraleLille\CustomFosUserBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
@@ -43,6 +43,15 @@ class User extends BaseUser
      * @ORM\Column(name="phone", type="string", length=25, nullable=true)
      */
     protected $phone;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
+     * @ORM\JoinTable(name="fos_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
 
     /**
      * @return string
