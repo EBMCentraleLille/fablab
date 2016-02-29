@@ -21,11 +21,10 @@ class Abonnement
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="User", type="string", length=255)
-     */
+   /**
+    * @ORM\ManyToOne (targetEntity="CentraleLille\DemoBundle\Entity\User"), cascade={"persist"})
+    * @ORM\JoinColumn(nullable=false)
+    **/
     private $user;
 
     /**
@@ -175,5 +174,29 @@ class Abonnement
     public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
         $this->projects->removeElement($project);
+    }
+
+    /**
+     * Add user
+     *
+     * @param \CentraleLille\DemoBundle\Entity\User $user
+     *
+     * @return Abonnement
+     */
+    public function addUser(\CentraleLille\DemoBundle\Entity\User $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \CentraleLille\DemoBundle\Entity\User $user
+     */
+    public function removeUser(\CentraleLille\DemoBundle\Entity\User $user)
+    {
+        $this->user->removeElement($user);
     }
 }
