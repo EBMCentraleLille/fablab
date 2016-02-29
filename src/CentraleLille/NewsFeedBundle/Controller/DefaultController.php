@@ -3,6 +3,9 @@
 namespace CentraleLille\NewsFeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use NewsFeedBundle\Entity\Abonnement;
+use DemoBundle\Entity\User;
+use DemoBundle\Entity\Projet;
 
 class DefaultController extends Controller
 {
@@ -57,13 +60,23 @@ class DefaultController extends Controller
                 'type'=>1,
                 'name'=>'Project De Martin'
             ]
-            ]; 
+            ];             
+            $em=$this->getDoctrine()->getManager();
+            $user=$em->getRepository('CentraleLilleDemoBundle:User')->findOneBy(array('name'=>'Martin'));
+            $projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
+            $category=$em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(array('name'=>'category1'));
 
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
-            $projets=$abonnementService->aboProjet('Martin');
+            //$abonnementService->addAboProjet($user,$projet); -> OK
+            //$abonnementService->addAboCategory($user,$category); -> OK
+            //$projets=$abonnementService->getAboProjet($user); -> OK
+            //$categories=$abonnementService->getAboCategory($user); -> OK
+            //$abonnementService->removeAboProjet($user,$projet); -> OK
+            //$abonnementService->removeAboCategory($user,$category); -> OK
+            
 
-        return $this->render('NewsFeedBundle:newsFeed.html.twig',[
-        	'recentProjects' => $recentProjects,
+        return $this->render('CentraleLilleNewsFeedBundle:newsFeed.html.twig',[
+            'recentProjects' => $recentProjects,
             'suggestions' => $suggestions
         ]);
     }
