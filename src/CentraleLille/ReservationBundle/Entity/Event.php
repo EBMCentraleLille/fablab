@@ -48,7 +48,7 @@ class Event
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Machine", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Machine", cascade={"persist","remove"})
      */
     protected $machine;
 

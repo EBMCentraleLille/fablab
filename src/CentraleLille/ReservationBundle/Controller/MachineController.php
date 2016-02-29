@@ -30,7 +30,6 @@ class MachineController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice',"La machine a bien été enregistrée");
             return $this->redirect($this->generateUrl('centrale_lille_add_machine',array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())));
         }
 
