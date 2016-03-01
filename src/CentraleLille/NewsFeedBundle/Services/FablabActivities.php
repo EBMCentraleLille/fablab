@@ -2,105 +2,43 @@
 
 namespace CentraleLille\NewsFeedBundle\Services;
 
-use CentraleLille\NewsFeedBundle\Entity\Abonnement;
-use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
+use CentraleLille\NewsFeedBundle\Entity\Activity;
+use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabActivitiesInterface;
 
-class FablabAbonnements implements FablabAbonnementsInterface
+class FablabActivities implements FablabActivitiesInterface
 {
 	public function __construct(\Doctrine\ORM\EntityManager $entityManager)
 	{
 	    $this->em = $entityManager;
 	}
-	//ajoute l'abonnement d'un user à une categorie
-	public function addAboCategory($user,$category){
-		$abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-		if (! $abonnement->findOneBy(array('user'=>$user))){
-			$abonnement = new Abonnement;
-			$abonnement->setUser($user);
-			$abonnement->setCategories($category);
-		}
-		else{ 
-			$abonnement=$abonnement->findOneBy(
-				array('user'=>$user)
-				);
-			$abonnement->addCategory($category);
-		}
+
+	
+	// Créer l'activité généré par un user sur un projet
+	public function creerActivite($user,$projet,$type,$content){
+		$date = new \DateTime()
 		
-		$this->em->persist($abonnement);
+		$activity=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
+		$activity = new Activity;
+		$activity->setDate($date);
+		$activity->setUser($user);
+		$activity->setProjet($projet);
+		$activity->setType($type);
+		$activity->setContent($content);
+
+		$this->em->persist($activity);
       	$this->em->flush();
 		return $this;
-	}
-	//ajoute l'abonnement d'un user à un projet
-	public function addAboProjet($user,$projet){
-		$abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-		if (! $abonnement->findOneBy(array('user'=>$user))){
-			$abonnement = new Abonnement;
-			$abonnement->setUser($user);
-			$abonnement->setProjects($projet);
-		}
-		else{ 
-			$abonnement=$abonnement->findOneBy(
-				array('user'=>$user)
-				);
-			$abonnement->addProject($projet);
-		}
-		$this->em->persist($abonnement);
-      	$this->em->flush();
-		
-		return $this;
-	}
-	//retourne un tableau des catégories auxquelles est abonné un user
-	public function getAboCategory($user){
-		$repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-		$abonnement=$repository->findOneBy(
-			array('user'=>$user)
+
+
+	// Retourne un tableau des activités d'un projet
+	public function getActiProjet($projet){
+		$repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
+		$activities=$repository->findBy(
+			array('projet'=>$projet),   // Critere
+			array('date'=>'desc'),      // Tri par date décroissant
+			20,                         // Selection de 20 activité seulement
+			0                           // A partir de la première
 	        );
-		return $abonnement->getCategories();
-	}
-
-	//retourne un tableau des projets auxquels est abonné un user
-	//sans les projets des catégories auxquelles il est abonné
-	public function getAboProjet($user){
-		$repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-		$abonnement=$repository->findOneBy(
-			array('user'=>$user)
-	        );
-
-		return $abonnement->getProjects();
-	}
-	//retourne un tableaux des projets auxquels est abonné un utilisateurs,
-	//y compris ceux des catégories auxquelles il est abonné
-	public function getAboAll($user){
-		$repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-		$abonnement=$repository->findOneBy(
-			array('user'=>$user)
-	        );
-		$categories=$this->getCatAbo($user);
-		$aboProjets=$this->getProjAbo($user);
-
-		/* à compléter*/
-
-		return $aboProjets;
-	}
-	//ajoute l'abonnement d'un user à une categorie
-	public function removeAboCategory($user,$category){
-		$abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement")->findOneBy(
-				array('user'=>$user)
-				);		
-		$abonnement->removeCategory($category);
-		$this->em->persist($abonnement);
-      	$this->em->flush();
-		return $this;
-	}
-	//ajoute l'abonnement d'un user à un projet
-	public function removeAboProjet($user,$projet){
-
-		$abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement")->findOneBy(
-				array('user'=>$user)
-				);
-		$abonnement->removeProject($projet);
-		$this->em->persist($abonnement);
-      	$this->em->flush();
-		return $this;
+		return $activities;
 	}
 }
