@@ -1,9 +1,12 @@
 <?php
 
-namespace CentraleLille\NewsFeedBundle\Abonnements;
-use CentraleLille\NewsFeedBundle\Entity\Abonnement;
+namespace CentraleLille\NewsFeedBundle\Services;
 
-class FablabAbonnements
+use CentraleLille\NewsFeedBundle\Entity\Abonnement;
+use CentraleLille\DemoBundle\Entity\Projet;
+use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
+
+class FablabAbonnements implements FablabAbonnementsInterface
 {
 	public function __construct(\Doctrine\ORM\EntityManager $entityManager)
 	{
@@ -69,16 +72,28 @@ class FablabAbonnements
 	//retourne un tableaux des projets auxquels est abonné un utilisateurs,
 	//y compris ceux des catégories auxquelles il est abonné
 	public function getAboAll($user){
-		$repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-		$abonnement=$repository->findOneBy(
+		$projets=[];
+		$abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement")->findOneBy(
 			array('user'=>$user)
 	        );
-		$categories=$this->getCatAbo($user);
-		$aboProjets=$this->getProjAbo($user);
+		$aboCategories=$this->getAboCategory($user);
+		$aboProjets=$this->getAboProjet($user);
+		foreach ($aboProjets as $aboProjet){
+			array_push($projets, $aboProjet->getId());
+		}
+		
+		foreach ($aboCategories as $aboCategory) {
+			$projetsCat=$this->em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(
+				array('name'=>$aboCategory->getName())
+				)->getProjets();
+			foreach ($projetsCat as $projetCat) {
+				if(! in_array($projetCat->getId(), $projets)){
+					array_push($projets, $projetCat->getId());
+				}
+			}
+		}
 
-		/* à compléter*/
-
-		return $aboProjets;
+		return $projets;
 	}
 	//ajoute l'abonnement d'un user à une categorie
 	public function removeAboCategory($user,$category){

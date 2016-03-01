@@ -1,4 +1,4 @@
 services:
     fablab_newsfeed.abonnements:
-        class: CentraleLille\NewsFeedBundle\Abonnements\FablabAbonnements
+        class: CentraleLille\NewsFeedBundle\Services\FablabAbonnements
         arguments: ['@doctrine.orm.entity_manager']

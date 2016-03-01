@@ -67,13 +67,14 @@ class DefaultController extends Controller
             $category=$em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(array('name'=>'category1'));
 
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
-            //$abonnementService->addAboProjet($user,$projet); -> OK
-            //$abonnementService->addAboCategory($user,$category); -> OK
-            //$projets=$abonnementService->getAboProjet($user); -> OK
-            //$categories=$abonnementService->getAboCategory($user); -> OK
-            //$abonnementService->removeAboProjet($user,$projet); -> OK
-            //$abonnementService->removeAboCategory($user,$category); -> OK
-            
+            //$abonnementService->addAboProjet($user,$projet);
+            //$abonnementService->addAboCategory($user,$category);
+            //$projets=$abonnementService->getAboProjet($user); 
+            //$categories=$abonnementService->getAboCategory($user); 
+            $projets=$abonnementService->getAboAll($user); 
+            //$abonnementService->removeAboProjet($user,$projet);
+            //$abonnementService->removeAboCategory($user,$category);
+            var_dump($projets);die;
 
         return $this->render('CentraleLilleNewsFeedBundle:newsFeed.html.twig',[
             'recentProjects' => $recentProjects,
