@@ -1,0 +1,15 @@
+gdp_home_page:
+    path: /homepage
+    defaults: { _controller: CentraleLilleGdpBundle:Task:index }
+
+gdp_add_task:
+    path: /add
+    defaults: { _controller: CentraleLilleGdpBundle:Task:add }
+
+gdp_view_task:
+    path: /view/{id}
+    defaults: { _controller: CentraleLilleGdpBundle:Task:view }
+
+gdp_edit_task:
+    path: /edit/{id}
+    defaults : { _controller: CentraleLilleGdpBundle:Task:edit }
