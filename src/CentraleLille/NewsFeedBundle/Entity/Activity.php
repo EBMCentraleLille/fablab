@@ -46,11 +46,11 @@ class Activity
     private $type;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="Attribute", type="string", length=255, nullable=true)
+     * @ORM\Column(name="Content", type="text", nullable=true)
      */
-    private $attribute;
+    private $content;
 
 
     /**
@@ -166,9 +166,9 @@ class Activity
      *
      * @return Activity
      */
-    public function setAttribute($attribute)
+    public function setContent($content)
     {
-        $this->attribute = $attribute;
+        $this->content = $content;
 
         return $this;
     }
@@ -178,9 +178,9 @@ class Activity
      *
      * @return string
      */
-    public function getAttribute()
+    public function getContent()
     {
-        return $this->attribute;
+        return $this->content;
     }
     /**
      * Constructor
