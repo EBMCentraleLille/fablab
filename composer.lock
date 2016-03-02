@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b518eb68560d44168624fc50442b0f4",
+    "hash": "0182a0b4447af02ce654b6536d1d9114",
     "content-hash": "dd6fe86ab56c491358d96f225610d895",
     "packages": [
         {
@@ -1649,16 +1649,16 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "5274eafa251359087230bade2ff35dd6cec2e530"
+                "reference": "ac91535054d025937d897d78ebb5fc2da5e955a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/5274eafa251359087230bade2ff35dd6cec2e530",
-                "reference": "5274eafa251359087230bade2ff35dd6cec2e530",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/ac91535054d025937d897d78ebb5fc2da5e955a4",
+                "reference": "ac91535054d025937d897d78ebb5fc2da5e955a4",
                 "shasum": ""
             },
             "require": {
@@ -1697,7 +1697,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2016-01-05 16:30:36"
+            "time": "2016-02-26 04:36:01"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -1924,6 +1924,62 @@
                 "logging"
             ],
             "time": "2015-11-17 10:02:29"
+        },
+        {
+            "name": "symfony/polyfill-apcu",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-apcu.git",
+                "reference": "d1911e6caeb4b6a4c8e2d5c46b978a66b3745e4c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/d1911e6caeb4b6a4c8e2d5c46b978a66b3745e4c",
+                "reference": "d1911e6caeb4b6a4c8e2d5c46b978a66b3745e4c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "apcu",
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-01-20 09:13:37"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -2440,22 +2496,23 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.8.2",
+            "version": "v2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "f3e6a82bcbea4db3b56df08e491e20a1faae82b5"
+                "reference": "7a9a5fce7ce6e448e527f635463dda00761e12c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f3e6a82bcbea4db3b56df08e491e20a1faae82b5",
-                "reference": "f3e6a82bcbea4db3b56df08e491e20a1faae82b5",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/7a9a5fce7ce6e448e527f635463dda00761e12c2",
+                "reference": "7a9a5fce7ce6e448e527f635463dda00761e12c2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
+                "symfony/polyfill-apcu": "~1.1",
                 "symfony/polyfill-intl-icu": "~1.0",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php54": "~1.0",
@@ -2524,7 +2581,7 @@
                 "doctrine/orm": "~2.4,>=2.4.5",
                 "egulias/email-validator": "~1.2",
                 "monolog/monolog": "~1.11",
-                "ocramius/proxy-manager": "~0.4|~1.0",
+                "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection": "^1.0.7"
             },
             "type": "library",
@@ -2569,7 +2626,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-01-14 12:01:11"
+            "time": "2016-02-28 21:06:29"
         },
         {
             "name": "twig/twig",
@@ -2819,16 +2876,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.2",
+            "version": "v2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "855dc0e829fad123966347612b4183e307338c11"
+                "reference": "ee8ead4f78e21ed6c873d1cc19e141949d9ed493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/855dc0e829fad123966347612b4183e307338c11",
-                "reference": "855dc0e829fad123966347612b4183e307338c11",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/ee8ead4f78e21ed6c873d1cc19e141949d9ed493",
+                "reference": "ee8ead4f78e21ed6c873d1cc19e141949d9ed493",
                 "shasum": ""
             },
             "require": {
@@ -2870,7 +2927,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-01-06 09:59:23"
+            "time": "2016-01-21 09:24:53"
         }
     ],
     "aliases": [],
