@@ -1,9 +1,32 @@
 <?php
+/**
+ *
+ * PHP Version 5.5
+ *
+ * @Category    Entity
+ * @Package Reservation
+ * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
+ * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @Link https://github.com/pierloui/fablab
+ */
 
 namespace CentraleLille\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * Entity Class Doc
+ *
+ * Classe permettant la réservation de machine
+ *
+ * @category Entity
+ * @package  Reservation Bundle
+ * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/pierloui/fablab
+ */
 
 /**
  * Event
@@ -33,6 +56,7 @@ class Event
     protected $creationDateTime;
 
     /**
+     *
      * @var datetime
      *
      * @ORM\Column(name="startDateTime", type="datetime")
@@ -132,6 +156,10 @@ class Event
     }
 
     /**
+     * setCreationDateTime
+     *
+     * Assigne l'heure de créaton directement sans besoin de la définir
+     *
      * @param datetime $creationDateTime
      */
     public function setCreationDateTime()

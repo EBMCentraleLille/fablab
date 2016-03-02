@@ -1,8 +1,29 @@
 <?php
-
+/**
+ *
+ * PHP Version 5.5
+ *
+ * @Category    Entity
+ * @Package Reservation
+ * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
+ * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @Link https://github.com/pierloui/fablab
+ */
 namespace CentraleLille\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Entity Class Doc
+ *
+ * Classe permettant la création de machines
+ *
+ * @category Entity
+ * @package  Reservation Bundle
+ * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/pierloui/fablab
+ */
 
 /**
  * Event
