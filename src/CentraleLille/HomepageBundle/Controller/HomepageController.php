@@ -1,11 +1,38 @@
 <?php
-
+/**
+ * HomePageController.php File Doc
+ *
+ * Controller permettant le chargement du fil d'actualité d'un user 
+ * sur la route /news-feed
+ *
+ * PHP Version 5.6
+ *
+ * @package  CentraleLille
+ * @subpackage NewsFeedBundle
+ * @category Controller
+ * @author   Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/EBMCentraleLille/fablab
+ */
 namespace CentraleLille\HomepageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+/**
+ * HomepageController Class Doc
+ *
+ * Controller de chargement de la homepage
+ *
+ */
+class HomepageController extends Controller
 {
+    /**
+    * indexAction
+    *
+    * charge les premières actualités d'un utilisateurs en fonction de ses abonnements
+    *
+    * @return Twig La vue Twig à display
+    */
     public function indexAction()
     {
     	$weeklyProject=[

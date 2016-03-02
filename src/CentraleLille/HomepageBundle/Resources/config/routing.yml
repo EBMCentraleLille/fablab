@@ -1,3 +1,3 @@
 centrale_lille_homepage_homepage:
     path:     /
-    defaults: { _controller: CentraleLilleHomepageBundle:Default:index }
+    defaults: { _controller: CentraleLilleHomepageBundle:Homepage:index }

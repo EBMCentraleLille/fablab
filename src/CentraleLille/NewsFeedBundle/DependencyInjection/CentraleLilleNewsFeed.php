@@ -1,5 +1,19 @@
 <?php
-// src/CentraleLille/NewsFeedBundle/DependencyInjection/CentraleLilleNewsFeed.php
+/**
+ * src/CentraleLille/NewsFeedBundle/DependencyInjection/CentraleLilleNewsFeed.php
+ * CentraleLilleNewsFeed.php File Doc
+ *
+ * Dependencies pour le bundle NewsFeedBundle
+ *
+ * PHP Version 5.6
+ *
+ * @package  	CentraleLille
+ * @subpackage 	NewsFeedBundle
+ * @category 	DependencyInjection
+ * @author   	Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     	https://github.com/EBMCentraleLille/fablab
+ */
 
 namespace CentraleLille\NewsFeedBundle\DependencyInjection;
 

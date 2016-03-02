@@ -1,14 +1,41 @@
 <?php
+/**
+ * NewsFeedController.php File Doc
+ *
+ * Controller permettant le chargement du fil d'actualité d'un user 
+ * sur la route /news-feed
+ *
+ * PHP Version 5.6
+ *
+ * @package  CentraleLille
+ * @subpackage NewsFeedBundle
+ * @category Controller
+ * @author   Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/EBMCentraleLille/fablab
+ */
 
 namespace CentraleLille\NewsFeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use NewsFeedBundle\Entity\Abonnement;
-use DemoBundle\Entity\User;
-use DemoBundle\Entity\Projet;
 
-class DefaultController extends Controller
+/**
+ * NewsFeedController Class Doc
+ *
+ * Controller de chargement du newsfeed
+ *
+ */
+class NewsFeedController extends Controller
 {
+    /**
+    * indexAction
+    *
+    * charge les premières actualités d'un utilisateurs en fonction de ses abonnements
+    * 
+    * @param Integer $userId Id unique de l'utilisateur
+    *
+    * @return Twig La vue Twig à display
+    */
     public function indexAction()
     {
     	$recentProjects=[
@@ -71,12 +98,12 @@ class DefaultController extends Controller
             //$abonnementService->addAboCategory($user,$category);
             //$projets=$abonnementService->getAboProjet($user); 
             //$categories=$abonnementService->getAboCategory($user); 
-            $projets=$abonnementService->getAboAll($user); 
+            //$projets=$abonnementService->getAboAll($user); 
             //$abonnementService->removeAboProjet($user,$projet);
             //$abonnementService->removeAboCategory($user,$category);
-            var_dump($projets);die;
+            //var_dump($projets);die;
 
-        return $this->render('CentraleLilleNewsFeedBundle:newsFeed.html.twig',[
+        return $this->render('CentraleLilleNewsFeedBundle::newsFeed.html.twig',[
             'recentProjects' => $recentProjects,
             'suggestions' => $suggestions
         ]);
