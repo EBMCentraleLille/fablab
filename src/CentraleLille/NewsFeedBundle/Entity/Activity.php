@@ -1,4 +1,21 @@
 <?php
+/**
+ * Activity.php File Doc
+ *
+ * Entité représentant une activité
+ * Une activité peut etre de trois type : 
+ *      1 - une création 
+ *      2 - une modification
+ *      3 - une publication
+ *
+ * PHP Version 5.5
+ *
+ * @category Activity
+ * @package  NewsFeedBundle
+ * @author   Corbière Charles <charles.corbiere@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/EBMCentraleLille/fablab
+ */
 
 namespace CentraleLille\NewsFeedBundle\Entity;
 

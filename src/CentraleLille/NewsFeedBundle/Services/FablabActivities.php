@@ -18,18 +18,6 @@ namespace CentraleLille\NewsFeedBundle\Services;
 use CentraleLille\NewsFeedBundle\Entity\Activity;
 use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabActivitiesInterface;
 
-/**
- * FablabActivities Class Doc
- *
- * Service de gestion des activités
- *
- * @category FablabActivites
- * @package  NewsFeedBundle
- * @author   Corbière Charles <charles.corbiere@gmail.com>
- * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     https://github.com/EBMCentraleLille/fablab
- */
-
 class FablabActivities implements FablabActivitiesInterface
 {
 
@@ -40,7 +28,7 @@ class FablabActivities implements FablabActivitiesInterface
          *
          * Constructeur du service FablabActivities
          *
-         * @return Response Une entité crée
+         * @param object Appel de l'entity manager
          */
 
 	    $this->em = $entityManager;
@@ -59,7 +47,7 @@ class FablabActivities implements FablabActivitiesInterface
       	* @param object $utype Type d'activité
       	* @param object $content Contenu à afficher de l'activité
       	*
-        * @return Response L'entité générée
+        * @return object L'entité générée
         */
 
 		$date = new \DateTime()
@@ -86,7 +74,7 @@ class FablabActivities implements FablabActivitiesInterface
         *
         * @param object $project Projet
         *
-        * @return Response Tableau d'activité du projet
+        * @return object Tableau d'activité du projet
         */
 
 		$repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
@@ -96,6 +84,7 @@ class FablabActivities implements FablabActivitiesInterface
 			20,                         // Selection de 20 activité seulement
 			0                           // A partir de la première
 	        );
+		
 		return $activities;
 	}
 }

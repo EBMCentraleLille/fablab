@@ -1,32 +1,47 @@
 <?php
+/**
+ * FablabActivitiesInterface.php File Doc
+ *
+ * Interface du service FablabActivities en charge de la création et la récupératiob des activités par projet
+ *
+ * PHP Version 5.5
+ *
+ * @category FablabActivitesInterface
+ * @package  NewsFeedBundle
+ * @author   Corbière Charles <charles.corbiere@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/EBMCentraleLille/fablab
+ */
 
 namespace CentraleLille\NewsFeedBundle\ServicesInterfaces;
 
 
 interface FablabAbonnementsInterface
 {
-	
-	//ajoute l'abonnement d'un user à une categorie
-	public function addAboCategory($user,$category);		
-	
-	//ajoute l'abonnement d'un user à un projet
-	public function addAboProjet($user,$projet);
+	/**
+    * creerActivitie
+    *
+    * Créer l'activité généré par un user sur un projet
+    *
+    * @param object $user Utilisateur
+    * @param object $projet Projet
+    * @param object $utype Type d'activité
+    * @param object $content Contenu à afficher de l'activité
+    *
+    * @return object L'entité générée
+    */
 
-	//retourne un tableau des catégories auxquelles est abonné un user
-	public function getAboCategory($user);
+	public function creerActivite($user,$projet,$type,$content);
 
-	//retourne un tableau des projets auxquels est abonné un user
-	//sans les projets des catégories auxquelles il est abonné
-	public function getAboProjet($user);
 
-	//retourne un tableaux des projets auxquels est abonné un utilisateurs,
-	//y compris ceux des catégories auxquelles il est abonné
-	public function getAboAll($user);
-
-	//ajoute l'abonnement d'un user à une categorie
-	public function removeAboCategory($user,$category);
-
-	//ajoute l'abonnement d'un user à un projet
-	public function removeAboProjet($user,$projet);
+	/**
+    * getActiProjet
+    *
+    * Retourne un tableau des activités d'un projet
+    *
+    * @param object $project Projet
+    *
+    * @return object Tableau d'activité du projet
+    */
 
 }
