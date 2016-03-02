@@ -1,4 +1,18 @@
 <?php
+/**
+ * AbonnementRepository.php File Doc
+ *
+ * Repository pour l'entité Abonnement
+ *
+ * PHP Version 5.6
+ *
+ * @package  	CentraleLille
+ * @subpackage 	NewsFeedBundle
+ * @category 	Repository
+ * @author   	Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     	https://github.com/EBMCentraleLille/fablab
+ */
 
 namespace CentraleLille\NewsFeedBundle\Repository;
 
