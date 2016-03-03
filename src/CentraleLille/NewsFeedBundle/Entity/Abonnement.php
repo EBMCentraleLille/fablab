@@ -1,14 +1,38 @@
 <?php
-
+/**
+ * Abonnements.php File Doc
+ *
+ * Entité Abonnement qui décrit les abonnements 
+ * aux projets ainsi qu'aux catégories des utilisateurs
+ *
+ * PHP Version 5.6
+ *
+ * @category   File
+ * @package    CentraleLille:NewsFeedBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
+ */
 namespace CentraleLille\NewsFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Abonnement
+ * Abonnement Class Doc
+ *
+ * Classe Abonnement définissant l'entité Abonnement
+ * comprenant les attributs Id, User, Categories et Projects
+ *
+ * @category   Class
+ * @package    CentraleLille:NewsFeedBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
  *
  * @ORM\Table(name="abonnement")
- * @ORM\Entity(repositoryClass="CentraleLille\NewsFeedBundle\Repository\AbonnementRepository")
+ * @ORM\Entity(repositoryClass="CentraleLille\NewsFeedBundle\Repository\AbonnementRepository") 
  */
 class Abonnement
 {
@@ -21,7 +45,7 @@ class Abonnement
      */
     private $id;
 
-   /**
+    /**
     * @ORM\ManyToOne (targetEntity="CentraleLille\DemoBundle\Entity\User"), cascade={"persist"})
     * @ORM\JoinColumn(nullable=false)
     **/
@@ -51,7 +75,7 @@ class Abonnement
     /**
      * Set user
      *
-     * @param string $user
+     * @param string $user Objet user
      *
      * @return Abonnement
      */
@@ -75,7 +99,7 @@ class Abonnement
     /**
      * Set categories
      *
-     * @param string $categories
+     * @param string $categories Objet category
      *
      * @return Abonnement
      */
@@ -99,7 +123,7 @@ class Abonnement
     /**
      * Set projects
      *
-     * @param string $projects
+     * @param string $projects Objet projets
      *
      * @return Abonnement
      */
@@ -131,7 +155,7 @@ class Abonnement
     /**
      * Add category
      *
-     * @param \CentraleLille\NewsFeedBundle\Entity\Category $category
+     * @param \CentraleLille\NewsFeedBundle\Entity\Category $category Objet Category
      *
      * @return Abonnement
      */
@@ -145,7 +169,9 @@ class Abonnement
     /**
      * Remove category
      *
-     * @param \CentraleLille\NewsFeedBundle\Entity\Category $category
+     * @param \CentraleLille\NewsFeedBundle\Entity\Category $category Objet Category
+     * 
+     * @return void
      */
     public function removeCategory(\CentraleLille\NewsFeedBundle\Entity\Category $category)
     {
@@ -155,7 +181,7 @@ class Abonnement
     /**
      * Add project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project
+     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
      *
      * @return Abonnement
      */
@@ -169,7 +195,9 @@ class Abonnement
     /**
      * Remove project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project
+     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
+     * 
+     * @return void
      */
     public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
@@ -179,7 +207,7 @@ class Abonnement
     /**
      * Add user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user
+     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
      *
      * @return Abonnement
      */
@@ -193,7 +221,9 @@ class Abonnement
     /**
      * Remove user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user
+     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
+     *
+     * @return void
      */
     public function removeUser(\CentraleLille\DemoBundle\Entity\User $user)
     {

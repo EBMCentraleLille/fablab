@@ -1,11 +1,35 @@
 <?php
-
+/**
+* Activity.php File Doc
+ *
+ * Entité Activity qui décrit les actualités des projets
+ * 
+ * PHP Version 5.6
+ *
+ * @category   File
+ * @package    CentraleLille:NewsFeedBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
+ */
 namespace CentraleLille\NewsFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Activity
+ * Activity Class Doc
+ *
+ * Classe Activity définissant l'entité Activity
+ * comprenant les attributs Id, Date, Project, User, 
+ * Type et Content
+ *
+ * @category   Class
+ * @package    CentraleLille:NewsFeedBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
  *
  * @ORM\Table(name="activity")
  * @ORM\Entity(repositoryClass="CentraleLille\NewsFeedBundle\Repository\ActivityRepository")
@@ -66,7 +90,7 @@ class Activity
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param \DateTime $date Date de création de l'actualité
      *
      * @return Activity
      */
@@ -90,7 +114,7 @@ class Activity
     /**
      * Set project
      *
-     * @param string $project
+     * @param string $project Objet Projet
      *
      * @return Activity
      */
@@ -114,7 +138,7 @@ class Activity
     /**
      * Set user
      *
-     * @param string $user
+     * @param string $user Objet User
      *
      * @return Activity
      */
@@ -138,7 +162,7 @@ class Activity
     /**
      * Set type
      *
-     * @param integer $type
+     * @param integer $type Type de l'actualité: Création/Update/Personnalisé
      *
      * @return Activity
      */
@@ -162,7 +186,7 @@ class Activity
     /**
      * Set attribute
      *
-     * @param string $attribute
+     * @param string $content Contenu de l'actualité
      *
      * @return Activity
      */
@@ -194,7 +218,7 @@ class Activity
     /**
      * Add project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project
+     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
      *
      * @return Activity
      */
@@ -208,7 +232,9 @@ class Activity
     /**
      * Remove project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project
+     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
+     *
+     * @return void
      */
     public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
@@ -218,7 +244,7 @@ class Activity
     /**
      * Add user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user
+     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
      *
      * @return Activity
      */
@@ -232,7 +258,9 @@ class Activity
     /**
      * Remove user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user
+     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
+     *
+     * @return void
      */
     public function removeUser(\CentraleLille\DemoBundle\Entity\User $user)
     {
