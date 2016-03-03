@@ -1,11 +1,34 @@
 <?php
-
+/**
+ * Category.php File Doc
+ *
+ * Entité Category qui décrit les catégories de projets
+ * 
+ * PHP Version 5.6
+ *
+ * @category   File
+ * @package    CentraleLille:NewsFeedBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
+ */
 namespace CentraleLille\NewsFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * Category Class Doc
+ *
+ * Classe Category définissant l'entité Category
+ * comprenant les attributs Id, Name et Projects
+ *
+ * @category   Class
+ * @package    CentraleLille:NewsFeedBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="CentraleLille\NewsFeedBundle\Repository\CategoryRepository")
@@ -47,7 +70,7 @@ class Category
     /**
      * Set name
      *
-     * @param string $name
+     * @param string $name Nom de la catégorie
      *
      * @return Category
      */
@@ -71,7 +94,7 @@ class Category
     /**
      * Set projets
      *
-     * @param string $projets
+     * @param string $projets Objet Projets
      *
      * @return Category
      */
@@ -102,7 +125,7 @@ class Category
     /**
      * Add projet
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $projet
+     * @param \CentraleLille\DemoBundle\Entity\Projet $projet Objet Projet
      *
      * @return Category
      */
@@ -116,7 +139,9 @@ class Category
     /**
      * Remove projet
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $projet
+     * @param \CentraleLille\DemoBundle\Entity\Projet $projet Objet Projet
+     *
+     * @return void
      */
     public function removeProjet(\CentraleLille\DemoBundle\Entity\Projet $projet)
     {
