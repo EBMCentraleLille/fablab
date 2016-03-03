@@ -21,16 +21,18 @@ class ProfileType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-        ->remove('username')
-        ->add('email', null, array('label' => 'Email'))
-        ->add('promo', null, array('label' => 'Promotion'))
-        ->add('phone', null, array('label' => 'Téléphone'))
-        ->add('current_password', 'password', array(
-            'label' => 'Mot de passe actuel',
-            'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => $constraint,
-        ));
+            ->remove('username')
+            ->add('email', null, array('label' => 'Email'))
+            ->add('promo', null, array('label' => 'Promotion'))
+            ->add('phone', null, array('label' => 'Téléphone'))
+            ->add(
+                'current_password', 'password', array(
+                'label' => 'Mot de passe actuel',
+                'translation_domain' => 'FOSUserBundle',
+                'mapped' => false,
+                'constraints' => $constraint,
+                )
+            );
     }
 
     public function getParent()

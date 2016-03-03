@@ -36,7 +36,7 @@ class DefaultController extends Controller
      *
      * @param Request $request Requette
      *
-     * @return truc Machin
+     * @return     truc Machin
 =======
 class DefaultController extends Controller
 {
@@ -54,8 +54,10 @@ class DefaultController extends Controller
             )
         );
 
-        return $this->render('default/index.html.twig', array(
+        return $this->render(
+            'default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
+            )
+        );
     }
 }

@@ -1,13 +1,12 @@
 <?php
 /**
- *
  * PHP Version 5.5
  *
- * @Category    Entity
- * @Package Reservation
+ * @Category Entity
+ * @Package  Reservation
  * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
- * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @Link https://github.com/pierloui/fablab
+ * @Licence  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @Link     https://github.com/pierloui/fablab
  */
 
 namespace CentraleLille\ReservationBundle\Entity;
@@ -50,7 +49,8 @@ class Event
     protected $title;
 
     /**
-     * @var datetime $creationDateTime
+     *
+     * @var                         datetime $creationDateTime
      * @ORM\Column(type="datetime")
      */
     protected $creationDateTime;
@@ -78,10 +78,11 @@ class Event
 
     /**
      * Event constructor.
-     * @param int $id
+     *
+     * @param int              $id
      * @param $creationDateTime
-     * @param datetime $startDateTime
-     * @param datetime $endDateTime
+     * @param datetime         $startDateTime
+     * @param datetime         $endDateTime
      * @param $machine
      */
     public function __construct()

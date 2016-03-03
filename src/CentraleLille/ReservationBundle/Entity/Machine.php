@@ -1,13 +1,12 @@
 <?php
 /**
- *
  * PHP Version 5.5
  *
- * @Category    Entity
- * @Package Reservation
+ * @Category Entity
+ * @Package  Reservation
  * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
- * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @Link https://github.com/pierloui/fablab
+ * @Licence  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @Link     https://github.com/pierloui/fablab
  */
 namespace CentraleLille\ReservationBundle\Entity;
 

@@ -37,7 +37,7 @@ class DemoService implements DemoServiceInterface
 {
 
     private $tokenStorage;
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
+    <<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
     /**
      * Construct
      *
@@ -79,12 +79,12 @@ class DemoService implements DemoServiceInterface
      *
      * Add a Role to the user
      *
-     * @param string $user User
-     * @param string $role Role
+     * @param  string $user User
+     * @param  string $role Role
      *
 =======
      * Add a Role to the user
-     * @param string $role
+     * @param  string $role
 >>>>>>> Fix
      * @return boolean
      */
