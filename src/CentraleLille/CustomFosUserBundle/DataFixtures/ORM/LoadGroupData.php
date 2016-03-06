@@ -9,6 +9,8 @@
 namespace CustomFosUserBundle\DataFixtures\ORM;
 
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,19 +19,39 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        $role_manager = "LEADER";
+
+        $role = new ProjectRole();
+        $role->setName($role_manager);
+        $manager->persist($role);
+
         $project = new Project('Project1');
-        $project->setRoles(array());
-        $project->addRole('ROLE_MEMBER');
-        $this->getReference('user1')->addGroup($project);
-        $this->getReference('user2')->addGroup($project);
         $manager->persist($project);
 
+        $projectUser = new ProjectUser();
+        $projectUser->setProject($project);
+        $projectUser->setUser($this->getReference('user1'));
+        $projectUser->addRole($role);
+        $manager->persist($projectUser);
+
+        $projectUser = new ProjectUser();
+        $projectUser->setProject($project);
+        $projectUser->setUser($this->getReference('user2'));
+        $manager->persist($projectUser);
+
         $project = new Project('Project2');
-        $project->setRoles(array());
-        $project->addRole('ROLE_MEMBER');
-        $this->getReference('user3')->addGroup($project);
-        $this->getReference('user1')->addGroup($project);
         $manager->persist($project);
+
+        $projectUser = new ProjectUser();
+        $projectUser->setProject($project);
+        $projectUser->setUser($this->getReference('user3'));
+        $manager->persist($projectUser);
+
+        $projectUser = new ProjectUser();
+        $projectUser->setProject($project);
+        $projectUser->setUser($this->getReference('user4'));
+        $manager->persist($projectUser);
+
         $manager->flush();
     }
 
