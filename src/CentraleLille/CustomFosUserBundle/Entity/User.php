@@ -4,12 +4,14 @@ namespace CentraleLille\CustomFosUserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="CentraleLille\CustomFosUserBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ProjectableInterface
 {
 
     /**
@@ -45,13 +47,10 @@ class User extends BaseUser
     protected $phone;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
-     * @ORM\JoinTable(name="fos_user_group",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
-     * )
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\ProjectUser", mappedBy="user")
      */
-    protected $groups;
+    protected $projectUsers;
 
     /**
      * @return string
@@ -132,4 +131,73 @@ class User extends BaseUser
     {
         $this->id = $id;
     }
+
+    /**
+     * Gets the user's projects.
+     *
+     * @return \Traversable
+     */
+    public function getProjectUsers()
+    {
+        return $this->projectUsers ?: $this->projectUsers = new ArrayCollection();
+    }
+
+    /**
+     * Gets the name of the projects which include the user.
+     *
+     * @return array
+     */
+    public function getProjectNames()
+    {
+        $names = array();
+        foreach ($this->getProjectUsers() as $projectUser) {
+            $names[] = $projectUser->getProject()->getName();
+        }
+
+        return $names;
+    }
+
+    /**
+     * Indicates whether the user belongs to the specified project or not.
+     *
+     * @param string $name Name of the project
+     *
+     * @return Boolean
+     */
+    public function hasProject($name)
+    {
+        return in_array($name, $this->getProjectNames());
+    }
+
+//    /**
+//     * Add a project to the user projects.
+//     *
+//     * @param Project $project
+//     *
+//     * @return self
+//     */
+//    public function addProject($projectUser)
+//    {
+//        if (!$this->getProjects()->contains($projectUser)) {
+//            $this->getProjects()->add($projectUser);
+//        }
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove a project from the user projects.
+//     *
+//     * @param Project $project
+//     *
+//     * @return self
+//     */
+//    public function removeProject($projectUser)
+//    {
+//        if ($this->getProjects()->contains($projectUser)) {
+//            $this->getProjects()->removeElement($projectUser);
+//        }
+//
+//        return $this;
+//    }
 }
