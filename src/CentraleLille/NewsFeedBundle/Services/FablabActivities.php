@@ -23,7 +23,7 @@ use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabActivitiesInterface;
  * FablabActivities Class Doc
  *
  * Services pour gérer les activités des projets
- * 
+ *
  * @category   Class
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage Services
@@ -35,7 +35,7 @@ class FablabActivities implements FablabActivitiesInterface
 {
     /**
      * Fonction construct de la classe FablabActivities
-     * 
+     *
      * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
      *
      * @return void
@@ -56,7 +56,7 @@ class FablabActivities implements FablabActivitiesInterface
     *
     * @return void
     */
-    public function creerActivite($user,$projet,$type,$content)
+    public function creerActivite($user, $projet, $type, $content)
     {
         $date = new \DateTime();
         
@@ -75,16 +75,16 @@ class FablabActivities implements FablabActivitiesInterface
 
     /**
      * Fonction de recherche des activités liées à un projet
-     * 
+     *
      * Retourne les $nb activités les plus récentes à partir de la $from
-     * 
+     *
      * @param array   $projet Entité Projet
      * @param integer $nb     Nombre d'actualités recherchées
      * @param integer $from   Offset de recherche
-     * 
+     *
      * @return array $activities Array d'Entités activités
      */
-    public function getActivityProjet($projet,$nb,$from)
+    public function getActivityProjet($projet, $nb, $from)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $activities=$repository->findBy(

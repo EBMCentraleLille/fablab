@@ -12,6 +12,6 @@ class ProjectPageControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('slide1', $client->getResponse()->getContent());
+        $this->assertContains('Page Projet', $client->getResponse()->getContent());
     }
 }

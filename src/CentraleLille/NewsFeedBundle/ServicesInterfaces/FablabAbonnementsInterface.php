@@ -1,7 +1,7 @@
 <?php
 /**
  * FablabAbonnementsInterface.php Doc
- * 
+ *
  * Interface relatif aux abonnements
  *
  * PHP Version 5.6
