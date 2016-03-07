@@ -1,0 +1,11 @@
+centrale_lille_searchuser:
+    path:     /user
+    defaults: { _controller: CentraleLilleSearchBundle:SearchUser:search }
+
+centrale_lille_demo_homepage:
+    path:     /user?username=&email=&search=
+    defaults: { _controller: CentraleLilleSearchBundle:SearchUser:search }
+
+centrale_lille_search_index:
+    path:     /index
+    defaults: { _controller: CentraleLilleSearchBundle:SearchUser:index }
