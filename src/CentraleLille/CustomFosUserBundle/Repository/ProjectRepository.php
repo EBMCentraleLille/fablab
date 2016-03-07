@@ -17,7 +17,7 @@ class ProjectRepository extends \Doctrine\ORM\EntityRepository
 
     public function addUserToProject($user, $project)
     {
-        if(!$user->hasProject($project->getName())) {
+        if (!$user->hasProject($project->getName())) {
             $manager = $this->getEntityManager();
             $projectUser = new ProjectUser();
             $projectUser->setProject($project);

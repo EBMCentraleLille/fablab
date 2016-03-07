@@ -18,7 +18,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProjectFormType extends AbstractType
 {
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
