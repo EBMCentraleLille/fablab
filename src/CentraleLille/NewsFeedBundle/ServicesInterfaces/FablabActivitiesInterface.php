@@ -15,10 +15,9 @@
 
 namespace CentraleLille\NewsFeedBundle\ServicesInterfaces;
 
-
 interface FablabAbonnementsInterface
 {
-	/**
+    /**
     * creerActivitie
     *
     * Créer l'activité généré par un user sur un projet
@@ -31,10 +30,10 @@ interface FablabAbonnementsInterface
     * @return object L'entité générée
     */
 
-	public function creerActivite($user,$projet,$type,$content);
+    public function creerActivite($user, $projet, $type, $content);
 
 
-	/**
+    /**
     * getActiProjet
     *
     * Retourne un tableau des activités d'un projet
@@ -43,5 +42,4 @@ interface FablabAbonnementsInterface
     *
     * @return object Tableau d'activité du projet
     */
-
 }

@@ -3,8 +3,8 @@
  * Activity.php File Doc
  *
  * Entité représentant une activité
- * Une activité peut etre de trois type : 
- *      1 - une création 
+ * Une activité peut etre de trois type :
+ *      1 - une création
  *      2 - une modification
  *      3 - une publication
  *
@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Activity Class Doc
  *
  * Classe Activity définissant l'entité Activity
- * comprenant les attributs Id, Date, Project, User, 
+ * comprenant les attributs Id, Date, Project, User,
  * Type et Content
  *
  * @category   Class

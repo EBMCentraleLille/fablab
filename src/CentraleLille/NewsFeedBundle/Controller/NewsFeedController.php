@@ -2,7 +2,7 @@
 /**
  * NewsFeedController.php File Doc
  *
- * Controller permettant le chargement du fil d'actualité d'un user 
+ * Controller permettant le chargement du fil d'actualité d'un user
  * sur la route /news-feed
  *
  * PHP Version 5.6
@@ -37,8 +37,8 @@ class NewsFeedController extends Controller
     * IndexAction Function Doc
     *
     * Fonction qui charge les premières actualités d'un utilisateurs en fonction de ses abonnements
-    * 
-    * @return Twig 
+    *
+    * @return Twig
     */
     public function indexAction()
     {
@@ -91,7 +91,7 @@ class NewsFeedController extends Controller
                 'type'=>1,
                 'name'=>'Project De Martin'
             ]
-            ];             
+            ];
             $em=$this->getDoctrine()->getManager();
             $user=$em->getRepository('CentraleLilleCustomFosUserBundle:User')->findOneBy(array('name'=>'Martin'));
             $projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
@@ -100,15 +100,16 @@ class NewsFeedController extends Controller
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             //$abonnementService->addAboProjet($user,$projet);
             //$abonnementService->addAboCategory($user,$category);
-            //$projets=$abonnementService->getAboProjet($user); 
-            //$categories=$abonnementService->getAboCategory($user); 
-            //$projets=$abonnementService->getAboAll($user); 
+            //$projets=$abonnementService->getAboProjet($user);
+            //$categories=$abonnementService->getAboCategory($user);
+            //$projets=$abonnementService->getAboAll($user);
             //$abonnementService->removeAboProjet($user,$projet);
             //$abonnementService->removeAboCategory($user,$category);
             //var_dump($projets);die;
 
         return $this->render(
-            'CentraleLilleNewsFeedBundle::newsFeed.html.twig', [
+            'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
+            [
                 'recentProjects' => $recentProjects,
                 'suggestions' => $suggestions
             ]

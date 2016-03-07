@@ -2,7 +2,7 @@
 /**
  * HomePageController.php File Doc
  *
- * Controller permettant le chargement du fil d'actualité d'un user 
+ * Controller permettant le chargement du fil d'actualité d'un user
  * sur la route /news-feed
  *
  * PHP Version 5.6
@@ -23,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * HomepageController Class Doc
  *
  * Controller de chargement de la homepage
- * 
+ *
  * @category   Controller
  * @package    CentraleLille:HomepageBundle
  * @subpackage Controller
@@ -36,9 +36,9 @@ class HomepageController extends Controller
     /**
     * IndexAction Function Doc
     *
-    * Cette fonction récupère les informations des projets récents 
+    * Cette fonction récupère les informations des projets récents
     * pour les afficher sur la homepage.
-    * 
+    *
     * @return Twig La vue Twig à display
     */
     public function indexAction()
@@ -107,7 +107,8 @@ class HomepageController extends Controller
                 'files'=>1
             ]];
         return $this->render(
-            'CentraleLilleHomepageBundle:Default:index.html.twig', [
+            'CentraleLilleHomepageBundle:Default:index.html.twig',
+            [
                 'weeklyProject' => $weeklyProject,
                 'news' => $news,
                 'thematics' => $thematics,

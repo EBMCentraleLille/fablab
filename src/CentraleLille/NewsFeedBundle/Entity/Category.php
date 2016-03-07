@@ -3,7 +3,7 @@
  * Category.php File Doc
  *
  * Entité Category qui décrit les catégories de projets
- * 
+ *
  * PHP Version 5.6
  *
  * @category   File
