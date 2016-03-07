@@ -46,7 +46,7 @@ class Abonnement
     private $id;
 
     /**
-    * @ORM\ManyToOne (targetEntity="CentraleLille\DemoBundle\Entity\User"), cascade={"persist"})
+    * @ORM\ManyToOne (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
     * @ORM\JoinColumn(nullable=false)
     **/
     private $user;
@@ -57,7 +57,7 @@ class Abonnement
     private $categories;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
     **/
     private $projects;
 
@@ -181,11 +181,11 @@ class Abonnement
     /**
      * Add project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
      *
      * @return Abonnement
      */
-    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->projects[] = $project;
 
@@ -195,11 +195,11 @@ class Abonnement
     /**
      * Remove project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
      * 
      * @return void
      */
-    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->projects->removeElement($project);
     }
@@ -207,11 +207,11 @@ class Abonnement
     /**
      * Add user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user Objet User
      *
      * @return Abonnement
      */
-    public function addUser(\CentraleLille\DemoBundle\Entity\User $user)
+    public function addUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
     {
         $this->user[] = $user;
 
@@ -221,11 +221,11 @@ class Abonnement
     /**
      * Remove user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user Objet User
      *
      * @return void
      */
-    public function removeUser(\CentraleLille\DemoBundle\Entity\User $user)
+    public function removeUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
     {
         $this->user->removeElement($user);
     }

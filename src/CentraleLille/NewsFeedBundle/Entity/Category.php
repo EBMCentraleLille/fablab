@@ -52,7 +52,7 @@ class Category
     private $name;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
     **/
     private $projets;
 
@@ -94,7 +94,7 @@ class Category
     /**
      * Set projets
      *
-     * @param string $projets Objet Projets
+     * @param string $projets Objet Projects
      *
      * @return Category
      */
@@ -125,11 +125,11 @@ class Category
     /**
      * Add projet
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $projet Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $projet Objet Project
      *
      * @return Category
      */
-    public function addProjet(\CentraleLille\DemoBundle\Entity\Projet $projet)
+    public function addProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
     {
         $this->projets[] = $projet;
 
@@ -139,11 +139,11 @@ class Category
     /**
      * Remove projet
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $projet Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $projet Objet Project
      *
      * @return void
      */
-    public function removeProjet(\CentraleLille\DemoBundle\Entity\Projet $projet)
+    public function removeProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
     {
         $this->projets->removeElement($projet);
     }
