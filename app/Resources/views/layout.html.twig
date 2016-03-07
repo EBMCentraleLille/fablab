@@ -1,0 +1,56 @@
+<html>
+<!--
+    Pour des exemples d'utilisation du Bootstrap United, se référer à la page suivante:
+    https://bootswatch.com/united/
+    ou au pire des cas contacter le groupe 1
+-->
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}Fablab - École Centrale de Lille{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      <div class="row">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Fablab Centrale Lille</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="{{ path("homepage")}}">Accueil <span class="sr-only"></span></a></li>
+                <li><a href="{{ path("news_feed")}}">Fil d'actualité</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Créer un projet</a></li>
+                <li><a href="#">Réserver une machine</a></li>
+                <li>
+                  <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Rechercher sur le site">
+                    </div>
+                  </form>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Mon Profil <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Username</a></li>
+                    <li><a href="#">Mes Messages <img  src="{{ asset('icons/message.svg') }}"></a></li>
+                    <li><a href="#">Mes Projets</a></li>
+                    <li><a href="#">Mes Projets</a></li>
+                    <li><a href="#">Mes Abonnements</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    {% block body %}{% endblock %}
+    </body>
+</html>

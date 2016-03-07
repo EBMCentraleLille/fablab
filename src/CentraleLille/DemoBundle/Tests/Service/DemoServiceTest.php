@@ -1,11 +1,11 @@
 <?php
+class DefaultControllerTest extends \PHPUnit_Framework_TestCase
 
 namespace CentraleLille\DemoBundle\Tests\Service;
 
 use CentraleLille\DemoBundle\Service\DemoService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * TestGetUser : Check the return of the function getUser

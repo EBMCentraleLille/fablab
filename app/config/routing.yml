@@ -1,6 +1,18 @@
+news_feed:
+    resource: "@CentraleLilleNewsFeedBundle/Resources/config/routing.yml"
+    prefix:   /news-feed
+
+project_page:
+    resource: "@ProjectPageBundle/Resources/config/routing.yml"
+    prefix:   /projet
+
+centrale_lille_homepage:
+    resource: "@CentraleLilleHomepageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 centrale_lille_demo:
     resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /demo
 
 app:
     resource: "@AppBundle/Controller/"
