@@ -32,7 +32,7 @@ class TaskController extends FOSRestController
      *
      * @return View
      */
-     public function getTasksAction()
+    public function getTasksAction()
     {
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $list = $taskRepository->findAll();
@@ -76,14 +76,14 @@ class TaskController extends FOSRestController
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($task);
-          $em->flush();
-          $view->setData($task)->setStatusCode(201);
-          return $view;
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+            $view->setData($task)->setStatusCode(201);
+            return $view;
         } else {
-          $view = $this->getErrorsView($errors);
-          return $view;
+            $view = $this->getErrorsView($errors);
+            return $view;
         }
     }
 
@@ -113,20 +113,26 @@ class TaskController extends FOSRestController
         $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy(
             array('id' => $paramFetcher->get('id'))
         );
-        if($paramFetcher->get('title')){ $task->setTitle($paramFetcher->get('title')); }
-        if($paramFetcher->get('body')){$task->setBody($paramFetcher->get('body')); }
-        if($paramFetcher->get('status')){$task->setStatus($paramFetcher->get('status')); }
+        if ($paramFetcher->get('title')) {
+            $task->setTitle($paramFetcher->get('title'));
+        }
+        if ($paramFetcher->get('body')) {
+            $task->setBody($paramFetcher->get('body'));
+        }
+        if ($paramFetcher->get('status')) {
+            $task->setStatus($paramFetcher->get('status'));
+        }
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Update'));
         if (count($errors) == 0) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($task);
-          $em->flush();
-          $view->setData($task)->setStatusCode(200);
-          return $view;
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+            $view->setData($task)->setStatusCode(200);
+            return $view;
         } else {
-          $view = $this->getErrorsView($errors);
-          return $view;
+            $view = $this->getErrorsView($errors);
+            return $view;
         }
     }
 
@@ -148,19 +154,19 @@ class TaskController extends FOSRestController
      */
     public function deleteTaskAction($id)
     {
-      $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
-      $task = $repo->findOneBy(
-          array('id' => $id)
-      );
-      if (!$task) {
-          throw $this->createNotFoundException('Data not found.');
-      }
-      $em = $this->getDoctrine()->getManager();
-      $em->remove($task);
-      $em->flush();
-      $view = View::create();
-      $view->setData("Task deteled.")->setStatusCode(200);
-      return $view;
+        $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+        $task = $repo->findOneBy(
+            array('id' => $id)
+        );
+        if (!$task) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($task);
+        $em->flush();
+        $view = View::create();
+        $view->setData("Task deteled.")->setStatusCode(200);
+        return $view;
     }
 
     /**
