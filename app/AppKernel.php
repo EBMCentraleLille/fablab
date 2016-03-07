@@ -18,6 +18,12 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new CentraleLille\DemoBundle\CentraleLilleDemoBundle(),
             new CentraleLille\GdpBundle\CentraleLilleGdpBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

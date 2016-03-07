@@ -1,0 +1,4 @@
+service_task:
+  type: rest
+  prefix: /api
+  resource: CentraleLille\GdpBundle\Controller\TaskController

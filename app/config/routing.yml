@@ -1,6 +1,5 @@
 centrale_lille_gdp:
-    resource: "@CentraleLilleGdpBundle/Controller/"
-    type:     annotation
+    resource: "@CentraleLilleGdpBundle/Resources/config/routing.yml"
     prefix:   /gdp
 
 centrale_lille_demo:
@@ -10,3 +9,7 @@ centrale_lille_demo:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
