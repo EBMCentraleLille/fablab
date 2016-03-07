@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new CentraleLille\KnowledgeBundle\CentraleLilleKnowledgeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
