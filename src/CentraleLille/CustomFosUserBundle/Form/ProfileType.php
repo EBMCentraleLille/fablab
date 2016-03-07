@@ -26,7 +26,9 @@ class ProfileType extends AbstractType
             ->add('promo', null, array('label' => 'Promotion'))
             ->add('phone', null, array('label' => 'Téléphone'))
             ->add(
-                'current_password', 'password', array(
+                'current_password',
+                'password',
+                array(
                 'label' => 'Mot de passe actuel',
                 'translation_domain' => 'FOSUserBundle',
                 'mapped' => false,

@@ -51,21 +51,27 @@ class EventController extends Controller
         $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
 
         $formBuilder->add(
-            'startDateTime', 'datetime', array(
+            'startDateTime',
+            'datetime',
+            array(
 
             'placeholder' => array(
                 'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
             ))
         )
             ->add(
-                'endDateTime', 'datetime', array(
+                'endDateTime',
+                'datetime',
+                array(
                 'placeholder'=> array(
                     'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
                     'hour'=>'Heure','minute'=>'Minute',
                 ))
             )
             ->add(
-                'machine', EntityType::class, array(
+                'machine',
+                EntityType::class,
+                array(
                 'class' => 'ReservationBundle:Machine',
                 'choice_label' => 'machineName',
                 'multiple' => false,
@@ -88,20 +94,26 @@ class EventController extends Controller
                 $event = new Event();
                 $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
                 $formBuilder->add(
-                    'startDateTime', 'datetime', array(
+                    'startDateTime',
+                    'datetime',
+                    array(
                     'placeholder' => array(
                         'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
                     ))
                 )
                     ->add(
-                        'endDateTime', 'datetime', array(
+                        'endDateTime',
+                        'datetime',
+                        array(
                         'placeholder'=> array(
                             'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
                             'hour'=>'Heure','minute'=>'Minute',
                         ))
                     )
                     ->add(
-                        'machine', EntityType::class, array(
+                        'machine',
+                        EntityType::class,
+                        array(
 
                         'class' => 'ReservationBundle:Machine',
                         'choice_label' => 'machineName',

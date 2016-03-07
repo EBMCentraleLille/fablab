@@ -58,7 +58,7 @@ class MachineController extends Controller
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
