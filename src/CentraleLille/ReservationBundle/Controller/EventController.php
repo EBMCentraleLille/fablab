@@ -127,11 +127,17 @@ class EventController extends Controller
 
                 $form = $formBuilder ->getForm();
 
-                return $this->render('ReservationBundle::reservation.html.twig', array('nom'=>"Michelle",'prenom'=>'Jean','form'=> $form->createView()));
+                return $this->render(
+                    'ReservationBundle::reservation.html.twig',
+                    array('nom'=>"Michelle",'prenom'=>'Jean','form'=> $form->createView())
+                );
             }
         }
 
-            return $this->render('ReservationBundle::reservation.html.twig', array('nom' => 'Michelle', 'prenom' => 'Jean', 'form' => $form->createView()));
+            return $this->render(
+                'ReservationBundle::reservation.html.twig',
+                array('nom' => 'Michelle', 'prenom' => 'Jean', 'form' => $form->createView())
+            );
 
     }
 
@@ -152,6 +158,9 @@ class EventController extends Controller
         $machines = $repository->findAll();
 
 
-        return $this->render('ReservationBundle::admin.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
+        return $this->render(
+            'ReservationBundle::admin.html.twig',
+            array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines)
+        );
     }
 }

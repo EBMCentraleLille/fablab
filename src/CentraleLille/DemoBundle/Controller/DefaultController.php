@@ -11,7 +11,6 @@
  * @link     https://github.com/EBMCentraleLille/fablab
  */
 
-
 namespace CentraleLille\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,6 +26,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
+class DefaultController extends Controller
+{
     /**
      * IndexAction
      *
@@ -35,8 +36,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
      *
      * @return something
      */
-class DefaultController extends Controller
-{
     public function indexAction()
     {
         return $this->render('CentraleLilleDemoBundle:Default:index.html.twig');

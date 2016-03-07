@@ -62,10 +62,18 @@ class MachineController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
-            return $this->redirect($this->generateUrl('centrale_lille_add_machine', array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())));
+            return $this->redirect(
+                $this->generateUrl(
+                    'centrale_lille_add_machine',
+                    array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())
+                )
+            );
         }
 
-        return $this->render('ReservationBundle::add.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView()));
+        return $this->render(
+            'ReservationBundle::add.html.twig',
+            array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView())
+        );
     }
 
 
@@ -88,6 +96,11 @@ class MachineController extends Controller
 
         $em->remove($machine);
         $em->flush();
-        return $this->redirect($this->generateUrl('centrale_lille_administration', array('prenom'=>'Michelle', 'nom'=>'Jean')));
+        return $this->redirect(
+            $this->generateUrl(
+                'centrale_lille_administration',
+                array('prenom'=>'Michelle', 'nom'=>'Jean')
+            )
+        );
     }
 }

@@ -36,7 +36,10 @@ class DefaultController extends Controller
     public function indexAction()
     {
         // En attendant de récupérer directement le $user pour avoir ses informations perso.
-        return $this->render('ReservationBundle:Default:index.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','role'=>'Admin'));
+        return $this->render(
+            'ReservationBundle:Default:index.html.twig',
+            array('prenom'=>'Michelle','nom'=>'Jean','role'=>'Admin')
+        );
     }
 
     /**
@@ -70,7 +73,10 @@ class DefaultController extends Controller
         $machines = $repository->findAll();
 
 
-        return $this->render('ReservationBundle::admin.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
+        return $this->render(
+            'ReservationBundle::admin.html.twig',
+            array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines)
+        );
     }
 
     /**
@@ -85,7 +91,10 @@ class DefaultController extends Controller
 
         $events = $repository ->findAll();
 
-        return $this->render('ReservationBundle::profil.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','events'=>$events));
+        return $this->render(
+            'ReservationBundle::profil.html.twig',
+            array('prenom'=>'Michelle','nom'=>'Jean','events'=>$events)
+        );
 
     }
 }
