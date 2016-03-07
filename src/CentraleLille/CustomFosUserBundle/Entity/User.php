@@ -204,13 +204,12 @@ class User extends BaseUser implements ProjectableInterface
     public function hasRoleWithinProject($role, $project)
     {
         foreach ($this->getProjectUsers() as $projectUser) {
-            if ($projectUser->getProject() === $project) {
-                if ($projectUser.$this->hasRole($role)) {
+            if ($projectUser->getProject()->getId() === $project->getId()) {
+                if ($projectUser->hasRole($role)) {
                     return true;
-                } else {
-                    return false;
                 }
             }
         }
+        return false;
     }
 }
