@@ -12,7 +12,7 @@ use CentraleLille\GdpBundle\Form\TaskType;
 class TaskController extends Controller
 {
     /**
-     * @Route("/tasks")
+     * @Route("/tasks",name="gdp_tasks")
      */
     public function indexAction()
     {
@@ -36,7 +36,7 @@ class TaskController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Tâche bien enregistrée.');
 
-            return $this->redirect($this->generateUrl('gdp_personal_page'));
+            return $this->redirect($this->generateUrl('gdp_tasks'));
 
         }
         return $this->render('CentraleLilleGdpBundle:Task:add.html.twig', array(
