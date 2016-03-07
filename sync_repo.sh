@@ -3,5 +3,5 @@
 git checkout master
 git pull origin master
 git fetch --all 
-git rebase FabLabOrigin/master
+git merge FabLabOrigin/master
 git push origin master

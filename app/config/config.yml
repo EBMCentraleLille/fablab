@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
+    - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -11,7 +12,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -68,6 +69,27 @@ swiftmailer:
     spool:     { type: memory }
 
 nelmio_api_doc: ~
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: CentraleLille\CustomFosUserBundle\Entity\User
+    registration:
+        form:
+            type: CentraleLille\CustomFosUserBundle\Form\RegistrationType
+    profile:
+        form:
+            type: CentraleLille\CustomFosUserBundle\Form\ProfileType
+
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+
+
+twig:
+    form:
+        resources:['bootstrap_3_layout.html.twig']
+
 
 sensio_framework_extra:
     view:   {   annotations: false }

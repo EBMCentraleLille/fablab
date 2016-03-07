@@ -1,0 +1,22 @@
+{% extends "ReservationBundle:Default:index.html.twig" %}
+
+{% block title %} {{ parent() }} - mon profil {% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="col-lg-3 col-md-3">
+    <h3>  Mes réservations </h3>
+    </div>
+    </div>
+    {% for event in events %}
+    <div class="well">
+        <ul>
+            <li>Date de début : {{ event.startDateTime|date('d-m-Y H:i')}} </li>
+            <li>Date de fin : {{ event.endDateTime|date('d-m-Y H:i')}} </li>
+            <li>Sur la machine : {{ event.machine.getMachineName()  }}</li>
+
+        </ul>
+    </div>
+ {% endfor %}
+</div>
+{% endblock %}
