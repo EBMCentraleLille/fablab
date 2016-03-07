@@ -52,7 +52,7 @@ Ex : ProjectController
         /**
          * Control access for members only
          */
-        $this->denyAccessUnlessGranted(ProjectRole::project_role_member, $project);
+        $this->denyAccessUnlessGranted(ProjectRole::PROJECT_ROLE_MEMBER, $project);
 
         return $this->render(
             'CustomFosUserBundle:Project:show.html.twig',
