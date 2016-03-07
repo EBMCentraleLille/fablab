@@ -93,7 +93,7 @@ class NewsFeedController extends Controller
             ]
             ];             
             $em=$this->getDoctrine()->getManager();
-            $user=$em->getRepository('CentraleLilleDemoBundle:User')->findOneBy(array('name'=>'Martin'));
+            $user=$em->getRepository('CentraleLilleCustomFosUserBundle:User')->findOneBy(array('name'=>'Martin'));
             $projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
             $category=$em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(array('name'=>'category1'));
 

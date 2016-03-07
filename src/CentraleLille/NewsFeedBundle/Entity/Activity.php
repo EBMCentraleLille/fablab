@@ -53,12 +53,12 @@ class Activity
     private $date;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
     **/
     private $project;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\User"), cascade={"persist"})
+    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
     **/
     private $user;
 
@@ -218,11 +218,11 @@ class Activity
     /**
      * Add project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Projet
      *
      * @return Activity
      */
-    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->project[] = $project;
 
@@ -232,11 +232,11 @@ class Activity
     /**
      * Remove project
      *
-     * @param \CentraleLille\DemoBundle\Entity\Projet $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Projet
      *
      * @return void
      */
-    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->project->removeElement($project);
     }
@@ -244,11 +244,11 @@ class Activity
     /**
      * Add user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user Objet User
      *
      * @return Activity
      */
-    public function addUser(\CentraleLille\DemoBundle\Entity\User $user)
+    public function addUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
     {
         $this->user[] = $user;
 
@@ -258,11 +258,11 @@ class Activity
     /**
      * Remove user
      *
-     * @param \CentraleLille\DemoBundle\Entity\User $user Objet User
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user Objet User
      *
      * @return void
      */
-    public function removeUser(\CentraleLille\DemoBundle\Entity\User $user)
+    public function removeUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
     {
         $this->user->removeElement($user);
     }
