@@ -26,14 +26,20 @@
        <td style="vertical-align: middle">
            <b>Global: </b>
            {% for role in user.roles %}
-               {{role}} -
+               {{role}}
+               {% if not loop.last %}
+                 -
+                {% endif %}
            {% endfor %}
            <br>
            {% for pu in user.projectUsers %}
                {% if pu.roles is not empty %}
                    <b>{{ pu.project.name }}: </b>
                    {% for pRole in pu.roles %}
-                       {{ pRole.name }} -
+                       {{ pRole.name }}
+                       {% if not loop.last %}
+                           -
+                       {% endif %}
                    {% endfor %}
                    <br>
                {% endif %}
