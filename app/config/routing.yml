@@ -4,10 +4,6 @@ centrale_lille_gdp:
     prefix:   /gdp
 
 centrale_lille_demo:
-    resource: "@CentraleLilleGdpBundle/Resources/config/routing.yml"
-    prefix:   /gdp
-
-centrale_lille_demo:
     resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
     prefix:   /
 
