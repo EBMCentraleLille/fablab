@@ -42,5 +42,17 @@
     </tr>
     {% endfor %}
 </table>
+
+<h2>List of projects</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Nom du projet</th>
+        </tr>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

@@ -8,8 +8,12 @@
 
 namespace CentraleLille\CustomFosUserBundle\Controller;
 
+use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Form\ProjectFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use CentraleLille\CustomFosUserBundle\Form;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProjectController
@@ -19,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ProjectController extends Controller
 {
     /**
-     * @Route("/{projectId}", name="project_show")
+     * @Route("/id_{projectId}", name="project_show")
      * @param $projectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -36,7 +40,7 @@ class ProjectController extends Controller
         /**
          * Control access for members only
          */
-        $this->denyAccessUnlessGranted('MEMBER', $project);
+        //$this->denyAccessUnlessGranted('MEMBER', $project);
 
         return $this->render(
             'CustomFosUserBundle:Project:show.html.twig',
@@ -74,5 +78,28 @@ class ProjectController extends Controller
                 'currentUser' => $currentUser
             )
         );
+    }
+
+    /**
+     * @Route("/new", name="project_new"))
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newAction(Request $request)
+    {
+        $project = new Project("hello");
+        $form = $this->get('form.factory')->create(new ProjectFormType(), $project);
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($project);
+            $em->flush();
+            return $this->redirect($this->generateUrl('project_new'));
+
+        } else {
+            return $this->render('CustomFosUserBundle:Project:new.html.twig', array(
+                'form' => $form->createview()
+            ));
+        }
     }
 }
