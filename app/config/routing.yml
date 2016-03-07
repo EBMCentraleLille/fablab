@@ -1,6 +1,5 @@
 centrale_lille_gdp:
-    resource: "@CentraleLilleGdpBundle/Controller/"
-    type:     annotation
+    resource: "@CentraleLilleGdpBundle/Resources/config/routing.yml"
     prefix:   /gdp
 
 custom_fos_user:
