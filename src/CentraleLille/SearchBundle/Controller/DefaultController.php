@@ -16,16 +16,16 @@ class DefaultController extends Controller
   */
   public function indexAction()
   {
-    $es = new Elastic($this->container);
+    //recherche dans demo seulement
+    //$demo = $this->get('fos_elastica.index.fablab.demo');
 
-    //récupérer donnée formulaire
-    //$request = $this->getRequest();
-    //$post = $request->query;
-
-    $data = $es->simpleSearch("Coucou");
+    //recherche dans tout l'index fablab
+    $index = $this->get('fos_elastica.index.fablab');
+    $result = $index->search("coucou");
+    var_dump($result);
 
     $response = new JsonResponse();
-    $response->setData($data);
+    $response->setData($result);
     return $response;
   }
 }
