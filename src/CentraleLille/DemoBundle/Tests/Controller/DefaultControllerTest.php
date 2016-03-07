@@ -41,3 +41,4 @@ public function testIndex()
 
     $this->assertContains('Hello World', $client->getResponse()->getContent());
 }
+}
