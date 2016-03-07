@@ -19,7 +19,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Controller Class Doc
  *
@@ -91,5 +90,4 @@ class MachineController extends Controller
         $em->flush();
         return $this->redirect($this->generateUrl('centrale_lille_administration', array('prenom'=>'Michelle', 'nom'=>'Jean')));
     }
-
 }

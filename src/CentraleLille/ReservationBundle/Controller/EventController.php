@@ -52,6 +52,7 @@ class EventController extends Controller
 
         $formBuilder->add(
             'startDateTime', 'datetime', array(
+
             'placeholder' => array(
                 'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
             ))
@@ -101,12 +102,15 @@ class EventController extends Controller
                     )
                     ->add(
                         'machine', EntityType::class, array(
+
                         'class' => 'ReservationBundle:Machine',
                         'choice_label' => 'machineName',
                         'multiple' => false,
                         'required' => true,
+
                         'expanded' => true)
                     )
+
                     ->add('sauvegarder', 'submit');
 
                 $form = $formBuilder ->getForm();

@@ -180,8 +180,4 @@ class Machine
     {
         $this->requirements = $requirements;
     }
-
-
-
 }
-

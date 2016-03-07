@@ -14,7 +14,6 @@ namespace CentraleLille\ReservationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Entity Class Doc
  *
@@ -168,7 +167,4 @@ class Event
         $date = date_create(date("d-M-Y H:i"));
         $this->creationDateTime = $date ;
     }
-
-
 }
-
