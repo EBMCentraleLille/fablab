@@ -200,4 +200,8 @@ class User extends BaseUser implements ProjectableInterface
 //
 //        return $this;
 //    }
+
+    public function hasRoleWithinProject($role,$project){
+        // TODO
+    }
 }
