@@ -38,7 +38,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user->setFirstname('user1');
         $user->setLastname('user1');
         $user->setEnabled(true);
-        $user->addRole('ROLE_SUPER_MEMBER');
         $manager->persist($user);
         $this->addReference('user1', $user);
 
