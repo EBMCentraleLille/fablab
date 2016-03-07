@@ -89,7 +89,7 @@ services:
 fos_elastica:
     serializer: ~
     clients:
-        default: { host: %elastic_host%, port: %elastic_port% }
+        default: { host: 127.0.0.1 , port: 9200 }
     indexes:
         fablab:
             client: default

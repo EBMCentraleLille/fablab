@@ -4,11 +4,19 @@ namespace CentraleLille\CustomFosUserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\ElasticaBundle\Configuration\Search;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @Search(repositoryClass="CentraleLille\SearchBundle\Entity\SearchRepository\searchRepository")
+ * @ORM\HasLifecycleCallbacks
  */
+
+
+
+
+
 class User extends BaseUser
 {
 
@@ -21,13 +29,13 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="firstname", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
     protected $firstname;
 
     /**
      * @var string
-     * @ORM\Column(name="lastname", type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
     protected $lastname;
 

@@ -13,3 +13,8 @@ services:
         class: CentraleLille\CustomFosUserBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }
+
+    form.type.user_search:
+        class: CentraleLille\SearchBundle\Form\SearchUserType
+        tags:
+            - { name: form.type, alias: user_search_type }

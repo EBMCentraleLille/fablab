@@ -8,6 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CentraleLille\SearchBundle\Entity\Demo;
 use CentraleLille\SearchBundle\Form\DemoType;
+use CentraleLille\CustomFosUserBundle\Entity\User;
+
+
 
 /**
  * Demo controller.
@@ -24,12 +27,14 @@ class DemoController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $repositoryManager = $this->get('fos_elastica.manager.orm');
 
-        $demos = $em->getRepository('CentraleLilleSearchBundle:Demo')->findAll();
+        $repository = $repositoryManager->getRepository('CentraleLilleCustomFosUserBundle:User');
+        
+       $result = $repository->find('AAAA');
 
         return $this->render('demo/index.html.twig', array(
-            'demos' => $demos,
+            'demos' => $result,
         ));
     }
 
