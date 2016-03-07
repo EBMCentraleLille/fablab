@@ -18,45 +18,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProjectFormType extends AbstractType
 {
-    private $class;
-
-    /**
-     * @param string $class The Group class name
-     */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
+    public function __construct(){}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, array('label' => 'form.group_name', 'translation_domain' => 'FOSUserBundle'));
+        $builder
+            ->add('name', 'text', array("label" => "Nom"))
+            ->add('dateBegin', 'text', array("label" => "Date de début"))
+            ->add('dateEnd', 'text', array("label" => "Date de fin"))
+            ->add('picture', 'text', array("label" => "Image"))
+            ->add('summary', 'text', array("label" => "Résumé"))
+            ->add('description', 'text', array("label" => "Description"))
+            ->add('save', 'submit', array('label' => 'Créer projet'));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => $this->class,
-            'csrf_token_id' => 'group',
-            // BC for SF < 2.8
-            'intention'  => 'group',
-        ));
-    }
-
-    // BC for SF < 2.7
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
-    // BC for SF < 3.0
     public function getName()
     {
-        return $this->getBlockPrefix();
-    }
-
-    public function getBlockPrefix()
-    {
-        return 'fos_user_group';
+        return 'fos_user_project';
     }
 }

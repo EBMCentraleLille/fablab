@@ -18,13 +18,20 @@ class DefaultController extends Controller
             ->getRepository('CustomFosUserBundle:User')
             ->findAll();
 
+        $projects = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('CustomFosUserBundle:Project')
+            ->findAll();
+
         $currentUser = $this->getUser();
 
         return $this->render(
             'CustomFosUserBundle:Default:index.html.twig',
             array(
             'users' => $users,
-            'currentUser' => $currentUser
+            'currentUser' => $currentUser,
+            'projects' => $projects
             )
         );
     }
