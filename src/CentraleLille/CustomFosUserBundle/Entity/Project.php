@@ -32,37 +32,37 @@ class Project
 
     /**
      * @var string
-     * @ORM\Column(name="dateBegin", type="string")
+     * @ORM\Column(name="dateBegin", type="string", nullable=true)
      */
     protected $dateBegin;
 
     /**
      * @var string
-     * @ORM\Column(name="dateEnd", type="string")
+     * @ORM\Column(name="dateEnd", type="string", nullable=true)
      */
     protected $dateEnd;
 
     /**
      * @var string
-     * @ORM\Column(name="dateUpdate", type="string")
+     * @ORM\Column(name="dateUpdate", type="string", nullable=true)
      */
     protected $dateUpdate;
 
     /**
      * @var string
-     * @ORM\Column(name="picture", type="string", length=80)
+     * @ORM\Column(name="picture", type="string", length=80, nullable=true)
      */
     protected $picture;
 
     /**
      * @var string
-     * @ORM\Column(name="summary", type="string", length=500)
+     * @ORM\Column(name="summary", type="string", length=500, nullable=true)
      */
     protected $summary;
 
     /**
      * @var string
-     * @ORM\Column(name="description", type="string")
+     * @ORM\Column(name="description", type="string", nullable=true)
      */
     protected $description;
         
