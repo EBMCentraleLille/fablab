@@ -168,7 +168,7 @@ class Machine
         return $this->requirements;
     }
 
-    function __toString()
+    public function __toString()
     {
         return (string)$this->getMachineName()+"  "+$this->getDescription();
     }
