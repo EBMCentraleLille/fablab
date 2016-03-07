@@ -1,4 +1,4 @@
-#Fablab
+# fablab
 Site de gestion du FabLab de CentraleLille
 
 ## Installation
@@ -13,8 +13,10 @@ bower install
 
 Bower will install bootstrap for layout.
 
-##Gestion des réservations
+## Dev
 
-**par Romain, Medhi et Pierre-Louis**
+We use the PSR-2 PHP Standard, you can test locally with this command :
 
-Classes Event et Machine
+```
+./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 src/
+```

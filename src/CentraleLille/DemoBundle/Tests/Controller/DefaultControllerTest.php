@@ -40,7 +40,7 @@ class DefaultControllerTest extends WebTestCase
 =======
 class DefaultControllerTest extends WebTestCase
 {
->>>>>>> Fix
+    >>>>>>> Fix
     public function testIndex()
     {
         $client = static::createClient();

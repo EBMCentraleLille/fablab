@@ -68,6 +68,6 @@ interface DemoServiceInterface
      * @param string $role
      * @return boolean
      */
-    public function setRole($user, $role);
+public function setRole($user, $role);
 }
 >>>>>>> Fix

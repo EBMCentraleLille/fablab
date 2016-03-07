@@ -1,14 +1,13 @@
 <?php
 
 /**
- *
  * PHP Version 5.5
  *
- * @Category    Controller
- * @Package Reservation
+ * @Category Controller
+ * @Package  Reservation
  * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
- * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @Link https://github.com/pierloui/fablab
+ * @Licence  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @Link     https://github.com/pierloui/fablab
  */
 
 namespace CentraleLille\ReservationBundle\Controller;
@@ -40,7 +39,7 @@ class EventController extends Controller
      *
      * Génère un formulaire permettant de réserver une machine à une date donnée
      *
-     * @param Request $request Récupère les données envoyés en POST
+     * @param  Request $request Récupère les données envoyés en POST
      *      *
      * @return Redirect
      */
@@ -51,21 +50,27 @@ class EventController extends Controller
         $event->setCreationDateTime();
         $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
 
-        $formBuilder->add('startDateTime', 'datetime',array(
+        $formBuilder->add(
+            'startDateTime', 'datetime', array(
             'placeholder' => array(
                 'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-            )))
-            ->add('endDateTime', 'datetime', array(
+            ))
+        )
+            ->add(
+                'endDateTime', 'datetime', array(
                 'placeholder'=> array(
                     'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
                     'hour'=>'Heure','minute'=>'Minute',
-                )))
-            ->add('machine', EntityType::class, array(
+                ))
+            )
+            ->add(
+                'machine', EntityType::class, array(
                 'class' => 'ReservationBundle:Machine',
                 'choice_label' => 'machineName',
                 'multiple' => false,
                 'required' => true,
-                'expanded' => true))
+                'expanded' => true)
+            )
             ->add('sauvegarder', 'submit');
 
 
@@ -73,40 +78,46 @@ class EventController extends Controller
 
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $request->isMethod("POST")) {
+        if ($form->isSubmitted() && $request->isMethod("POST")) {
 
-                if ($form->isValid()) {
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($event);
-                    $em->flush();
-                    $event = new Event();
-                    $formBuilder = $this->get('form.factory')->createBuilder('form',$event);
-                    $formBuilder->add('startDateTime', 'datetime',array(
-                        'placeholder' => array(
-                            'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-                        )))
-                        ->add('endDateTime', 'datetime', array(
-                            'placeholder'=> array(
-                                'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
-                                'hour'=>'Heure','minute'=>'Minute',
-                            )))
-                        ->add('machine', EntityType::class, array(
-                            'class' => 'ReservationBundle:Machine',
-                            'choice_label' => 'machineName',
-                            'multiple' => false,
-                            'required' => true,
-                            'expanded' => true))
-                        ->add('sauvegarder', 'submit');
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($event);
+                $em->flush();
+                $event = new Event();
+                $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
+                $formBuilder->add(
+                    'startDateTime', 'datetime', array(
+                    'placeholder' => array(
+                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
+                    ))
+                )
+                    ->add(
+                        'endDateTime', 'datetime', array(
+                        'placeholder'=> array(
+                            'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
+                            'hour'=>'Heure','minute'=>'Minute',
+                        ))
+                    )
+                    ->add(
+                        'machine', EntityType::class, array(
+                        'class' => 'ReservationBundle:Machine',
+                        'choice_label' => 'machineName',
+                        'multiple' => false,
+                        'required' => true,
+                        'expanded' => true)
+                    )
+                    ->add('sauvegarder', 'submit');
 
-                    $form = $formBuilder ->getForm();
+                $form = $formBuilder ->getForm();
 
-                    return $this->render('ReservationBundle::reservation.html.twig',array('nom'=>"Michelle",'prenom'=>'Jean','form'=> $form->createView()));
-                }
+                return $this->render('ReservationBundle::reservation.html.twig', array('nom'=>"Michelle",'prenom'=>'Jean','form'=> $form->createView()));
             }
+        }
 
             return $this->render('ReservationBundle::reservation.html.twig', array('nom' => 'Michelle', 'prenom' => 'Jean', 'form' => $form->createView()));
 
-        }
+    }
 
     /**
      * adminAction
@@ -125,6 +136,6 @@ class EventController extends Controller
         $machines = $repository->findAll();
 
 
-        return $this->render('ReservationBundle::admin.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
+        return $this->render('ReservationBundle::admin.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
     }
 }

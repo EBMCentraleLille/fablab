@@ -48,11 +48,11 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
     {
         //mock the anonymous token
         $anonymousMock = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\AnonymousToken')
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
+        <<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
             ->disableOriginalConstructor()->getMock();
-=======
+        =======
                 ->disableOriginalConstructor()->getMock();
->>>>>>> Fix
+        >>>>>>> Fix
         $anonymousMock->method('getUser')->will($this->returnValue(false));
 
         //mock the token Storage
@@ -63,7 +63,7 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
         $demoService->getUser();
     }
 
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
+    <<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
     /**
      * Test Set Role
      *
@@ -71,8 +71,8 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
      *
      * @return something
      */
-=======
->>>>>>> Fix
+    =======
+    >>>>>>> Fix
     public function testSetRole()
     {
     }

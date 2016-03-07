@@ -1,14 +1,13 @@
 <?php
 
 /**
- *
  * PHP Version 5.5
  *
- * @Category    Controller
- * @Package Reservation
+ * @Category Controller
+ * @Package  Reservation
  * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
- * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @Link https://github.com/pierloui/fablab
+ * @Licence  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @Link     https://github.com/pierloui/fablab
  */
 
 
@@ -41,7 +40,7 @@ class MachineController extends Controller
      *
      * Génère un formulaire permettant de rajouter une machine
      *
-     * @param Request $request Récupère les données envoyés en POST
+     * @param  Request $request Récupère les données envoyés en POST
      *      *
      * @return Redirect
      */
@@ -50,25 +49,24 @@ class MachineController extends Controller
     {
         $machine = new Machine();
 
-        $formBuilder = $this->get('form.factory')->createBuilder('form',$machine);
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $machine);
 
         $formBuilder
             ->add('machineName', 'text')
             ->add('description', 'textarea')
-            ->add('Sauvegarder', 'submit')
-            ;
+            ->add('Sauvegarder', 'submit');
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if($form->isValid()){
+        if($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
-            return $this->redirect($this->generateUrl('centrale_lille_add_machine',array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())));
+            return $this->redirect($this->generateUrl('centrale_lille_add_machine', array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())));
         }
 
-        return $this->render('ReservationBundle::add.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView()));
+        return $this->render('ReservationBundle::add.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView()));
     }
 
 
@@ -82,7 +80,8 @@ class MachineController extends Controller
      * @return Redirect
      */
 
-    public function deleteMachineAction($id){
+    public function deleteMachineAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ReservationBundle:Machine');
 
@@ -90,7 +89,7 @@ class MachineController extends Controller
 
         $em->remove($machine);
         $em->flush();
-        return $this->redirect($this->generateUrl('centrale_lille_administration',array('prenom'=>'Michelle', 'nom'=>'Jean')));
+        return $this->redirect($this->generateUrl('centrale_lille_administration', array('prenom'=>'Michelle', 'nom'=>'Jean')));
     }
 
 }

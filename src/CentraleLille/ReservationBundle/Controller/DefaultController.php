@@ -1,14 +1,13 @@
 <?php
 
 /**
- *
  * PHP Version 5.5
  *
- * @Category    Controller
- * @Package Reservation
+ * @category Controller
+ * @package  Reservation
  * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
- * @Licence http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @Link https://github.com/pierloui/fablab
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/pierloui/fablab
  */
 
 namespace CentraleLille\ReservationBundle\Controller;
@@ -23,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Contrôleur par défaut pour la gestion du site et ses redirections
  *
  * @category Controller
- * @package  Reservation Bundle
+ * @package  Reservation_Bundle
  * @author   Skikar El Mehdi <skikar.elmehdi@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/pierloui/fablab
@@ -35,8 +34,9 @@ class DefaultController extends Controller
      * @return Response
      */
     public function indexAction()
-    { // En attendant de récupérer directement le $user pour avoir ses informations perso.
-        return $this->render('ReservationBundle:Default:index.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','role'=>'Admin'));
+    {
+        // En attendant de récupérer directement le $user pour avoir ses informations perso.
+        return $this->render('ReservationBundle:Default:index.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','role'=>'Admin'));
     }
 
     /**
@@ -70,21 +70,22 @@ class DefaultController extends Controller
         $machines = $repository->findAll();
 
 
-        return $this->render('ReservationBundle::admin.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
+        return $this->render('ReservationBundle::admin.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines));
     }
 
     /**
      * @return Response
      */
 
-    public function profilAction(){
+    public function profilAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $repository = $em->getRepository('ReservationBundle:Event');
 
         $events = $repository ->findAll();
 
-        return $this->render('ReservationBundle::profil.html.twig',array('prenom'=>'Michelle','nom'=>'Jean','events'=>$events));
+        return $this->render('ReservationBundle::profil.html.twig', array('prenom'=>'Michelle','nom'=>'Jean','events'=>$events));
 
     }
 }
