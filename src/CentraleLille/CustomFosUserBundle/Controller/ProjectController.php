@@ -9,6 +9,7 @@
 namespace CentraleLille\CustomFosUserBundle\Controller;
 
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
 use CentraleLille\CustomFosUserBundle\Form\ProjectFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,7 +41,7 @@ class ProjectController extends Controller
         /**
          * Control access for members only
          */
-        //$this->denyAccessUnlessGranted('MEMBER', $project);
+        //$this->denyAccessUnlessGranted(ProjectRole::project_role_member, $project);
 
         return $this->render(
             'CustomFosUserBundle:Project:show.html.twig',
@@ -69,7 +70,7 @@ class ProjectController extends Controller
         /**
          * Control access for members only
          */
-        $this->denyAccessUnlessGranted('LEADER', $project);
+        $this->denyAccessUnlessGranted(ProjectRole::project_role_leader, $project);
 
         return $this->render(
             'CustomFosUserBundle:Project:edit.html.twig',

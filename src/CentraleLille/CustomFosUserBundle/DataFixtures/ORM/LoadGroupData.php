@@ -16,11 +16,12 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\CustomFosUserBundle\Repository;
 
+
 class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $role_manager = 'LEADER';
+        $role_manager = ProjectRole::project_role_leader;
 
         $role = new ProjectRole();
         $role->setName($role_manager);

@@ -9,6 +9,7 @@
 namespace CentraleLille\CustomFosUserBundle\Security;
 
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
 use CentraleLille\CustomFosUserBundle\Entity\User;
 use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -18,7 +19,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class ProjectMemberVoter extends Voter
 {
     private $decisionManager;
-    const MEMBER = "MEMBER";
+    const MEMBER = ProjectRole::project_role_member;
 
     public function __construct(AccessDecisionManagerInterface $decisionManager)
     {
