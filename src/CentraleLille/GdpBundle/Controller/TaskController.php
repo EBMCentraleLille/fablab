@@ -86,84 +86,82 @@ class TaskController extends FOSRestController
           return $view;
         }
     }
-    // /**
-    //  * Update a User from the submitted data by ID.<br/>
-    //  *
-    //  * @Secure(roles="ROLE_API")
-    //  * @ApiDoc(
-    //  *   resource = true,
-    //  *   description = "Updates a user from the submitted data by ID.",
-    //  *   statusCodes = {
-    //  *     200 = "Returned when successful",
-    //  *     400 = "Returned when the form has errors"
-    //  *   }
-    //  * )
-    //  *
-    //  * @param ParamFetcher $paramFetcher Paramfetcher
-    //  *
-    //  * @RequestParam(name="id", nullable=false, strict=true, description="id.")
-    //  * @RequestParam(name="username", nullable=true, strict=true, description="Username.")
-    //  * @RequestParam(name="email", nullable=true, strict=true, description="Email.")
-    //  * @RequestParam(name="name", nullable=true, strict=true, description="Name.")
-    //  * @RequestParam(name="lastname", nullable=true, strict=true, description="Lastname.")
-    //  * @RequestParam(name="password", nullable=true, strict=true, description="Plain Password.")
-    //  *
-    //  * @return View
-    //  */
-    // public function putUserAction(ParamFetcher $paramFetcher)
-    // {
-    //     $entity = $this->getDoctrine()->getRepository('AppBundle\Entity\User')->findOneBy(
-    //         array('id' => $paramFetcher->get('id'))
-    //     );
-    //     $userManager = $this->container->get('fos_user.user_manager');
-    //     $user = $userManager->findUserByUsername($entity->getUsername());
-    //     if($paramFetcher->get('username')){ $user->setUsername($paramFetcher->get('username')); }
-    //     if($paramFetcher->get('email')){$user->setEmail($paramFetcher->get('email')); }
-    //     if($paramFetcher->get('password')){$user->setPlainPassword($paramFetcher->get('password')); }
-    //     if($paramFetcher->get('name')){$user->setName($paramFetcher->get('name')); }
-    //     if($paramFetcher->get('lastname')){$user->setLastname($paramFetcher->get('lastname')); }
-    //     $view = View::create();
-    //     $errors = $this->get('validator')->validate($user, array('Update'));
-    //     if (count($errors) == 0) {
-    //       $em = $this->getDoctrine()->getManager();
-    //       $em->persist($task);
-    //       $em->flush();
-    //       $view->setData($task)->setStatusCode(201);
-    //       return $view;
-    //     } else {
-    //       $view = $this->getErrorsView($errors);
-    //       return $view;
-    //     }
-    // }
-    // /**
-    //  * Delete an user identified by username/email.
-    //  *
-    //  * @Secure(roles="ROLE_API")
-    //  * @ApiDoc(
-    //  *   resource = true,
-    //  *   description = "Delete an user identified by username/email",
-    //  *   statusCodes = {
-    //  *     200 = "Returned when successful",
-    //  *     404 = "Returned when the user is not found"
-    //  *   }
-    //  * )
-    //  *
-    //  * @param string $slug username or email
-    //  *
-    //  * @return View
-    //  */
-    // public function deleteUserAction($slug)
-    // {
-    //     $userManager = $this->container->get('fos_user.user_manager');
-    //     $entity = $userManager->findUserByUsernameOrEmail($slug);
-    //     if (!$entity) {
-    //         throw $this->createNotFoundException('Data not found.');
-    //     }
-    //     $userManager->deleteUser($entity);
-    //     $view = View::create();
-    //     $view->setData("User deteled.")->setStatusCode(204);
-    //     return $view;
-    // }
+
+    /**
+     * Update a Task from the submitted data by ID.<br/>
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Updates a task from the submitted data by ID.",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @param ParamFetcher $paramFetcher Paramfetcher
+     *
+     * @RequestParam(name="id", nullable=false, strict=true, description="id.")
+     * @RequestParam(name="title", nullable=true, strict=true, description="Username.")
+     * @RequestParam(name="body", nullable=true, strict=true, description="Email.")
+     * @RequestParam(name="status", nullable=true, strict=true, description="status.")
+     *
+     * @return View
+     */
+    public function putTaskAction(ParamFetcher $paramFetcher)
+    {
+        $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy(
+            array('id' => $paramFetcher->get('id'))
+        );
+        if($paramFetcher->get('title')){ $task->setTitle($paramFetcher->get('title')); }
+        if($paramFetcher->get('body')){$task->setBody($paramFetcher->get('body')); }
+        if($paramFetcher->get('status')){$task->setStatus($paramFetcher->get('status')); }
+        $view = View::create();
+        $errors = $this->get('validator')->validate($task, array('Update'));
+        if (count($errors) == 0) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($task);
+          $em->flush();
+          $view->setData($task)->setStatusCode(200);
+          return $view;
+        } else {
+          $view = $this->getErrorsView($errors);
+          return $view;
+        }
+    }
+
+    /**
+     * Delete a task identified by id.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Delete a task identified by id",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     *
+     * @param int $id id
+     *
+     * @return View
+     */
+    public function deleteTaskAction($id)
+    {
+      $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+      $task = $repo->findOneBy(
+          array('id' => $id)
+      );
+      if (!$task) {
+          throw $this->createNotFoundException('Data not found.');
+      }
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($task);
+      $em->flush();
+      $view = View::create();
+      $view->setData("Task deteled.")->setStatusCode(200);
+      return $view;
+    }
 
     /**
      * Get the validation errors

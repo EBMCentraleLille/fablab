@@ -76,16 +76,29 @@ sensio_framework_extra:
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
-    format_listener: true
+    format_listener:
+        rules:
+            - { path: ^/, priorities: [json], fallback_format: ~, prefer_extension: true }
+    body_converter:
+        enabled: true
+        validate: true
     view:
         view_response_listener: 'force'
         formats:
-            json : true
+            json: true
         templating_formats:
             html: true
-        force_redirects:
-            html: true
-        failed_validation: HTTP_BAD_REQUEST
-        default_engine: twig
-    routing_loader:
-        default_format: json
+    exception:
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+    allowed_methods_listener: true
+    access_denied_listener:
+        json: true
+    disable_csrf_role: ROLE_API
+
+
+nelmio_api_doc:
+    name: API Documentation
