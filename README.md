@@ -22,6 +22,10 @@ We use the PSR-2 PHP Standard, you can test locally with this command :
 ```
 Use the code fixer with ```phpcbf``` instead of ```phpcs```
 
+```
+./vendor/squizlabs/php_codesniffer/scripts/phpcbf --standard=PSR2 src/
+```
+
 For windows :
 
 ```
