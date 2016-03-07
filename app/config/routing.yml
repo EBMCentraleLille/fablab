@@ -9,7 +9,3 @@ centrale_lille_demo:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-
-NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc
