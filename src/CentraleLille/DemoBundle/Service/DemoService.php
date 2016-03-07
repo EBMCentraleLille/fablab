@@ -1,5 +1,4 @@
 <?php
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * DemoService File Doc Comment
  *
@@ -11,9 +10,6 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
-=======
-
->>>>>>> Fix
 namespace CentraleLille\DemoBundle\Service;
 
 use CentraleLille\DemoBundle\ServiceInterfaces\DemoServiceInterface;
@@ -21,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * DemoService Class Doc Comment
  *
@@ -31,13 +26,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
-=======
->>>>>>> Fix
 class DemoService implements DemoServiceInterface
 {
 
     private $tokenStorage;
-    <<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
     /**
      * Construct
      *
@@ -55,15 +47,6 @@ class DemoService implements DemoServiceInterface
     /**
      * Get User
      *
-=======
-
-    function __construct(TokenStorageInterface $tokenStorage)
-    {
-        $this->tokenStorage = $tokenStorage;
-    }
-
-    /**
->>>>>>> Fix
      * Get the user from the context
      *
      * @return UserInterface
@@ -74,18 +57,13 @@ class DemoService implements DemoServiceInterface
     }
 
     /**
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
      * Set Role
      *
      * Add a Role to the user
      *
-     * @param  string $user User
-     * @param  string $role Role
+     * @param string $user User
+     * @param string $role Role
      *
-=======
-     * Add a Role to the user
-     * @param  string $role
->>>>>>> Fix
      * @return boolean
      */
     public function setRole($user, $role)

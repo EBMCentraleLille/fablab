@@ -1,5 +1,4 @@
 <?php
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * DemoServiceTest File Doc Comment
  *
@@ -11,15 +10,11 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/EBMCentraleLille/fablab
  */
-=======
-
->>>>>>> Fix
 namespace CentraleLille\DemoBundle\Tests\Service;
 
 use CentraleLille\DemoBundle\Service\DemoService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-<<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
 /**
  * DemoServiceTest Class Doc Comment
  *
@@ -37,22 +32,12 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
      * Description function
      *
      * @return something
-=======
-class DefaultControllerTest extends \PHPUnit_Framework_TestCase
-{
-    /**
-     * TestGetUser : Check the return of the function getUser
->>>>>>> Fix
      */
     public function testGetUser()
     {
         //mock the anonymous token
         $anonymousMock = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\AnonymousToken')
-        <<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
             ->disableOriginalConstructor()->getMock();
-        =======
-                ->disableOriginalConstructor()->getMock();
-        >>>>>>> Fix
         $anonymousMock->method('getUser')->will($this->returnValue(false));
 
         //mock the token Storage
@@ -63,7 +48,6 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
         $demoService->getUser();
     }
 
-    <<<<<<< 71872a2e747cf024ae6cc231eed8b83ca3bc85b1
     /**
      * Test Set Role
      *
@@ -71,8 +55,6 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
      *
      * @return something
      */
-    =======
-    >>>>>>> Fix
     public function testSetRole()
     {
     }
