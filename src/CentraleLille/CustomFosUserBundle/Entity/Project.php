@@ -31,20 +31,20 @@ class Project
     protected $name;
 
     /**
-     * @var date
-     * @ORM\Column(name="dateBegin", type="date")
+     * @var string
+     * @ORM\Column(name="dateBegin", type="string")
      */
     protected $dateBegin;
 
     /**
-     * @var date
-     * @ORM\Column(name="dateEnd", type="date")
+     * @var string
+     * @ORM\Column(name="dateEnd", type="string")
      */
     protected $dateEnd;
 
     /**
-     * @var date
-     * @ORM\Column(name="dateUpdate", type="date")
+     * @var string
+     * @ORM\Column(name="dateUpdate", type="string")
      */
     protected $dateUpdate;
 
