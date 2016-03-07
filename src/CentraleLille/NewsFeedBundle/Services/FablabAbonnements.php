@@ -18,7 +18,7 @@
 namespace CentraleLille\NewsFeedBundle\Services;
 
 use CentraleLille\NewsFeedBundle\Entity\Abonnement;
-use CentraleLille\DemoBundle\Entity\Projet;
+use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
 
 /**

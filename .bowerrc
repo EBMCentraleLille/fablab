@@ -1,0 +1,5 @@
+{
+  "directory": "web/assets/vendor/",
+  "proxy":"http://proxy.ec-lille.fr:3128",
+  "https-proxy":"http://proxy.ec-lille.fr:3128"
+}

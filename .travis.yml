@@ -11,8 +11,17 @@ matrix:
   allow_failures:
     - php: hhvm
 
+services:
+  - mysql
+
 before_script:
-  - composer install -n
+  - mysql -u root -e "CREATE DATABASE fablab"
+  - cp app/config/parameters.yml.travis app/config/parameters.yml
+  - ./composer.phar -v install -n
+  - ./composer.phar -v update -n
+  - php app/console doctrine:schema:create
+  - php app/console doctrine:fixtures:load -n
 
 script:
   - phpunit -c app
+  - ./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard="./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/ruleset.xml" src/

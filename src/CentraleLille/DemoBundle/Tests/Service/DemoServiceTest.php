@@ -1,20 +1,43 @@
 <?php
-class DefaultControllerTest extends \PHPUnit_Framework_TestCase
-
+/**
+ * DemoServiceTest File Doc Comment
+ *
+ * PHP Version 5.5
+ *
+ * @category DemoServiceTest
+ * @package  DemoServiceTest
+ * @author   Display Name <example@example.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/EBMCentraleLille/fablab
+ */
 namespace CentraleLille\DemoBundle\Tests\Service;
 
 use CentraleLille\DemoBundle\Service\DemoService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * DemoServiceTest Class Doc Comment
+ *
+ * @category DemoServiceTest
+ * @package  DemoServiceTest
+ * @author   Display Name <example@example.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/EBMCentraleLille/fablab
+ */
+class DefaultControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * TestGetUser : Check the return of the function getUser
+     * Test Get User
+     *
+     * Description function
+     *
+     * @return something
      */
     public function testGetUser()
     {
         //mock the anonymous token
         $anonymousMock = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\AnonymousToken')
-                ->disableOriginalConstructor()->getMock();
+            ->disableOriginalConstructor()->getMock();
         $anonymousMock->method('getUser')->will($this->returnValue(false));
 
         //mock the token Storage
@@ -25,6 +48,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
         $demoService->getUser();
     }
 
+    /**
+     * Test Set Role
+     *
+     * Description function
+     *
+     * @return something
+     */
     public function testSetRole()
     {
     }

@@ -1,0 +1,18 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<h1>Mon profil</h1>
+		</br>
+		{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+		</br>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<a href={{path('fos_user_profile_edit')}} class="btn btn-primary">Modifier</a>
+	</div>
+</div>
+{% endblock fos_user_content %}

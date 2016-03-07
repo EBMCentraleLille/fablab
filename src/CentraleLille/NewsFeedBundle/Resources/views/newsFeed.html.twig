@@ -4,6 +4,7 @@
 {% endblock stylesheets %}
 
 {% block body %}
+
 	<div class="newsFeed">
 		<div class="col-md-2 filter-menu">
 			<h3>Filtres</h3>
@@ -31,7 +32,7 @@
 								<div class="panel-footer">
 									<div class="row">
 										<div class="col-md-4 recentProjectSide">
-								  			<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+											<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
 								  			</br>{{ recentProject.likes }}
 								  		</div>
 								  		<div class="col-md-4 recentProjectCenter">
@@ -40,7 +41,7 @@
 								  		</div>
 								  		<div class="col-md-4 recentProjectSide">
 								  			<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object>
-								  			</br>{{ recentProject.files}}
+								  			</br>{{ recentProject.files }}
 								  		</div>
 								  	</div>
 							  	</div>
@@ -84,7 +85,7 @@
 				</div>
 				<div class="button-right-menu">
 	  				<div class="panel-body">
-	    				Mes Abonnenments
+	    				Mes Abonnements
 	    				<object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
 	  				</div>
 				</div>

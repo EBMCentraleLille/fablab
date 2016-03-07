@@ -15,18 +15,24 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new CentraleLille\DemoBundle\CentraleLilleDemoBundle(),
+            new CentraleLille\GdpBundle\CentraleLilleGdpBundle(),
+            new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new CentraleLille\ReservationBundle\ReservationBundle(),
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
-            new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle(),
+            new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle()
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
         return $bundles;
     }
