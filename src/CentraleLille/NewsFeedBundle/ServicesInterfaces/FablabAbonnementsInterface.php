@@ -1,6 +1,6 @@
 <?php
 /**
- * AbonnementRepository.php Doc
+ * FablabAbonnementsInterface.php Doc
  * 
  * Interface relatif aux abonnements
  *
