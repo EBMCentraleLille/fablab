@@ -17,7 +17,7 @@ Bower will install bootstrap for layout.
 
 ###Tests
 
-Scripts tests.bat ou tests.sh
+Scripts tests.bat or tests.sh
 
 We use the PSR-2 PHP Standard, you can test locally with this command :
 
