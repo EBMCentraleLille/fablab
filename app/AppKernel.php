@@ -22,11 +22,10 @@ class AppKernel extends Kernel
             new CentraleLille\GdpBundle\CentraleLilleGdpBundle(),
             new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new CentraleLille\ReservationBundle\ReservationBundle()
+            new CentraleLille\ReservationBundle\ReservationBundle(),
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
-            new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle(),
+            new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle()
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
