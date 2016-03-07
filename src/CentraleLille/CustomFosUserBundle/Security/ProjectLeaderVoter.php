@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class ProjectLeaderVoter extends Voter
 {
     private $decisionManager;
-    const LEADER = ProjectRole::project_role_leader;
+    const LEADER = ProjectRole::PROJECT_ROLE_LEADER;
 
     public function __construct(AccessDecisionManagerInterface $decisionManager)
     {

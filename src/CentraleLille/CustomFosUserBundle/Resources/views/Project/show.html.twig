@@ -2,7 +2,7 @@
 <br>
 {{ constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::project_role_leader') }}
 
-{% if currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::project_role_leader'), project) %}
+{% if currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
 
     <br>
     You are the leader!!!!

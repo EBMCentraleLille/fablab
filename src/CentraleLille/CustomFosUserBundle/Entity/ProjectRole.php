@@ -17,8 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ProjectRole
 {
 
-    const project_role_member = 'PROJECT_MEMBER';
-    const project_role_leader = 'PROJECT_LEADER';
+    const PROJECT_ROLE_MEMBER = 'PROJECT_MEMBER';
+    const PROJECT_ROLE_LEADER = 'PROJECT_LEADER';
 
     /**
      * @ORM\Id

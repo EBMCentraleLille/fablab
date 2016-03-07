@@ -68,7 +68,7 @@ Ex : ProjectController
 Il suffit d'ajouter dans le template la ligne suivante:
 
 ```
-{% if currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::project_role_leader'), project) %}
+{% if currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
     <p>This part is visible only by the PROJECT_LEADER</p>
 {% endif %}
 ```
