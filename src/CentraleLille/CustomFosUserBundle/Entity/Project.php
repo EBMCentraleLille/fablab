@@ -31,10 +31,49 @@ class Project
     protected $name;
 
     /**
+     * @var date
+     * @ORM\Column(name="dateBegin", type="date")
+     */
+    protected $dateBegin;
+
+    /**
+     * @var date
+     * @ORM\Column(name="dateEnd", type="date")
+     */
+    protected $dateEnd;
+
+    /**
+     * @var date
+     * @ORM\Column(name="dateUpdate", type="date")
+     */
+    protected $dateUpdate;
+
+    /**
+     * @var string
+     * @ORM\Column(name="picture", type="string", length=80)
+     */
+    protected $picture;
+
+    /**
+     * @var string
+     * @ORM\Column(name="summary", type="string", length=500)
+     */
+    protected $summary;
+
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="string")
+     */
+    protected $description;
+        
+
+
+    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\ProjectUser", mappedBy="user")
      */
     protected $projectUsers;
+
 
     /**
      * Project constructor.
@@ -75,5 +114,183 @@ class Project
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * Set dateBegin
+     *
+     * @param \DateTime $dateBegin
+     *
+     * @return Project
+     */
+    public function setDateBegin($dateBegin)
+    {
+        $this->dateBegin = $dateBegin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateBegin
+     *
+     * @return \DateTime
+     */
+    public function getDateBegin()
+    {
+        return $this->dateBegin;
+    }
+
+    /**
+     * Set dateEnd
+     *
+     * @param \DateTime $dateEnd
+     *
+     * @return Project
+     */
+    public function setDateEnd($dateEnd)
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEnd
+     *
+     * @return \DateTime
+     */
+    public function getDateEnd()
+    {
+        return $this->dateEnd;
+    }
+
+    /**
+     * Add projectUser
+     *
+     * @param \CentraleLille\CustomFosUserBundle\Entity\ProjectUser $projectUser
+     *
+     * @return Project
+     */
+    public function addProjectUser(\CentraleLille\CustomFosUserBundle\Entity\ProjectUser $projectUser)
+    {
+        $this->projectUsers[] = $projectUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove projectUser
+     *
+     * @param \CentraleLille\CustomFosUserBundle\Entity\ProjectUser $projectUser
+     */
+    public function removeProjectUser(\CentraleLille\CustomFosUserBundle\Entity\ProjectUser $projectUser)
+    {
+        $this->projectUsers->removeElement($projectUser);
+    }
+
+    /**
+     * Get projectUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProjectUsers()
+    {
+        return $this->projectUsers;
+    }
+
+    /**
+     * Set dateUpdate
+     *
+     * @param \DateTime $dateUpdate
+     *
+     * @return Project
+     */
+    public function setDateUpdate($dateUpdate)
+    {
+        $this->dateUpdate = $dateUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get dateUpdate
+     *
+     * @return \DateTime
+     */
+    public function getDateUpdate()
+    {
+        return $this->dateUpdate;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return Project
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set summary
+     *
+     * @param string $summary
+     *
+     * @return Project
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get summary
+     *
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Project
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
