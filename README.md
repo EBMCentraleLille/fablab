@@ -20,3 +20,10 @@ We use the PSR-2 PHP Standard, you can test locally with this command :
 ```
 ./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 src/
 ```
+Use the code fixer with ```phpcbf``` instead of ```phpcs```
+
+For windows :
+
+```
+php ./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 src/ --no-patch
+```
