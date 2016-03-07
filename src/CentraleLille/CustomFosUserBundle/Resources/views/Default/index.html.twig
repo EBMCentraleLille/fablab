@@ -1,1 +1,46 @@
-Hello World!
+{% extends 'CustomFosUserBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+<h2>List of users</h2>
+{% if currentUser %}
+<p> Vous êtes connecté en tant que : {{ currentUser.username }}</p>
+{% endif %}
+<table class="table table-striped">
+    <tr>
+        <th>Username</th>
+        <th>Projects</th>
+        <th>Roles</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+       <td style="vertical-align: middle">{{ user.username }}</td>
+       <td style="vertical-align: middle">
+       {% for pu in user.projectUsers %}
+           {{ pu.project.name }}
+           (<a href="{{ path('project_show', {'projectId' : pu.project.id}) }}">view</a> /
+           <a href="{{ path('project_edit', {'projectId' : pu.project.id}) }}">edit</a>)
+           <br>
+       {% endfor %}
+       </td>
+       <td style="vertical-align: middle">
+           <b>Global: </b>
+           {% for role in user.roles %}
+               {{role}} -
+           {% endfor %}
+           <br>
+           {% for pu in user.projectUsers %}
+               {% if pu.roles is not empty %}
+                   <b>{{ pu.project.name }}: </b>
+                   {% for pRole in pu.roles %}
+                       {{ pRole.name }} -
+                   {% endfor %}
+                   <br>
+               {% endif %}
+           {% endfor %}
+       </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

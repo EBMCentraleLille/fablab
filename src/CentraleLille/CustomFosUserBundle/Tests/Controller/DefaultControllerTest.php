@@ -20,7 +20,7 @@ class DefaultControllerTest extends WebTestCase
         $this->testLogin('Lucas', 'Hey there!', 'Invalid credentials');
     }
 
-    public function testLoginWithFixturesCredentials()
+    public function testLoginWithFixtureCredentials()
     {
         $this->testLogin('admin', 'admin', 'Hello World!');
     }
