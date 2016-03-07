@@ -9,26 +9,34 @@
 
 namespace CentraleLille\CustomFosUserBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
+
 class ProjectRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function createProject($name)
-    {
-        // TODO
-    }
-
-    public function findGroupByName($name)
-    {
-        // TODO
-    }
-
     public function addUserToProject($user, $project)
     {
-        // TODO
+        if(!$user->hasProject($project->getName())) {
+            $manager = $this->getEntityManager();
+            $projectUser = new ProjectUser();
+            $projectUser->setProject($project);
+            $projectUser->setUser($user);
+            $manager->persist($projectUser);
+            $manager->flush();
+        }
     }
 
     public function removeUserFromProject($user, $project)
     {
-        // TODO
+        $manager = $this->getEntityManager();
+
+        foreach ($user->getProjectUsers() as $projectUser) {
+            if ($projectUser->getProject() === $project) {
+                $manager->remove($projectUser);
+                $manager->flush();
+                break;
+            }
+        }
     }
 }
