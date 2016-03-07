@@ -101,10 +101,10 @@ class TaskController extends FOSRestController
      *
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
-     * @RequestParam(name="id", nullable=false, strict=true, description="id.")
-     * @RequestParam(name="title", nullable=true, strict=true, description="Username.")
-     * @RequestParam(name="body", nullable=true, strict=true, description="Email.")
-     * @RequestParam(name="status", nullable=true, strict=true, description="status.")
+     * @RequestParam(name="id", nullable=false, strict=true, description="Id.")
+     * @RequestParam(name="title", nullable=true, strict=true, description="Title.")
+     * @RequestParam(name="body", nullable=true, strict=true, description="Body.")
+     * @RequestParam(name="status", nullable=true, strict=true, description="Status.")
      *
      * @return View
      */
