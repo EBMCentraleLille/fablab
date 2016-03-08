@@ -1,7 +1,7 @@
 #!/bin/bash
 
-git checkout master
-git pull origin master
+git checkout develop
+git pull origin develop
 git fetch --all 
-git rebase FabLabOrigin/master
-git push origin master
+git rebase FabLabOrigin/develop
+git push origin develop
