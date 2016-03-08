@@ -20,80 +20,48 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
- * SearchUser controller.
- *
- * @Route("/")
- */
+* SearchUser controller.
+*
+* @Route("/")
+*/
 
 
 class SearchUserController extends Controller
 {
 
-     /**
-     *
-     * @Route("/user", name="centrale_lille_searchuser")
-     * @Method("GET")
-     */
-    public function searchAction(Request $request)
-    {
-        
-      $search = new SearchUser();
-      $searchForm = $this->get('form.factory')->createNamed(
-                '',
-                'user_search_type',
-                $search,
-                array(
-                    'action' => $this->generateUrl('centrale_lille_searchuser'),
-                    'method' => 'GET'
-                )
-            );
+  /**
+  *
+  * @Route("/user", name="centrale_lille_searchuser")
+  * @Method("GET")
+  */
+  public function searchAction(Request $request)
+  {
 
-       $searchForm->handleRequest($request);
-        $search = $searchForm->getData();
-        
-        $elasticaManager = $this->container->get('fos_elastica.manager');
-        $results = $elasticaManager->getRepository('CustomFosUserBundle:User')->search($search);
+    $search = new SearchUser();
+    $searchForm = $this->get('form.factory')->createNamed(
+    '',
+    'user_search_type',
+    $search,
+    array(
+      'action' => $this->generateUrl('centrale_lille_searchuser'),
+      'method' => 'GET'
+      )
+    );
 
-        return $this->render('CentraleLilleSearchBundle:Default:search.html.twig',array(
-            'results' => $results,
-            'form' => $searchForm->createView(),
-        ));}
+    $searchForm->handleRequest($request);
+    $search = $searchForm->getData();
 
-
-
-     /**
-     *
-     * @Route("/index", name="centrale_lille_search_index")
-     * @Method("GET")
-     */
-
-        
-        public function indexAction(Request $request)
-    {
- $search = new SearchUser();
-         $searchForm = $this->get('form.factory')->createNamed(
-                '',
-                'user_search_type',
-                $search,
-                array(
-                    'action' => $this->generateUrl('centrale_lille_searchuser'),
-                    'method' => 'GET'
-                )
-            );
-
-       $searchForm->handleRequest($request);
-        $search = $searchForm->getData();
+    if (is_null($search->getUsername())){
         $results = [];
-    
+    }
+    else{
+      $elasticaManager = $this->container->get('fos_elastica.manager');
+      $results = $elasticaManager->getRepository('CustomFosUserBundle:User')->search($search);
+    }
 
-        return $this->render('CentraleLilleSearchBundle:Default:search.html.twig',array(
-            'results' => $results,
-            'form' => $searchForm->createView(),
-        ));}
+    return $this->render('CentraleLilleSearchBundle:Default:search.html.twig',array(
+      'results' => $results,
+      'form' => $searchForm->createView(),
+    ));}
 
-
-        
-
-        
-   
-}
+    }
