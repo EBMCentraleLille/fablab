@@ -45,7 +45,21 @@ class ProjectPageController extends Controller
          */
 
         return $this->render('ProjectPageBundle:Default:projectpage.html.twig', array(
-            'projectId' =>$projectId)
-        );
+                'projectId' => $projectId));
+    }
+
+    public function wrongProjectAction()
+    {
+        /**
+         * wrongProjectAction
+         *
+         * Affiche une page d'erreur si l'on tente d'accéder à l'URL /project/ sans Id projet
+         *
+         * @param
+         *
+         * @return Response Une réponse à afficher
+         */
+
+        return $this->render('ProjectPageBundle:Default:wrongpage.html.twig');
     }
 }

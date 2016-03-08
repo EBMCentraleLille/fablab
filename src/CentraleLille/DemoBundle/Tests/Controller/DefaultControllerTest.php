@@ -33,11 +33,12 @@ class DefaultControllerTest extends WebTestCase
      *
      * @return something
      */
-    public function testIndex()
-    {
-        $client = static::createClient();
+public function testIndex()
+{
+    $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+    $crawler = $client->request('GET', '/');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
-    }
+    $this->assertContains('Hello World', $client->getResponse()->getContent());
+}
+}

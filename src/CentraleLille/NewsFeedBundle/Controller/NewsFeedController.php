@@ -95,7 +95,6 @@ class NewsFeedController extends Controller
                 'name'=>'Project De Martin'
             ]
             ];
-
         return $this->render(
             'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
             [

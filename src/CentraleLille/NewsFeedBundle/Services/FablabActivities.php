@@ -45,6 +45,7 @@ class FablabActivities implements FablabActivitiesInterface
         $this->em = $entityManager;
     }
 
+
     /**
     * Créer l'activité généré par un user sur un projet
     *

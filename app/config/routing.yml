@@ -13,7 +13,7 @@ news_feed:
 
 project_page:
     resource: "@ProjectPageBundle/Resources/config/routing.yml"
-    prefix:   /projet
+    prefix:   /project
 
 centrale_lille_homepage:
     resource: "@CentraleLilleHomepageBundle/Resources/config/routing.yml"
