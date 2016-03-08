@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-
 class SearchUserType extends AbstractType
 {
     /**
@@ -24,7 +23,7 @@ class SearchUserType extends AbstractType
              
             ->add('username')
             
-            ->add('search','submit')
+            ->add('search', 'submit')
            
            
             

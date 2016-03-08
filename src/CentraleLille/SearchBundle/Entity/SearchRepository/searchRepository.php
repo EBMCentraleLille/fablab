@@ -5,7 +5,7 @@ namespace CentraleLille\SearchBundle\Entity\SearchRepository;
 use FOS\ElasticaBundle\Repository;
 use CentraleLille\SearchBundle\Model\SearchUser;
 
-class searchRepository extends Repository
+class SearchRepository extends Repository
 {
     public function search(SearchUser $userSearch)
     {
@@ -16,7 +16,7 @@ class searchRepository extends Repository
             $query->setFieldQuery('user.username', $userSearch->getUsername());
             $query->setFieldFuzziness('user.username', 0.4);
 
-             
+
             //
         } else {
             $query = new \Elastica\Query\MatchAll();
@@ -26,19 +26,20 @@ class searchRepository extends Repository
         // then we create filters depending on the chosen criterias
         $boolFilter = new \Elastica\Filter\Bool();
 
-        
+
         /*
             Dates filter
             We add this filter only the getIspublished filter is not at "false"
         */
-        
+
 
         // Published or not filter
-        
+
 
         $filtered = new \Elastica\Query\Filtered($baseQuery, $boolFilter);
 
         $query = \Elastica\Query::create($filtered);
 
         return $this->find($query);
-    }}
+    }
+}

@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SearchUser
 {
-   protected $id;
-   protected $username;
-   protected $email;
+    protected $id;
+    protected $username;
+    protected $email;
 
     public function getId()
     {
@@ -22,7 +22,7 @@ class SearchUser
         return $this;
     }
 
-     public function getEmail()
+    public function getEmail()
     {
         return $this->email;
     }
@@ -35,7 +35,7 @@ class SearchUser
     }
 
 
-     public function getUsername()
+    public function getUsername()
     {
         return $this->username;
     }
