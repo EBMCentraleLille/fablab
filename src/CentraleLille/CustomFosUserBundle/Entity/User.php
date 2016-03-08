@@ -9,7 +9,7 @@ use FOS\ElasticaBundle\Configuration\Search;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
- * @Search(repositoryClass="CentraleLille\SearchBundle\Entity\SearchRepository\searchRepository")
+ * @Search(repositoryClass="CentraleLille\SearchBundle\Entity\SearchRepository\SearchRepository")
  * @ORM\HasLifecycleCallbacks
  */
 

@@ -13,15 +13,12 @@ services:
         class: CentraleLille\CustomFosUserBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }
-<<<<<<< HEAD
 
     form.type.user_search:
         class: CentraleLille\SearchBundle\Form\SearchUserType
         tags:
             - { name: form.type, alias: user_search_type }
-=======
+            
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
->>>>>>> FabLabOrigin/master

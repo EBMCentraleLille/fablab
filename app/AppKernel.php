@@ -22,13 +22,10 @@ class AppKernel extends Kernel
             new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-<<<<<<< HEAD
             new CentraleLille\SearchBundle\CentraleLilleSearchBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-=======
             new CentraleLille\ReservationBundle\ReservationBundle()
->>>>>>> FabLabOrigin/master
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
