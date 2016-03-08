@@ -4,12 +4,9 @@ namespace CentraleLille\CustomFosUserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-<<<<<<< HEAD
 use FOS\ElasticaBundle\Configuration\Search;
-=======
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
->>>>>>> FabLabOrigin/master
 
 /**
  * @ORM\Entity(repositoryClass="CentraleLille\CustomFosUserBundle\Repository\UserRepository")
@@ -17,16 +14,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Search(repositoryClass="CentraleLille\SearchBundle\Entity\SearchRepository\SearchRepository")
  * @ORM\HasLifecycleCallbacks
  */
-<<<<<<< HEAD
 
-
-
-
-
-class User extends BaseUser
-=======
 class User extends BaseUser implements ProjectableInterface
->>>>>>> FabLabOrigin/master
 {
 
     /**
