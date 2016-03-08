@@ -4,13 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "hash": "e9477aa1401e4f61beb8286e2704c5ed",
     "content-hash": "faa46985178cc671c18b03e7cefd5e68",
-=======
-    "hash": "0182a0b4447af02ce654b6536d1d9114",
-    "content-hash": "dd6fe86ab56c491358d96f225610d895",
->>>>>>> FabLabOrigin/master
     "packages": [
         {
             "name": "doctrine/annotations",
