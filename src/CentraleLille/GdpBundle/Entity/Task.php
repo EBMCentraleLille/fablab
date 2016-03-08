@@ -3,6 +3,7 @@
 namespace CentraleLille\GdpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+//use CentraleLille\CustomFosUserBundle\Entity\User as User;
 
 /**
  * Task
@@ -53,6 +54,12 @@ class Task
      * @ORM\Column(name="date", type="date")
      */
     private $date;
+
+    /**
+     * @ORM\OneToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
+     * @ORM\JoinColumn(name="in_charge_user_id", referencedColumnName="id")
+     */
+    private $inChargeUser;
 
 
     public function __construct()
@@ -188,5 +195,29 @@ class Task
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set in charge user
+     *
+     * @param \CentraleLille\CustomerFosUserBundle\Entity\User
+     *
+     * @return Task
+     */
+    public function setInChargeUser ($user)
+    {
+        $this->inChargeUser = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get in charge user
+     *
+     * @return \CentraleLille\CustomerFosUserBundle\Entity\User
+     */
+    public function getInChargeUser()
+    {
+        return $this->inChargeUser;
     }
 }
