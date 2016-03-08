@@ -11,6 +11,7 @@ namespace CentraleLille\CustomFosUserBundle\Controller;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
 use CentraleLille\CustomFosUserBundle\Form\ProjectFormType;
+use Proxies\__CG__\CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CentraleLille\CustomFosUserBundle\Form;
@@ -24,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ProjectController extends Controller
 {
     /**
-     * @Route("/id_{projectId}", name="project_show")
+     * @Route("/show/{projectId}", name="project_show")
      * @param $projectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -94,6 +95,13 @@ class ProjectController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($project);
+
+            $user = $this->getUser();
+            $projectUser = new ProjectUser();
+            $projectUser->setUser($user);
+            $projectUser->setProject($project);
+            $em->persist($projectUser);
+
             $em->flush();
             return $this->redirect($this->generateUrl('project_new'));
 
