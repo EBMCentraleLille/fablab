@@ -29,7 +29,7 @@ class DemoController extends Controller
     {
         $repositoryManager = $this->get('fos_elastica.manager.orm');
 
-        $repository = $repositoryManager->getRepository('CentraleLilleCustomFosUserBundle:User');
+        $repository = $repositoryManager->getRepository('CentraleLilleSearchBundle:Demo');
         
        $result = $repository->find('AAAA');
 

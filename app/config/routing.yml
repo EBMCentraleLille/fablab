@@ -1,7 +1,9 @@
-centrale_lille_search:
-    resource: "@CentraleLilleSearchBundle/Resources/config/routing.yml"
-    prefix:   /search
 
+centrale_lille_search:
+    resource: "@CentraleLilleSearchBundle/Controller/"
+    type:     annotation
+    prefix:   /search
+    
 centrale_lille_gdp:
     resource: "@CentraleLilleGdpBundle/Controller/"
     type:     annotation

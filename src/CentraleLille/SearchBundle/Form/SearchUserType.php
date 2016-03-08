@@ -23,7 +23,6 @@ class SearchUserType extends AbstractType
         $builder
              
             ->add('username')
-            ->add('email')
             
             ->add('search','submit')
            

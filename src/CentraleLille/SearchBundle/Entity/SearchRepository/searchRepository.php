@@ -11,7 +11,7 @@ class searchRepository extends Repository
     {
         // we create a query to return all the articles
         // but if the criteria title is specified, we use it
-        if ($userSearch->getUsername() != null || $userSearch != '' || $userSearch->getEmail() != null) {
+        if ($userSearch->getUsername() != null || $userSearch != '') {
             $query = new \Elastica\Query\Match();
             $query->setFieldQuery('user.username', $userSearch->getUsername());
             $query->setFieldFuzziness('user.username', 0.4);

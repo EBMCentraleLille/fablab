@@ -5,7 +5,6 @@ namespace CentraleLille\SearchBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CentraleLille\SearchBundle\Entity\Demo;
 use CentraleLille\SearchBundle\Model\SearchUser;
 use CentraleLille\CustomFosUserBundle\Entity\User;
@@ -14,17 +13,27 @@ use CentraleLille\SearchBundle\Form\SearchUserType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
-
+/**
+ * SearchUser controller.
+ *
+ * @Route("/")
+ */
 
 
 class SearchUserController extends Controller
 {
+
+     /**
+     *
+     * @Route("/user", name="centrale_lille_searchuser")
+     * @Method("GET")
+     */
     public function searchAction(Request $request)
     {
         
@@ -52,6 +61,11 @@ class SearchUserController extends Controller
 
 
 
+     /**
+     *
+     * @Route("/index", name="centrale_lille_search_index")
+     * @Method("GET")
+     */
 
         
         public function indexAction(Request $request)
