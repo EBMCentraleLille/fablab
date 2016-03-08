@@ -1,7 +1,7 @@
 <?php
 /**
  * NewsFeedControllerTest.php Doc
- * 
+ *
  * Tests unitaires liés aux controller du NewsFeed
  *
  * PHP Version 5.6
@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * NewsFeedControllerTest Class Doc
  *
  * Classe de tests unitaires liés aux controller du NewsFeed
- * 
+ *
  * @category   TestClass
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage Tests

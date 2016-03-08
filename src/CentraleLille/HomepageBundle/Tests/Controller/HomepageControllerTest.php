@@ -17,6 +17,7 @@
 namespace CentraleLilleHomepageBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 /**
  * Test de la classe HomePageController
  *
@@ -32,9 +33,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class HomepageControllerTest extends WebTestCase
 {
     /**
-     * Test de la fonction Index 
-     * 
-     * @return void 
+     * Test de la fonction Index
+     *
+     * @return void
      */
     public function testIndex()
     {

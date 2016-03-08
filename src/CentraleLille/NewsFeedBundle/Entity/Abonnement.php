@@ -2,7 +2,7 @@
 /**
  * Abonnements.php File Doc
  *
- * Entité Abonnement qui décrit les abonnements 
+ * Entité Abonnement qui décrit les abonnements
  * aux projets ainsi qu'aux catégories des utilisateurs
  *
  * PHP Version 5.6
@@ -32,7 +32,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @link       https://github.com/EBMCentraleLille/fablab
  *
  * @ORM\Table(name="abonnement")
- * @ORM\Entity(repositoryClass="CentraleLille\NewsFeedBundle\Repository\AbonnementRepository") 
+ * @ORM\Entity(repositoryClass="CentraleLille\NewsFeedBundle\Repository\AbonnementRepository")
  */
 class Abonnement
 {
@@ -57,8 +57,9 @@ class Abonnement
     private $categories;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-    **/
+     * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+     */
     private $projects;
 
 
@@ -170,7 +171,7 @@ class Abonnement
      * Remove category
      *
      * @param \CentraleLille\NewsFeedBundle\Entity\Category $category Objet Category
-     * 
+     *
      * @return void
      */
     public function removeCategory(\CentraleLille\NewsFeedBundle\Entity\Category $category)
@@ -185,7 +186,8 @@ class Abonnement
      *
      * @return Abonnement
      */
-    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
         $this->projects[] = $project;
 
@@ -196,10 +198,11 @@ class Abonnement
      * Remove project
      *
      * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
-     * 
+     *
      * @return void
      */
-    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
         $this->projects->removeElement($project);
     }

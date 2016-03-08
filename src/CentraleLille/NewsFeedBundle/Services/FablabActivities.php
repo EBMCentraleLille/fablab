@@ -23,7 +23,7 @@ use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabActivitiesInterface;
  * FablabActivities Class Doc
  *
  * Services pour gérer les activités des projets
- * 
+ *
  * @category   Class
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage Services
@@ -35,7 +35,7 @@ class FablabActivities implements FablabActivitiesInterface
 {
     /**
      * Fonction construct de la classe FablabActivities
-     * 
+     *
      * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
      *
      * @return void
@@ -55,16 +55,22 @@ class FablabActivities implements FablabActivitiesInterface
     *
     * @return void
     */
-    public function creerActivite($user,$projet,$type,$content)
+    public function addActivity($user, $projet, $type, $content = "")
     {
         $date = new \DateTime();
         
-        $activity=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
+        $activity = $this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $activity = new Activity;
         $activity->setDate($date);
         $activity->setUser($user);
-        $activity->setProjet($projet);
+        $activity->setProject($projet);
         $activity->setType($type);
+        if ($type = 1) {
+            $content = "Martin a créé le projet.";
+        } elseif ($type = 2) {
+            $content = "Martin a mis à jour le projet.";
+        }
+
         $activity->setContent($content);
 
         $this->em->persist($activity);
@@ -74,25 +80,48 @@ class FablabActivities implements FablabActivitiesInterface
 
     /**
      * Fonction de recherche des activités liées à un projet
-     * 
-     * Retourne les $nb activités les plus récentes à partir de la $from
-     * 
+     *
+     * Retourne les $nb activités du projet $projet les plus récentes à partir de la $from
+     *
      * @param array   $projet Entité Projet
-     * @param integer $nb     Nombre d'actualités recherchées
+     * @param integer $nb     Nombre d'actualités retournées souhaitées
      * @param integer $from   Offset de recherche
-     * 
+     *
      * @return array $activities Array d'Entités activités
      */
-    public function getActivityProjet($projet,$nb,$from)
+    public function getActivityProjet($projet, $nb, $offset=0)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $activities=$repository->findBy(
-            array('projet'=>$projet),   // Critere
-            array('date'=>'desc'),      // Tri par date décroissant
-            $nb,                        // Selection de $nb activité seulement
-            $from                       // A partir de la $from-ieme
+            array('projet'=>$projet),     // Recherche par projets
+            array('date'=>'desc'),        // Tri par date décroissante
+            $nb,                          // Selection de $nb activités seulement
+            $offset                       // A partir de l'offset
         );
         
         return $activities;
+    }
+
+    /**
+     * Fonction de recherche des activités liées à un projet
+     *
+     * Retourne les $nb activités les plus récentes à partir de la $from
+     *
+     * @param integer $limit     Nombre d'actualités recherchées
+     * @param integer $from   Offset de recherche
+     *
+     * @return array $activities Array d'Entités activités
+     */
+    public function getActivities($limit, $offset=0)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
+        $query = $repository->createQueryBuilder('a')
+            ->orderBy('a.date', 'DESC')
+            ->setFirstResult( $offset )
+            ->setMaxResults( $limit )
+            ->getQuery();
+        $activities = $query->getResult();
+        
+    return $activities;
     }
 }

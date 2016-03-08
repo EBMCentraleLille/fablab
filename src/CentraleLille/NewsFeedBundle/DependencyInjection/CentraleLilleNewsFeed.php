@@ -20,11 +20,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+
 /**
  * CentraleLilleExtension Class Doc
  *
  * Extension for CentraleLilleNewsFeedBundle
- * 
+ *
  * @category   File
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage DependencyInjection
@@ -38,10 +39,10 @@ class CentraleLilleExtension extends Extension
      * Load Function Doc
      *
      * Fonction d'injection de dépendance
-     * 
-     * @param array            $configs 
+     *
+     * @param array            $configs
      * @param ContainerBuilder $container container de service
-     * 
+     *
      * @return void
      */
     public function load(array $configs, ContainerBuilder $container)

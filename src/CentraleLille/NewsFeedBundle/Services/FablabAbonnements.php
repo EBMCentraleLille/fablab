@@ -1,7 +1,7 @@
 <?php
 /**
  * FablabAbonnements.php Doc
- * 
+ *
  * Services relatif aux abonnements permettant l'accès et la modification
  * aux données d'abonnements relatives à un user
  *
@@ -25,7 +25,6 @@ use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
  * FablabAbonnements Class Doc
  *
  * Services pour gérer les abonnements utilisateurs
- * 
  * @category   Class
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage Services
@@ -37,7 +36,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
 {
     /**
      * Fonction construct de la classe FablabAbonnements
-     * 
+     *
      * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
      *
      * @return void
@@ -50,22 +49,22 @@ class FablabAbonnements implements FablabAbonnementsInterface
     //
     /**
      * Fonction d'ajout de catégorie aux abonnements user
-     * 
+     *
      * Ajoute une categorie aux abonnements catégories d'un utilisateur
-     * 
+     *
      * @param array $user     Entité User
      * @param array $category Entité Category
      *
      * @return void
      */
-    public function addAboCategory($user,$category)
+    public function addAboCategory($user, $category)
     {
         $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
         if (! $abonnement->findOneBy(array('user'=>$user))) {
             $abonnement = new Abonnement;
             $abonnement->setUser($user);
             $abonnement->setCategories($category);
-        } else { 
+        } else {
             $abonnement=$abonnement->findOneBy(
                 array('user'=>$user)
             );
@@ -78,22 +77,22 @@ class FablabAbonnements implements FablabAbonnementsInterface
     }
     /**
      * Fonction d'ajout de projet aux abonnements user
-     * 
+     *
      * Ajoute un projets aux abonnements projets d'un utilisateur
-     * 
+     *
      * @param array $user   Entité User
      * @param array $projet Entité Projet
      *
      * @return void
      */
-    public function addAboProjet($user,$projet)
+    public function addAboProjet($user, $projet)
     {
         $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
         if (! $abonnement->findOneBy(array('user'=>$user))) {
             $abonnement = new Abonnement;
             $abonnement->setUser($user);
             $abonnement->setProjects($projet);
-        } else { 
+        } else {
             $abonnement=$abonnement->findOneBy(
                 array('user'=>$user)
             );
@@ -106,12 +105,12 @@ class FablabAbonnements implements FablabAbonnementsInterface
     }
     /**
      * Fonction de recherche des abonnements catégories d'un user
-     * 
+     *
      * Retourne les catégories auxquelles est abonné un user
      * sous forme de tableau.
-     * 
+     *
      * @param array $user Entité User
-     * 
+     *
      * @return array $categories
      */
     public function getAboCategory($user)
@@ -124,12 +123,12 @@ class FablabAbonnements implements FablabAbonnementsInterface
     }
     /**
      * Fonction de recherche des abonnements projets d'un user
-     * 
+     *
      * Retourne un tableau des projets auxquels est abonné un user
      * sans les projets des catégories auxquelles il est abonné
-     * 
+     *
      * @param array $user Entité User
-     * 
+     *
      * @return array $projets
      */
     public function getAboProjet($user)
@@ -143,12 +142,12 @@ class FablabAbonnements implements FablabAbonnementsInterface
     
     /**
      * Fonction de recherche de tous les abonnements d'un user
-     * 
+     *
      * Retourne un tableau des projets auxquels est abonné un user
      * en comprenant également ceux des catégories auxquelles il est abonné
-     * 
+     *
      * @param array $user Entité User
-     * 
+     *
      * @return array $projets
      */
     public function getAboAll($user)
@@ -177,19 +176,19 @@ class FablabAbonnements implements FablabAbonnementsInterface
     
     /**
      * Fonction de suppression d'un abonnement catégorie d'un user
-     * 
+     *
      * Supprime l'abonnement catégorie d'un user
-     * 
+     *
      * @param array $user     Entité User
      * @param array $category Entité Category
-     * 
+     *
      * @return void
      */
-    public function removeAboCategory($user,$category)
+    public function removeAboCategory($user, $category)
     {
         $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement")->findOneBy(
             array('user'=>$user)
-        );      
+        );
         $abonnement->removeCategory($category);
         $this->em->persist($abonnement);
         $this->em->flush();
@@ -198,15 +197,15 @@ class FablabAbonnements implements FablabAbonnementsInterface
     
     /**
      * Fonction de suppression d'un abonnement projet d'un user
-     * 
+     *
      * Supprime l'abonnement projet d'un user
-     * 
+     *
      * @param array $user   Entité User
      * @param array $projet Entité Projet
-     * 
+     *
      * @return void
      */
-    public function removeAboProjet($user,$projet)
+    public function removeAboProjet($user, $projet)
     {
         $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement")->findOneBy(
             array('user'=>$user)

@@ -1,11 +1,11 @@
 <?php
 /**
  * CentraleLilleHomepageBundle.php Doc
- * 
+ *
  * Classe d'implémentation du bundle Homepage
- * 
+ *
  * PHP Version 5.6
- * 
+ *
  * @category Class
  * @package  CentraleLille:HomepagBundle
  * @author   Lechaptois Martin <martin.lechaptois@gmail.com>
@@ -15,6 +15,7 @@
 namespace CentraleLille\HomepageBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+
 /**
  *  CentraleLilleHomepageBundle Class Doc
  *

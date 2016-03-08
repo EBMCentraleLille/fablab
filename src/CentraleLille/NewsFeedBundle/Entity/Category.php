@@ -3,7 +3,7 @@
  * Category.php File Doc
  *
  * Entité Category qui décrit les catégories de projets
- * 
+ *
  * PHP Version 5.6
  *
  * @category   File
@@ -52,8 +52,9 @@ class Category
     private $name;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-    **/
+     * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+     **/
     private $projets;
 
 
@@ -125,11 +126,12 @@ class Category
     /**
      * Add projet
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $projet Objet Project
+     * @param \CentraleLille\DemoBundle\Entity\Projet $projet Objet Project
      *
      * @return Category
      */
-    public function addProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
+    //public function addProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
+    public function addProjet(\CentraleLille\DemoBundle\Entity\Projet $projet)
     {
         $this->projets[] = $projet;
 
@@ -139,11 +141,12 @@ class Category
     /**
      * Remove projet
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $projet Objet Project
+     * @param \CentraleLille\DemoBundle\Entity\Projet $projet Objet Project
      *
      * @return void
      */
-    public function removeProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
+    //public function removeProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
+    public function removeProjet(\CentraleLille\DemoBundle\Entity\Projet $projet)
     {
         $this->projets->removeElement($projet);
     }

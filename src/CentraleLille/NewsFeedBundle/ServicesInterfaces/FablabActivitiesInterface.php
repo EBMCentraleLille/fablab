@@ -1,11 +1,11 @@
 <?php
 /**
  * FablabActivitiesInterface.php Doc
- * 
+ *
  * Interface relatif aux activités
  *
  * PHP Version 5.6
- * 
+ *
  * @category   File
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage ServicesInterfaces
@@ -20,7 +20,7 @@ namespace CentraleLille\NewsFeedBundle\ServicesInterfaces;
  * FablabActivitiesInterface Interface Doc
  *
  * Interface pour gérer les activités des projets
- * 
+ *
  * @category   Interface
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage ServicesInterfaces
@@ -28,7 +28,7 @@ namespace CentraleLille\NewsFeedBundle\ServicesInterfaces;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
-interface FablabAbonnementsInterface
+interface FablabActivitiesInterface
 {
     /**
     * Créer l'activité généré par un user sur un projet
@@ -40,16 +40,16 @@ interface FablabAbonnementsInterface
     *
     * @return object L'entité générée
     */
-    public function addActivite($user,$projet,$type,$content);
+    public function addActivity($user, $projet, $type, $content);
     
     /**
      * Fonction de recherche des activités liées à un projet
-     * 
+     *
      * @param array   $projet Entité Projet
      * @param integer $nb     Nombre d'activités recherchées
      * @param integer $from   Offset de recherche
      *
      * @return array $activities Array d'Entités activités
      */
-    public function getActivityProjet($projet,$nb,$from);F
+    public function getActivityProjet($projet, $nb, $from);
 }

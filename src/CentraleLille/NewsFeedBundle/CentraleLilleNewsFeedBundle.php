@@ -1,9 +1,9 @@
 <?php
 /**
  * CentraleLilleNewsFeedBundle.php Doc
- * 
+ *
  * Classe d'implémentation du bundle NewsFeed
- * 
+ *
  *
  * PHP Version 5.6
  *
@@ -17,6 +17,7 @@
 namespace CentraleLille\NewsFeedBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+
 /**
  * CentraleLilleNewsFeedBundle Bundle Class Doc
  *

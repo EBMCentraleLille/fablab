@@ -3,8 +3,8 @@
  * Activity.php File Doc
  *
  * Entité représentant une activité
- * Une activité peut etre de trois type : 
- *      1 - une création 
+ * Une activité peut etre de trois type :
+ *      1 - une création
  *      2 - une modification
  *      3 - une publication
  *
@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Activity Class Doc
  *
  * Classe Activity définissant l'entité Activity
- * comprenant les attributs Id, Date, Project, User, 
+ * comprenant les attributs Id, Date, Project, User,
  * Type et Content
  *
  * @category   Class
@@ -57,12 +57,13 @@ class Activity
     private $date;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-    **/
+     * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     * @ORM\ManyToOne (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+     */
     private $project;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
+    * @ORM\ManyToOne (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
     **/
     private $user;
 
@@ -226,7 +227,8 @@ class Activity
      *
      * @return Activity
      */
-    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
         $this->project[] = $project;
 
@@ -240,7 +242,8 @@ class Activity
      *
      * @return void
      */
-    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
+    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
     {
         $this->project->removeElement($project);
     }
