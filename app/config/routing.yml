@@ -14,7 +14,7 @@ centrale_lille_demo:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /
+    prefix: /reservation
 
 app:
     resource: "@AppBundle/Controller/"
