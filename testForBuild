@@ -1,0 +1,3 @@
+./loadUnload
+phpunit -c app --exclude-group ignore
+./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard="./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/ruleset.xml" src/
