@@ -1,0 +1,8 @@
+{{ project.name }}
+
+{% if currentUser != null and currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
+
+    <br>
+    You are the leader!!!!
+
+{% endif %}

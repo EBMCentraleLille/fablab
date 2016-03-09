@@ -13,3 +13,19 @@ services:
         class: CentraleLille\CustomFosUserBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }
+
+    # app.project.member_voter:
+    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter
+    #     arguments: ['@security.access.decision_manager']
+    #     tags:
+    #         - { name: security.voter }
+    #     # small performance boost
+    #     # public: false
+    #
+    # app.project.leader_voter:
+    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectLeaderVoter
+    #     arguments: ['@security.access.decision_manager']
+    #     tags:
+    #         - { name: security.voter }
+        # small performance boost
+        # public: false

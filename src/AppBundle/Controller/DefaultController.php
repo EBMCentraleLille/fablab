@@ -11,6 +11,7 @@
  * @link     https://github.com/EBMCentraleLille/fablab
  */
 
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -35,11 +36,24 @@ class DefaultController extends Controller
      *
      * @param Request $request Requette
      *
-     * @return truc Machin
+     * @return     truc Machin
+=======
+class DefaultController extends Controller
+{
+    /**
+     * @Route("/", name="homepage")
+>>>>>>> Fix
      */
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
+        return $this->render(
+            'default/index.html.twig',
+            array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            )
+        );
+
         return $this->render(
             'default/index.html.twig',
             array(
