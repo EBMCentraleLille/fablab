@@ -1,3 +1,8 @@
+centrale_lille_knowledge:
+    resource: "@CentraleLilleKnowledgeBundle/Controller/"
+    type:     annotation
+    prefix:   /knowledge
+
 centrale_lille_gdp:
     resource: "@CentraleLilleGdpBundle/Resources/config/routing.yml"
     prefix:   /gdp
@@ -20,7 +25,7 @@ centrale_lille_homepage:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /
+    prefix: /reservation
 
 app:
     resource: "@AppBundle/Controller/"

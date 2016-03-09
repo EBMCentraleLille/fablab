@@ -207,6 +207,7 @@ class TaskController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
         $em->flush();
+        $view = View::create();
         $view->setData($task)->setStatusCode(200);
         return $view;
     }
@@ -230,7 +231,7 @@ class TaskController extends FOSRestController
     public function putTaskUnassignAction($id)
     {
         $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
-        $task = $repoTasks->findOneBy(
+        $task = $repo->findOneBy(
             array('id' => $id)
         );
         if (!$task) {
@@ -240,6 +241,7 @@ class TaskController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
         $em->flush();
+        $view = View::create();
         $view->setData($task)->setStatusCode(200);
         return $view;
     }

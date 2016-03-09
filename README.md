@@ -15,6 +15,15 @@ Bower will install bootstrap for layout.
 
 ## Dev
 
+###Integration
+
+Local serv at : 172.31.4.227
+
+
+###Tests
+
+Scripts tests.bat or tests.sh
+
 We use the PSR-2 PHP Standard, you can test locally with this command :
 
 ```
