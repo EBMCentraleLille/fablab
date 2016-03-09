@@ -14,10 +14,10 @@ services:
         tags:
             - { name: form.type, alias: app_user_profile }
 
-    form.type.user_search:
-        class: CentraleLille\SearchBundle\Form\SearchUserType
+    form.type.string_search:
+        class: CentraleLille\SearchBundle\Form\SearchStringType
         tags:
-            - { name: form.type, alias: user_search_type }
+            - { name: form.type, alias: string_search_type }
 
     app.project.member_voter:
         class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter

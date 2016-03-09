@@ -29,6 +29,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="machine")
  * @ORM\Entity(repositoryClass="CentraleLille\ReservationBundle\Repository\MachineRepository")
+ * @Search(repositoryClass="CentraleLille\SearchBundle\Entity\SearchRepository\SearchRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Machine
 {

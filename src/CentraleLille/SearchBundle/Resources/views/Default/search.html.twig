@@ -3,7 +3,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Ajouter un souhait</h1>
+                    <h1 class="page-header">Recherche</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -21,24 +21,27 @@
 
                                    {{ form_errors(form) }}
 
-
-
                                         <div class="form-group">
-                                            {{ form_label(form.username, "Recherche", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
-                                            {{ form_errors(form.username) }}
-                                            {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+                                            {{ form_label(form.stringSearch, "Recherche", {'label_attr': {'class': 'col-sm-6 control-label'}}) }}
+                                            {{ form_errors(form.stringSearch) }}
+                                            {{ form_widget(form.stringSearch, {'attr': {'class': 'form-control'}})}}
+                                            {{ form_end(form) }}
                                         </div>
-
-                                        {{ form_end(form) }}
-
-
-
-
 
                                 </div>
 
-                                <div class="col-lg-12">
 
+
+                                <!-- Affichage User -->
+                                
+                                {% if (not result_user) and (not result_machine) %}
+                                <div class="col-lg-12">
+                                Aucun résultat
+                                </div>
+                                {% endif %}
+                                {% if result_user|length > 0 %}
+                                <div class="col-lg-12">
+                                <h3>Utilisateur</h3>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
@@ -48,16 +51,18 @@
 
                                         </tr>
                                     </thead>
+
+
                                     <tbody>
 
-                                        {% for Liste in results %}
+                                        {% for Liste_user in result_user %}
                                           <tr class="odd gradeX">
                                           <td>
-                                          {{ Liste.id }}
+                                          {{ Liste_user.id }}
                                           </td>
 
-                                        <td>{{ Liste.username }}</td>
-                                           <td>{{ Liste.email }}</td>
+                                        <td>{{ Liste_user.username }}</td>
+                                           <td>{{ Liste_user.email }}</td>
 
 
 
@@ -71,6 +76,61 @@
                                     </tbody>
 
                                 </table>
+                                </div>
+                                 {% endif %}
+                                 {% if result_machine|length > 0 %}
+                                 <div class="col-lg-12">
+                                 <h3>Machine</h3>
+                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Nom</th>
+                                            <th>Description</th>
+
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+
+                                        {% for Liste_machine in result_machine %}
+                                          <tr class="odd gradeX">
+                                          <td>
+                                          {{ Liste_machine.id }}
+                                          </td>
+
+                                        <td>{{ Liste_machine.machine_name }}</td>
+                                           <td>{{ Liste_machine.description }}</td>
+
+                                           
+
+
+
+
+
+                                          {%  endfor %}
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                                </div>
+
+                                {% endif %}
+
+                                
+
+
+
+
+
+                                <!-- Fin Affichage User -->
+                                <!-- Affichage Machine -->
+                                <div class="col-lg-12">
+
+                                
 
 
 
@@ -78,7 +138,7 @@
 
 
                                 </div>
-
+                                <!-- Fin Affichage Machine -->
 
                             </div>
                             <!-- /.row (nested) -->

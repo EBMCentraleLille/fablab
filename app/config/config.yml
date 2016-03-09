@@ -96,21 +96,22 @@ fos_elastica:
         fablab:
             client: default
             types:
-                demo:
-                    serializer:
-                        groups: [elastica, Default]
-                    persistence:
-                        driver: orm
-                        model: CentraleLille\SearchBundle\Entity\Demo
-                        provider: ~
-                        listener: ~
-                        finder: ~
                 user:
                     serializer:
                         groups: [elastica, Default]
                     persistence:
                         driver: orm
                         model: CentraleLille\CustomFosUserBundle\Entity\User
+                        provider: ~
+                        listener: ~
+                        finder: ~
+
+                Machine:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\ReservationBundle\Entity\Machine
                         provider: ~
                         listener: ~
                         finder: ~
