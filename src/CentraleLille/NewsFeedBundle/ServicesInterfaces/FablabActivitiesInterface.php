@@ -54,3 +54,4 @@ interface FablabActivitiesInterface
      * @return array $activities Array d'Entités activités
      */
     public function getActivityProjet($projet, $nb, $from);
+}
