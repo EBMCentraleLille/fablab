@@ -46,7 +46,8 @@ class NewsFeedController extends Controller
             [
                 'userName'=>'Martin Lechaptois',
                 'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
+                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
+                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
                 'likes'=>19,
                 'messages'=>3,
                 'files'=>4,
@@ -55,7 +56,8 @@ class NewsFeedController extends Controller
             [
                 'userName'=>'Martin Lechaptois',
                 'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
+                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
+                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
                 'likes'=>19,
                 'messages'=>3,
                 'files'=>4,
@@ -64,7 +66,8 @@ class NewsFeedController extends Controller
             [
                 'userName'=>'Martin Lechaptois',
                 'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
+                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
+                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
                 'likes'=>19,
                 'messages'=>3,
                 'files'=>4,
