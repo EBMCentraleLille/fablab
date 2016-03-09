@@ -13,8 +13,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
-
-namespace CentraleLilleHomepageBundle\Tests\Controller;
+namespace HomepageBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
