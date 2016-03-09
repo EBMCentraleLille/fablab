@@ -17,7 +17,9 @@ Bower will install bootstrap for layout.
 
 ###Integration
 
-Local serv at : 172.31.4.227
+Local server at : http://172.31.4.227
+
+It actualizes from GitHub once every day.
 
 
 ###Tests
