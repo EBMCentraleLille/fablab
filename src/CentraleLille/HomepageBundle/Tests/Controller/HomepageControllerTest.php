@@ -1,6 +1,6 @@
 <?php
 /**
- * HomePageControllerTest.php File Doc
+ * HomePageControllerTest.php Doc
  *
  * Test de la classe HomePageController
  *
@@ -22,14 +22,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  *
  * PHP Version 5.6
  *
- * @category   Class
+ * @category   TestClass
  * @package    CentraleLille:HomepageBundle
  * @subpackage Tests
  * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
-class HomepageControllerTest extends WebTestCase
+class DefaultControllerTest extends WebTestCase
 {
     /**
      * Test de la fonction Index
