@@ -50,7 +50,7 @@ class HomepageController extends Controller
 
         //Récupération des dernières actualités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $recentActivities=$activityService->getActivities(20);
+        $recentActivities=$activityService->getActivities(30);
 
         $weeklyProject=[
             'projectId'=>'3',
@@ -88,7 +88,7 @@ class HomepageController extends Controller
                 'files'=>1
             ]];
         return $this->render(
-            'CentraleLilleHomepageBundle:Default:index.html.twig',
+            'CentraleLilleHomepageBundle:index.html.twig',
             [
                 'weeklyProject' => $weeklyProject,
                 'recentActivities' => $recentActivities,
@@ -104,7 +104,7 @@ class HomepageController extends Controller
         $categoryService = $this->container->get('fablab_newsfeed.categories');
         $projects=$categoryService->getProjectsCategory($category);
         return $this->render(
-            'CentraleLilleHomepageBundle:Default:category.html.twig',
+            'CentraleLilleHomepageBundle:category.html.twig',
             [
                 'projects' => $projects,
             ]
