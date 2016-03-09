@@ -170,6 +170,81 @@ class TaskController extends FOSRestController
     }
 
     /**
+     * Assign a task to an user.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Assign a task to an user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     *
+     * @param int $taskId taskId
+     * @param int $usedId userId
+     *
+     * @return View
+     */
+    public function putTaskAssignUserAction($taskId, $userId)
+    {
+        $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+        $repoUsers = $this->getDoctrine()->getRepository('CentraleLilleCustomFosUserBundle:User');
+        $task = $repoTasks->findOneBy(
+            array('id' => $taskId)
+        );
+        // Retrieves task & user
+        if (!$task) {
+            throw $this->createNotFoundException('Task not found.');
+        }
+        $user = $repoUsers->findOneBy(
+            array('id' => $userId)
+        );
+        if (!$user) {
+            throw $this->createNotFoundException('User not found.');
+        }
+        $task->setInChargeUser($user);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($task);
+        $em->flush();
+        $view->setData($task)->setStatusCode(200);
+        return $view;
+    }
+
+    /**
+     * Unassign a task
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Assign a task to an user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     *
+     * @param int $id id
+     *
+     * @return View
+     */
+    public function putTaskUnassignAction($id)
+    {
+        $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+        $task = $repoTasks->findOneBy(
+            array('id' => $id)
+        );
+        if (!$task) {
+            throw $this->createNotFoundException('Task not found.');
+        }
+        $task->setInChargeUser(null);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($task);
+        $em->flush();
+        $view->setData($task)->setStatusCode(200);
+        return $view;
+    }
+
+    /**
      * Get the validation errors
      *
      * @param ConstraintViolationList $errors Validator error list
