@@ -71,12 +71,14 @@ class TaskController extends FOSRestController
     public function postProjectTaskAction($id,ParamFetcher $paramFetcher)
     {
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
+        $project = $projectRepository->find($id);
         $task = new Task();
         $task->setTitle($paramFetcher->get('title'));
         $task->setBody($paramFetcher->get('body'));
         // TODO get current user
         $task->setAuthor('JunkOS');
-        $task->setProject($id);
+        $task->setProject($project);
         $task->setStatus(false);
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
@@ -190,7 +192,7 @@ class TaskController extends FOSRestController
      *
      * @return View
      */
-    public function putTaskAssignUserAction($taskId, $userId)
+    public function putTaskUserAction($taskId, $userId)
     {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $repoUsers = $this->getDoctrine()->getRepository('CustomFosUserBundle:User');
