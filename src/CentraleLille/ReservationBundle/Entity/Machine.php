@@ -11,6 +11,7 @@
 namespace CentraleLille\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\ElasticaBundle\Configuration\Search;
 
 /**
  * Entity Class Doc
