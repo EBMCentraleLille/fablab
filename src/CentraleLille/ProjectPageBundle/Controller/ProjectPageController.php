@@ -37,7 +37,8 @@ class ProjectPageController extends Controller
         /**
          * displayProjectAction
          *
-         * Affiche une page projet en utilisant l'ID du projet et en supposant récupérer les données du projet grâce à un service
+         * Affiche une page projet en utilisant l'ID du projet et en supposant récupérer les données du
+         * projet grâce à un service
          *
          * @param String $projectId Id unique de projet, attribué à la création par le groupe Projet
          *
