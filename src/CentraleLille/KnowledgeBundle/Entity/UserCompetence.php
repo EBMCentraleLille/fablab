@@ -27,6 +27,18 @@ class UserCompetence
      * @ORM\Column(name="level", type="integer")
      */
     private $level;
+    
+    /**
+     * @ManyToOne(targetEntity="Competence")
+     * @JoinColumn(name="competence_id", referencedColumnName="id")
+     */
+    private $competence;
+    
+    /**
+     * @ManyToOne(targetEntity="\CentraleLille\CustomFosUserBundle\Entity\User")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
 
     /**
@@ -61,6 +73,48 @@ class UserCompetence
     public function getLevel()
     {
         return $this->level;
+    }
+    
+    /**
+     * Get competence
+     *
+     * @return Competence
+     */
+    public function getCompetence()
+    {
+        return $this->competence;
+    }
+    
+    /**
+     * Set competence
+     *
+     * @return Competence
+     */
+    public function setCompetence($competence)
+    {
+        $this->competence = $competence;
+        return $this;
+    }
+    
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
+    /**
+     * Set user
+     *
+     * @return User
+     */
+    public function setCompetence($user)
+    {
+        $this->user = $user;
+        return $this;
     }
 }
 
