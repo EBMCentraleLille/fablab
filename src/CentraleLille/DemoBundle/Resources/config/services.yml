@@ -1,3 +1,0 @@
-services:
-    centrale_lille.demo_bundle.demo_service:
-        class: CentraleLille\DemoBundle\Service\DemoService

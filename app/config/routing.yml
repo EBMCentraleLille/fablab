@@ -7,10 +7,6 @@ custom_fos_user:
     type:     annotation
     prefix:   /users
 
-centrale_lille_demo:
-    resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
-    prefix:   /
-
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
     prefix: /
