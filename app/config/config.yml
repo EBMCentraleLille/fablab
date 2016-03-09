@@ -118,9 +118,6 @@ fos_elastica:
 twig:
     form:
         resources:['bootstrap_3_layout.html.twig']
-<<<<<<< HEAD
-=======
-
 
 sensio_framework_extra:
     view:   {   annotations: false }
@@ -155,4 +152,3 @@ fos_rest:
 
 nelmio_api_doc:
     name: API Documentation
->>>>>>> FabLabOrigin/master

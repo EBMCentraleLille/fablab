@@ -14,41 +14,7 @@ services:
         tags:
             - { name: form.type, alias: app_user_profile }
 
-<<<<<<< HEAD
     form.type.string_search:
         class: CentraleLille\SearchBundle\Form\SearchStringType
         tags:
             - { name: form.type, alias: string_search_type }
-
-    app.project.member_voter:
-        class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter
-        arguments: ['@security.access.decision_manager']
-        tags:
-            - { name: security.voter }
-        # small performance boost
-        public: false
-
-    app.project.leader_voter:
-        class: CentraleLille\CustomFosUserBundle\Security\ProjectLeaderVoter
-        arguments: ['@security.access.decision_manager']
-        tags:
-            - { name: security.voter }
-        # small performance boost
-        public: false
-=======
-    # app.project.member_voter:
-    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter
-    #     arguments: ['@security.access.decision_manager']
-    #     tags:
-    #         - { name: security.voter }
-    #     # small performance boost
-    #     # public: false
-    #
-    # app.project.leader_voter:
-    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectLeaderVoter
-    #     arguments: ['@security.access.decision_manager']
-    #     tags:
-    #         - { name: security.voter }
-        # small performance boost
-        # public: false
->>>>>>> FabLabOrigin/master
