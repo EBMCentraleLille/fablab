@@ -1,0 +1,111 @@
+.newsFeed{
+	margin-top: 75px; 
+}
+
+.news{
+	border-radius: 4px;
+	border: 1px solid;
+    border-color: #dddddd;
+    padding:10px;
+    background-color: #ecf0f1;
+  margin-bottom:10px; 
+  margin-top:10px; 
+}
+
+.filter-menu{
+}
+
+.right-menu{
+  margin-top: 60px;
+  width:100%;
+
+}
+
+.time-elapsed{
+  float: right;
+}
+.project-name{
+  margin-bottom: 10px;
+}
+.recentProjectLeft{
+	text-align: center;
+	border-right: 1px solid;
+	border-color: #dddddd;
+}
+.recentProjectRight{
+	text-align: center;
+}
+.recentProjectSide{
+	text-align: center;
+}
+.recentProjectCenter{
+	text-align: center;
+	border-left: 1px solid; 
+	border-right: 1px solid;
+	border-color: #dddddd;
+}
+.recentProjectPicture{
+	background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+	height:250px;
+}
+
+.likeIcon:hover{
+    color:red;
+}
+
+.button-right-menu {
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border-color: #dddddd;
+      -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.button-right-menu:hover{
+	background-color: #f39c12;
+  color: white;
+}
+.arrow-right{
+ 	float: right;
+}
+
+
+.suggestion{
+  border-bottom: 1px solid; 
+  border-color: #dddddd;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  }
+  .suggestion-picture{
+  background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
+  background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  height:80px;
+  width:80px;
+}
+.suggestion-name{
+  padding-top: 25px;
+  font-size: 20px;
+  
+}
+.add{
+  float:right;
+  font-size: 60px;
+  color:grey;
+  margin-top: -15px;
+  text-align: center;
+}
