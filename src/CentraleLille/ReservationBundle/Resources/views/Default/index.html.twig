@@ -17,7 +17,7 @@
         <img src="http://centrale.ec-lille.fr/img/logo_site_1.gif" alt="logo fablab"/>
     </div>
     <div class="col-md-4 pull-right text-center">
-        <h3>Bonjour {{ nom }} {{ prenom }} !</h3>
+        <h3>Bonjour NOM PRENOM !</h3>
         <p>On est le {{date().timestamp |date('d/m/Y H:i')}}</p>
     </div>
         </row>
@@ -28,10 +28,10 @@
 
         <ul class="nav navbar-nav ">
             <li class="active"><a href="#">Accueil</a></li>
-            <li><a href="./">Réservation Machine</a></li>
-            <li><a href="./casier">Réservation Casier</a></li>
-            <li><a href="./salle">Réservation Salle </a></li>
-            <li><a href="./admin">Administration </a></li>
+            <li><a href="{{ path('centrale_lille_machine') }}">Réservation Machine</a></li>
+            <li><a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a></li>
+            <li><a href="{{ path('centrale_lille_salle') }}">Réservation Salle </a></li>
+            <li><a href="{{ path('centrale_lille_administration') }}">Administration </a></li>
         </ul>
     </div>
 </nav>
@@ -39,7 +39,7 @@
 <div class="container">
 <div class="container col-lg-2 col-md-2">
     <div class="list-group">
-        <a href="./profil" class="list-group-item active">Mon profil</a>
+        <a href="{{ path('centrale_lille_profil') }}" class="list-group-item active">Mon profil</a>
         <a href="#" class="list-group-item">Mes projets</a>
         <a href="#" class="list-group-item">FAQ</a>
         <a href="#" class="list-group-item">HELP</a>
