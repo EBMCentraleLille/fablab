@@ -43,6 +43,6 @@ class HomepageControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertContains('Martin Lechaptois', $client->getResponse()->getContent());
     }
 }

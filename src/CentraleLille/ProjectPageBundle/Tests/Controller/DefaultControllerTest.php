@@ -10,8 +10,8 @@ class ProjectPageControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/project/test');
 
-        $this->assertContains('Page Projet', $client->getResponse()->getContent());
+        $this->assertContains('Page projet', $client->getResponse()->getContent());
     }
 }

@@ -93,8 +93,8 @@ class NewsFeedController extends Controller
             ]
             ];
             $em=$this->getDoctrine()->getManager();
-            $user=$em->getRepository('CentraleLilleCustomFosUserBundle:User')->findOneBy(array('name'=>'Martin'));
-            $projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
+            //$user=$em->getRepository('CentraleLilleCustomFosUserBundle:User')->findOneBy(array('name'=>'Martin'));
+            //$projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
             $category=$em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(array('name'=>'category1'));
 
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');

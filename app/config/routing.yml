@@ -18,10 +18,6 @@ centrale_lille_homepage:
     resource: "@CentraleLilleHomepageBundle/Resources/config/routing.yml"
     prefix:   /
 
-centrale_lille_demo:
-    resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
-    prefix:   /demo
-
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
     prefix: /
