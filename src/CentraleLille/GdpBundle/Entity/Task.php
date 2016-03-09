@@ -57,13 +57,13 @@ class Task
     private $date;
 
     /**
-     * @ORM\OneToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
      * @ORM\JoinColumn(name="in_charge_user_id", referencedColumnName="id")
      */
     private $inChargeUser;
 
     /**
-     * @ORM\OneToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $project;
