@@ -100,7 +100,7 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            - { path: ^/, priorities: [json], fallback_format: ~, prefer_extension: true }
+            - { path: ^/, priorities: [json,html], fallback_format: ~, prefer_extension: true }
     body_converter:
         enabled: true
         validate: true
