@@ -63,4 +63,3 @@ class Competence
         return $this->name;
     }
 }
-

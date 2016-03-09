@@ -117,4 +117,3 @@ class UserCompetence
         return $this;
     }
 }
-
