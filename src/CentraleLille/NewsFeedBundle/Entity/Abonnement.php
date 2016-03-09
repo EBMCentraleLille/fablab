@@ -3,7 +3,7 @@
  * Abonnements.php File Doc
  *
  * Entité Abonnement qui décrit les abonnements
- * aux projets ainsi qu'aux catégories des utilisateurs
+ * aux Projects ainsi qu'aux catégories des utilisateurs
  *
  * PHP Version 5.6
  *
@@ -58,7 +58,7 @@ class Abonnement
 
     /**
      * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-     * @ORM\ManyToMany (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+     * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      */
     private $projects;
 
@@ -124,7 +124,7 @@ class Abonnement
     /**
      * Set projects
      *
-     * @param string $projects Objet projets
+     * @param string $projects Objet Projects
      *
      * @return Abonnement
      */
@@ -187,7 +187,7 @@ class Abonnement
      * @return Abonnement
      */
     //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
-    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->projects[] = $project;
 
@@ -202,7 +202,7 @@ class Abonnement
      * @return void
      */
     //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
-    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->projects->removeElement($project);
     }
