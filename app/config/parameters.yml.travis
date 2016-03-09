@@ -10,3 +10,6 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    elastic_host: localhost
+    elastic_port: 9200
