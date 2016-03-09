@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
     - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleKnowledgeBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleHomepageBundle/Resources/config/services.yml" }
     - { resource: "@ProjectPageBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleNewsFeedBundle/Resources/config/services.yml" }

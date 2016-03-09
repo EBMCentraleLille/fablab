@@ -10,3 +10,4 @@
 /bin/
 .idea
 *.DS_Store
+composer.phar
