@@ -3,6 +3,7 @@
 namespace CentraleLille\GdpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 //use CentraleLille\CustomFosUserBundle\Entity\User as User;
 
 /**
@@ -204,7 +205,7 @@ class Task
      *
      * @return Task
      */
-    public function setInChargeUser ($user)
+    public function setInChargeUser($user)
     {
         $this->inChargeUser = $user;
 
