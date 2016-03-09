@@ -1,0 +1,1 @@
+./vendor/squizlabs/php_codesniffer/scripts/phpcbf --standard="./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/ruleset.xml" src/
