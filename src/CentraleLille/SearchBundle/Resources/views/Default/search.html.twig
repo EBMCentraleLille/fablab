@@ -34,7 +34,7 @@
 
                                 <!-- Affichage User -->
                                 
-                                {% if (not result_user) and (not result_machine) %}
+                                {% if (result_user|length < 1 ) and (result_machine |length < 1) %}
                                 <div class="col-lg-12">
                                 Aucun résultat
                                 </div>
