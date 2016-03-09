@@ -15,6 +15,11 @@ Bower will install bootstrap for layout.
 
 ## Dev
 
+###Integration
+
+Local serv at : 172.31.4.227
+
+
 ###Tests
 
 Scripts tests.bat or tests.sh
