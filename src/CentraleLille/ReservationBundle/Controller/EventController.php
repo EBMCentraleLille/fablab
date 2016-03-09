@@ -40,7 +40,7 @@ class EventController extends Controller
      * Génère un formulaire permettant de réserver une machine à une date donnée
      *
      * @param  Request $request Récupère les données envoyés en POST
-     *      *
+     *
      * @return Redirect
      */
 
@@ -129,14 +129,14 @@ class EventController extends Controller
 
                 return $this->render(
                     'ReservationBundle::reservation.html.twig',
-                    array('nom'=>"Michelle",'prenom'=>'Jean','form'=> $form->createView())
+                    array('form'=> $form->createView())
                 );
             }
         }
 
             return $this->render(
                 'ReservationBundle::reservation.html.twig',
-                array('nom' => 'Michelle', 'prenom' => 'Jean', 'form' => $form->createView())
+                array('form' => $form->createView())
             );
 
     }
@@ -160,7 +160,7 @@ class EventController extends Controller
 
         return $this->render(
             'ReservationBundle::admin.html.twig',
-            array('prenom'=>'Michelle','nom'=>'Jean','machines'=>$machines)
+            array('machines'=>$machines)
         );
     }
 }
