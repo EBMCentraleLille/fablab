@@ -56,6 +56,7 @@ class FablabActivities implements FablabActivitiesInterface
     *
     * @return void
     */
+
     public function addActivity($user, $projet, $type, $content = "")
     {
         $date = new \DateTime();

@@ -58,7 +58,7 @@ class Activity
 
     /**
      * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-     * @ORM\ManyToOne (targetEntity="CentraleLille\DemoBundle\Entity\Projet"), cascade={"persist"})
+     * @ORM\ManyToOne (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      */
     private $project;
 
@@ -119,7 +119,7 @@ class Activity
     /**
      * Set project
      *
-     * @param string $project Objet Projet
+     * @param string $project Objet Project
      *
      * @return Activity
      */
@@ -223,12 +223,12 @@ class Activity
     /**
      * Add project
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
      *
      * @return Activity
      */
     //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
-    public function addProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->project[] = $project;
 
@@ -238,12 +238,12 @@ class Activity
     /**
      * Remove project
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
      *
      * @return void
      */
     //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
-    public function removeProject(\CentraleLille\DemoBundle\Entity\Projet $project)
+    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->project->removeElement($project);
     }

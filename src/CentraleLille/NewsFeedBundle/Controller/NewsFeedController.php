@@ -46,8 +46,8 @@ class NewsFeedController extends Controller
             [
                 'userName'=>'Martin Lechaptois',
                 'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96
-                e9d944ead31ad3c6ec_preview_featured.jpg',
+                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
+                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
                 'likes'=>19,
                 'messages'=>3,
                 'files'=>4,
@@ -56,8 +56,8 @@ class NewsFeedController extends Controller
             [
                 'userName'=>'Martin Lechaptois',
                 'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96
-                e9d944ead31ad3c6ec_preview_featured.jpg',
+                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
+                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
                 'likes'=>19,
                 'messages'=>3,
                 'files'=>4,
@@ -66,8 +66,8 @@ class NewsFeedController extends Controller
             [
                 'userName'=>'Martin Lechaptois',
                 'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96
-                e9d944ead31ad3c6ec_preview_featured.jpg',
+                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
+                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
                 'likes'=>19,
                 'messages'=>3,
                 'files'=>4,
@@ -95,6 +95,22 @@ class NewsFeedController extends Controller
                 'name'=>'Project De Martin'
             ]
             ];
+
+            //$em=$this->getDoctrine()->getManager();
+            //$user=$em->getRepository('CentraleLilleCustomFosUserBundle:User')->findOneBy(array('name'=>'Martin'));
+            //$projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
+            //$category=$em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(array('name'=>'category1'));
+
+            //$abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            //$abonnementService->addAboProjet($user,$projet);
+            //$abonnementService->addAboCategory($user,$category);
+            //$projets=$abonnementService->getAboProjet($user);
+            //$categories=$abonnementService->getAboCategory($user);
+            //$projets=$abonnementService->getAboAll($user);
+            //$abonnementService->removeAboProjet($user,$projet);
+            //$abonnementService->removeAboCategory($user,$category);
+            //var_dump($projets);die;
+
         return $this->render(
             'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
             [

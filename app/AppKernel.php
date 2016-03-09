@@ -18,14 +18,19 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new CentraleLille\DemoBundle\CentraleLilleDemoBundle(),
             new CentraleLille\GdpBundle\CentraleLilleGdpBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new CentraleLille\ReservationBundle\ReservationBundle(),
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
-            new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle()
+            new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle(),
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
