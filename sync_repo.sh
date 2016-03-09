@@ -3,5 +3,5 @@
 git checkout develop
 git pull origin develop
 git fetch --all 
-git rebase FabLabOrigin/develop
-git push origin develop
+git merge FabLabOrigin/master
+git push origin master

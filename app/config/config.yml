@@ -4,6 +4,10 @@ imports:
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
     - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleKnowledgeBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleHomepageBundle/Resources/config/services.yml" }
+    - { resource: "@ProjectPageBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleNewsFeedBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -91,5 +95,41 @@ twig:
         resources:['bootstrap_3_layout.html.twig']
 
 
+sensio_framework_extra:
+    view:   {   annotations: false }
+    router: {   annotations: true }
 
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener:
+        rules:
+            - { path: ^/, priorities: [json,html], fallback_format: ~, prefer_extension: true }
+    body_converter:
+        enabled: true
+        validate: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            json: true
+        templating_formats:
+            html: true
+    exception:
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+    allowed_methods_listener: true
+    access_denied_listener:
+        json: true
+    disable_csrf_role: ROLE_API
 
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+nelmio_api_doc:
+    name: API Documentation
