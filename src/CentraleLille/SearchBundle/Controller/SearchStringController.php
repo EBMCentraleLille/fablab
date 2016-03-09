@@ -30,7 +30,7 @@ class SearchStringController extends Controller
 
   /**
   *
-  * @Route("/user", name="centrale_lille_searchuser")
+  * @Route("", name="centrale_lille_searchuser")
   * @Method("GET")
   */
     public function searchAction(Request $request)

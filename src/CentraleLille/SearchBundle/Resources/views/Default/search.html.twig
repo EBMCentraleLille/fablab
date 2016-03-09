@@ -31,14 +31,18 @@
                                 </div>
 
 
-
                                 <!-- Affichage User -->
-                                
-                                {% if (result_user|length < 1 ) and (result_machine |length < 1) %}
+                                {% if (not search)  %}
                                 <div class="col-lg-12">
-                                Aucun résultat
+
                                 </div>
                                 {% endif %}
+                                
+                                {% if (result_user|length < 1 ) and (result_machine|length < 1) and search %}
+                                <div class="col-lg-12">
+                                Aucun résultat
+                                </div>  
+                                  {% endif %}
                                 {% if result_user|length > 0 %}
                                 <div class="col-lg-12">
                                 <h3>Utilisateur</h3>
