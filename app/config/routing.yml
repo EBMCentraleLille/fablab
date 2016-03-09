@@ -9,7 +9,7 @@ custom_fos_user:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /
+    prefix: /reservation
 
 app:
     resource: "@AppBundle/Controller/"
