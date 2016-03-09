@@ -4,18 +4,13 @@ centrale_lille_search:
     prefix:   /search
 
 centrale_lille_gdp:
-    resource: "@CentraleLilleGdpBundle/Controller/"
-    type:     annotation
+    resource: "@CentraleLilleGdpBundle/Resources/config/routing.yml"
     prefix:   /gdp
 
 custom_fos_user:
     resource: "@CustomFosUserBundle/Controller/"
     type:     annotation
     prefix:   /users
-
-centrale_lille_demo:
-    resource: "@CentraleLilleDemoBundle/Resources/config/routing.yml"
-    prefix:   /
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
