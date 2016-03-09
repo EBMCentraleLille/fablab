@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
     - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleKnowledgeBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleHomepageBundle/Resources/config/services.yml" }
     - { resource: "@ProjectPageBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleNewsFeedBundle/Resources/config/services.yml" }
@@ -103,7 +104,7 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            - { path: ^/, priorities: [json], fallback_format: ~, prefer_extension: true }
+            - { path: ^/, priorities: [json,html], fallback_format: ~, prefer_extension: true }
     body_converter:
         enabled: true
         validate: true
