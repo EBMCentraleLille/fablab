@@ -1,9 +1,9 @@
 centrale_lille_machine:
-    path: /reservation
+    path: /
     defaults: {_controller:ReservationBundle:Event:reserver}
 
 centrale_lille_add_machine:
-    path: /reservation/add_machine
+    path: /machine/add
     defaults: {_controller:ReservationBundle:Machine:addMachine}
 
 centrale_lille_salle:
@@ -15,11 +15,11 @@ centrale_lille_casier:
     defaults: {_controller:ReservationBundle:Default:casier}
 
 centrale_lille_administration:
-    path: /Admin
+    path: /admin
     defaults: {_controller:ReservationBundle:Default:admin}
 
 centrale_lille_delete_machine:
-    path: /reservation/delete_machine/{id}
+    path: /machine/delete/{id}
     defaults: {_controller:ReservationBundle:Machine:deleteMachine}
 
 centrale_lille_profil:

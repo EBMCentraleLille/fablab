@@ -1,0 +1,8 @@
+@import "compass/css3";
+
+.like {
+	fill: #94d31b; 
+}
+.like:hover {
+	fill: #ace63c; 
+}
