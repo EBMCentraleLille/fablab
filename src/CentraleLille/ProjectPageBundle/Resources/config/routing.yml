@@ -1,0 +1,7 @@
+project_page_homepage:
+    path:     /{projectId}
+    defaults: { _controller: ProjectPageBundle:ProjectPage:displayProject }
+
+project_page_wrongpage:
+    path:     /
+    defaults: { _controller: ProjectPageBundle:ProjectPage:wrongProject}

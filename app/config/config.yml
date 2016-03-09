@@ -4,6 +4,9 @@ imports:
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
     - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleHomepageBundle/Resources/config/services.yml" }
+    - { resource: "@ProjectPageBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleNewsFeedBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -121,6 +124,11 @@ fos_rest:
         json: true
     disable_csrf_role: ROLE_API
 
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
 
 nelmio_api_doc:
     name: API Documentation
