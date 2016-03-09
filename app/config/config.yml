@@ -4,14 +4,10 @@ imports:
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
     - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
-<<<<<<< HEAD
-    - { resource: "@CentraleLilleSearchBundle/Resources/config/services.yml" }
-
-=======
     - { resource: "@CentraleLilleHomepageBundle/Resources/config/services.yml" }
     - { resource: "@ProjectPageBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleNewsFeedBundle/Resources/config/services.yml" }
->>>>>>> FabLabOrigin/master
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
