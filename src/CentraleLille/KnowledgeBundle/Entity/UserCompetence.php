@@ -111,7 +111,7 @@ class UserCompetence
      *
      * @return User
      */
-    public function setCompetence($user)
+    public function setUser($user)
     {
         $this->user = $user;
         return $this;
