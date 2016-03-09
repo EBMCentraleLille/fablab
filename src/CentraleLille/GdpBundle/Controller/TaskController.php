@@ -189,7 +189,7 @@ class TaskController extends FOSRestController
     public function putTaskAssignUserAction($taskId, $userId)
     {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
-        $repoUsers = $this->getDoctrine()->getRepository('CentraleLilleCustomFosUserBundle:User');
+        $repoUsers = $this->getDoctrine()->getRepository('CustomFosUserBundle:User');
         $task = $repoTasks->findOneBy(
             array('id' => $taskId)
         );
