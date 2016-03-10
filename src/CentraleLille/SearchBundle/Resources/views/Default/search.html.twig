@@ -38,17 +38,16 @@
 
     {% else %}
 
-
     <div class="result">
-      <h3>Utilisateurs</h3>
-      {% if result_user|length > 0 %}
+      <h3>Projets</h3>
+      {% if result_project|length > 0 %}
 
-      {% for user in result_user %}
+      {% for project in result_project %}
       <a href="#">
         <div class="panel panel-default">
           <div class="panel-body">
-            <h4>{{ user.username }}</h4>
-            <p>{{ user.username }}</p>
+            <h4>{{ project.name }}</h4>
+            <p>{{ project.summary }}</p>
           </div>
         </div>
       </a>
@@ -58,6 +57,31 @@
       aucun résultats
       {% endif %}
     </div>
+
+
+
+
+    <div class="result">
+      <h3>Compétences</h3>
+      {% if result_competence|length > 0 %}
+
+      {% for competence in result_competence %}
+      <a href="#">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>{{ competence.name }}</h4>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+
+      {% else %}
+      aucun résultats
+      {% endif %}
+    </div>
+
+
+
 
     <div class="result">
       <h3>Machines</h3>
@@ -69,6 +93,28 @@
           <div class="panel-body">
             <h4>{{ machine.machine_name }}</h4>
             <p>{{ machine.description }}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+
+      {% else %}
+      aucun résultats
+      {% endif %}
+    </div>
+
+
+
+    <div class="result">
+      <h3>Utilisateurs</h3>
+      {% if result_user|length > 0 %}
+
+      {% for user in result_user %}
+      <a href="#">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>{{ user.username }}</h4>
+            <p>{{ user.username }}</p>
           </div>
         </div>
       </a>
