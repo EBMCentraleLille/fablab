@@ -58,21 +58,21 @@ class MachineController extends Controller
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isValid() && $machine != null) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
+            $machine = new Machine();
             return $this->redirect(
                 $this->generateUrl(
-                    'centrale_lille_add_machine',
-                    array('prenom'=>'Michelle','nom'=>'Jean', 'form'=> $form->createView())
+                    'centrale_lille_add_machine'
                 )
             );
         }
 
         return $this->render(
             'ReservationBundle::add.html.twig',
-            array('prenom'=>'Michelle','nom'=>'Jean','form' => $form->createView())
+            array('form' => $form->createView())
         );
     }
 
@@ -98,8 +98,7 @@ class MachineController extends Controller
         $em->flush();
         return $this->redirect(
             $this->generateUrl(
-                'centrale_lille_administration',
-                array('prenom'=>'Michelle', 'nom'=>'Jean')
+                'centrale_lille_administration'
             )
         );
     }
