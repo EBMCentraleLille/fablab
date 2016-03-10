@@ -57,7 +57,6 @@ class Activity
     private $date;
 
     /**
-     * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      * @ORM\ManyToOne (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      */
     private $project;

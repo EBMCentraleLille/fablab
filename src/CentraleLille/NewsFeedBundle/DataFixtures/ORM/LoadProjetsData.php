@@ -19,7 +19,7 @@ namespace AppBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use CentraleLille\DemoBundle\Entity\Projet;
+use CentraleLille\CustomFosUserBundle\Entity\Project;
 
 /**
  * LoadProjetsData Class Doc
@@ -45,9 +45,9 @@ class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $projet1 = new Projet();
-        $projet2 = new Projet();
-        $projet3 = new Projet();
+        $projet1 = new Project();
+        $projet2 = new Project();
+        $projet3 = new Project();
         $projet1->setName('projet de martin');
         $projet2->setName('projet de charles');
         $projet3->setName('projet de gregoire');

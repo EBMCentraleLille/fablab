@@ -17,6 +17,7 @@
 
 namespace CentraleLille\NewsFeedBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\NewsFeedBundle\Entity\Abonnement;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
@@ -41,9 +42,9 @@ class FablabAbonnements implements FablabAbonnementsInterface
      *
      * @return void
      */
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(ObjectManager $manager)
     {
-        $this->em = $entityManager;
+        $this->em = $manager;
     }
     
     //

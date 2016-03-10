@@ -16,6 +16,7 @@
 
 namespace CentraleLille\NewsFeedBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\NewsFeedBundle\Entity\Activity;
 use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabActivitiesInterface;
 
@@ -40,9 +41,9 @@ class FablabActivities implements FablabActivitiesInterface
      *
      * @return void
      */
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(ObjectManager $manager)
     {
-        $this->em = $entityManager;
+        $this->em = $manager;
     }
 
 
@@ -61,7 +62,6 @@ class FablabActivities implements FablabActivitiesInterface
     {
         $date = new \DateTime();
         
-        $activity = $this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $activity = new Activity;
         $activity->setDate($date);
         $activity->setUser($user);

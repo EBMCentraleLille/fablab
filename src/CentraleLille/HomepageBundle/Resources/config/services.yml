@@ -1,4 +1,4 @@
 services:
-#    centrale_lille_homepage.example:
-#        class: CentraleLilleHomepageBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    fablab_homepage.starProject:
+        class: CentraleLille\HomepageBundle\Services\FablabStarProject
+        arguments: ['@doctrine.orm.entity_manager']

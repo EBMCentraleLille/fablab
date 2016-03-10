@@ -57,7 +57,7 @@ class Abonnement
     private $categories;
 
     /**
-     * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     * 
      * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      */
     private $projects;
@@ -186,7 +186,6 @@ class Abonnement
      *
      * @return Abonnement
      */
-    //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->projects[] = $project;
@@ -201,7 +200,6 @@ class Abonnement
      *
      * @return void
      */
-    //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->projects->removeElement($project);

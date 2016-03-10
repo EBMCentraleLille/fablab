@@ -19,6 +19,8 @@ namespace CentraleLille\HomepageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CentraleLille\NewsFeedBundle\Entity\Activity;
+use CentraleLille\HomepageBundle\Entity\StarProject;
+use CentraleLille\CustomFosUserBundle\Entity\Project;
 
 /**
  * HomepageController Class Doc
@@ -51,52 +53,12 @@ class HomepageController extends Controller
         //Récupération des dernières actualités
         $activityService=$this->container->get('fablab_newsfeed.activities');
         $recentActivities=$activityService->getActivities(30);
+        
+        //Récupération du projet "star"
+        $starProjectService=$this->container->get('fablab_homepage.starProject');
+        $starProject = $starProjectService -> getStarProjects();
 
-        $weeklyProject=[
-            'projectId'=>'3',
-            'projectName'=>'Projet De La semaine',
-            'projectDescription'=>'Ceci est la description du projet de la semaine',
-            'projectPicture'=>'http://thingiverse-production-new.s3.amazonaws.com'
-            . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg'
-        ];
-        $news=[
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'newsType'=>'a commenté'
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'newsType'=>'a commenté'
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'newsType'=>'a commenté'
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'newsType'=>'a commenté'
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'newsType'=>'a commenté'
-            ]];
-        $thematics=['Mécanique','Impression 3D','Arduino',
-                    'Électronique','Drone','CAO','Informatique','Réalité Virtuelle'];
+        //Récupération des projets récents
         $recentProjects=[
             [
                 'userName'=>'Martin Lechaptois',
@@ -128,7 +90,7 @@ class HomepageController extends Controller
         return $this->render(
             'CentraleLilleHomepageBundle:index.html.twig',
             [
-                'weeklyProject' => $weeklyProject,
+                'starProject' => $starProject,
                 'recentActivities' => $recentActivities,
                 'thematics' => $thematics,
                 'recentProjects' => $recentProjects,

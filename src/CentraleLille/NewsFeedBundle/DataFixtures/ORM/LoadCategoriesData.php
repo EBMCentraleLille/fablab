@@ -56,30 +56,30 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
         $category9 = new Category();
 
         $category1->setName('Mecanique');
-        $category1->addProjet($this->getReference('projet-martin'));
-        $category1->addProjet($this->getReference('projet-charles'));
-        $category1->addProjet($this->getReference('projet-gregoire'));
+        $category1->addProject($this->getReference('projet-martin'));
+        $category1->addProject($this->getReference('projet-charles'));
+        $category1->addProject($this->getReference('projet-gregoire'));
 
         $category2->setName('Impression 3D');
-        $category2->addProjet($this->getReference('projet-martin'));
-        $category2->addProjet($this->getReference('projet-gregoire'));
+        $category2->addProject($this->getReference('projet-martin'));
+        $category2->addProject($this->getReference('projet-gregoire'));
 
         $category3->setName('Electronique');
-        $category3->addProjet($this->getReference('projet-martin'));
-        $category3->addProjet($this->getReference('projet-charles'));
+        $category3->addProject($this->getReference('projet-martin'));
+        $category3->addProject($this->getReference('projet-charles'));
 
         $category4->setName('Informatique');
-        $category4->addProjet($this->getReference('projet-charles'));
-        $category4->addProjet($this->getReference('projet-gregoire'));
+        $category4->addProject($this->getReference('projet-charles'));
+        $category4->addProject($this->getReference('projet-gregoire'));
 
         $category5->setName('CAO');
-        $category5->addProjet($this->getReference('projet-martin'));
+        $category5->addProject($this->getReference('projet-martin'));
 
         $category6->setName('Découpeuse Laser');
-        $category6->addProjet($this->getReference('projet-charles'));
+        $category6->addProject($this->getReference('projet-charles'));
 
         $category7->setName('Arduino');
-        $category7->addProjet($this->getReference('projet-gregoire'));
+        $category7->addProject($this->getReference('projet-gregoire'));
 
         $category8->setName('Rasberry Pi');
         $category9->setName('Soudure');

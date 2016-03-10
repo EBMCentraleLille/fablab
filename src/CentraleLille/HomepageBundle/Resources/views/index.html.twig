@@ -9,9 +9,9 @@
 	        <div class="col-md-10">
 	          	<div class="row panelHome weeklyProjectPicture panelHome-default">
 	            	<div class="jumbotronHome col-md-4" >
-	            		<h2> {{ weeklyProject.projectName }} </h2>
-	  					<p> {{ weeklyProject.projectDescription }} </p>
-	  					<p><a class="btn btn-primary btn-lg">En Savoir Plus</a></p>
+	            		<h2> {{ starProject.projectName }} </h2>
+	  					<p> {{ starProject.content }} </p>
+	  					<p><a  class="btn btn-primary btn-lg"href="{{ path("project_page_homepage", { 'projectId':	starProject.projectId }) }}">En Savoir Plus</a></p>
 	            	</div>
 	            </div>
 	        </div>
@@ -20,27 +20,31 @@
     
 
 	<div class="row">
-		<div class="col-md-1"></div>
-		<ul class="list-group col-md-4">
+		<div class="col-md-1 "></div>
+		<ul class="list-group col-md-4" >
 			<div class="list-group-item active">
 	    		<h4>Dernières Actualités</h4>
 	  		</div>
-	  		{% for recentActivity in recentActivities %}
-	  			<li class="list-group-item">
-	  				<div class="row">
-		  				<div class="news col-md-3"></div>
-		  				<div class="col-md-9">
-		  					{% for project in recentActivity %}
-		  						<strong>{{ project.name }}:</strong></br>
-		  					{% endfor %}
-		  					{% for user in recentActivity %}
-		  						<strong>{{ user.firstname }}:</strong></br>
-		  					{% endfor %}
-		  					{{ recentActivity.content }}
-		  				</div>
-		  			</div>
-	  			</li>	
-	  		{% endfor %}
+	  		<div class="recent-news">
+		  		{% for recentActivity in recentActivities %}
+		  			<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+		  				<li class="list-group-items">
+			  				<div class="row">
+				  				<div class="news col-md-3"></div>
+				  				<div class="col-md-9">
+				  					{% for project in recentActivity %}
+				  						<strong>{{ project.name }}:</strong></br>
+				  					{% endfor %}
+				  					{% for user in recentActivity %}
+				  						<strong>{{ user.firstname }}:</strong></br>
+				  					{% endfor %}
+				  					{{ recentActivity.content }}
+				  				</div>
+				  			</div>
+			  			</li>
+			  		</a>
+		  		{% endfor %}
+		  	</div>
 		</ul>
 		<div class="col-md-6">
 			<div class="row panelThematics panel-primary">

@@ -15,6 +15,7 @@
  */
 namespace CentraleLille\NewsFeedBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\NewsFeedBundle\Entity\Category;
 use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabCategoriesInterface;
 
@@ -39,9 +40,9 @@ class FablabCategories implements FablabCategoriesInterface
      *
      * @return void
      */
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(ObjectManager $manager)
     {
-        $this->em = $entityManager;
+        $this->em = $manager;
     }
 
     /**
@@ -53,7 +54,6 @@ class FablabCategories implements FablabCategoriesInterface
      */
     public function addCategory($categoryName)
     {
-        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Category");
         $category = new Category;
         $category->setName($categoryName);
         $this->em->persist($category);
@@ -73,7 +73,7 @@ class FablabCategories implements FablabCategoriesInterface
         $category=$repository->findOneBy(
             array('name'=>$categoryName)
         );
-        $category->addProjet($project);
+        $category->addProject($project);
         $this->em->persist($category);
         $this->em->flush();
 
@@ -118,7 +118,7 @@ class FablabCategories implements FablabCategoriesInterface
         $category=$repository->findOneBy(
             array('name'=>$categoryName)
         );
-        $projectsCategory=$category->getProjets();
+        $projectsCategory=$category->getProjects();
         return $projectsCategory;
     }
 
@@ -154,7 +154,7 @@ class FablabCategories implements FablabCategoriesInterface
         $category=$repository->findOneBy(
             array('name'=>$categoryName)
         );
-        $category->removeProjet($projet);
+        $category->removeProject($projet);
         $this->em->persist($category);
         $this->em->flush();
         return $this;
