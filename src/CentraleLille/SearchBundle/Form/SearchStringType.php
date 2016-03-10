@@ -27,7 +27,7 @@ class SearchStringType extends AbstractType
                     'all' => 'Catégorie',
                     'utilisateur' => 'Utilisateur',
                     'machine' => 'Machine'
-        )))
+                )))
             ->add('search', 'submit')
         ;
     }
