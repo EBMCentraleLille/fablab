@@ -11,6 +11,7 @@
 namespace CentraleLille\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\ElasticaBundle\Configuration\Search;
 
 /**
  * Entity Class Doc
@@ -29,6 +30,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="machine")
  * @ORM\Entity(repositoryClass="CentraleLille\ReservationBundle\Repository\MachineRepository")
+ * @Search(repositoryClass="CentraleLille\SearchBundle\Entity\SearchRepository\SearchRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Machine
 {
