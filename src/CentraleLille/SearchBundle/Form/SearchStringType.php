@@ -20,17 +20,18 @@ class SearchStringType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-             
+
             ->add('stringSearch')
+            ->add('categorie', 'choice', array(
+                'choices' => array(
+                    'all' => 'Catégorie',
+                    'utilisateur' => 'Utilisateur',
+                    'machine' => 'Machine'
+        )))
             ->add('search', 'submit')
-           
-           
-            
-
-
         ;
     }
-    
+
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
