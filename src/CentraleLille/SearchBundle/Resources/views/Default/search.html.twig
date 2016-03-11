@@ -5,6 +5,8 @@
 {% block stylesheets %}
 {{ parent() }}
 <link rel="stylesheet" href="{{ asset('css/search.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/vendor/autocomplete/easy-autocomplete.min.css') }}" >
+<link rel="stylesheet" href="{{ asset('css/vendor/autocomplete/easy-autocomplete.themes.min.css') }}" >
 {% endblock stylesheets %}
 
 
@@ -125,18 +127,51 @@
       {% endif %}
     </div>
 
-
-
   {% endif %}
 </div>
 
 </div>
 
 
+<script src="{{ asset('js/vendor/autocomplete/jquery.easy-autocomplete.min.js') }}"></script>
+<script type="text/javascript">
+var options = {
 
+    url: "{{ asset('json/heroes.json') }}",
 
+    categories: [{
+        listLocation: "marvel",
+        maxNumberOfElements: 4,
+        header: "Marvel - heroes"
+    }, {
+        listLocation: "dc-comics",
+        maxNumberOfElements: 4,
+        header: "DC Comics - heroes"
+    }],
 
+    getValue: function(element) {
+        return element.character;
+    },
 
+    template: {
+        type: "description",
+        fields: {
+            description: "realName"
+        }
+    },
 
+    list: {
+        maxNumberOfElements: 8,
+        match: {
+            enabled: true
+        },
+        sort: {
+            enabled: true
+        }
+    },
 
+};
+
+$("#stringSearch").easyAutocomplete(options);
+</script>
 {% endblock body %}
