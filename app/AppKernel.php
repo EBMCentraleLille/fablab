@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
             new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
 
         );
