@@ -127,8 +127,8 @@
       {% endif %}
     </div>
 
-  {% endif %}
-</div>
+    {% endif %}
+  </div>
 
 </div>
 
@@ -137,39 +137,55 @@
 <script type="text/javascript">
 var options = {
 
-    url: "{{ asset('json/heroes.json') }}",
+  url: function(phrase) {
+    return "{{ path('autocomplete') }}";
+  },
 
-    categories: [{
-        listLocation: "marvel",
-        maxNumberOfElements: 4,
-        header: "Marvel - heroes"
-    }, {
-        listLocation: "dc-comics",
-        maxNumberOfElements: 4,
-        header: "DC Comics - heroes"
-    }],
+  categories: [{
+    listLocation: "user",
+    maxNumberOfElements: 4,
+    header: "Utilisateur"
+  }, {
+    listLocation: "machine",
+    maxNumberOfElements: 4,
+    header: "Machine"
+  }],
 
-    getValue: function(element) {
-        return element.character;
+  getValue: function(element) {
+    return element.name;
+  },
+
+  template: {
+    type: "links",
+    fields: {
+      link: "link"
+    }
+  },
+
+  list: {
+    maxNumberOfElements: 8,
+    match: {
+      enabled: true
     },
+    sort: {
+      enabled: true
+    }
+  },
 
-    template: {
-        type: "description",
-        fields: {
-            description: "realName"
-        }
-    },
+  ajaxSettings: {
+    dataType: "json",
+    method: "POST",
+    data: {
+      dataType: "json"
+    }
+  },
 
-    list: {
-        maxNumberOfElements: 8,
-        match: {
-            enabled: true
-        },
-        sort: {
-            enabled: true
-        }
-    },
+  preparePostData: function(data) {
+    data.phrase = $("#example-ajax-post").val();
+    return data;
+  },
 
+  requestDelay: 300
 };
 
 $("#stringSearch").easyAutocomplete(options);
