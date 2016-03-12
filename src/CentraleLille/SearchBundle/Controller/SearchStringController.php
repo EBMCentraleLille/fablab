@@ -131,8 +131,11 @@ class SearchStringController extends Controller
   public function autocompleteAction()
   {
 
+    //get request search
+    $search = $this->get('request')->request->get('phrase');
 
-    /*Renvoyer un seul document json avec la structure suivante : 
+
+    /*Renvoyer un seul document json avec la structure suivante :
     {
     "user": [
     {"name": "Maxime", "link": "userId"},

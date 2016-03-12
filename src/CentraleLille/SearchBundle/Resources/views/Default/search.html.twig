@@ -137,6 +137,11 @@
 <script type="text/javascript">
 var options = {
 
+  preparePostData: function(data) {
+    data.phrase = $("#stringSearch").val();
+    return data;
+  },
+
   url: function(phrase) {
     return "{{ path('autocomplete') }}";
   },
@@ -178,11 +183,6 @@ var options = {
     data: {
       dataType: "json"
     }
-  },
-
-  preparePostData: function(data) {
-    data.phrase = $("#example-ajax-post").val();
-    return data;
   },
 
   requestDelay: 300
