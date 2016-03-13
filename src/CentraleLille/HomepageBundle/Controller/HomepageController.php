@@ -18,9 +18,6 @@
 namespace CentraleLille\HomepageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use CentraleLille\NewsFeedBundle\Entity\Activity;
-use CentraleLille\HomepageBundle\Entity\StarProject;
-use CentraleLille\CustomFosUserBundle\Entity\Project;
 
 /**
  * HomepageController Class Doc
@@ -59,34 +56,9 @@ class HomepageController extends Controller
         $starProject = $starProjectService -> getStarProjects();
 
         //Récupération des projets récents
-        $recentProjects=[
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'likes'=>19,
-                'messages'=>3,
-                'files'=>4
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'likes'=>3,
-                'messages'=>15,
-                'files'=>2
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'likes'=>5,
-                'messages'=>9,
-                'files'=>1
-            ]];
+        $recentProjectService=$this->container->get('fablab_homepage.recentProject');
+        $recentProjects = $recentProjectService -> getRecentProjects(3);
+
         return $this->render(
             'CentraleLilleHomepageBundle:index.html.twig',
             [
@@ -99,6 +71,15 @@ class HomepageController extends Controller
         );
     }
 
+    /**
+    * CategoryAction Function Doc
+    *
+    * Cette fonction récupère et affiche les informations de l'activité ciblée
+    *
+    * @param Object $category Entité catégorie à afficher
+    *
+    * @return Twig La vue Twig à display
+    */
     public function categoryAction($category)
     {
         $categoryService = $this->container->get('fablab_newsfeed.categories');

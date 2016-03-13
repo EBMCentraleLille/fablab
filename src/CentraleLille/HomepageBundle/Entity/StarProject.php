@@ -1,11 +1,35 @@
 <?php
+/**
+ * StarProject.php File Doc
+ *
+ * Entité Star Project
+ *
+ * PHP Version 5.6
+ *
+ * @category   File
+ * @package    CentraleLille:HomepageBundle
+ * @subpackage Entité
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
+ */
 
 namespace CentraleLille\HomepageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StarProject
+ * StarProject Class Doc
+ *
+ * Classe StarProjectt définissant l'entité StarProject
+ * comprenant les attributs Id, Project et Content
+ *
+ * @category   Class
+ * @package    CentraleLille:HomepageBundle
+ * @subpackage Entity
+ * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link       https://github.com/EBMCentraleLille/fablab
  *
  * @ORM\Table(name="star_project")
  * @ORM\Entity(repositoryClass="CentraleLille\HomepageBundle\Repository\StarProjectRepository")

@@ -38,8 +38,9 @@ use CentraleLille\NewsFeedBundle\Entity\Abonnement;
 class LoadAbonnementsData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * fonction chargeants les données d'abonnements
-     * @param  ObjectManager $manager
+     * Fonction chargeants les données d'abonnements
+     *
+     * @param ObjectManager $manager Manager de Fixtures
      *
      * @return void
      */

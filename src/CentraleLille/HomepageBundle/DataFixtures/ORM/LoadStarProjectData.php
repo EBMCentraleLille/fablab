@@ -38,8 +38,9 @@ use CentraleLille\HomepageBundle\Entity\StarProject;
 class LoadStarProjectData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * fonction chargeants les données d'abonnements
-     * @param  ObjectManager $manager
+     * Fonction chargeants les données d'abonnements
+     *
+     * @param ObjectManager $manager manager de fixtures
      *
      * @return void
      */

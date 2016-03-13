@@ -32,18 +32,34 @@ interface FablabStarProjectInterface
     /**
      * Ajoute un star project
      *
+     * @param integer $projectId Entité Projet
+     * @param string  $content   Text associé au star project
+     *
+     * @return void
+     */
+    public function addStarProject($projectId, $content);
+
+    /**
+     * Modifie un star project
+     *
      * @param array  $project Entité Projet
      * @param string $content Text associé au star project
      *
      * @return void
      */
-    public function addStarProject($project, $content);
+    public function modifyStarProject($project, $content);
     
+    /**
+     * Retourne tous les star projects
+     *
+     * @return array $starProjects Array d'entités StarProject
+     */
+    public function getAllStarProjects();
+
     /**
      * Retourne un ou plusieurs star projects
      *
-     * @param integer $limit  Nombre de star projets retournés
-     * @param integer $offset Offset de recherche
+     * @param integer $limit Nombre de star projets retournés
      *
      * @return void
      */

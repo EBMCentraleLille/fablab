@@ -53,6 +53,7 @@ class Category
 
     /**
      * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     *
      * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      **/
     private $Projects;

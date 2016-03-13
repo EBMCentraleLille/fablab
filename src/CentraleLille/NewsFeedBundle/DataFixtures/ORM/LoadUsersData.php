@@ -38,8 +38,9 @@ use CentraleLille\CustomFosUserBundle\Entity\User;
 class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * fonction chargeants les données de Users
-     * @param  ObjectManager $manager
+     * Fonction chargeants les données de Users
+     *
+     * @param ObjectManager $manager Manager de Fixtures
      *
      * @return void
      */

@@ -26,6 +26,7 @@ use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
  * FablabAbonnements Class Doc
  *
  * Services pour gérer les abonnements utilisateurs
+ *
  * @category   Class
  * @package    CentraleLille:NewsFeedBundle
  * @subpackage Services
@@ -38,7 +39,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
     /**
      * Fonction construct de la classe FablabAbonnements
      *
-     * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
+     * @param ObjectManager $manager Entity Manager de Doctrine
      *
      * @return void
      */

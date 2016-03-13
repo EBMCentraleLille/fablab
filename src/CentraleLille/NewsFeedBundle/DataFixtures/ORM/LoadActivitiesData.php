@@ -38,14 +38,15 @@ use CentraleLille\NewsFeedBundle\Entity\Activity;
 class LoadActivitiesData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * fonction chargeants les données d'abonnements du user Martin
-     * @param  ObjectManager $manager
+     * Fonction chargeants les données d'abonnements du user Martin
+     *
+     * @param ObjectManager $manager Manager de Fixtures
      *
      * @return void
      */
     public function load(ObjectManager $manager)
     {
-        for ($counter = 1; $counter <= 30; $counter++){
+        for ($counter = 1; $counter <= 30; $counter++) {
             ${"activity" . $counter} = new Activity();
         }
         $activity1 = new Activity();
@@ -234,7 +235,7 @@ class LoadActivitiesData extends AbstractFixture implements OrderedFixtureInterf
         $activity29->setDate(new \Datetime());
         $activity30->setDate(new \Datetime());
 
-        for ($counter = 1; $counter <= 30; $counter++){
+        for ($counter = 1; $counter <= 30; $counter++) {
             $activity = ${"activity" . $counter};
             $manager->persist($activity);
         }

@@ -40,7 +40,6 @@ interface FablabActivitiesInterface
     *
     * @return object L'entité générée
     */
-
     public function addActivity($user, $projet, $type, $content);
 
     
@@ -54,4 +53,16 @@ interface FablabActivitiesInterface
      * @return array $activities Array d'Entités activités
      */
     public function getActivityProjet($projet, $nb, $from);
+
+        /**
+     * Fonction de recherche des activités liées à un projet
+     *
+     * Retourne les $nb activités les plus récentes à partir de la $from
+     *
+     * @param integer $limit  Nombre d'actualités recherchées
+     * @param integer $offset Offset de recherche
+     *
+     * @return array $activities Array d'Entités activités
+     */
+    public function getActivities($limit, $offset);
 }

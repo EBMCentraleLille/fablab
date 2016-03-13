@@ -38,8 +38,9 @@ use CentraleLille\NewsFeedBundle\Entity\Category;
 class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * fonction chargeants les données de categories
-     * @param  ObjectManager $manager
+     * Fonction chargeants les données de categories
+     *
+     * @param ObjectManager $manager Manager de Fixtures
      *
      * @return void
      */

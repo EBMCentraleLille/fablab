@@ -36,7 +36,7 @@ class FablabCategories implements FablabCategoriesInterface
     /**
      * Fonction construct de la classe FablabCategories
      *
-     * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
+     * @param ObjectManager $manager Entity Manager de Doctrine
      *
      * @return void
      */

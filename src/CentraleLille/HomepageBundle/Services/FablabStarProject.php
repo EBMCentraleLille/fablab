@@ -37,7 +37,7 @@ class FablabStarProject implements FablabStarProjectInterface
     /**
      * Fonction construct de la classe FablabStarProject
      *
-     * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
+     * @param ObjectManager $manager Entité Manager de Doctrine
      *
      * @return void
      */
@@ -55,7 +55,7 @@ class FablabStarProject implements FablabStarProjectInterface
      * @return void
      */
     public function addStarProject($project, $content)
-    {           
+    {
         $starProject = new StarProject;
         $starProject->setContent($content);
         $starProject->Projet($project);
@@ -64,23 +64,62 @@ class FablabStarProject implements FablabStarProjectInterface
         $this->em->flush();
         return $this;
     }
+
+     /**
+     * Modifie un star project
+     *
+     * @param integer $projectId ProjetId
+     * @param string  $content   Text associé au star project
+     *
+     * @return void
+     */
+    public function modifyStarProject($projectId, $content)
+    {
+        $repository = $this->em->getRepository("CentraleLilleHomepageBundle:StarProject");
+        $starProject= $repository->find($projectId);
+        $starProject->setContent($content);
+
+        $this->em->persist($starProject);
+        $this->em->flush();
+        return $this;
+    }
     
     /**
-     * Retourne un ou plusieurs star projects
-     *
-     * @param integer $limit  Nombre de star projets retournés
-     * @param integer $offset Offset de recherche
+     * Retourne tous les star projects
      *
      * @return array $starProjects Array d'entités StarProject
      */
-    public function getStarProjects($limit=1)
+    public function getAllStarProjects()
+    {
+        $starProject=[];
+        $starProjects=[];
+        $repository = $this->em->getRepository("CentraleLilleHomepageBundle:StarProject");
+        $rawStarProjects = $repository->findAll();
+        foreach ($rawStarProjects as $rawStarProject) {
+            $starProject["content"] = $rawStarProject -> getContent();
+            $starProject["projectName"] = $rawStarProject -> getProject()->getName();
+            $starProject["projectPicture"] = $rawStarProject -> getProject()->getPicture();
+            $starProject["projectId"] = $rawStarProject -> getProject()->getId();
+            array_push($starProjects, $starProject);
+        }
+        return $starProjects;
+    }
+
+    /**
+     * Retourne un ou plusieurs star projects
+     *
+     * @param integer $limit Nombre de star projets retournés
+     *
+     * @return array $starProjects Array d'entités StarProject
+     */
+    public function getStarProjects($limit = 1)
     {
         $starProjects = [];
         $starProject = [];
         $repository = $this->em->getRepository("CentraleLilleHomepageBundle:StarProject");
         $query = $repository->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
-            ->setMaxResults( $limit )
+            ->setMaxResults($limit)
             ->getQuery();
         if ($limit = 1) {
             $rawStarProjects = $query->getSingleResult();
@@ -98,7 +137,7 @@ class FablabStarProject implements FablabStarProjectInterface
                 $starProject["projectId"] = $rawStarProject -> getProject()->getId();
                 array_push($starProjects, $starProject);
             }
-        }        
+        }
         return $starProjects;
     }
 

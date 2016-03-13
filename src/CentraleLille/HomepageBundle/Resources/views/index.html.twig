@@ -79,21 +79,15 @@
 					{% for recentProject in recentProjects %}
 						<div class="col-md-4">
 							<div class="panel panel-default">
-							  	<div class="panel-heading">{{ recentProject.projectName }}</div>
+							  	<div class="panel-heading">{{ recentProject.name }}</div>
 							  	<div class="recentProjectPicture"></div>
 							  	<div class="panel-footer">
 							  		<div class="row">
-								  		<div class="col-md-4 recentProjectSide">
+								  		<div class="col-md-6 recentProjectSide">
 								  			<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-								  			</br>{{ recentProject.likes }}
-								  		</div>
-								  		<div class="col-md-4 recentProjectCenter">
-								  			<object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object>
-								  		</br>{{ recentProject.messages }}
 								  		</div>
 								  		<div class="col-md-4 recentProjectSide">
-								  			<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object>
-								  		</br>{{ recentProject.files}}
+								  			<object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object>
 								  		</div>
 								  	</div>
 							  	</div>

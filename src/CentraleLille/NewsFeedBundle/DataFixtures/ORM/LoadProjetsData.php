@@ -38,8 +38,9 @@ use CentraleLille\CustomFosUserBundle\Entity\Project;
 class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * fonction chargeants les données de projets
-     * @param  ObjectManager $manager
+     * Fonction chargeants les données de projets
+     *
+     * @param ObjectManager $manager Manager de Fixtures
      *
      * @return void
      */

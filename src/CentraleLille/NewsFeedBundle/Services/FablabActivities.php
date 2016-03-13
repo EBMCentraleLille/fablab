@@ -37,7 +37,7 @@ class FablabActivities implements FablabActivitiesInterface
     /**
      * Fonction construct de la classe FablabActivities
      *
-     * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
+     * @param ObjectManager $manager Entity Manager de Doctrine
      *
      * @return void
      */
@@ -57,7 +57,6 @@ class FablabActivities implements FablabActivitiesInterface
     *
     * @return void
     */
-
     public function addActivity($user, $projet, $type, $content = "")
     {
         $date = new \DateTime();
@@ -87,11 +86,11 @@ class FablabActivities implements FablabActivitiesInterface
      *
      * @param array   $projet Entité Projet
      * @param integer $nb     Nombre d'actualités retournées souhaitées
-     * @param integer $from   Offset de recherche
+     * @param integer $offset Offset de recherche
      *
      * @return array $activities Array d'Entités activités
      */
-    public function getActivityProjet($projet, $nb, $offset=0)
+    public function getActivityProjet($projet, $nb, $offset = 0)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $activities=$repository->findBy(
@@ -109,21 +108,21 @@ class FablabActivities implements FablabActivitiesInterface
      *
      * Retourne les $nb activités les plus récentes à partir de la $from
      *
-     * @param integer $limit     Nombre d'actualités recherchées
-     * @param integer $from   Offset de recherche
+     * @param integer $limit  Nombre d'actualités recherchées
+     * @param integer $offset Offset de recherche
      *
      * @return array $activities Array d'Entités activités
      */
-    public function getActivities($limit, $offset=0)
+    public function getActivities($limit, $offset = 0)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $query = $repository->createQueryBuilder('a')
             ->orderBy('a.date', 'DESC')
-            ->setFirstResult( $offset )
-            ->setMaxResults( $limit )
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
             ->getQuery();
         $activities = $query->getResult();
         
-    return $activities;
+        return $activities;
     }
 }

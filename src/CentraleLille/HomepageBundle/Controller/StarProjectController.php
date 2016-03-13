@@ -16,8 +16,10 @@
 
 namespace CentraleLille\HomepageBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CentraleLille\HomepageBundle\Entity\StarProject;
+use CentraleLille\HomepageBundle\Form\StarProjectType;
 
 /**
  * StarProjectController Class Doc
@@ -31,17 +33,66 @@ use CentraleLille\HomepageBundle\Entity\StarProject;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
-class HomepageController extends Controller
+class StarProjectController extends Controller
 {
-	/**
-    * CreateAction Function Doc
+    /**
+    * IndexAction Function Doc
     *
-    * Formulaire d'jout de star project
+    * Présentation de tous les starprojets
     *
     * @return Twig La vue Twig à display
     */
-    public function createAction()
+    public function indexAction()
     {
-    	
+        //Récupération des star project
+        $starProjectService=$this->container->get('fablab_homepage.starProject');
+        $starProjects=$starProjectService->getAllStarProjects();
+
+        return $this->render(
+            'CentraleLilleHomepageBundle:starproject.html.twig',
+            [
+                'starProjects' => $starProjects
+            ]
+        );
+    }
+
+    /**
+    * CreateAction Function Doc
+    *
+    * Fonction d'ajout de star project
+    *
+    * @param Object $request Requête HTTP
+    *
+    * @return Twig La vue Twig à display
+    */
+    public function createAction(Request $request)
+    {
+        $starProject = new StarProject();
+        $form = $this->createForm(StarProjectType::class, $starProject);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($starProject);
+            $em->flush();
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Le projet star a bien été ajouté."
+            );
+
+            return $this->redirect(
+                $this->generateUrl(
+                    'centrale_lille_homepage_star_project'
+                )
+            );
+        }
+        
+        return $this->render(
+            'CentraleLilleHomepageBundle:newstarproject.html.twig',
+            array(
+            'form' => $form->createView()
+            )
+        );
     }
 }
