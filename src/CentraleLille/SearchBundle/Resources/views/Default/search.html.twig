@@ -39,6 +39,8 @@
     Aucun résultat
 
     {% else %}
+    {{ jsonTotal }}<br>
+    
 
     <div class="result">
       <h3>Projets</h3>
@@ -56,7 +58,7 @@
       {% endfor %}
 
       {% else %}
-      aucun résultats
+      aucun résultat
       {% endif %}
     </div>
 
@@ -78,7 +80,7 @@
       {% endfor %}
 
       {% else %}
-      aucun résultats
+      aucun résultat
       {% endif %}
     </div>
 
@@ -101,7 +103,7 @@
       {% endfor %}
 
       {% else %}
-      aucun résultats
+      aucun résultat
       {% endif %}
     </div>
 
@@ -116,14 +118,14 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <h4>{{ user.username }}</h4>
-            <p>{{ user.username }}</p>
+            <p>{{ user.email }}</p>
           </div>
         </div>
       </a>
       {% endfor %}
 
       {% else %}
-      aucun résultats
+      aucun résultat
       {% endif %}
     </div>
 
