@@ -3,6 +3,11 @@ service_task:
   prefix: /api
   resource: CentraleLille\GdpBundle\Controller\TaskController
 
+service_project:
+  type : rest
+  prefix: /api
+  resource: CentraleLille\GdpBundle\Controller\ProjectController
+
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
