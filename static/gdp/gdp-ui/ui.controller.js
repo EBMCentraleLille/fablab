@@ -7,6 +7,8 @@ function uiController($scope,rq) {
         'title':'',
         'body':''
     }
+    $scope.taskCreateShow=false;
+
 
     $scope.currentProject={
         'id':1,
