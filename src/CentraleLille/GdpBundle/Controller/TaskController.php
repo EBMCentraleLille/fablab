@@ -223,7 +223,7 @@ class TaskController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Assign a task to an user",
+     *   description = "Unassign a task",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
