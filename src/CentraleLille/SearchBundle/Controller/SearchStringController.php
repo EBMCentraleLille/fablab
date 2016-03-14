@@ -41,7 +41,9 @@ class SearchStringController extends Controller
   */
   public function searchAction(Request $request)
   {
-
+    $jsonContentUser = '';
+    $jsonContentMachine = '';
+    $jsonTotal = '';
     $search = new SearchString();
     $searchForm = $this->get('form.factory')->createNamed(
     '',
@@ -168,9 +170,10 @@ class SearchStringController extends Controller
   */
   public function autocompleteAction()
   {
-
+    $search = $this->get('request')->request->get('phrase');
     //User Json
-      $queryall = new \Elastica\Query\MatchAll();
+           $queryall = new \Elastica\Query\MatchAll();
+
       $typeUser = $this->get('fos_elastica.index.fablab.User');
       $result_alluser = $typeUser->search($queryall)->getResults();
       foreach ($result_alluser as $result) {
@@ -210,7 +213,7 @@ class SearchStringController extends Controller
 
 
     //get request search
-    $search = $this->get('request')->request->get('phrase');
+    
 
 
     /*Renvoyer un seul document json avec la structure suivante :
