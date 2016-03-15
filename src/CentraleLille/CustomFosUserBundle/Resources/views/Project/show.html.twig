@@ -1,5 +1,11 @@
-{{ project.name }}
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+<br><br><br>
+<h1>{{ project.name }}</h1>
 
 {% if project_service.isAllowedLeader(currentUser, project) %}
     <p>You are leader of this project</p>
 {% endif %}
+
+{% endblock body %}
