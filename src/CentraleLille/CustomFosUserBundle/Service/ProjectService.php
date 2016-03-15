@@ -4,6 +4,7 @@ namespace CentraleLille\CustomFosUserBundle\Service;
 
 use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
 use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
+use \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Created by PhpStorm.
@@ -16,12 +17,16 @@ class ProjectService
     protected $em;
     protected $authorizationChecker;
 
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager, \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker) {
+    public function __construct(
+        \Doctrine\ORM\EntityManager $entityManager,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->em = $entityManager;
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function isAllowedLeader($user, $project) {
+    public function isAllowedLeader($user, $project)
+    {
         if ($user==null || $project==null) {
             return false;
         }
@@ -73,5 +78,4 @@ class ProjectService
         }
         return false;
     }
-
 }
