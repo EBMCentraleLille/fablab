@@ -14,18 +14,22 @@ services:
         tags:
             - { name: form.type, alias: app_user_profile }
 
-    # app.project.member_voter:
-    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter
-    #     arguments: ['@security.access.decision_manager']
-    #     tags:
-    #         - { name: security.voter }
-    #     # small performance boost
-    #     # public: false
-    #
-    # app.project.leader_voter:
-    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectLeaderVoter
-    #     arguments: ['@security.access.decision_manager']
-    #     tags:
-    #         - { name: security.voter }
+    app.project.service:
+        class:  CentraleLille\CustomFosUserBundle\Service\ProjectService
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
+
+    app.project.member_voter:
+         class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter
+         arguments: ['@security.access.decision_manager']
+         tags:
+             - { name: security.voter }
+       # small performance boost
+       # public: false
+
+    app.project.leader_voter:
+        class: CentraleLille\CustomFosUserBundle\Security\ProjectLeaderVoter
+        arguments: ['@security.access.decision_manager']
+        tags:
+         - { name: security.voter }
         # small performance boost
         # public: false
