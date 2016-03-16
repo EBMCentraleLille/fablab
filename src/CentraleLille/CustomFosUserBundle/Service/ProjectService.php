@@ -27,7 +27,7 @@ class ProjectService
 
     public function isAllowedLeader($user, $project)
     {
-        if ($user==null || $project==null) {
+        if (!$user instanceof User || !$project instanceof Project) {
             return false;
         }
         if (true === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
