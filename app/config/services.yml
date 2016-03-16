@@ -33,3 +33,8 @@ services:
          - { name: security.voter }
         # small performance boost
         # public: false
+        
+    form.type.string_search:
+        class: CentraleLille\SearchBundle\Form\SearchStringType
+        tags:
+            - { name: form.type, alias: string_search_type }
