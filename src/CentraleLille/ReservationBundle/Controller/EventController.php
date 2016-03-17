@@ -12,11 +12,9 @@
 
 namespace CentraleLille\ReservationBundle\Controller;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use ADesigns\CalendarBundle\Event\CalendarEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
-use CentraleLille\ReservationBundle\Entity\Event;
 use CentraleLille\ReservationBundle\Entity\Machine;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,100 +44,58 @@ class EventController extends Controller
 
     public function reserverAction(Request $request)
     {
-        $event = new Event();
-        $event->setCreationDateTime();
-        $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
+        $em = $this->getDoctrine()->getManager();
 
-        $formBuilder->add(
-            'startDateTime',
-            'datetime',
-            array(
+        $repository = $em->getRepository('ReservationBundle:Machine');
 
-            'placeholder' => array(
-                'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-            ))
-        )
-            ->add(
-                'endDateTime',
-                'datetime',
-                array(
-                'placeholder'=> array(
-                    'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
-                    'hour'=>'Heure','minute'=>'Minute',
-                ))
-            )
-            ->add(
-                'machine',
-                EntityType::class,
-                array(
-                'class' => 'ReservationBundle:Machine',
-                'choice_label' => 'machineName',
-                'multiple' => false,
-                'required' => true,
-                'expanded' => true)
-            )
-            ->add('sauvegarder', 'submit');
+        $machines = $repository->findAll();
 
+        return $this->render(
+            'ReservationBundle::reservation.html.twig',
+            array('machines'=>$machines)
+        );
+    }
 
-            $form = $formBuilder->getForm();
+    public function viewResourceAction($id)
+    {
+        if (is_numeric($id)) {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('ReservationBundle:Machine');
 
-            $form->handleRequest($request);
+            $machine = $repository ->find($id);
 
-        if ($form->isSubmitted() && $request->isMethod("POST")) {
-
-            if ($form->isValid()) {
+            if (! is_null($machine)) { //if machine id is good, display planning
+                return $this->render(
+                    'ReservationBundle::resourceBooking.html.twig',
+                    array('machine'=>$machine)
+                );
+            } else { //if this machine id does not return something, do smthg else
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($event);
-                $em->flush();
-                $event = new Event();
-                $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
-                $formBuilder->add(
-                    'startDateTime',
-                    'datetime',
-                    array(
-                    'placeholder' => array(
-                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-                    ))
-                )
-                    ->add(
-                        'endDateTime',
-                        'datetime',
-                        array(
-                        'placeholder'=> array(
-                            'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
-                            'hour'=>'Heure','minute'=>'Minute',
-                        ))
-                    )
-                    ->add(
-                        'machine',
-                        EntityType::class,
-                        array(
 
-                        'class' => 'ReservationBundle:Machine',
-                        'choice_label' => 'machineName',
-                        'multiple' => false,
-                        'required' => true,
+                $repository = $em->getRepository('ReservationBundle:Machine');
 
-                        'expanded' => true)
-                    )
-
-                    ->add('sauvegarder', 'submit');
-
-                $form = $formBuilder ->getForm();
+                $machines = $repository->findAll();
 
                 return $this->render(
                     'ReservationBundle::reservation.html.twig',
-                    array('form'=> $form->createView())
+                    array('machines'=>$machines)
                 );
             }
-        }
+
+        } else { // if id is not a number, go back
+            $em = $this->getDoctrine()->getManager();
+
+            $repository = $em->getRepository('ReservationBundle:Machine');
+
+            $machines = $repository->findAll();
 
             return $this->render(
                 'ReservationBundle::reservation.html.twig',
-                array('form' => $form->createView())
+                array('machines'=>$machines)
             );
-
+        }
     }
+
 
     /**
      * adminAction

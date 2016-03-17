@@ -18,3 +18,9 @@ services:
         class: CentraleLille\SearchBundle\Form\SearchStringType
         tags:
             - { name: form.type, alias: string_search_type }
+
+    centrale.reservation.calendar_listener:
+        class: CentraleLille\ReservationBundle\Event\CalendarEventListener
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_listener, event: calendar.load_events, method: loadEvents}

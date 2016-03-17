@@ -173,7 +173,7 @@ class Machine
 
     public function __toString()
     {
-        return (string)$this->getMachineName()+"  "+$this->getDescription();
+        return (string)$this->getMachineName()."  ".$this->getDescription();
     }
 
     /**

@@ -164,7 +164,6 @@ class Event
      */
     public function setCreationDateTime()
     {
-        $date = date_create(date("d-M-Y H:i"));
-        $this->creationDateTime = $date ;
+        $this->creationDateTime = new \DateTime() ;
     }
 }
