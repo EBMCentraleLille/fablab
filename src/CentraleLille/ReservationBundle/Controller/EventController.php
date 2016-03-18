@@ -72,7 +72,7 @@ class EventController extends Controller
             } else { //if this machine id does not return something, do smthg else
                 $em = $this->getDoctrine()->getManager();
 
-                $repository = $em->getRepository('ReservationBundle:Machine');
+                $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
                 $machines = $repository->findAll();
 
@@ -85,7 +85,7 @@ class EventController extends Controller
         } else { // if id is not a number, go back
             $em = $this->getDoctrine()->getManager();
 
-            $repository = $em->getRepository('ReservationBundle:Machine');
+            $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
             $machines = $repository->findAll();
 
