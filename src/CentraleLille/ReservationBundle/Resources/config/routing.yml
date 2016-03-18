@@ -30,4 +30,12 @@ centrale_lille_display_resources:
         path: /resource/view/{id}
         defaults: {_controller:ReservationBundle:Event:viewResource}
 
+centrale_lille_types:
+    path: /types
+    defaults: {_controller:ReservationBundle:Type:create}
+
+centrale_lille_list_types:
+    path: /list-types
+    defaults: {_controller:ReservationBundle:Type:list}
+
 

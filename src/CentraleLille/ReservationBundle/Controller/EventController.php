@@ -15,7 +15,7 @@ namespace CentraleLille\ReservationBundle\Controller;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use CentraleLille\ReservationBundle\Entity\Machine;
+use CentraleLille\ReservationBundle\Entity\Booking\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -96,7 +96,6 @@ class EventController extends Controller
         }
     }
 
-
     /**
      * adminAction
      *
@@ -109,7 +108,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $repository = $em->getRepository('ReservationBundle:Machine');
+        $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
         $machines = $repository->findAll();
 
