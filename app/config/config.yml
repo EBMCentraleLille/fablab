@@ -116,7 +116,7 @@ fos_elastica:
                         groups: [elastica, Default]
                     persistence:
                         driver: orm
-                        model: CentraleLille\ReservationBundle\Entity\Machine
+                        model: CentraleLille\ReservationBundle\Entity\Bookables\Machine
                         provider: ~
                         listener: ~
                         finder: ~
