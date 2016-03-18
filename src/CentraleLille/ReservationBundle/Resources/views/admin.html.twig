@@ -31,7 +31,7 @@
 
             <div class="well">
         <ul>
-                <li> {{ machine.machineName}}</li>
+                <li> {{ machine.name}}</li>
                 <li> {{ machine.description }}</li>
         </ul>
                 <div class="btn-group" role="toolbar">
@@ -39,7 +39,7 @@
                             onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getId()}) }}'">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </button>
-                    <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getMachineId()}) }}'">
+                    <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getId()}) }}'">
                         Supprimer la machine
                     </button>
                 </div>

@@ -18,6 +18,7 @@ use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use CentraleLille\ReservationBundle\Entity\Bookables\Type;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 /**
@@ -55,7 +56,7 @@ class MachineController extends Controller
             ->add('name', 'text')
             ->add('description', 'textarea')
             ->add('type','entity',array(
-                    'class'=>'ReservationBundle:Type',
+                    'class'=>'ReservationBundle:Bookables\Type',
                     'choice_label'=>'name',
                     'required'=>true
             ))

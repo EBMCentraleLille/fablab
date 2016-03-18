@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
-use CentraleLille\ReservationBundle\Entity\Type;
+use CentraleLille\ReservationBundle\Entity\Bookables\Type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 
@@ -33,7 +33,7 @@ class TypeController extends Controller
 
         if($request->isMethod('POST') && $form->isValid() ){
             $em =$this->getDoctrine()->getManager();
-            $types = $em->getRepository('ReservationBundle:Type');
+            $types = $em->getRepository('ReservationBundle:Bookables\Type');
             $test = false;
             foreach ($types as $typ){
                 if($type->getName() == $typ->getName()) {
@@ -51,7 +51,7 @@ class TypeController extends Controller
 
     public function listAction(){
         $em = $this->getDoctrine()->getManager();
-        $types = $em->getRepository('ReservationBundle:Type')->findAll();
+        $types = $em->getRepository('ReservationBundle:Bookables\Type')->findAll();
 
         return $this->render('ReservationBundle::listes-types.html.twig',array('types'=>$types));
 

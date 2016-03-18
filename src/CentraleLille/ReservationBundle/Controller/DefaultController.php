@@ -90,7 +90,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $repository = $em->getRepository('ReservationBundle:Event');
+        $repository = $em->getRepository('ReservationBundle:Booking\Event');
         $events = $repository->findAll();
 
         return $this->render(

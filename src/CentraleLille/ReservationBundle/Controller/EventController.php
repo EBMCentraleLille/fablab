@@ -65,11 +65,11 @@ class EventController extends Controller
                 ))
             )
             ->add(
-                'machine',
+                'bookable',
                 EntityType::class,
                 array(
-                'class' => 'ReservationBundle:Machine',
-                'choice_label' => 'machineName',
+                'class' => 'ReservationBundle:Bookables\Machine',
+                'choice_label' => 'name',
                 'multiple' => false,
                 'required' => true,
                 'expanded' => true)
@@ -106,12 +106,12 @@ class EventController extends Controller
                         ))
                     )
                     ->add(
-                        'machine',
+                        'bookable',
                         EntityType::class,
                         array(
 
-                        'class' => 'ReservationBundle:Machine',
-                        'choice_label' => 'machineName',
+                        'class' => 'ReservationBundle:Bookables\Machine',
+                        'choice_label' => 'name',
                         'multiple' => false,
                         'required' => true,
 
@@ -148,7 +148,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $repository = $em->getRepository('ReservationBundle:Machine');
+        $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
         $machines = $repository->findAll();
 

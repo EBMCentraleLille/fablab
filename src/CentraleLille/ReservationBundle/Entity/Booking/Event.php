@@ -71,6 +71,22 @@ class Event
     protected $endDateTime;
 
     /**
+     * @return mixed
+     */
+    public function getBookable()
+    {
+        return $this->bookable;
+    }
+
+    /**
+     * @param mixed $bookable
+     */
+    public function setBookable($bookable)
+    {
+        $this->bookable = $bookable;
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="CentraleLille\ReservationBundle\Entity\Bookables\Bookable", cascade={"persist","remove"})
      *
      */

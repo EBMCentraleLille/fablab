@@ -13,7 +13,7 @@
         <ul>
             <li>Date de début : {{ event.startDateTime|date('d-m-Y H:i')}} </li>
             <li>Date de fin : {{ event.endDateTime|date('d-m-Y H:i')}} </li>
-            <li>Sur la machine : {{ event.machine.getMachineName()  }}</li>
+            <li>Sur la machine : {{ event.bookable.getName()  }}</li>
 
         </ul>
     </div>
