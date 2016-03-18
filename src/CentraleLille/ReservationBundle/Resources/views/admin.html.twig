@@ -3,9 +3,10 @@
 {% block title %} Admin - Index {% endblock %}
 
 {% block body %}
+
     <div class="container-fluid">
     <div class="col-md-5 col-lg-5">
-    <h3>  Liste des machines </h3>
+    <h2>  Liste des machines </h2>
     </div>
 
     <div class=" col-lg-offset-3 col-md-offset-3 col-lg-4 col-md-4">
@@ -22,22 +23,27 @@
     </div>
     </div>
 
+    {% for type in types %}
 
-    {% for machine in machines %}
-        <div class="well">
-    <ul>
-            <li> {{ machine.machineName}}</li>
-            <li> {{ machine.description }}</li>
-    </ul>
-            <div class="btn-group" role="toolbar">
-                <button type="button" class="btn btn-danger" aria-hidden="true"
-                        onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.id}) }}'">
-                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                </button>
-                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.id}) }}'">
-                    Supprimer la machine
-                </button>
+        <h3> {{ type.getName() }}</h3>
+
+        {% for machine in machines if machine.getType() == type %}
+
+            <div class="well">
+        <ul>
+                <li> {{ machine.machineName}}</li>
+                <li> {{ machine.description }}</li>
+        </ul>
+                <div class="btn-group" role="toolbar">
+                    <button type="button" class="btn btn-danger" aria-hidden="true"
+                            onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getId()}) }}'">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+                    <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getMachineId()}) }}'">
+                        Supprimer la machine
+                    </button>
+                </div>
             </div>
-        </div>
+        {% endfor %}
     {% endfor %}
 {% endblock %}

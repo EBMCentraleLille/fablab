@@ -13,11 +13,12 @@
 
 namespace CentraleLille\ReservationBundle\Controller;
 
-use CentraleLille\ReservationBundle\Entity\Machine;
+use CentraleLille\ReservationBundle\Entity\Bookables\Machine;
+use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use CentraleLille\ReservationBundle\Entity\Bookables\Type;
+
 
 /**
  * Controller Class Doc
@@ -51,14 +52,28 @@ class MachineController extends Controller
         $formBuilder = $this->get('form.factory')->createBuilder('form', $machine);
 
         $formBuilder
-            ->add('machineName', 'text')
+            ->add('name', 'text')
             ->add('description', 'textarea')
+            ->add('type','entity',array(
+                    'class'=>'ReservationBundle:Type',
+                    'choice_label'=>'name',
+                    'required'=>true
+            ))
+            ->add('statut',ChoiceType::class,[
+                'choices'=>array(
+                    'Disponible'=>'Disponible',
+                    'Indisponible'=>'Indisponible',
+                    'Hors Service'=>'Hors Service'
+                ),
+                'choices_as_values'=>true
+                ])
             ->add('Sauvegarder', 'submit');
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
         if ($form->isValid() && $machine != null) {
+            $this ->addFlash('notice','La machine '.$machine->getName().' a bien été enregistré !');
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
@@ -91,8 +106,13 @@ class MachineController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ReservationBundle:Machine');
-
+        $repository_event = $em->getRepository('ReservationBundle:Event');
         $machine = $repository ->find($id);
+        $events = $repository_event->findByBookable($machine);
+
+        foreach($events as $event){
+            $em->remove($event);
+    }
 
         $em->remove($machine);
         $em->flush();

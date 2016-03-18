@@ -1,0 +1,19 @@
+{% extends "ReservationBundle:Default:index.html.twig" %}
+
+{% block title %} {{ parent() }} - Types de machine {% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="col-lg-3 col-md-3">
+    <h3>  Types Machine </h3>
+    </div>
+    </div>
+    {% for type in types %}
+    <div class="well">
+        <ul>
+            <li>Type : {{ type.getName }} </li>
+            <li>Description : {{ type.getDescription }} </li>
+
+        </ul>
+    </div>
+{% endblock %}

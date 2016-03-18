@@ -14,10 +14,8 @@ namespace CentraleLille\ReservationBundle\Controller;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
-use CentraleLille\ReservationBundle\Entity\Event;
-use CentraleLille\ReservationBundle\Entity\Machine;
+use CentraleLille\ReservationBundle\Entity\Booking\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -56,16 +54,14 @@ class EventController extends Controller
             array(
 
             'placeholder' => array(
-                'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-            ))
+                'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute'))
         )
             ->add(
                 'endDateTime',
                 'datetime',
                 array(
                 'placeholder'=> array(
-                    'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
-                    'hour'=>'Heure','minute'=>'Minute',
+                    'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour', 'hour'=>'Heure','minute'=>'Minute',
                 ))
             )
             ->add(
@@ -98,8 +94,7 @@ class EventController extends Controller
                     'datetime',
                     array(
                     'placeholder' => array(
-                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-                    ))
+                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute'))
                 )
                     ->add(
                         'endDateTime',

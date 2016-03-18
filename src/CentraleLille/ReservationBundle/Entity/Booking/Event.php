@@ -9,15 +9,16 @@
  * @Link     https://github.com/pierloui/fablab
  */
 
-namespace CentraleLille\ReservationBundle\Entity;
+namespace CentraleLille\ReservationBundle\Entity\Booking;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
+use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 
 /**
  * Entity Class Doc
  *
- * Classe permettant la réservation de machine
+ * Classe permettant la réservation de Bookables
  *
  * @category Entity
  * @package  Reservation Bundle
@@ -49,7 +50,7 @@ class Event
 
     /**
      *
-     * @var                         datetime $creationDateTime
+     * @var datetime $creationDateTime
      * @ORM\Column(type="datetime")
      */
     protected $creationDateTime;
@@ -70,20 +71,11 @@ class Event
     protected $endDateTime;
 
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="Machine", cascade={"persist","remove"})
-     */
-    protected $machine;
-
-    /**
-     * Event constructor.
+     * @ORM\ManyToOne(targetEntity="CentraleLille\ReservationBundle\Entity\Bookables\Bookable", cascade={"persist","remove"})
      *
-     * @param int              $id
-     * @param $creationDateTime
-     * @param datetime         $startDateTime
-     * @param datetime         $endDateTime
-     * @param $machine
      */
+    protected $bookable;
+
     public function __construct()
     {
 
@@ -102,21 +94,10 @@ class Event
     /**
      * @return mixed
      */
-    public function getMachine()
-    {
-        return $this->machine;
-    }
+
 
     /**
-     * @param mixed $machine
-     */
-    public function setMachine($machine)
-    {
-        $this->machine = $machine;
-    }
-
-    /**
-     * @return datetime
+     * @return DateTime
      */
     public function getEndDateTime()
     {
@@ -124,16 +105,13 @@ class Event
     }
 
     /**
-     * @param datetime $endDateTime
+     * @param DateTime $endDateTime
      */
     public function setEndDateTime($endDateTime)
     {
         $this->endDateTime = $endDateTime;
     }
 
-    /**
-     * @return datetime
-     */
     public function getStartDateTime()
     {
         return $this->startDateTime;
@@ -159,12 +137,12 @@ class Event
      * setCreationDateTime
      *
      * Assigne l'heure de créaton directement sans besoin de la définir
-     *
-     * @param datetime $creationDateTime
      */
     public function setCreationDateTime()
     {
         $date = date_create(date("d-M-Y H:i"));
         $this->creationDateTime = $date ;
     }
+
+
 }

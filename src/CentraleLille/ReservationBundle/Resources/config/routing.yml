@@ -26,4 +26,12 @@ centrale_lille_profil:
     path: /profil
     defaults: {_controller:ReservationBundle:Default:profil}
 
+centrale_lille_types:
+    path: /types
+    defaults: {_controller:ReservationBundle:Type:create}
+
+centrale_lille_list_types:
+    path: /list-types
+    defaults: {_controller:ReservationBundle:Type:list}
+
 
