@@ -30,7 +30,7 @@ centrale_lille_homepage:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /reservation
+    prefix: /booking
 
 app:
     resource: "@AppBundle/Controller/"

@@ -42,7 +42,7 @@ class EventController extends Controller
      * @return Redirect
      */
 
-    public function reserverAction(Request $request)
+    public function bookAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -51,7 +51,7 @@ class EventController extends Controller
         $machines = $repository->findAll();
 
         return $this->render(
-            'ReservationBundle::reservation.html.twig',
+            'ReservationBundle::booking.html.twig',
             array('machines'=>$machines)
         );
     }

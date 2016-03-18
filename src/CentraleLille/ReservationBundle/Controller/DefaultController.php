@@ -83,7 +83,7 @@ class DefaultController extends Controller
      * @return Response
      */
 
-    public function profilAction()
+    public function bookingListAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -92,7 +92,7 @@ class DefaultController extends Controller
         $events = $repository ->findAll();
 
         return $this->render(
-            'ReservationBundle::profil.html.twig',
+            'ReservationBundle::bookingList.html.twig',
             array('prenom'=>'Michelle','nom'=>'Jean','events'=>$events)
         );
 
