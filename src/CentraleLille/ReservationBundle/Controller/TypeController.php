@@ -53,7 +53,7 @@ class TypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $types = $em->getRepository('ReservationBundle:Bookables\Type')->findAll();
 
-        return $this->render('ReservationBundle::listes-types.html.twig',array('types'=>$types));
+        return $this->render('ReservationBundle::typeList.html.twig',array('types'=>$types));
 
     }
 

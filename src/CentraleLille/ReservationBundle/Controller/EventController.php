@@ -46,7 +46,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $repository = $em->getRepository('ReservationBundle:Machine');
+        $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
         $machines = $repository->findAll();
 
@@ -60,7 +60,7 @@ class EventController extends Controller
     {
         if (is_numeric($id)) {
             $em = $this->getDoctrine()->getManager();
-            $repository = $em->getRepository('ReservationBundle:Machine');
+            $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
             $machine = $repository ->find($id);
 

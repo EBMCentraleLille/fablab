@@ -31,11 +31,11 @@ centrale_lille_display_resources:
         defaults: {_controller:ReservationBundle:Event:viewResource}
 
 centrale_lille_types:
-    path: /types
+    path: /type/add
     defaults: {_controller:ReservationBundle:Type:create}
 
 centrale_lille_list_types:
-    path: /list-types
+    path: /type/list
     defaults: {_controller:ReservationBundle:Type:list}
 
 
