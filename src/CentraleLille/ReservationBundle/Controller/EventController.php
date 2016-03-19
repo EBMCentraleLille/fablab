@@ -56,43 +56,38 @@ class EventController extends Controller
         );
     }
 
-    public function viewResourceAction($id)
+    public function viewResourceAction($resourceType, $id)
     {
-        if (is_numeric($id)) {
-            $em = $this->getDoctrine()->getManager();
-            $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
-
-            $machine = $repository ->find($id);
-
-            if (! is_null($machine)) { //if machine id is good, display planning
-                return $this->render(
-                    'ReservationBundle::resourceBooking.html.twig',
-                    array('machine'=>$machine)
-                );
-            } else { //if this machine id does not return something, do smthg else
+        switch($resourceType){
+            case 'machine':
                 $em = $this->getDoctrine()->getManager();
-
                 $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
-                $machines = $repository->findAll();
+                if (is_numeric($id)) {
+                    $machine = $repository ->find($id);
+                    if (! is_null($machine)) { //if machine id is good, display planning
+                        return $this->render(
+                            'ReservationBundle::resourceBooking.html.twig',
+                            array('machine'=>$machine)
+                        );
+                    } else { //if this machine id does not return something, do smthg else
+                        $machines = $repository->findAll();
+                        return $this->render(
+                            'ReservationBundle::reservation.html.twig',
+                            array('machines'=>$machines)
+                        );
+                    }
 
-                return $this->render(
-                    'ReservationBundle::reservation.html.twig',
-                    array('machines'=>$machines)
-                );
-            }
-
-        } else { // if id is not a number, go back
-            $em = $this->getDoctrine()->getManager();
-
-            $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
-
-            $machines = $repository->findAll();
-
-            return $this->render(
-                'ReservationBundle::reservation.html.twig',
-                array('machines'=>$machines)
-            );
+                } else { // if id is not a number, go back
+                    $machines = $repository->findAll();
+                    return $this->render(
+                        'ReservationBundle::reservation.html.twig',
+                        array('machines'=>$machines)
+                    );
+                }
+                break;
+            case 'room':
+                break;
         }
     }
 

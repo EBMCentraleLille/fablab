@@ -24,10 +24,9 @@ $(function () {
                 type: 'POST',
                 // A way to add custom filters to your event listeners
                 data: {
-                    machineId: window.location.pathname.split('/')[window.location.pathname.split('/').length-1]
                 },
                 error: function() {
-                   alert('Erreur de récupération du calendrier, merci de recharger la page');
+                   //alert('Erreur de récupération du calendrier, merci de recharger la page');
                 }
             }
         ],

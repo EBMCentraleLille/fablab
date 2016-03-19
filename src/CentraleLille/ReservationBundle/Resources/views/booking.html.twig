@@ -2,7 +2,7 @@
 
 {% block title %}
     Réservation
-x{% endblock %}
+{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -19,7 +19,8 @@ x{% endblock %}
                     <li> {{ machine.description }}</li>
                 </ul>
                 <div class="btn-group" role="toolbar">
-                    <button class="btn" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_display_resources', {'id': machine.id}) }}'">
+                    <button class="btn" aria-hidden="true"
+                            onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
                         Voir les disponibilités
                     </button>
                 </div>
