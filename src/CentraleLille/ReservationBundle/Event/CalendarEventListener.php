@@ -5,6 +5,7 @@ namespace CentraleLille\ReservationBundle\Event;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
+use Proxies\__CG__\CentraleLille\ReservationBundle\Entity\Booking\Event;
 
 /**
  * Event Class Doc
@@ -29,24 +30,42 @@ class CalendarEventListener
 
     public function loadEvents(CalendarEvent $calendarEvent)
     {
-        //$machineId = $calendarEvent->getStartDatetime();
-        //$machineId = '2';
+        $startDate = $calendarEvent->getStartDatetime();
+        $endDate = $calendarEvent->getEndDatetime();
+
+        $request = $calendarEvent->getRequest();
+        $id = $request->get('id');
+        //create some dummy event
+
+        $id = '1';
+
+        $em = $this->entityManager;
+        $repository = $em->getRepository('ReservationBundle:Booking\Event');
+        $resource = $repository ->find($id)->getBookable();
+        $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
+        $event->setBookable($resource);
+        $event->setStartDateTime(getdate());
+        $event->setEndDateTime(getdate());
+
+
+
+        $em->persist($event);
+
 
         // The original request so you can get filters from the calendar
         // Use the filter in your query for example
 
-        $request = $calendarEvent->getRequest();
-        $machineId = $request->get('machineId');
+
 
 
         // load events using your custom logic here,
         // for instance, retrieving events from a repository
 
         $companyEvents = $this->entityManager
-            ->getRepository('ReservationBundle:Event')
+            ->getRepository('ReservationBundle:Booking\Event')
             ->createQueryBuilder('event')
-            ->where('event.machine = :machineId')
-            ->setParameter('machineId', $machineId)
+            ->where('event.bookable = :id')
+            ->setParameter('id', $id)
             ->getQuery()->getResult();
 
         // $companyEvents and $companyEvent in this example
@@ -58,12 +77,14 @@ class CalendarEventListener
 
         foreach ($companyEvents as $companyEvent) {
 
-                // create an event with a start/end time, or an all day event
-                $eventEntity = new EventEntity(
-                    (string) $companyEvent->getMachine(),
-                    $companyEvent->getStartDatetime(),
-                    $companyEvent->getEndDatetime()
-                );
+            // create an event with a start/end time, or an all day event
+
+            $eventEntity = new EventEntity(
+                $companyEvent->getTitle(),
+                $companyEvent->getStartDatetime(),
+                $companyEvent->getEndDatetime(),
+                false
+            );
 
             //optional calendar event settings
                 $eventEntity->setBgColor('#FF0000'); //set the background color of the event's label

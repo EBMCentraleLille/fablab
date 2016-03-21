@@ -33,18 +33,21 @@ $(function () {
         selectable: true,
         selectHelper: true,
         select: function(start, end) {
-            var title = prompt('Event Title:');
-            var eventData;
-            if (title) {
-                eventData = {
-                    title: title,
-                    start: start,
-                    end: end
-                };
+            $('#myModal').modal('show');
+            $('#submitEvent').click(function(){
+                var description =  $('#eventDescription').val();
+                var eventData = {
+                        description: description,
+                        start: start,
+                        end: end
+                    };
+                $('#myModal').modal('hide');
                 $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-            }
+            });
             $('#calendar').fullCalendar('unselect');
         },
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
         defaultView: 'agendaWeek'
     });
 });
