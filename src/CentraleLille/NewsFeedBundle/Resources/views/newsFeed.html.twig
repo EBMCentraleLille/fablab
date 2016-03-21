@@ -1,84 +1,124 @@
 {% extends "layout.html.twig" %}
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('css/newsFeed.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/newsFeed.css') }}" />
+
 {% endblock stylesheets %}
 
 {% block body %}
 
-	<div class="newsFeed">
-		<div class="col-md-1"></div>
-		<div class="col-md-2 filter-menu">
-			<h3>Filtres</h3>
-			<h4>Type d'activité</h4>
-			<h4>Thématiques</h4>
-			<h4>Date</h4>
-			<div class="form-group">
-			  <input class="form-control" id="focusedInput" value="Membre" type="text">
-			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="col-md-1"></div>
-			<div class="col-md-11">
-				<h2>Fil d'actualité</h2>
-				{% for recentActivity in recentActivities %}
-					<div class="news">
-						<div class="row">
-							<div class="project-name">
-								<div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
-								<div class="activity-content">
-									{{ recentActivity.content }}
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="recentProjectPicture"></div>
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-md-6 recentProjectSide">
-											<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-								  		</div>
-								  		<div class="col-md-6 recentProjectSide">
-								  			<object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object>
-								  		</div>
-								  	</div>
-							  	</div>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			
-		</div>
-		<div class="col-md-3">
-			<div class="right-menu">
-				<div class="row">
-					<form role="search">
-	                	<div class="form-group">
-	                 		<input type="text" class="form-control" placeholder="Personnes,thématiques, projets...">
-	                	</div>
-	            	</form>
-	            </div>
+    <div class="newsFeed">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 filter-menu">
+            <h3>Filtres</h3>
+            <h4>Type d'activité</h4>
+            <h4>Thématiques</h4>
+            <h4>Date</h4>
+            <div class="form-group">
+              <input class="form-control" id="focusedInput" value="Membre" type="text">
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h2>Fil d'actualité</h2>
+                {% for recentActivity in recentActivities %}
+                    <div class="news row">
+                        <div class="project-name">
+                            {{ recentActivity.project.name }}
+                            <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
+                        <div class="activity-content">
+                                {{ recentActivity.content }}
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="recentProjectPicture"></div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-md-6 recentProject">
+                                        {% if recentActivity.project in abonnements %}
+                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+                                            <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
+                                        {% else %}
+                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                            <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6 recentProject">
+                                        <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+            <div class="right-menu">
+                <div class="row">
+                    <form role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Personnes,thématiques, projets...">
+                        </div>
+                    </form>
+                </div>
 
-	            <div class="button-right-menu">
-	  				<div class="panel-body">
-	    				Mon Profil
-	    				<object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-	  				</div>
-				</div>
+                <div class="button-right-menu">
+                    <div class="panel-body">
+                        Mon Profil
+                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                    </div>
+                </div>
 
-				<div class="button-right-menu">
-	  				<div class="panel-body">
-	    				Mes Projets
-	    				<object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-	  				</div>
-				</div>
-				<div class="button-right-menu">
-	  				<div class="panel-body">
-	    				Mes Abonnements
-	    				<object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-	  				</div>
-				</div>
-			</div>
-		</div>
-	<div class="col-md-1"></div>
+                <div class="button-right-menu">
+                    <div class="panel-body">
+                        Mes Projets
+                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                    </div>
+                </div>
+                <div class="button-right-menu">
+                    <div class="panel-body">
+                        Mes Abonnements
+                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-1"></div>
 </div>
+<script src="{{ asset('jquery.js') }}"></script>
+<script src="{{ asset('js/oXHR.js') }}"></script>
+<script>
+
+var projectsName = [];
+
+{% for recentActivity in recentActivities %}
+    if (projectsName.indexOf("{{ recentActivity.project.name }}") == -1) {
+        projectsName.push("{{ recentActivity.project.name }}");
+
+        $('[class="' + "{{ recentActivity.project.name }}" + '"]').click(function() {
+            likefunction($('[class="' + "{{ recentActivity.project.name }}" + '"]'), "{{ recentActivity.project.name }}");
+        });
+
+    };
+{% endfor %}
+
+function likefunction(projectLike, projectLikeName) {
+    var xhr = getXMLHttpRequest();
+    if (projectLike.eq(0).text() == "Suivre") {
+        projectLike.text("Ne Plus Suivre");
+        projectLike.prev().attr('data',"{{ asset('icons/likeOn.svg') }}");
+    } else {
+        projectLike.text("Suivre");
+        projectLike.prev().attr('data',"{{ asset('icons/like.svg') }}");
+    }
+    xhr.open("POST", "{{ path('news_feed_subscribe') }}", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("projet=" + projectLikeName);
+    xhr.send(null);
+};
+
+</script>
 {% endblock body %}
+

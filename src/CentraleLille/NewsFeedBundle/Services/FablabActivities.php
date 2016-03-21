@@ -104,7 +104,7 @@ class FablabActivities implements FablabActivitiesInterface
     }
 
     /**
-     * Fonction de recherche des activités liées à un projet
+     * Fonction de recherche de toutes les activités
      *
      * Retourne les $nb activités les plus récentes à partir de la $from
      *
@@ -124,5 +124,20 @@ class FablabActivities implements FablabActivitiesInterface
         $activities = $query->getResult();
         
         return $activities;
+    }
+
+    /**
+     * Fonction de recherche des activités en fonction des abonnements d'un user
+     *
+     * @param array   $abonnements Entité Projet
+     * @param integer $nb     Nombre d'activités recherchées
+     * @param integer $from   Offset de recherche
+     *
+     * @return array $activities Array d'Entités activités
+     */
+    public function getActivitiesNewsFeed($abonnements, $nb, $offset)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
+        foreach ($abonnements as $aboProjet)
     }
 }

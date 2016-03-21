@@ -161,21 +161,68 @@ class FablabAbonnements implements FablabAbonnementsInterface
         $aboCategories=$this->getAboCategory($user);
         $aboProjets=$this->getAboProjet($user);
         foreach ($aboProjets as $aboProjet) {
-            array_push($projets, $aboProjet->getId());
+            array_push($projets, $aboProjet);
         }
         foreach ($aboCategories as $aboCategory) {
             $projetsCat=$this->em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(
                 array('name'=>$aboCategory->getName())
             )->getProjets();
             foreach ($projetsCat as $projetCat) {
-                if (! in_array($projetCat->getId(), $projets)) {
-                    array_push($projets, $projetCat->getId());
+                if (! in_array($projetCat, $projets)) {
+                    array_push($projets, $projetCat);
                 }
             }
         }
         return $projets;
     }
     
+    /**
+     * Permet de savoir si un user est déja abonné à un projet
+     *
+     * @param array $user   Entité User
+     * @param array $projet Entité Projet
+     *
+     * @return boolean
+     */
+    public function isAboProjet($user,$projet)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        $projectsAbo=$repository->findOneBy(
+            array('user'=>$user)
+        )->getProjects();
+        
+        foreach ($projectsAbo as $projectAbo) {
+            if ($projectAbo->getId() == $projet->getId()) {
+                return 1;
+            }
+        } 
+        return 0;
+    }
+
+    /**
+     * Permet de savoir si un user est déja abonné à une catégorie
+     *
+     * @param array $user     Entité User
+     * @param array $category Entité Category
+     *
+     * @return boolean
+     */
+    public function isAboCategory($user,$category)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        $categoriesAbo=$repository->findOneBy(
+            array('user'=>$user)
+        )->getCategories();
+        
+        foreach ($categoriesAbo as $categoryAbo) {
+            if ($categoryAbo->getName() == $category->getName()){
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
     /**
      * Fonction de suppression d'un abonnement catégorie d'un user
      *

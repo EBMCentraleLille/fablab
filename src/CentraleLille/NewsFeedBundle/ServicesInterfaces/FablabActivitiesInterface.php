@@ -65,4 +65,15 @@ interface FablabActivitiesInterface
      * @return array $activities Array d'Entités activités
      */
     public function getActivities($limit, $offset);
+
+    /**
+     * Fonction de recherche des activités en fonction des abonnements d'un user
+     *
+     * @param array   $abonnements Entité Abonnements
+     * @param integer $nb     Nombre d'activités recherchées
+     * @param integer $offset   Offset de recherche
+     *
+     * @return array $activities Array d'Entités activités
+     */
+    public function getActivitiesNewsFeed($abonnements, $nb, $offset);
 }

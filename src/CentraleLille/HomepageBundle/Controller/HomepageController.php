@@ -82,6 +82,7 @@ class HomepageController extends Controller
     */
     public function categoryAction($category)
     {
+        //Récupération des projets de la catégories en question
         $categoryService = $this->container->get('fablab_newsfeed.categories');
         $projects=$categoryService->getProjectsCategory($category);
         return $this->render(
