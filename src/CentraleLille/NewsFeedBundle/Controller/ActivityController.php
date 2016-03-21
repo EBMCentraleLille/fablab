@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CentraleLille\NewsFeedBundle\Entity\Activity;
 use CentraleLille\NewsFeedBundle\Form\ActivityType;
+use CentraleLille\CustomFosUserBundle\Entity\User;
 
 /**
  * ActivityController Class Doc
@@ -46,12 +47,12 @@ class ActivityController extends Controller
     {
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $recentActivities=$activityService->getActivities(20);
-
+        $activities=$activityService->getActivities(30);
+        
         return $this->render(
             'CentraleLilleNewsFeedBundle:activity.html.twig',
             [
-                'recentActivities' => $recentActivities
+                'recentActivities' => $activities
             ]
         );
     }
@@ -79,7 +80,7 @@ class ActivityController extends Controller
             $em->flush();
             $session=$request->getSession()->getFlashBag()->add(
                 'notice',
-                "L'activité a bien été ajoutéz."
+                "L'activité a bien été ajoutée."
             );
 
             return $this->redirect(

@@ -166,7 +166,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
         foreach ($aboCategories as $aboCategory) {
             $projetsCat=$this->em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(
                 array('name'=>$aboCategory->getName())
-            )->getProjets();
+            )->getProjects();
             foreach ($projetsCat as $projetCat) {
                 if (! in_array($projetCat, $projets)) {
                     array_push($projets, $projetCat);

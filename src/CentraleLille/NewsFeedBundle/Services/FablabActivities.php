@@ -135,9 +135,35 @@ class FablabActivities implements FablabActivitiesInterface
      *
      * @return array $activities Array d'Entités activités
      */
-    public function getActivitiesNewsFeed($abonnements, $nb, $offset)
+    public function getActivitiesNewsFeed($abonnements, $nb, $offset = 0)
     {
+        $activities = [];
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
-        foreach ($abonnements as $aboProjet)
+
+        foreach($abonnements as $abonnement) {
+            $query = $repository->createQueryBuilder('a')
+            ->where('a.project = :abonnement' )
+            ->orderBy('a.date', 'DESC')
+            ->setParameter('abonnement', $abonnement)
+            ->setFirstResult($offset)
+            ->setMaxResults($nb)
+            ->getQuery();
+        $activitiesProjet = $query->getResult();
+        array_push($activities, $activitiesProjet);
+        }
+
+        $activities = call_user_func_array('array_merge', $activities);
+        usort($activities, function($a, $b)
+            {
+                if ($a > $b) { 
+                    return -1;
+                } elseif ($a < $b) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+
+        return array_splice($activities, 0, $nb);
     }
 }
