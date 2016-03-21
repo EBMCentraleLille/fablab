@@ -70,8 +70,8 @@ interface FablabActivitiesInterface
      * Fonction de recherche des activités en fonction des abonnements d'un user
      *
      * @param array   $abonnements Entité Abonnements
-     * @param integer $nb     Nombre d'activités recherchées
-     * @param integer $offset   Offset de recherche
+     * @param integer $nb          Nombre d'activités recherchées
+     * @param integer $offset      Offset de recherche
      *
      * @return array $activities Array d'Entités activités
      */

@@ -42,6 +42,7 @@ class StarProjectType extends AbstractType
      * Formulaire de création de StarProject
      *
      * @param FormBuilderInterface $builder FormBuilder
+     * @param Array                $options Options
      *
      * @return void
      */

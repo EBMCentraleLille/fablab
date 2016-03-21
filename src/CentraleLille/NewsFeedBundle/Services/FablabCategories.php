@@ -123,6 +123,23 @@ class FablabCategories implements FablabCategoriesInterface
     }
 
     /**
+     * Retourne un tableau des users abonnés à une catégorie
+     *
+     * @param string $categoryName Nom de la catégorie
+     *
+     * @return array $usersCategory Tableau des users abonnés à la catgégorie
+     */
+    public function getUsersCategory($categoryName)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Category");
+        $category=$repository->findOneBy(
+            array('name'=>$categoryName)
+        );
+        $usersCategory=$category->getUsers();
+        return $usersCategory;
+    }
+
+    /**
      * Supprime une catégorie
      *
      * @param string $categoryName Nom de la catégorie à supprimer

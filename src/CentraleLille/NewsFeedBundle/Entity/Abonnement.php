@@ -163,6 +163,7 @@ class Abonnement
     public function addCategory(\CentraleLille\NewsFeedBundle\Entity\Category $category)
     {
         $this->categories[] = $category;
+        $category->addUser($this->getUser());
 
         return $this;
     }

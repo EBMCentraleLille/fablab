@@ -67,6 +67,15 @@ interface FablabCategoriesInterface
     public function getProjectsCategory($categoryName);
 
     /**
+     * Retourne un tableau des users abonnés à une catégorie
+     *
+     * @param string $categoryName Nom de la catégorie
+     *
+     * @return array $usersCategory Tableau des users abonnés à la catgégorie
+     */
+    public function getUsersCategory($categoryName);
+
+    /**
      * Supprime une catégorie
      *
      * @param string $categoryName Nom de la catégorie à supprimer
