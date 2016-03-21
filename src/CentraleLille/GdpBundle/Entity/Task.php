@@ -57,15 +57,29 @@ class Task
     private $date;
 
     /**
-     * @ORM\OneToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
      * @ORM\JoinColumn(name="in_charge_user_id", referencedColumnName="id")
      */
     private $inChargeUser;
 
 
+    /* @ManyToMany(targetEntity="TaskList", inversedBy="tasks")
+     * @JoinTable(name="tasks_lists")
+     */
+    private $taskLists;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     */
+    private $project;
+
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -220,5 +234,21 @@ class Task
     public function getInChargeUser()
     {
         return $this->inChargeUser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param mixed $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
     }
 }
