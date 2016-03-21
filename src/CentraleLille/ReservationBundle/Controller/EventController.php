@@ -13,6 +13,8 @@
 namespace CentraleLille\ReservationBundle\Controller;
 
 use ADesigns\CalendarBundle\Event\CalendarEvent;
+use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookMachine;
+use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use CentraleLille\ReservationBundle\Entity\Booking\Event;
@@ -44,6 +46,7 @@ class EventController extends Controller
 
     public function bookAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
@@ -55,6 +58,7 @@ class EventController extends Controller
             array('machines'=>$machines)
         );
     }
+
 
     public function viewResourceAction($id)
     {

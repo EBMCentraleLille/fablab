@@ -13,7 +13,6 @@ namespace CentraleLille\ReservationBundle\Entity\Booking;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
-use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 
 /**
  * Entity Class Doc
@@ -43,7 +42,6 @@ class Event
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
 
     /**
     protected $title;
@@ -91,6 +89,70 @@ class Event
      *
      */
     protected $bookable;
+
+    /**
+     * @ORM\Column(name="status", type="string")
+     */
+    protected $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User", cascade={"persist","remove"})
+     */
+    protected $project;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project", cascade={"persist","remove"})
+     */
+    protected $user;
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param mixed $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
 
     public function __construct()
     {

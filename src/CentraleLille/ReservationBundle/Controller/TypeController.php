@@ -8,13 +8,9 @@
 
 namespace CentraleLille\ReservationBundle\Controller;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 use CentraleLille\ReservationBundle\Entity\Bookables\Type;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Form;
 
 class TypeController extends Controller
 {

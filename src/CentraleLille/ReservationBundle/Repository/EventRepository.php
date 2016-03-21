@@ -3,6 +3,7 @@
 namespace CentraleLille\ReservationBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+
 /**
  * EventRepository
  *

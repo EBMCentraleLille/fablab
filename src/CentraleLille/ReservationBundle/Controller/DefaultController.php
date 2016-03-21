@@ -14,10 +14,6 @@ namespace CentraleLille\ReservationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
-use CentraleLille\ReservationBundle\Entity\Bookables\Machine;
-use CentraleLille\ReservationBundle\Entity\Booking\Event;
-use CentraleLille\ReservationBundle\Entity\Bookables\Type;
 
 /**
  * Controller Class Doc

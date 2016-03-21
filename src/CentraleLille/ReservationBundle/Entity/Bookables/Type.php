@@ -11,7 +11,6 @@ namespace CentraleLille\ReservationBundle\Entity\Bookables;
 use Doctrine\ORM\Mapping as ORM;
 
 
-
 /**
  * Event
  *
@@ -49,6 +48,7 @@ class Type
     /**
      * @return mixed
      */
+
     public function getEventId()
     {
         return $this->type_id;

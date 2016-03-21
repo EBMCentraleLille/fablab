@@ -8,8 +8,8 @@
 
 namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
-use Doctrine\ORM\Mapping as ORM;
 use CentraleLille\CustomFosUserBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Salle

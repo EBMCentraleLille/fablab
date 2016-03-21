@@ -10,10 +10,10 @@
  */
 namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
+use CentraleLille\ReservationBundle\Entity\Type;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
-use CentraleLille\ReservationBundle\Entity\Type;
 
 /**
  * Entity Class Doc
@@ -60,7 +60,7 @@ class Machine extends Bookable
     protected $type;
 
     /**
-     * @ORM\Column(name="Statut", columnDefinition="ENUM('Disponible','Indisponible','Hors Service')")
+     * @ORM\Column(name="Statut", columnDefinition="ENUM('Disponible','Indisponible','Hors Service','En Test')")
      */
     protected $statut;
 
