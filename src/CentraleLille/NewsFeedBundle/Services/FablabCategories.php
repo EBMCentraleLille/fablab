@@ -62,7 +62,7 @@ class FablabCategories implements FablabCategoriesInterface
     /**
      * Crée une catégorie
      *
-     * @param array $categoryName nom de la catégorie
+     * @param array $categoryName Nom de la catégorie
      * @param array $project      Entité Projet à ajouter à la catégorie
      *
      * @return void
