@@ -12,3 +12,6 @@ centrale_lille_newsfeed_activity:
 centrale_lille_newsfeed_new_activity:
     path:     /activity/new
     defaults: { _controller: CentraleLilleNewsFeedBundle:Activity:create }
+centrale_lille_newsfeed_abonnements:
+    path:     /abonnements
+    defaults: { _controller: CentraleLilleNewsFeedBundle:Abonnement:index }
