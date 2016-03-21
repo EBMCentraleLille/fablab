@@ -117,3 +117,10 @@ text-align: center;
 .likeIcon:hover{
     color:red;
 }
+.projectPicture{
+    background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:200px;
+}
