@@ -62,10 +62,16 @@ class Task
      */
     private $inChargeUser;
 
+    /* @ManyToMany(targetEntity="TaskList", inversedBy="tasks")
+     * @JoinTable(name="tasks_lists")
+     */
+    private $taskLists;
+
 
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -20,7 +20,12 @@ class TaskList
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
+    /**
+     * @ManyToMany(targetEntity="Task", mappedBy="taskLists")
+     */
+    private $tasks;
+
     /**
      * @var string
      *
@@ -28,6 +33,9 @@ class TaskList
      */
     private $name;
 
+    public function __construct() {
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
