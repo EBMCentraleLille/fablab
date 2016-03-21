@@ -66,9 +66,9 @@ class FablabActivities implements FablabActivitiesInterface
         $activity->setUser($user);
         $activity->setProject($projet);
         $activity->setType($type);
-        if ($type = 1) {
+        if ($type = 'creation') {
             $content = "Martin a créé le projet.";
-        } elseif ($type = 2) {
+        } elseif ($type = 'update') {
             $content = "Martin a mis à jour le projet.";
         }
 
