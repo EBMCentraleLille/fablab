@@ -23,7 +23,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
 /**
  * ActivityForm Class Doc
  *
@@ -44,34 +43,42 @@ class ActivityType extends AbstractType
      * Formulaire de création de Activity
      *
      * @param FormBuilderInterface $builder FormBuilder
+     * @param Array                $options Options
      *
      * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('type', ChoiceType::class, array(
-                'choices'  => array(
-                'Création de projet' => 'creation',
-                'Modification de projet' => 'update',
-                'Personnalisée' => 'custom'
-                )))
+        $builder->add(
+            'type',
+            ChoiceType::class,
+            array(
+                'choices' => array(
+                    'Création de projet' => 'creation',
+                    'Modification de projet' => 'update',
+                    'Personnalisée' => 'custom'
+                )
+            )
+        )
             ->add(
                 'user',
                 EntityType::class,
                 array(
-                'class' => 'CustomFosUserBundle:User',
-                'choice_label' => 'firstname',
-                ))
+                    'class' => 'CustomFosUserBundle:User',
+                    'choice_label' => 'firstname',
+                )
+            )
             ->add(
                 'project',
                 EntityType::class,
                 array(
-                'class' => 'CustomFosUserBundle:Project',
-                'choice_label' => 'name',
-                ))
-            ->add('Content', TextareaType::class)
-            ;
-            
+                    'class' => 'CustomFosUserBundle:Project',
+                    'choice_label' => 'name',
+                )
+            )
+            ->add(
+                'Content',
+                TextareaType::class
+            );
     }
 }

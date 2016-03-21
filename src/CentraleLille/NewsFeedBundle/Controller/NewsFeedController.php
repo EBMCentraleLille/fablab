@@ -41,6 +41,8 @@ class NewsFeedController extends Controller
     *
     * Fonction qui charge les premières actualités d'un utilisateurs en fonction de ses abonnements
     *
+    * @param Request $request Requête http
+    *
     * @return Twig
     */
     public function indexAction(Request $request)
@@ -71,6 +73,8 @@ class NewsFeedController extends Controller
     *
     * Fonction qui abonne l'utilisateur à un projet du newsfeed
     *
+    * @param Request $request requête http
+    *
     * @return Twig
     */
     public function subscribeAction(Request $request)
@@ -85,10 +89,10 @@ class NewsFeedController extends Controller
         
         //Abonnement/désabonnement du user au projet en question
         $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
-        if ( $abonnementService->isAboProjet($user,$projet) ) {
+        if ($abonnementService->isAboProjet($user, $projet)) {
             $recentActivities=$abonnementService->removeAboProjet($user, $projet);
         } else {
-            $recentActivities=$abonnementService->addAboProjet($user, $projet);    
+            $recentActivities=$abonnementService->addAboProjet($user, $projet);
         }
 
         //Récupération des dernières actualités
@@ -104,7 +108,7 @@ class NewsFeedController extends Controller
             [
                 'recentActivities' => $recentActivities,
                 'abonnements' => $abonnementsProjet
-            ]      
+            ]
         );
     }
 }

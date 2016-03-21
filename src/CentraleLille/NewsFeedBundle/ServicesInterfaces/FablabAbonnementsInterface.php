@@ -86,7 +86,7 @@ interface FablabAbonnementsInterface
      *
      * @return void
      */
-    public function isAboProjet($user,$projet);
+    public function isAboProjet($user, $projet);
 
     /**
      * Permet de savoir si un user est déja abonné à une catégorie
@@ -96,7 +96,7 @@ interface FablabAbonnementsInterface
      *
      * @return void
      */
-    public function isAboCategory($user,$category);
+    public function isAboCategory($user, $category);
     
     /**
      * Ajoute l'abonnement d'un user à une categorie
