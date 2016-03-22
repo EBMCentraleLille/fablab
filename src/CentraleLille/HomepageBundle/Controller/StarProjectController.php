@@ -40,20 +40,38 @@ class StarProjectController extends Controller
     *
     * Présentation de tous les starprojets
     *
+    * @param Object $request Requête HTTP
+    *
     * @return Twig La vue Twig à display
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        //Récupération des star project
-        $starProjectService=$this->container->get('fablab_homepage.starProject');
-        $starProjects=$starProjectService->getAllStarProjects();
+        $user = $this->getUser();
+        
+        if (!$user) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous devez être connecté pour accéder à cette page."
+            );
+            return $this->redirectToRoute('fos_user_security_login ');
+        } elseif (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous n'avez pas les droits d'accéder à cette page."
+            );
+            return $this->redirectToRoute('fos_user_profile_show');
+        } else {
+            //Récupération des star project
+            $starProjectService=$this->container->get('fablab_homepage.starProject');
+            $starProjects=$starProjectService->getAllStarProjects();
 
-        return $this->render(
-            'CentraleLilleHomepageBundle:starproject.html.twig',
-            [
-                'starProjects' => $starProjects
-            ]
-        );
+            return $this->render(
+                'CentraleLilleHomepageBundle:starproject.html.twig',
+                [
+                    'starProjects' => $starProjects
+                ]
+            );
+        }
     }
 
     /**
@@ -67,32 +85,48 @@ class StarProjectController extends Controller
     */
     public function createAction(Request $request)
     {
-        $starProject = new StarProject();
-        $form = $this->createForm(StarProjectType::class, $starProject);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($starProject);
-            $em->flush();
+        $user = $this->getUser();
+        
+        if (!$user) {
             $session=$request->getSession()->getFlashBag()->add(
                 'notice',
-                "Le projet star a bien été ajouté."
+                "Vous devez être connecté pour accéder à cette page."
             );
+            return $this->redirectToRoute('fos_user_security_login ');
+        } elseif (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous n'avez pas les droits d'accéder à cette page."
+            );
+            return $this->redirectToRoute('fos_user_profile_show');
+        } else {
+            $starProject = new StarProject();
+            $form = $this->createForm(StarProjectType::class, $starProject);
 
-            return $this->redirect(
-                $this->generateUrl(
-                    'centrale_lille_homepage_star_project'
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($starProject);
+                $em->flush();
+                $session=$request->getSession()->getFlashBag()->add(
+                    'notice',
+                    "Le projet star a bien été ajouté."
+                );
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        'centrale_lille_homepage_star_project'
+                    )
+                );
+            }
+            
+            return $this->render(
+                'CentraleLilleHomepageBundle:newstarproject.html.twig',
+                array(
+                'form' => $form->createView()
                 )
             );
         }
-        
-        return $this->render(
-            'CentraleLilleHomepageBundle:newstarproject.html.twig',
-            array(
-            'form' => $form->createView()
-            )
-        );
     }
 }

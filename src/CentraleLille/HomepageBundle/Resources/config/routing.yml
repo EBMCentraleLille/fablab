@@ -1,4 +1,4 @@
-centrale_lille_homepage_homepage:
+centrale_lille_homepage:
     path:     /
     defaults: { _controller: CentraleLilleHomepageBundle:Homepage:index }
 centrale_lille_homepage_category:
