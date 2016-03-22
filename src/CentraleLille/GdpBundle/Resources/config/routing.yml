@@ -8,6 +8,11 @@ service_user:
   prefix: /api
   resource: CentraleLille\GdpBundle\Controller\UserController
 
+service_project:
+  type : rest
+  prefix: /api
+  resource: CentraleLille\GdpBundle\Controller\ProjectController
+
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc

@@ -22,7 +22,7 @@ var vendorJS = [
     './node_modules/angular-ui-router/release/angular-ui-router.min.js',
     './node_modules/angular-cookies/angular-cookies.min.js',
     './node_modules/angular-sanitize/angular-sanitize.min.js',
-    './static/vendor/datejs-fr-FR.js'
+    './static/vendor/date-fr-FR.js'
 ];
 
 gulp.task('scripts', function() {

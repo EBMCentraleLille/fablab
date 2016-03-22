@@ -68,7 +68,7 @@ class TaskController extends FOSRestController
      *
      * @return View
      */
-    public function postProjectTaskAction($id,ParamFetcher $paramFetcher)
+    public function postProjectTaskAction($id, ParamFetcher $paramFetcher)
     {
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
@@ -76,8 +76,7 @@ class TaskController extends FOSRestController
         $task = new Task();
         $task->setTitle($paramFetcher->get('title'));
         $task->setBody($paramFetcher->get('body'));
-        // TODO get current user
-        $task->setAuthor('JunkOS');
+        $task->setAuthor($this->getUser());
         $task->setProject($project);
         $task->setStatus(false);
         $view = View::create();
@@ -116,7 +115,7 @@ class TaskController extends FOSRestController
      *
      * @return View
      */
-    public function putTaskAction($taskId,ParamFetcher $paramFetcher)
+    public function putTaskAction($taskId, ParamFetcher $paramFetcher)
     {
         $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy($taskId);
         if ($paramFetcher->get('title')) {
@@ -150,7 +149,7 @@ class TaskController extends FOSRestController
      *   description = "Delete a task identified by id",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     404 = "Returned when the user is not found"
+     *     404 = "Returned when the task is not found"
      *   }
      * )
      *
@@ -223,7 +222,7 @@ class TaskController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Assign a task to an user",
+     *   description = "Unassign a task",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
