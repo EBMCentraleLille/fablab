@@ -44,32 +44,5 @@ class UserController extends FOSRestController
         return $view;
     }
 
-    /**
-     * Return the project .
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Return the project",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     404 = "Returned when no users are found"
-     *   }
-     * )
-     *
-     * @param int $id id
-     *
-     * @return View
-     */
-    public function getProjectAction($id)
-    {
-        $projectRepository = $this->getDoctrine()->getRepository('CentraleLilleCustomFosUserBundle:Project');
-        $project = $projectRepository->find($id);
-        if (!$project) {
-            throw $this->createNotFoundException('Data not found.');
-        }
-        $view = View::create();
-        $view->setData($project)->setStatusCode(200);
-        return $view;
-    }
 
 }
