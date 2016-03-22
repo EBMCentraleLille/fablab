@@ -20,7 +20,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class ProjectController extends FOSRestController
+class EventController extends FOSRestController
 {
   /**
    * Return the overall event list.
