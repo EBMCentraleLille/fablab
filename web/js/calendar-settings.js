@@ -36,10 +36,11 @@ $(function () {
             $('#myModal').modal('show');
             $('#submitEvent').click(function(){
                 var description =  $('#eventDescription').val();
+                var title =  $('#eventTitle').val();
                 start = start.getTime();
                 end = end.getTime();
                 var e = {
-                        title: 'titre1',
+                        title: title,
                         description: description,
                         start: start,
                         end: end,
@@ -51,12 +52,14 @@ $(function () {
                         data: 'title='+ e.title+'&start='+ e.start +'&end='+ e.end +'&description='+ e.description,
                         type: "POST",
                         success: function(json) {
+                            $('#eventDescription').val('');
+                            $('#myModal').modal('hide');
                             alert('Added Successfully');
                         }
                     });
                 }
                 $('#myModal').modal('hide');
-                $('#calendar').fullCalendar('renderEvent', e, true); // stick? = true
+                $('#calendar').fullCalendar('refetchEvents');
             });
             $('#calendar').fullCalendar('unselect');
         },

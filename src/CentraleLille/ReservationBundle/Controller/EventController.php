@@ -53,12 +53,12 @@ class EventController extends Controller
 
         // machines fitering
 
-        foreach ($machines as $machine) {
-            $machinesAvailables = array();
-            $machinesUnavailables = array();
-            $machinesOutOfOrder = array();
-            $machinesBeingTested = array();
+        $machinesAvailables = array();
+        $machinesUnavailables = array();
+        $machinesOutOfOrder = array();
+        $machinesBeingTested = array();
 
+        foreach ($machines as $machine) {
             switch ($machine->getStatut()) {
                 case 'Disponible':
                     array_push($machinesAvailables, $machine);

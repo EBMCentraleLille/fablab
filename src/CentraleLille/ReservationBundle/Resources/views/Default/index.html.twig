@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-4 pull-right text-center">
                 <h3>Bonjour NOM PRENOM !</h3>
-                <p>On est le {{date().timestamp |date('d/m/Y H:i')}}</p>
+                <p>Nous sommes le {{date().timestamp |date('d/m/Y H:i')}}</p>
             </div>
                 </row>
         </div>
@@ -31,11 +31,21 @@
         <nav class="navbar navbar-inverse">
             <div class="container col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8">
                 <ul class="nav navbar-nav ">
-                    <li class="active"><a href="#">Accueil</a></li>
-                    <li><a href="{{ path('centrale_lille_machine') }}">Réservation Machine</a></li>
-                    <li><a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a></li>
-                    <li><a href="{{ path('centrale_lille_salle') }}">Réservation Salle </a></li>
-                    <li><a href="{{ path('centrale_lille_administration') }}">Administration </a></li>
+                    <li class="active">
+                        <a href="{{ path('centrale_lille_homepage_homepage') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('centrale_lille_machine') }}">Réservation Machine</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('centrale_lille_salle') }}">Réservation Salle </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('centrale_lille_administration') }}">Administration </a>
+                    </li>
                 </ul>
             </div>
         </nav>
