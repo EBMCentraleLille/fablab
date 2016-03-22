@@ -6,7 +6,6 @@ use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
 
-
 /**
  * Event Class Doc
  *
@@ -39,10 +38,10 @@ class CalendarEventListener
 
         $idMachine = 1; /////TO FIX --> get ID from route
 
-        if ($title && $description && $start && $end){
+        if ($title && $description && $start && $end) {
             //converting unix timestamp from ms to s (because javascript provide ms)
-            $start = \DateTime::createFromFormat( 'U', $start/1000 );
-            $end = \DateTime::createFromFormat( 'U', $end/1000 );
+            $start = \DateTime::createFromFormat('U', $start/1000);
+            $end = \DateTime::createFromFormat('U', $end/1000);
 
             $em = $this->entityManager;
             $repository = $em->getRepository('ReservationBundle:Bookables\Machine');

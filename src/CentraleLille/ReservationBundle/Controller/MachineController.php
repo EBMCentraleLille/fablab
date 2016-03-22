@@ -18,7 +18,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Controller Class Doc
  *
@@ -53,12 +52,12 @@ class MachineController extends Controller
         $formBuilder
             ->add('name', 'text')
             ->add('description', 'textarea')
-            ->add('type','entity',array(
+            ->add('type', 'entity', array(
                     'class'=>'ReservationBundle:Bookables\Type',
                     'choice_label'=>'name',
                     'required'=>true
             ))
-            ->add('statut',ChoiceType::class,[
+            ->add('statut', ChoiceType::class, [
                 'choices'=>array(
                     'Disponible'=>'Disponible',
                     'Indisponible'=>'Indisponible',
@@ -72,7 +71,7 @@ class MachineController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid() && $machine != null) {
-            $this ->addFlash('notice','La machine '.$machine->getName().' a bien été enregistré !');
+            $this ->addFlash('notice', 'La machine '.$machine->getName().' a bien été enregistré !');
             $em = $this->getDoctrine()->getManager();
             $em->persist($machine);
             $em->flush();
@@ -109,9 +108,9 @@ class MachineController extends Controller
         $machine = $repository ->find($id);
         $events = $repository_event->findByBookable($machine);
 
-        foreach($events as $event){
+        foreach ($events as $event) {
             $em->remove($event);
-    }
+        }
 
         $em->remove($machine);
         $em->flush();

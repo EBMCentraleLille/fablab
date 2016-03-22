@@ -10,7 +10,6 @@ namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * Event
  *
@@ -93,7 +92,4 @@ class Type
     {
         $this->description = $description;
     }
-
-
-
 }

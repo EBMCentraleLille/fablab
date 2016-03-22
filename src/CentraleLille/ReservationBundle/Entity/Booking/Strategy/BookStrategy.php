@@ -1,6 +1,7 @@
 <?php
 
 namespace CentraleLille\ReservationBundle\Entity\Booking\Strategy;
+
 /**
  * Created by PhpStorm.
  * User: windownet
@@ -19,19 +20,20 @@ use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\CustomFosUserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-
-Abstract class BookStrategy implements IBooking
+abstract class BookStrategy implements IBooking
 {
     protected $repository;
     protected $em;
 
-    public function book(User $user,Project $project,DateTime $start, DateTime $end, Bookable $bookable){
+    public function book(User $user, Project $project, DateTime $start, DateTime $end, Bookable $bookable)
+    {
     }
 
-    public function release(Event $event){
+    public function release(Event $event)
+    {
     }
 
-    public function isAvailableForPeriod($item, \DateTime $start,\DateTime $end, $repository)
+    public function isAvailableForPeriod($item, \DateTime $start, \DateTime $end, $repository)
     {
         $qb = $repository->createQueryBuilder('b');
         $query = $qb->select('b.id')

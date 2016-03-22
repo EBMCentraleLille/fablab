@@ -6,7 +6,6 @@ use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * Created by PhpStorm.
  * User: windownet
@@ -29,10 +28,11 @@ class BookManager
      * @param $end
      * @param $bookable
      */
-    public function book($user, $project, $start, $end, $bookable){
+    public function book($user, $project, $start, $end, $bookable)
+    {
         $bookstrategy = $this->BookStrategy;
 
-        $bookstrategy->book($user,$project,$start,$end,$bookable);
+        $bookstrategy->book($user, $project, $start, $end, $bookable);
     }
 
     /**
@@ -44,6 +44,4 @@ class BookManager
 
         $bookstrategy->release($event);
     }
-
-
 }

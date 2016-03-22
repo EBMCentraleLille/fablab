@@ -53,13 +53,13 @@ class EventController extends Controller
 
         // machines fitering
 
-        foreach($machines as $machine){
+        foreach ($machines as $machine) {
             $machinesAvailables = array();
             $machinesUnavailables = array();
             $machinesOutOfOrder = array();
             $machinesBeingTested = array();
 
-            switch($machine->getStatut()) {
+            switch ($machine->getStatut()) {
                 case 'Disponible':
                     array_push($machinesAvailables, $machine);
                     break;
@@ -72,7 +72,7 @@ class EventController extends Controller
                 case 'En Test':
                     array_push($machinesBeingTested, $machine);
                     break;
-                }
+            }
 
         }
 
@@ -89,7 +89,7 @@ class EventController extends Controller
 
     public function viewResourceAction($resourceType, $id)
     {
-        switch($resourceType){
+        switch ($resourceType) {
             case 'machine':
                 $em = $this->getDoctrine()->getManager();
                 $repository = $em->getRepository('ReservationBundle:Bookables\Machine');

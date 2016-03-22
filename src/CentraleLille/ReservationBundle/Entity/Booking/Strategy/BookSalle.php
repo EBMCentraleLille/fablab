@@ -8,7 +8,6 @@
 
 namespace CentraleLille\ReservationBundle\Entity\Booking\Strategy;
 
-
 use CentraleLille\ReservationBundle\Entity\Bookables\Salle;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -29,17 +28,18 @@ class BookSalle extends BookStrategy
      *
      **/
 
-    public function __construct($repository,EntityManager $em)
+    public function __construct($repository, EntityManager $em)
     {
         $this->em = $em;
         $this->repository = $em->getRepository('ReservationBundle:Salle');
     }
 
-    public function book(User $user,Project $project,DateTime $start, DateTime $end, Bookable $salle){
+    public function book(User $user, Project $project, DateTime $start, DateTime $end, Bookable $salle)
+    {
 
         $repository = $this->getRepository();
 
-        if($this->isAvailableForPeriod($salle,$start,$end,$repository)){
+        if ($this->isAvailableForPeriod($salle, $start, $end, $repository)) {
 
             $event = new Event();
             $event->setCreationDateTime();
@@ -51,9 +51,7 @@ class BookSalle extends BookStrategy
             $this->em->flush();
 
             return true;
-        }
-
-        else{
+        } else {
 
             return false;
         }
@@ -99,6 +97,4 @@ class BookSalle extends BookStrategy
     {
         $this->em = $em;
     }
-
-
 }

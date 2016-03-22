@@ -36,7 +36,8 @@ class DefaultController extends Controller
     {
         // En attendant de récupérer directement le $user pour avoir ses informations perso.
         return $this->render(
-            'ReservationBundle:Default:index.html.twig');
+            'ReservationBundle:Default:index.html.twig'
+        );
     }
 
     /**

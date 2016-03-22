@@ -10,7 +10,6 @@ namespace CentraleLille\ReservationBundle\Entity\Booking\Strategy;
 
 use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookStrategy;
 
-
 class BookCasier extends BookStrategy
 {
 

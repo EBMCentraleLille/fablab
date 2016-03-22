@@ -10,7 +10,6 @@ namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="Bookables")
@@ -100,6 +99,4 @@ abstract class Bookable
     {
         $this->description = $description;
     }
-
-
 }

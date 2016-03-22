@@ -14,43 +14,45 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TypeController extends Controller
 {
-    public function createAction(Request $request){
+    public function createAction(Request $request)
+    {
         $type = new Type();
 
-        $formBuilder =$this->get('form.factory')->createBuilder('form',$type);
+        $formBuilder =$this->get('form.factory')->createBuilder('form', $type);
 
-        $formBuilder->add('name','text')
-        ->add('description','textarea')
-        ->add('Sauvegarder','submit');
+        $formBuilder->add('name', 'text')
+        ->add('description', 'textarea')
+        ->add('Sauvegarder', 'submit');
 
         $form = $formBuilder->getForm();
 
         $form->handleRequest($request);
 
-        if($request->isMethod('POST') && $form->isValid() ){
+        if ($request->isMethod('POST') && $form->isValid()) {
             $em =$this->getDoctrine()->getManager();
             $types = $em->getRepository('ReservationBundle:Bookables\Type');
             $test = false;
-            foreach ($types as $typ){
-                if($type->getName() == $typ->getName()) {
+            foreach ($types as $typ) {
+                if ($type->getName() == $typ->getName()) {
                     $test = true;
-                }}
+                }
+            }
             if ($test == false) {
                 $em->persist($type);
                 $em->flush();
             }
-            return $this->redirectToRoute('centrale_lille_types',array('form' =>$form->createView()));
+            return $this->redirectToRoute('centrale_lille_types', array('form' =>$form->createView()));
         }
 
-        return $this->render('ReservationBundle::types.html.twig',array('form'=> $form->createView()));
+        return $this->render('ReservationBundle::types.html.twig', array('form'=> $form->createView()));
     }
 
-    public function listAction(){
+    public function listAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $types = $em->getRepository('ReservationBundle:Bookables\Type')->findAll();
 
-        return $this->render('ReservationBundle::typeList.html.twig',array('types'=>$types));
+        return $this->render('ReservationBundle::typeList.html.twig', array('types'=>$types));
 
     }
-
 }

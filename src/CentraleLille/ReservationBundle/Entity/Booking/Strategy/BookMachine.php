@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use CentraleLille\CustomFosUserBundle\Entity\User;
 use Doctrine\ORM\Mapping;
 
-
 class BookMachine extends BookStrategy
 {
     protected $em;
@@ -28,11 +27,11 @@ class BookMachine extends BookStrategy
         $this->repository = $em->getRepository('ReservationBundle:Machine');
     }
 
-    public function book(User $user,Project $project,DateTime $start, DateTime $end, Bookable $machine)
+    public function book(User $user, Project $project, DateTime $start, DateTime $end, Bookable $machine)
     {
         $em = $this->em;
 
-        if($this->isAvailableForPeriod($machine,$start,$end,$this->repository)){
+        if ($this->isAvailableForPeriod($machine, $start, $end, $this->repository)) {
             $event = new Event();
             $event->setCreationDateTime();
             $event->setStartDateTime($start);
@@ -44,8 +43,7 @@ class BookMachine extends BookStrategy
             $em->persist($event);
             $em->flush();
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -56,5 +54,4 @@ class BookMachine extends BookStrategy
         $em->remove($event);
         $em->flush();
     }
-
 }

@@ -148,5 +148,4 @@ class Machine extends Bookable
     {
         $this->type = $type;
     }
-
 }
