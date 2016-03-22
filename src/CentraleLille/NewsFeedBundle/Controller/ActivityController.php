@@ -42,11 +42,11 @@ class ActivityController extends Controller
     *
     * @return Twig La vue Twig à display
     */
-    public function indexAction()
+    public function indexAction(request $request)
     {
         //Récupération des activités
-        $activityService=$this->container->get('fablab_newsfeed.activities');
-        $recentActivities=$activityService->getActivities(20);
+        $activityService = $this->container->get('fablab_newsfeed.activities');
+        $recentActivities = $activityService->getActivities(20);
 
         return $this->render(
             'CentraleLilleNewsFeedBundle:activity.html.twig',
@@ -54,6 +54,7 @@ class ActivityController extends Controller
                 'recentActivities' => $recentActivities
             ]
         );
+
     }
 
     /**

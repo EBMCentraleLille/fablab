@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CentraleLille\CustomFosUserBundle\Entity\User;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\NewsFeedBundle\Form\FilterType;
 
 /**
  * NewsFeedController Class Doc
@@ -58,11 +59,29 @@ class NewsFeedController extends Controller
         $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
         $abonnementsProjet=$abonnementService->getAboProjet($user);
 
+        //Récupération des thématiques pour le filtre
+        $categoryService=$this->container->get('fablab_newsfeed.categories');
+        $thematics=$categoryService->getCategories();
+
+        $filter = [];
+        $form = $this
+            ->get('form.factory')
+            ->create(new FilterType($thematics), $filter);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute(
+                    'centrale_lille_newsfeed'
+            );
+        }
+
         return $this->render(
             'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
             [
                 'recentActivities' => $recentActivities,
-                'abonnements' => $abonnementsProjet
+                'abonnements' => $abonnementsProjet,
+                'thematics' => $thematics,
+                'form' => $form->createView(),
             ]
         );
     }

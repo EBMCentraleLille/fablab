@@ -99,7 +99,7 @@ class FablabCategories implements FablabCategoriesInterface
                 $categories=array_slice($categories, $offset, $nb);
             }
         } else {
-            $categories=$categoryEntities;
+            $categories=$categoriesEntities;
         }
         
         return $categories;

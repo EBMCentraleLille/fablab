@@ -138,6 +138,5 @@ class FablabActivities implements FablabActivitiesInterface
     public function getActivitiesNewsFeed($abonnements, $nb, $offset)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
-        foreach ($abonnements as $aboProjet)
     }
 }

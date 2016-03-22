@@ -1,4 +1,5 @@
 {% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/newsFeed.css') }}" />
 
@@ -10,12 +11,27 @@
         <div class="col-md-1"></div>
         <div class="col-md-2 filter-menu">
             <h3>Filtres</h3>
-            <h4>Type d'activité</h4>
-            <h4>Thématiques</h4>
-            <h4>Date</h4>
-            <div class="form-group">
-              <input class="form-control" id="focusedInput" value="Membre" type="text">
-            </div>
+            <form action="">
+                {{ form_start(form) }}
+                <h4>Type d'activité</h4>
+                    <div class = chkbox-filter>
+                        {{ form_row(form.creation) }}
+                        {{ form_row(form.update) }}
+                    </div>
+                <h4>Thématiques</h4>
+                    <div class = chkbox-filter>
+                            {% for thematics in thematics %}
+                                {{ form_row(attribute(form, thematics.id))}}
+                            {% endfor %}
+                    </div>
+                <h4>Date</h4>
+                {{ form_row(form.dateMin) }}
+                {{ form_row(form.dateMax) }}
+                <input type="submit" value="Appliquer les filtres"
+                       class="btn btn-primary" />
+                    {{ form_end(form) }}
+
+            <form/>
         </div>
         <div class="col-md-5">
             <div class="col-md-1"></div>
