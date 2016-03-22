@@ -45,7 +45,7 @@ class HomepageController extends Controller
     {
         //Récupération des catégories
         $categoryService=$this->container->get('fablab_newsfeed.categories');
-        $thematics=$categoryService->getCategories(8);
+        $categories=$categoryService->getCategories(8);
 
         //Récupération des dernières actualités
         $activityService=$this->container->get('fablab_newsfeed.activities');
@@ -64,7 +64,7 @@ class HomepageController extends Controller
             [
                 'starProject' => $starProject,
                 'recentActivities' => $recentActivities,
-                'thematics' => $thematics,
+                'categories' => $categories,
                 'recentProjects' => $recentProjects,
                 'username'=>"Martin"
             ]
