@@ -47,15 +47,15 @@
 		<div class="col-md-6">
 			<div class="row panelThematics panel-primary">
 				<div class="panel-heading">
-	    			<h4>Thématiques</h4>
+	    			<h4>Catégories</h4>
 	    		</div>
 	    		<div class="panel-body">
-				    {% for thematic in thematics %}
+				    {% for category in categories %}
 					    <div id="thematic-column" class="col-md-3">
-					    	<a href="{{ path("centrale_lille_homepage_category", { 'category': thematic }) }}">
-					    		<h4 class="thematicTitle"> {{ thematic }} </h4>
+					    	<a href="{{ path("centrale_lille_homepage_category", { 'category': category }) }}">
+					    		<h4 class="thematicTitle"> {{ category }} </h4>
 					    	</a>
-					    	<a href="{{ path("centrale_lille_homepage_category", { 'category': thematic }) }}">
+					    	<a href="{{ path("centrale_lille_homepage_category", { 'category': category }) }}">
 					    		<div class="thematics"></div>
 					    	</a>
 					    </div>
