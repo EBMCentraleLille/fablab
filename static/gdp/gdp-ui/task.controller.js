@@ -1,34 +1,39 @@
 var uiModule = require('./_index');
 
-uiModule.controller('uiController',['$scope','rq','toastr',uiController]);
+uiModule.controller('taskController',['$scope','rq','toastr',taskController]);
 
-function uiController($scope,rq,toastr) {
+function taskController($scope,rq,toastr) {
     $scope.newTask = {
         'title':'',
         'body':''
     }
 
+    $scope.selectedDay = Date.today()
+
+    /* Temporary */
+
+    $scope.onDragOver = function(data,taskgroup) {
+    }
+
     $scope.tasks=[
         {
             "name":"fait",
-            "data":['Tâche 1','Tâche 2','Tâche 3'],
+            "data":[],
             "space":1
         },
         {
             "name":"à faire",
-            "data":['4','5','6'],
+            "data":[],
             "space":2
         },
         {
             "name":"en cours",
-            "data":['7','8','9'],
+            "data":[],
             "space":3
         }
     ]
 
     $scope.spaceData=[{},{},{}];
-
-
 
     $scope.taskCreateShow=false;
 
@@ -38,22 +43,16 @@ function uiController($scope,rq,toastr) {
         'name':'projet_test'
     }
 
-
-    $scope.onDropTaskInList = function(data,taskgroup) {
-        data = data['json/task'];
-        if(!data) return;
-        taskgroup.data.push(data.name)
-        $scope.tasks[data.sourceGroup].data.splice(data.sourceTask,1);
-    }
-
-    $scope.onDragOver = function(data,taskgroup) {
-    }
+    /* Scope functions */
 
     $scope.createTask = createTask;
+    $scope.deleteTask=deleteTask;
+    $scope.onDropTaskInList=dropTaskInList;
 
+    /* Init */
 
     (function() {
-        //getTasks()
+        getTasks()
 
         for(var t in $scope.tasks) {
             var taskgroup = $scope.tasks[t];
@@ -62,6 +61,7 @@ function uiController($scope,rq,toastr) {
         console.log($scope.spaceData)
     })();
 
+    /* Controller functions */
 
     function createTask() {
         rq.createTask($scope.currentProject.id,$scope.newTask,function() {
@@ -72,9 +72,24 @@ function uiController($scope,rq,toastr) {
         })
     }
 
+    function deleteTask(id,title) {
+        rq.deleteTask(id,function(res) {
+            toastr.success(['Task',title,'has been removed.'].join(" "));
+            getTasks();
+        });
+    }
+
+    function dropTaskInList(data,taskgroup) {
+        data = data['json/task'];
+        if(!data) return;
+        taskgroup.data.push(data.name)
+        $scope.tasks[data.sourceGroup].data.splice(data.sourceTask,1);
+    }
+
     function getTasks() {
         rq.getTasks($scope.currentProject.id,function(res) {
-            $scope.tasks=res.data;
+            $scope.tasks[0].data=res.data;
         })
     }
+
 }

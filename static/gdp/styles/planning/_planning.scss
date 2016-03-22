@@ -4,6 +4,7 @@ $flat-ui-silver:#bdc3c7;
   width: 14%;
   float:left;
   text-align:center;
+  margin-right:2px;
 }
 
 .other-month {
@@ -37,10 +38,14 @@ $flat-ui-silver:#bdc3c7;
 }
 
 .planning-task-list {
-  height:20vh;
+  height:60vh;
 }
 
 .week {
   overflow:hidden;
 }
 
+.task-edit-content {
+  width:100%;
+  height: 100px;
+}

@@ -2,7 +2,7 @@
      class="col-md-3 taskspace">
      <div
          drop="onDropTaskInList($data, taskgroup)"
-         class="panel panel-default"
+         class="panel panel-primary"
          drop-effect="move"
          drop-accept="'json/task'"
          drag-over-class="drag-over-accept-task">
@@ -15,7 +15,9 @@
                  draggable-data="{name: task,sourceGroup:$parent.$index,sourceTask:$index}">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{task}}</div>
+                    <div class="panel-heading">{{task.title}}
+                    <span class="task-delete" ng-click="deleteTask(task.id,task.title)">(supprimer)</span>
+                    </div>
                     <div class="panel-body">
                         BODY
                     </div>
@@ -44,13 +46,18 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <textarea ng-model="newTask.body" placeholder="contenu" required></textarea>
+                        <textarea class="task-edit-content" ng-model="newTask.body" placeholder="contenu" required></textarea>
                     </div>
                 </div>
                  <div class="form-group">
+                     <datepicker min=0 max=20></datepicker>
+                 </div>
+
+
+                 <div class="form-group">
                      <button class="btn btn-primary" ng-click="createTask()">Créer</button>
                  </div>
-                 <datepicker min=0 max=20></datepicker>
+
              </div>
          </form>
 
