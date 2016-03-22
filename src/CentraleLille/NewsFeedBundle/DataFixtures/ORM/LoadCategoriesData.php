@@ -60,30 +60,40 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
         $category1->addProject($this->getReference('projet-martin'));
         $category1->addProject($this->getReference('projet-charles'));
         $category1->addProject($this->getReference('projet-gregoire'));
+        $category1->setPicture('http://formycar.fr/wp-content/uploads/2015/04/mecanique-voiture-pas-cher.png');
 
         $category2->setName('Impression 3D');
         $category2->addProject($this->getReference('projet-martin'));
         $category2->addProject($this->getReference('projet-gregoire'));
+        $category2->setPicture('http://www.metronews.fr/_internal/gxml!0/r0dc21o2f3vste5s7ezej9x3a10rp3w$jf8ubqtwt541moqj1c66vgxo4bbj2a3/Replicator-21.jpeg');
 
         $category3->setName('Electronique');
         $category3->addProject($this->getReference('projet-martin'));
         $category3->addProject($this->getReference('projet-charles'));
+        $category3->setPicture('http://industrie.meosix.fr/nfelec/wp-content/uploads/sites/11/2014/10/composant-electronique.jpg');
 
         $category4->setName('Informatique');
         $category4->addProject($this->getReference('projet-charles'));
         $category4->addProject($this->getReference('projet-gregoire'));
+        $category4->setPicture('http://ceryom.com/wp-content/uploads/2015/06/developpement-web-nancy-concept-programmation-web-developpeur-web-agence-web-nancy-communication.png');
 
         $category5->setName('CAO');
         $category5->addProject($this->getReference('projet-martin'));
+        $category5->setPicture('http://img.directindustry.fr/images_di/photo-g/66484-2959335.jpg');
 
         $category6->setName('Découpeuse Laser');
         $category6->addProject($this->getReference('projet-charles'));
+        $category6->setPicture('http://www.murblanc.org/ccsti/fablab/120228_0372.jpg');
 
         $category7->setName('Arduino');
         $category7->addProject($this->getReference('projet-gregoire'));
+        $category7->setPicture('http://telefab.fr/wp-content/uploads/2013/02/ArduinoUno_r2_front450px.jpg');
 
         $category8->setName('Rasberry Pi');
+        $category8->setPicture('https://wiki.openwrt.org/_media/media/raspberry_pi_foundation/rpi2b.jpg');
+        
         $category9->setName('Soudure');
+        $category9->setPicture('http://www.fetrot-industry.com/img/mecano/soudure-main.jpg');
 
         $manager->persist($category1);
         $manager->persist($category2);

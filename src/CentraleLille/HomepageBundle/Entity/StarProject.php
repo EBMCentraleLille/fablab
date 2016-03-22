@@ -72,7 +72,7 @@ class StarProject
     /**
      * Set project
      *
-     * @param string $project
+     * @param string $project Entité projet
      *
      * @return StarProject
      */
@@ -96,7 +96,7 @@ class StarProject
     /**
      * Set content
      *
-     * @param string $content
+     * @param string $content Contenu à afficher
      *
      * @return StarProject
      */

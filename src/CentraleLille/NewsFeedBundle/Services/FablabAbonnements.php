@@ -166,7 +166,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
         foreach ($aboCategories as $aboCategory) {
             $projetsCat=$this->em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(
                 array('name'=>$aboCategory->getName())
-            )->getProjets();
+            )->getProjects();
             foreach ($projetsCat as $projetCat) {
                 if (! in_array($projetCat, $projets)) {
                     array_push($projets, $projetCat);
@@ -184,7 +184,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
      *
      * @return boolean
      */
-    public function isAboProjet($user,$projet)
+    public function isAboProjet($user, $projet)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
         $projectsAbo=$repository->findOneBy(
@@ -195,7 +195,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
             if ($projectAbo->getId() == $projet->getId()) {
                 return 1;
             }
-        } 
+        }
         return 0;
     }
 
@@ -207,7 +207,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
      *
      * @return boolean
      */
-    public function isAboCategory($user,$category)
+    public function isAboCategory($user, $category)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
         $categoriesAbo=$repository->findOneBy(
@@ -215,7 +215,7 @@ class FablabAbonnements implements FablabAbonnementsInterface
         )->getCategories();
         
         foreach ($categoriesAbo as $categoryAbo) {
-            if ($categoryAbo->getName() == $category->getName()){
+            if ($categoryAbo->getName() == $category->getName()) {
                 return 1;
             } else {
                 return 0;

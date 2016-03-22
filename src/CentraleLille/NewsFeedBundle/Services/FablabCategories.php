@@ -62,7 +62,7 @@ class FablabCategories implements FablabCategoriesInterface
     /**
      * Crée une catégorie
      *
-     * @param array $categoryName nom de la catégorie
+     * @param array $categoryName Nom de la catégorie
      * @param array $project      Entité Projet à ajouter à la catégorie
      *
      * @return void
@@ -95,7 +95,7 @@ class FablabCategories implements FablabCategoriesInterface
 
         if ($nb != 0) {
             foreach ($categoriesEntities as $categoryEntity) {
-                array_push($categories, $categoryEntity->getName());
+                array_push($categories, $categoryEntity);
                 $categories=array_slice($categories, $offset, $nb);
             }
         } else {
@@ -120,6 +120,23 @@ class FablabCategories implements FablabCategoriesInterface
         );
         $projectsCategory=$category->getProjects();
         return $projectsCategory;
+    }
+
+    /**
+     * Retourne un tableau des users abonnés à une catégorie
+     *
+     * @param string $categoryName Nom de la catégorie
+     *
+     * @return array $usersCategory Tableau des users abonnés à la catgégorie
+     */
+    public function getUsersCategory($categoryName)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Category");
+        $category=$repository->findOneBy(
+            array('name'=>$categoryName)
+        );
+        $usersCategory=$category->getUsers();
+        return $usersCategory;
     }
 
     /**

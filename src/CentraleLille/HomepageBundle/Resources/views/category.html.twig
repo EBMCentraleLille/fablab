@@ -3,7 +3,70 @@
 	<link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
 {% endblock stylesheets %}
 {% block body %}
-	{% for project in projects %}
-		<div style="margin-top:60px">{{ project.name }}</div>
-	{% endfor %}
+	
+		<br><br><br><br><br><br>
+
+
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="row panel panel-primary ">
+					<div class="panel-heading">
+					<h4>{{ category }}</h4>
+					</div>
+					<div class="panel-body">
+					{% for project in projects %}
+					<div class="col-md-4">
+					
+							<div class="panel panel-default">
+							  	<div class="panel-heading">{{ project.name }}</div>
+							  	<div class="RecentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
+							  	<div class="panel-footer">
+							  		<div class="row">
+								  		<div class="col-md-6 recentProjectSide">
+								  			<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+								  		</div>
+								  		<div class="col-md-4 recentProjectSide">
+								  			<object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object>
+								  		</div>
+								  	</div>
+							  	</div>
+							</div>
+					
+			</div>
+			{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	</div>
+
+
+	<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="row panel panel-primary ">
+					<div class="panel-heading">
+					<h4> Utilisateurs abonnés </h4>
+					</div>
+					<div class="panel-body">
+					{% for user in users %}
+					<div class="col-md-4">
+					
+							<div class="panel panel-default">
+							  	<div class="panel-heading">{{ user }}</div
+							  	<div class="RecentProjectPicture"></div>
+							  	
+							</div>
+					
+			</div>
+			{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	</div>
+
+
+	
 {% endblock body %}

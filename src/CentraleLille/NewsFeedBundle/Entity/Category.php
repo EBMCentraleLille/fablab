@@ -52,12 +52,23 @@ class Category
     private $name;
 
     /**
-     * (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     * @var string
+     *
+     * @ORM\Column(name="Picture", type="string", length=255,nullable=true)
+     */
+    private $picture;
+
+    /**
      *
      * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
      **/
     private $Projects;
 
+    /**
+     *
+     * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
+     **/
+    private $Users;
 
     /**
      * Get id
@@ -150,5 +161,63 @@ class Category
     public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $Project)
     {
         $this->Projects->removeElement($Project);
+    }
+
+    /**
+     * Add user
+     *
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user
+     *
+     * @return Category
+     */
+    public function addUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
+    {
+        $this->Users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user
+     */
+    public function removeUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
+    {
+        $this->Users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->Users;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return Category
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }

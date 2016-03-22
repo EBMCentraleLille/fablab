@@ -45,7 +45,7 @@ class HomepageController extends Controller
     {
         //Récupération des catégories
         $categoryService=$this->container->get('fablab_newsfeed.categories');
-        $thematics=$categoryService->getCategories(8);
+        $categories=$categoryService->getCategories(8);
 
         //Récupération des dernières actualités
         $activityService=$this->container->get('fablab_newsfeed.activities');
@@ -64,7 +64,7 @@ class HomepageController extends Controller
             [
                 'starProject' => $starProject,
                 'recentActivities' => $recentActivities,
-                'thematics' => $thematics,
+                'categories' => $categories,
                 'recentProjects' => $recentProjects,
                 'username'=>"Martin"
             ]
@@ -85,10 +85,13 @@ class HomepageController extends Controller
         //Récupération des projets de la catégories en question
         $categoryService = $this->container->get('fablab_newsfeed.categories');
         $projects=$categoryService->getProjectsCategory($category);
+        $users=$categoryService->getUsersCategory($category);
         return $this->render(
             'CentraleLilleHomepageBundle:category.html.twig',
             [
                 'projects' => $projects,
+                'users' => $users,
+                'category' => $category,
             ]
         );
     }
