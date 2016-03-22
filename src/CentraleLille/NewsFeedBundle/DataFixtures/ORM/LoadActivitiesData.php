@@ -235,7 +235,15 @@ class LoadActivitiesData extends AbstractFixture implements OrderedFixtureInterf
         $activity29->setDate(new \Datetime());
         $activity30->setDate(new \Datetime());
 
-        for ($counter = 1; $counter <= 30; $counter++) {
+        for ($counter = 1; $counter <= 30; $counter+=3) {
+            $activity = ${"activity" . $counter};
+            $manager->persist($activity);
+        }
+        for ($counter = 2; $counter <= 30; $counter+=3) {
+            $activity = ${"activity" . $counter};
+            $manager->persist($activity);
+        }
+        for ($counter = 3; $counter <= 30; $counter+=3) {
             $activity = ${"activity" . $counter};
             $manager->persist($activity);
         }
