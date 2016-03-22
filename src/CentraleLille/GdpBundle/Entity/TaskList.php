@@ -70,5 +70,23 @@ class TaskList
     {
         return $this->name;
     }
+
+    /**
+     * Get all tasks from list
+     *
+     * @return Task
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * Add a task to the task list
+     */
+    public function addTask($task)
+    {
+        $this->task[] = $task;
+    }
 }
 
