@@ -7,13 +7,12 @@
 {% block body %}
 
     <div class="abonnements">
-        <div class="col-md-1"></div>
-        <div class="col-md-5">
-            <div class="col-md-1"></div>
+        <div class="col-md-9">
             <div class="col-md-11">
                 <h2>Abonnements</h2>
+                </br>
                 {% for abonnement in abonnements %}
-                    <div class="abonnement row">
+                    <div id="project-column" class="col-md-3">
                         <div class="project-name">
                             <strong>{{ abonnement.name }}</strong>
                         </div>
