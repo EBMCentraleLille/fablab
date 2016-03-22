@@ -19,8 +19,6 @@ namespace CentraleLille\NewsFeedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use CentraleLille\CustomFosUserBundle\Entity\User;
-use CentraleLille\CustomFosUserBundle\Entity\Project;
 
 /**
  * NewsFeedController Class Doc
@@ -47,26 +45,32 @@ class NewsFeedController extends Controller
     */
     public function indexAction(Request $request)
     {
-        //$request = $this->container->get('request');
-        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if (!$user) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous devez être connecté pour accéder votre Fil d'Actualité."
+            );
+            return $this->redirectToRoute('fos_user_security_login');
+        } else {
+            //Récupération des dernières actualités
+            $activityService=$this->container->get('fablab_newsfeed.activities');
+            $recentActivities=$activityService->getActivities(10);
+
+            //Récupération des abonnements projets
+            $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+            $abonnementsProjet=$abonnementService->getAboProjet($user);
+
+            return $this->render(
+                'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
+                [
+                    'recentActivities' => $recentActivities,
+                    'abonnements' => $abonnementsProjet
+                ]
+            );
+        }
+
         
-        $user=$em->getRepository("CustomFosUserBundle:User")->findOneBy(array('username'=>'marlec'));
-
-        //Récupération des dernières actualités
-        $activityService=$this->container->get('fablab_newsfeed.activities');
-        $recentActivities=$activityService->getActivities(10);
-
-        //Récupération des abonnements projets
-        $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
-        $abonnementsProjet=$abonnementService->getAboProjet($user);
-
-        return $this->render(
-            'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
-            [
-                'recentActivities' => $recentActivities,
-                'abonnements' => $abonnementsProjet
-            ]
-        );
     }
     /**
     * SubscribeAction Function Doc
@@ -79,36 +83,45 @@ class NewsFeedController extends Controller
     */
     public function subscribeAction(Request $request)
     {
-        //$request = $this->container->get('request');
-        $em = $this->getDoctrine()->getManager();
-        
-        $user=$em->getRepository("CustomFosUserBundle:User")->findOneBy(array('username'=>'marlec'));
-        
-        $projectName = $request->request->get('projet');
-        $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
-        
-        //Abonnement/désabonnement du user au projet en question
-        $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
-        if ($abonnementService->isAboProjet($user, $projet)) {
-            $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+        $user = $this->getUser();
+        if (!$user) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous devez être connecté pour accéder votre Fil d'Actualité."
+            );
+            return $this->redirectToRoute('fos_user_security_login');
         } else {
-            $recentActivities=$abonnementService->addAboProjet($user, $projet);
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if (!$projectName) {
+                return $this->redirectToRoute('news_feed');
+            }
+            $em = $this->getDoctrine()->getManager();
+            $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+            
+            //Abonnement/désabonnement du user au projet en question
+            $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+            if ($abonnementService->isAboProjet($user, $projet)) {
+                $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+            } else {
+                $recentActivities=$abonnementService->addAboProjet($user, $projet);
+            }
+
+            //Récupération des dernières actualités
+            $activityService=$this->container->get('fablab_newsfeed.activities');
+            $recentActivities=$activityService->getActivities(10);
+
+            //Récupération des abonnements projets
+            $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+            $abonnementsProjet=$abonnementService->getAboProjet($user);
+            
+            return $this->container->get('templating')->renderResponse(
+                'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
+                [
+                    'recentActivities' => $recentActivities,
+                    'abonnements' => $abonnementsProjet
+                ]
+            );
         }
-
-        //Récupération des dernières actualités
-        $activityService=$this->container->get('fablab_newsfeed.activities');
-        $recentActivities=$activityService->getActivities(10);
-
-        //Récupération des abonnements projets
-        $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
-        $abonnementsProjet=$abonnementService->getAboProjet($user);
-        
-        return $this->container->get('templating')->renderResponse(
-            'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
-            [
-                'recentActivities' => $recentActivities,
-                'abonnements' => $abonnementsProjet
-            ]
-        );
     }
 }

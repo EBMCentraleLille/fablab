@@ -18,7 +18,6 @@ namespace CentraleLille\NewsFeedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use CentraleLille\NewsFeedBundle\Entity\Abonnement;
 
 /**
  * AbonnementController Class Doc
@@ -43,23 +42,29 @@ class AbonnementController extends Controller
     */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $user=$em->getRepository("CustomFosUserBundle:User")->findOneBy(array('username'=>'marlec'));
+        $user = $this->getUser();
+        if (!$user) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous devez être connecté pour accéder votre Fil d'Actualité."
+            );
+            return $this->redirectToRoute('fos_user_security_login');
+        } else {
+            //Récupération des abonnements
+            $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+            $abonnements=$abonnementService->getAboAll($user);
 
-        //Récupération des abonnements
-        $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
-        $abonnements=$abonnementService->getAboAll($user);
+            //Récupération des projets récents pour les suggestions
+            $recentProjectService=$this->container->get('fablab_homepage.recentProject');
+            $recentProjects=$recentProjectService->getRecentProjects(15);
 
-        //Récupération des projets récents pour les suggestions
-        $recentProjectService=$this->container->get('fablab_homepage.recentProject');
-        $recentProjects=$recentProjectService->getRecentProjects(15);
-
-        return $this->render(
-            'CentraleLilleNewsFeedBundle:abonnements.html.twig',
-            [
-                'abonnements' => $abonnements,
-                'recentProjects' => $recentProjects
-            ]
-        );
+            return $this->render(
+                'CentraleLilleNewsFeedBundle:abonnements.html.twig',
+                [
+                    'abonnements' => $abonnements,
+                    'recentProjects' => $recentProjects
+                ]
+            );
+        }
     }
 }

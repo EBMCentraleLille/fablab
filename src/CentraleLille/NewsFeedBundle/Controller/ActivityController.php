@@ -41,20 +41,37 @@ class ActivityController extends Controller
     *
     * Présentation de toutes les activités
     *
+    * @param Object $request Requête HTTP
+    *
     * @return Twig La vue Twig à display
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        //Récupération des activités
-        $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivities(30);
-        
-        return $this->render(
-            'CentraleLilleNewsFeedBundle:activity.html.twig',
-            [
-                'recentActivities' => $activities
-            ]
-        );
+        $user = $this->getUser();
+        if (!$user) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous devez être connecté pour accéder à cette page."
+            );
+            return $this->redirectToRoute('fos_user_security_login ');
+        } elseif (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous n'avez pas les droits d'accéder à cette page."
+            );
+            return $this->redirectToRoute('fos_user_profile_show');
+        } else {
+            //Récupération des activités
+            $activityService=$this->container->get('fablab_newsfeed.activities');
+            $activities=$activityService->getActivities(30);
+            
+            return $this->render(
+                'CentraleLilleNewsFeedBundle:activity.html.twig',
+                [
+                    'recentActivities' => $activities
+                ]
+            );
+        }
     }
 
     /**
@@ -68,33 +85,48 @@ class ActivityController extends Controller
     */
     public function createAction(Request $request)
     {
-        $activity = new Activity();
-        $form = $this->createForm(ActivityType::class, $activity);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $activity->setDate(new \Datetime());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($activity);
-            $em->flush();
+        $user = $this->getUser();
+        if (!$user) {
             $session=$request->getSession()->getFlashBag()->add(
                 'notice',
-                "L'activité a bien été ajoutée."
+                "Vous devez être connecté pour accéder à cette page."
             );
+            return $this->redirectToRoute('fos_user_security_login ');
+        } elseif (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $session=$request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous n'avez pas les droits d'accéder à cette page."
+            );
+            return $this->redirectToRoute('fos_user_profile_show');
+        } else {
+            $activity = new Activity();
+            $form = $this->createForm(ActivityType::class, $activity);
 
-            return $this->redirect(
-                $this->generateUrl(
-                    'centrale_lille_newsfeed_activity'
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $activity->setDate(new \Datetime());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($activity);
+                $em->flush();
+                $session=$request->getSession()->getFlashBag()->add(
+                    'notice',
+                    "L'activité a bien été ajoutée."
+                );
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        'centrale_lille_newsfeed_activity'
+                    )
+                );
+            }
+            
+            return $this->render(
+                'CentraleLilleNewsFeedBundle:newactivity.html.twig',
+                array(
+                'form' => $form->createView()
                 )
             );
         }
-        
-        return $this->render(
-            'CentraleLilleNewsFeedBundle:newactivity.html.twig',
-            array(
-            'form' => $form->createView()
-            )
-        );
     }
 }
