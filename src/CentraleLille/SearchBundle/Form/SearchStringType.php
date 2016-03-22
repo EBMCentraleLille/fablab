@@ -22,12 +22,6 @@ class SearchStringType extends AbstractType
         $builder
 
             ->add('stringSearch')
-            ->add('categorie', 'choice', array(
-                'choices' => array(
-                    'all' => 'Catégorie',
-                    'utilisateur' => 'Utilisateur',
-                    'machine' => 'Machine'
-                )))
             ->add('search', 'submit')
         ;
     }

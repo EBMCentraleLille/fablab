@@ -18,11 +18,6 @@
     {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
     {{ form_errors(form) }}
     <div class="form-group">
-      {{ form_label(form.categorie, " ", {'label_attr': {'class': 'control-label'}}) }}
-      {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}})}}
-      {{ form_errors(form.categorie) }}
-    </div>
-    <div class="form-group">
       {{ form_label(form.stringSearch, " ", {'label_attr': {'class': 'control-label'}}) }}
       {{ form_widget(form.stringSearch, {'attr': {'class': 'form-control'}})}}
       {{ form_errors(form.stringSearch) }}
@@ -39,8 +34,8 @@
     Aucun résultat
 
     {% else %}
-   
-    
+
+
 
     <div class="result">
       <h3>Projets</h3>
