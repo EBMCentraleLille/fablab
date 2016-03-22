@@ -9,6 +9,7 @@
  * @Link     https://github.com/pierloui/fablab
  */
 namespace CentraleLille\ReservationBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**

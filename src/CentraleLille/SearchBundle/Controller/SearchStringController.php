@@ -22,8 +22,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
-
 /**
 * SearchUser controller.
 *
@@ -39,86 +37,86 @@ class SearchStringController extends Controller
   * @Route("", name="centrale_lille_searchuser")
   * @Method("GET")
   */
-  public function searchAction(Request $request)
-  {
-    $jsonContentUser = '';
-    $jsonContentMachine = '';
-    $jsonTotal = '';
-    $search = new SearchString();
-    $searchForm = $this->get('form.factory')->createNamed(
-    '',
-    'string_search_type',
-    $search,
-    array(
-      'action' => $this->generateUrl('centrale_lille_searchuser'),
-      'method' => 'GET'
-      )
-    );
-
-    $searchForm->handleRequest($request);
-    $search = $searchForm->getData();
-
-    if (is_null($search->getStringSearch())) {
-      $result_machine = [];
-      $result_user = [];
-    } else {
-
-      //User Json
-      $queryall = new \Elastica\Query\MatchAll();
-      $typeUser = $this->get('fos_elastica.index.fablab.User');
-      $result_alluser = $typeUser->search($queryall)->getResults();
-      foreach ($result_alluser as $result) {
-        $source = $result->getSource();
-        $datauser[] = array(
-            
-            'name' => $source['username'],
-            'link'   => 'userId',
+    public function searchAction(Request $request)
+    {
+        $jsonContentUser = '';
+        $jsonContentMachine = '';
+        $jsonTotal = '';
+        $search = new SearchString();
+        $searchForm = $this->get('form.factory')->createNamed(
+            '',
+            'string_search_type',
+            $search,
+            array(
+            'action' => $this->generateUrl('centrale_lille_searchuser'),
+            'method' => 'GET'
+            )
         );
-    }
-     $jsonContentUser = new JsonResponse($datauser, 200, array(
-        'Cache-Control' => 'no-cache',
-        ));
-     //Machine Json
-     $queryall = new \Elastica\Query\MatchAll();
-      $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
-      $result_allmachine = $typeMachine->search($queryall)->getResults();
+
+        $searchForm->handleRequest($request);
+        $search = $searchForm->getData();
+
+        if (is_null($search->getStringSearch())) {
+            $result_machine = [];
+            $result_user = [];
+        } else {
+
+          //User Json
+            $queryall = new \Elastica\Query\MatchAll();
+            $typeUser = $this->get('fos_elastica.index.fablab.User');
+            $result_alluser = $typeUser->search($queryall)->getResults();
+            foreach ($result_alluser as $result) {
+                $source = $result->getSource();
+                $datauser[] = array(
+            
+                'name' => $source['username'],
+                'link'   => 'userId',
+                );
+            }
+            $jsonContentUser = new JsonResponse($datauser, 200, array(
+            'Cache-Control' => 'no-cache',
+            ));
+         //Machine Json
+            $queryall = new \Elastica\Query\MatchAll();
+            $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
+            $result_allmachine = $typeMachine->search($queryall)->getResults();
       
 
 
-      foreach ($result_allmachine as $result) {
-        $source = $result->getSource();
-        $type = $result->getType();
-        $datamachine[] = array(
-           'name' => $source['machine_name'],
-            'link'   => 'machineId',
-        );
-    }
-     $jsonContentMachine = new JsonResponse($datamachine, 200, array(
-        'Cache-Control' => 'no-cache',
-        ));
-     $jsonContentMachine = '"machine": '.substr($jsonContentMachine, 83);
-     $jsonContentUser = '"user": '.substr($jsonContentUser, 83);
-     $jsonTotal = '{'.$jsonContentUser.','.$jsonContentMachine.'}';
+            foreach ($result_allmachine as $result) {
+                $source = $result->getSource();
+                $type = $result->getType();
+                $datamachine[] = array(
+                'name' => $source['machine_name'],
+                'link'   => 'machineId',
+                );
+            }
+            $jsonContentMachine = new JsonResponse($datamachine, 200, array(
+            'Cache-Control' => 'no-cache',
+            ));
+            $jsonContentMachine = '"machine": '.substr($jsonContentMachine, 83);
+            $jsonContentUser = '"user": '.substr($jsonContentUser, 83);
+            $jsonTotal = '{'.$jsonContentUser.','.$jsonContentMachine.'}';
 
 
 
-      //Recherche User
-      $typeUser = $this->get('fos_elastica.index.fablab.User');
-      $query_part_user = new \Elastica\Query\BoolQuery();
+          //Recherche User
+            $typeUser = $this->get('fos_elastica.index.fablab.User');
+            $query_part_user = new \Elastica\Query\BoolQuery();
 
-      $fieldQuery = new \Elastica\Query\Match();
-      $fieldQuery2 = new \Elastica\Query\Match();
-      $fieldQuery->setFieldQuery('email', $search->getStringSearch());
-      $fieldQuery->setFieldFuzziness('email', 0.7);
-      $query_part_user->addShould($fieldQuery);
-      $fieldQuery2->setFieldQuery('username', $search->getStringSearch());
-      $fieldQuery2->setFieldFuzziness('username', 0.7);
-      $query_part_user->addShould($fieldQuery2);
-      $filters = new \Elastica\Filter\Bool();
-      $query_user = new \Elastica\Query\Filtered($query_part_user, $filters);
-      $result_user = $typeUser->search($query_user);
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery2 = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('email', $search->getStringSearch());
+            $fieldQuery->setFieldFuzziness('email', 0.7);
+            $query_part_user->addShould($fieldQuery);
+            $fieldQuery2->setFieldQuery('username', $search->getStringSearch());
+            $fieldQuery2->setFieldFuzziness('username', 0.7);
+            $query_part_user->addShould($fieldQuery2);
+            $filters = new \Elastica\Filter\Bool();
+            $query_user = new \Elastica\Query\Filtered($query_part_user, $filters);
+            $result_user = $typeUser->search($query_user);
 
-    //Recherche Machine
+        //Recherche Machine
             $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
             $query_part_machine = new \Elastica\Query\Bool();
 
@@ -148,89 +146,89 @@ class SearchStringController extends Controller
 
 
 
-    }
+        }
 
-    return $this->render('CentraleLilleSearchBundle:Default:search.html.twig', array(
-      'result_user' => $result_user,
-      'result_machine' => $result_machine,
-      'result_competence' => [],
-      'result_project' => [],
-      'form' => $searchForm->createView(),
-      'search' => $search->getStringSearch(),
-      'userjson' => $jsonContentUser,
-      'machinejson' => $jsonContentMachine,
-      'jsonTotal' => $jsonTotal,
-    ));
-  }
+        return $this->render('CentraleLilleSearchBundle:Default:search.html.twig', array(
+        'result_user' => $result_user,
+        'result_machine' => $result_machine,
+        'result_competence' => [],
+        'result_project' => [],
+        'form' => $searchForm->createView(),
+        'search' => $search->getStringSearch(),
+        'userjson' => $jsonContentUser,
+        'machinejson' => $jsonContentMachine,
+        'jsonTotal' => $jsonTotal,
+        ));
+    }
 
 
   /**
   *
   * @Route("/autocomplete", name="autocomplete")
   */
-  public function autocompleteAction()
-  {
-    $search = $this->get('request')->request->get('phrase');
-    //User Json
+    public function autocompleteAction()
+    {
+        $search = $this->get('request')->request->get('phrase');
+      //User Json
            $queryall = new \Elastica\Query\MatchAll();
 
-      $typeUser = $this->get('fos_elastica.index.fablab.User');
-      $result_alluser = $typeUser->search($queryall)->getResults();
-      foreach ($result_alluser as $result) {
-        $source = $result->getSource();
-        $datauser[] = array(
+        $typeUser = $this->get('fos_elastica.index.fablab.User');
+        $result_alluser = $typeUser->search($queryall)->getResults();
+        foreach ($result_alluser as $result) {
+            $source = $result->getSource();
+            $datauser[] = array(
             
             'name' => $source['username'],
             'link'   => 'userId',
-        );
-    }
-     $jsonContentUser = new JsonResponse($datauser, 200, array(
+            );
+        }
+        $jsonContentUser = new JsonResponse($datauser, 200, array(
         'Cache-Control' => 'no-cache',
         ));
-     //Machine Json
-     $queryall = new \Elastica\Query\MatchAll();
-      $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
-      $result_allmachine = $typeMachine->search($queryall)->getResults();
+       //Machine Json
+        $queryall = new \Elastica\Query\MatchAll();
+        $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
+        $result_allmachine = $typeMachine->search($queryall)->getResults();
       
 
 
-      foreach ($result_allmachine as $result) {
-        $source = $result->getSource();
-        $type = $result->getType();
-        $datamachine[] = array(
-           'name' => $source['machine_name'],
+        foreach ($result_allmachine as $result) {
+            $source = $result->getSource();
+            $type = $result->getType();
+            $datamachine[] = array(
+            'name' => $source['machine_name'],
             'link'   => 'machineId',
-        );
-    }
-     $jsonContentMachine = new JsonResponse($datamachine, 200, array(
+            );
+        }
+        $jsonContentMachine = new JsonResponse($datamachine, 200, array(
         'Cache-Control' => 'no-cache',
         ));
-     $jsonContentMachine = '"machine": '.substr($jsonContentMachine, 83);
-     $jsonContentUser = '"user": '.substr($jsonContentUser, 83);
-     $jsonTotal = '{'.$jsonContentUser.','.$jsonContentMachine.'}';
+        $jsonContentMachine = '"machine": '.substr($jsonContentMachine, 83);
+        $jsonContentUser = '"user": '.substr($jsonContentUser, 83);
+        $jsonTotal = '{'.$jsonContentUser.','.$jsonContentMachine.'}';
 
 
 
 
-    //get request search
+      //get request search
     
 
 
-    /*Renvoyer un seul document json avec la structure suivante :
-    {
-    "user": [
-    {"name": "Maxime", "link": "userId"},
-    {"name": "Cyprien", "link": "userId"}
-  ],
-  "machine": [
-  {"name": "Impression 3D", "link": "machineId"},
-  {"name": "Decoupe Laser", "link": "machineId"}
-]
-}
-*/
+      /*Renvoyer un seul document json avec la structure suivante :
+      {
+      "user": [
+      {"name": "Maxime", "link": "userId"},
+      {"name": "Cyprien", "link": "userId"}
+    ],
+    "machine": [
+    {"name": "Impression 3D", "link": "machineId"},
+    {"name": "Decoupe Laser", "link": "machineId"}
+  ]
+  }
+  */
 
-$string = $jsonTotal;
+        $string = $jsonTotal;
 
-return new Response($string);
-}
+        return new Response($string);
+    }
 }
