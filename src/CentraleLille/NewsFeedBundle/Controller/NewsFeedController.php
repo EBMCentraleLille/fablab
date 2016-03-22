@@ -71,7 +71,6 @@ class NewsFeedController extends Controller
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $abonnementsProjet = $abonnementService->getAboProjet($user);
 
-
             //Récupération des thématiques pour le filtre
             $categoryService = $this->container->get('fablab_newsfeed.categories');
             $thematics = $categoryService->getCategories();
@@ -141,12 +140,29 @@ class NewsFeedController extends Controller
             //Récupération des abonnements projets
             $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
             $abonnementsProjet=$abonnementService->getAboProjet($user);
+            //Récupération des thématiques pour le filtre
+            $categoryService = $this->container->get('fablab_newsfeed.categories');
+            $thematics = $categoryService->getCategories();
+
+            $filter = [];
+            $form = $this
+                ->get('form.factory')
+                ->create(new FilterType($thematics), $filter);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                return $this->redirectToRoute(
+                    'centrale_lille_newsfeed'
+                );
+            }
             
             return $this->container->get('templating')->renderResponse(
                 'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
                 [
                     'recentActivities' => $recentActivities,
-                    'abonnements' => $abonnementsProjet
+                    'abonnements' => $abonnementsProjet,
+                    'form' => $form->createView(),
+                    'thematics' => $thematics
                 ]
             );
         }
