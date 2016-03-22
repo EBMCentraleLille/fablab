@@ -42,5 +42,31 @@
 	</div>
 
 
+	<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="row panel panel-primary ">
+					<div class="panel-heading">
+					<h4> Utilisateurs abonnés </h4>
+					</div>
+					<div class="panel-body">
+					{% for user in users %}
+					<div class="col-md-4">
+					
+							<div class="panel panel-default">
+							  	<div class="panel-heading">{{ user }}</div
+							  	<div class="RecentProjectPicture"></div>
+							  	
+							</div>
+					
+			</div>
+			{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	</div>
+
+
 	
 {% endblock body %}
