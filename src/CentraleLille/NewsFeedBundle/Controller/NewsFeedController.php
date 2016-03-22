@@ -53,9 +53,15 @@ class NewsFeedController extends Controller
             );
             return $this->redirectToRoute('fos_user_security_login');
         } else {
+
+            //Récupération des abonnements du user
+            $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+            $abonnements=$abonnementService->getAboAll($user);
+            $abonnementsProjet=$abonnementService->getAboProjet($user);
+
             //Récupération des dernières actualités
             $activityService=$this->container->get('fablab_newsfeed.activities');
-            $recentActivities=$activityService->getActivities(10);
+            $recentActivities=$activityService->getActivitiesNewsFeed($abonnements, 10);
 
             //Récupération des abonnements projets
             $abonnementService=$this->container->get('fablab_newsfeed.abonnements');

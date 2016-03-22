@@ -31,7 +31,6 @@
 	text-align: center;
 }
 .recentProjectPicture{
-	background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
 	background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -76,26 +75,6 @@
  	float: right;
 }
 
-
-.suggestion{
-  border-bottom: 1px solid; 
-  border-color: #dddddd;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  }
-  .suggestion-picture{
-  background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
-  background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  height:80px;
-  width:80px;
-}
-.suggestion-name{
-  padding-top: 25px;
-  font-size: 20px;
-  
-}
 .add{
   float:right;
   font-size: 60px;

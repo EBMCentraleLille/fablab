@@ -34,11 +34,11 @@
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="recentProjectPicture"></div>
+                                <div class="recentProjectPicture" style="background-image:url('{{ recentActivity.project.picture }}');"></div>
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-6 recentProject">
-                                            {% if recentActivity.project in abonnements %}
+                                            {% if not recentActivity.project in abonnements %}
                                                 <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
                                                 <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
                                             {% else %}

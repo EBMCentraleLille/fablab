@@ -7,8 +7,8 @@
 {% block body %}
 
     <div class="abonnements">
-        <div class="col-md-9">
-            <div class="col-md-11">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
                 <h2>Abonnements</h2>
                 </br>
                 <div class="row panelThematics panel-primary">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="panel panel-default">
                         	<a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
-                            	<div class="projectPicture"></div>
+                            	<div class="projectPicture" style="background-image:url('{{ abonnementCategorie.picture }}');"></div>
                         	</a>
                             <div class="panel-footer">
                                 <div class="row">
@@ -48,7 +48,6 @@
                     </div>
                 {% endfor %}
                 </div>
-
                 <div class="row panelThematics panel-primary">
                 </br></br></br>
                 <div class="panel-heading">
@@ -62,7 +61,7 @@
                         </div>
                         <div class="panel panel-default">
                             <a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
-                                <div class="projectPicture"></div>
+                                <div class="projectPicture" style="background-image:url('{{ abonnementProjet.picture }}');"></div>
                             </a>
                             <div class="panel-footer">
                                 <div class="row">
@@ -87,8 +86,6 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
-
     </div>
     <div class="col-md-3">
         <div class="right-menu">
@@ -108,7 +105,7 @@
 		  					<li class="list-group-items">
 			  					<div class="row">
 				  					<div class="col-md-3">
-				  						<div class="recentProjectPicture"></div>
+				  						<div class="recentProjectPicture" style="background-image:url('{{ recentProject.picture }}');"></div>
 				  					</div>
 				  					<div class="recentProjectSide">
 		  								<strong>{{ recentProject.name }}</strong>
@@ -120,6 +117,7 @@
 
             </div>
         </div>
+        <div class="col-md-1"></div>
     </div>
 
 <script src="{{ asset('jquery.js') }}"></script>

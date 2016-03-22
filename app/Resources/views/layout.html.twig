@@ -20,43 +20,43 @@
       <div class="row">
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="{{ path("homepage")}}">Fablab Centrale Lille</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li><a href="{{ path("homepage")}}">Accueil <span class="sr-only"></span></a></li>
-                <li><a href="{{ path("news_feed")}}">Fil d'actualité</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path("project_new")}}">Créer un projet</a></li>
-                <li><a href="{{ path("centrale_lille_machine")}}">Réserver une machine</a></li>
-                <li>
-                  <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Rechercher sur le site">
-                    </div>
-                  </form>
-                </li>
-                {% if app.user %}
-                  <li class="dropdown">
-                    <a href="{{ path("centralelille_customfosuser_default_index")}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">{{ app.user.username }} <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Mon Profil</a></li>
-                      <li><a href="#">Mes Projets</a></li>
-                      <li><a href="{{ path("centrale_lille_newsfeed_abonnements")}}">Mes Abonnements</a></li>
-                      <li><a href="{{ path("fos_user_security_logout")}}">Deconnexion</a></li>
-                    </ul>
+              <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path("homepage")}}">Fablab Centrale Lille</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li><a href="{{ path("homepage")}}">Accueil <span class="sr-only"></span></a></li>
+                  <li><a href="{{ path("news_feed")}}">Fil d'actualité</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{{ path("project_new")}}">Créer un projet</a></li>
+                  <li><a href="{{ path("centrale_lille_machine")}}">Réserver une machine</a></li>
+                  <li>
+                    <form class="navbar-form navbar-right" role="search">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Rechercher sur le site">
+                      </div>
+                    </form>
                   </li>
-                {% else %}
-                  <li><a href="{{ path("fos_user_security_login")}}">Connexion</a></li>
-                  <li><a href="{{ path("fos_user_registration_register")}}">Créer un compte</a></li>
-                {% endif %}
-              </ul>
+                  {% if app.user %}
+                    <li class="dropdown">
+                      <a href="{{ path("centralelille_customfosuser_default_index")}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">{{ app.user.username }} <span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Mon Profil</a></li>
+                        <li><a href="#">Mes Projets</a></li>
+                        <li><a href="{{ path("centrale_lille_newsfeed_abonnements")}}">Mes Abonnements</a></li>
+                        <li><a href="{{ path("fos_user_security_logout")}}">Deconnexion</a></li>
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li><a href="{{ path("fos_user_security_login")}}">Connexion</a></li>
+                    <li><a href="{{ path("fos_user_registration_register")}}">Créer un compte</a></li>
+                  {% endif %}
+                </ul>
+              </div>
             </div>
-          </div>
-        </nav>
-      </div>
+          </nav>
+        </div>
     {% block body %}{% endblock %}
     </body>
 </html>

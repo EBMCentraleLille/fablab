@@ -95,7 +95,7 @@ class FablabCategories implements FablabCategoriesInterface
 
         if ($nb != 0) {
             foreach ($categoriesEntities as $categoryEntity) {
-                array_push($categories, $categoryEntity->getName());
+                array_push($categories, $categoryEntity);
                 $categories=array_slice($categories, $offset, $nb);
             }
         } else {
