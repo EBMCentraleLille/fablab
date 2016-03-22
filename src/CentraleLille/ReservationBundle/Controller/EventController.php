@@ -13,6 +13,7 @@
 namespace CentraleLille\ReservationBundle\Controller;
 
 use ADesigns\CalendarBundle\Event\CalendarEvent;
+use CentraleLille\ReservationBundle\Entity\Bookables\Machine;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use CentraleLille\ReservationBundle\Entity\Booking\Event;
@@ -50,9 +51,39 @@ class EventController extends Controller
 
         $machines = $repository->findAll();
 
+        // machines fitering
+
+        foreach($machines as $machine){
+            $machinesAvailables = array();
+            $machinesUnavailables = array();
+            $machinesOutOfOrder = array();
+            $machinesBeingTested = array();
+
+            switch($machine->getStatut()) {
+                case 'Disponible':
+                    array_push($machinesAvailables, $machine);
+                    break;
+                case 'Indisponible':
+                    array_push($machinesUnavailables, $machine);
+                    break;
+                case 'Hors Service':
+                    array_push($machinesOutOfOrder, $machine);
+                    break;
+                case 'En Test':
+                    array_push($machinesBeingTested, $machine);
+                    break;
+                }
+
+        }
+
         return $this->render(
             'ReservationBundle::booking.html.twig',
-            array('machines'=>$machines)
+            array(
+                'machinesAvailables'=>$machinesAvailables,
+                'machinesUnavailables'=>$machinesUnavailables,
+                'machinesOutOfOrder'=>$machinesOutOfOrder,
+                'machinesBeingTested'=>$machinesOutOfOrder
+                )
         );
     }
 

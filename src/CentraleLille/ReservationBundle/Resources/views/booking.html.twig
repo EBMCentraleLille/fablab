@@ -12,10 +12,59 @@
     </div>
 
     <div class="well">
-        {% for machine in machines %}
+        <h3>Machines disponibles</h3>
+        {% for machine in machinesAvailables %}
             <div class="well">
+                <h4>{{ machine.name}}</h4>
                 <ul>
-                    <li> {{ machine.name}}</li>
+                    <li> {{ machine.description }}</li>
+                </ul>
+                <div class="btn-group" role="toolbar">
+                    <button class="btn" aria-hidden="true"
+                            onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                        Voir les disponibilités
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h3>Machines indisponibles</h3>
+        {% for machine in machinesUnavailables %}
+            <div class="well">
+                <h4>{{ machine.name}}</h4>
+                <ul>
+                    <li> {{ machine.description }}</li>
+                </ul>
+                <div class="btn-group" role="toolbar">
+                    <button class="btn" aria-hidden="true"
+                            onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                        Voir les disponibilités
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h3>Machines hors d'usage </h3>
+        {% for machine in machinesOutOfOrder %}
+            <div class="well">
+                <h4>{{ machine.name}}</h4>
+                <ul>
+                    <li> {{ machine.description }}</li>
+                </ul>
+                <div class="btn-group" role="toolbar">
+                    <button class="btn" aria-hidden="true"
+                            onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                        Voir les disponibilités
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h3>Machines en test</h3>
+        {% for machine in machinesBeingTested %}
+            <div class="well">
+                <h4>{{ machine.name}}</h4>
+                <ul>
                     <li> {{ machine.description }}</li>
                 </ul>
                 <div class="btn-group" role="toolbar">
