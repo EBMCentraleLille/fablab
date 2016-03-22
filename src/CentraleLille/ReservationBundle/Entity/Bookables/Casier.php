@@ -10,7 +10,6 @@ namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
 use CentraleLille\ReservationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 
 /**
  *

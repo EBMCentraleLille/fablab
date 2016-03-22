@@ -15,9 +15,8 @@ namespace CentraleLille\ReservationBundle\Controller;
 
 use CentraleLille\ReservationBundle\Entity\Bookables\Machine;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use CentraleLille\ReservationBundle\Entity\Bookables\Type;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
