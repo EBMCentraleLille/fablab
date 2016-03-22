@@ -28,12 +28,12 @@
                             <div class="panel-footer">
                                 <div class="row">
                                 	<a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
-                                    	<div class="col-md-6 recentProject">
+                                    	<div class="col-md-6">
                                         	<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
                                         	Page catégorie
                                     	</div>
                                 	</a>
-                                    <div class="col-md-6 project">
+                                    <div class="col-md-6">
                                         {% if not abonnementCategorie in abonnementsCategorie %}
                                             <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
                                             <div class ="{{ abonnementProjet.name }}" id="follow">Suivre</div>
@@ -67,12 +67,12 @@
                             <div class="panel-footer">
                                 <div class="row">
                                     <a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
-                                        <div class="col-md-6 recentProject">
+                                        <div class="col-md-6">
                                             <object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
                                             Page projet
                                         </div>
                                     </a>
-                                    <div class="col-md-6 project">
+                                    <div class="col-md-6">
                                         {% if not abonnementProjet in abonnementsProjet %}
                                             <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
                                             <div class ="{{ abonnementProjet.name }}" id="follow">Suivre</div>
