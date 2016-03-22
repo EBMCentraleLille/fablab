@@ -92,7 +92,8 @@ class Event
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="CentraleLille\ReservationBundle\Entity\Bookables\Bookable", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="CentraleLille\ReservationBundle\Entity\Bookables\Bookable",
+     *     cascade={"persist","remove"})
      *
      */
     protected $bookable;

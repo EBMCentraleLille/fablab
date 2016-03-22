@@ -39,8 +39,16 @@ abstract class BookStrategy implements IBooking
         $query = $qb->select('b.id')
             ->where('b.startDateTime <= :startDateTime AND b.endDateTime >= :endDateTime')
             ->orWhere('b.startDateTime >= :startDateTime AND b.endDateTime <= :endDateTime')
-            ->orWhere('b.startDateTime >= :startDateTime AND b.endDateTime >= :endDateTime AND b.startDateTime <= :endDateTime')
-            ->orWhere('b.startDateTime <= :startDateTime AND b.endDateTime <= :endDateTime AND b.endDateTime >= :startDateTime')
+            ->orWhere(
+                'b.startDateTime >= :startDateTime
+                AND b.endDateTime >= :endDateTime
+                AND b.startDateTime <= :endDateTime'
+            )
+            ->orWhere(
+                'b.startDateTime <= :startDateTime
+                AND b.endDateTime <= :endDateTime
+                AND b.endDateTime >= :startDateTime'
+            )
             ->andWhere('b.bookable = :bookable')
             ->setParameters(array(
                 'startDateTime'=> $start,
