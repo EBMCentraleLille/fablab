@@ -12,7 +12,7 @@ use \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
  * Date: 15/03/2016
  * Time: 13:27
  */
-class ProjectService
+class ProjectService implements ProjectServiceInterface
 {
     protected $em;
     protected $authorizationChecker;

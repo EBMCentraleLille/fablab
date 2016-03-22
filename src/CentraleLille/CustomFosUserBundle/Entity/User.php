@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\HasLifecycleCallbacks
  */
 
-class User extends BaseUser implements ProjectableInterface
+class User extends BaseUser implements ProjectableUserInterface
 {
 
     /**
