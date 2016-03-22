@@ -16,6 +16,12 @@ function setupRouter($stateProvider, $urlRouterProvider) {
             controller: 'uiController',
             data: { access: 'user' }
         })
+        .state('planning', {
+            url: "/planning",
+            templateUrl: "views/planning/planning.html",
+            controller: 'planningController',
+            data: { access: 'user' }
+        })
 
     $urlRouterProvider.otherwise("/");
 }

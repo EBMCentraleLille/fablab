@@ -4,7 +4,8 @@ uiModule.factory('rq',['$http',getRequester]);
 
 function getRequester($http) {
     var service = {
-        'createTask': createTask
+        'createTask': createTask,
+        'getTasks': getTasks
         /*'getPosts': getPosts,
         'deletePost': deletePost,
         'savePost': savePost,
@@ -38,7 +39,7 @@ function getRequester($http) {
 
     function Resolver(id) {
         return {
-           'createTask':'/gdp/api/project/'+id+'/tasks'
+            'tasks':'/gdp/api/projects/'+id+'/tasks'
         }
     }
 
@@ -46,7 +47,12 @@ function getRequester($http) {
 
     function createTask(project_id,data,cb) {
         var r = new Resolver(project_id);
-        post_request(r.createTask,data,cb);
+        post_request(r.tasks,data,cb);
+    }
+
+    function getTasks(project_id,cb) {
+        var r = new Resolver(project_id);
+        get_request(r.tasks,cb);
     }
     /*function getPosts(cb) {
         var r = new Resolver();

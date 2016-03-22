@@ -22,8 +22,15 @@ var vendorJS = [
     './node_modules/angular-ui-router/release/angular-ui-router.min.js',
     './node_modules/angular-cookies/angular-cookies.min.js',
     './node_modules/angular-sanitize/angular-sanitize.min.js',
+    './node_modules/angular-toastr/dist/angular-toastr.tpls.min.js',
+    './node_modules/angular-draganddrop/angular-draganddrop.js',
     './static/vendor/date-fr-FR.js'
 ];
+
+var vendorCSS = [
+    './node_modules/angular-toastr/dist/angular-toastr.min.css',
+]
+
 
 gulp.task('scripts', function() {
     var opts= {entries: SRC_BASEDIR+'app.js',transform: ['bulkify']}
@@ -56,6 +63,13 @@ gulp.task('styles', function() {
         .pipe(gulp.dest(DEST_BASEDIR))
 })
 
+gulp.task('vendorCSS',function() {
+    gulp.src(vendorCSS)
+        .pipe(concat('vendor.css'))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest(DEST_BASEDIR))
+})
+
 gulp.task('html', function() {
     gulp.src(SRC_BASEDIR+"index.html")
         .pipe(gulp.dest(DEST_BASEDIR))
@@ -65,7 +79,7 @@ gulp.task('html', function() {
 })
 
 gulp.task('default', function() {
-    gulp.run('vendorJS', 'scripts', 'styles', 'html');
+    gulp.run('vendorJS', 'scripts', 'styles', 'html','vendorCSS');
 
     gulp.watch(SRC_BASEDIR+"**/*.js", ['scripts'])
     gulp.watch(SRC_BASEDIR+"styles/**", ['styles'])
