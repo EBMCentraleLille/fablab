@@ -2,7 +2,6 @@
 	margin-top: 75px; 
 }
 
-
 .project {
     border: 1px solid;
     border-color: #dddddd;
@@ -11,10 +10,16 @@
     padding-bottom: 10px;
     height: 110px;
     width: 110px;
-    background-image: url('http://thingiverse-production-new.s3.amazonaws.com/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+}
+
+.thematics {
+    border: 1px solid;
+    border-color: #dddddd;
+    border-radius: 5px;
+    margin: auto;
+    padding-bottom: 10px;
+    height: 110px;
+    width: 110px;
 }
 
 .project-name{

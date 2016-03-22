@@ -11,30 +11,74 @@
             <div class="col-md-11">
                 <h2>Abonnements</h2>
                 </br>
-                {% for abonnement in abonnements %}
+                <div class="row panelThematics panel-primary">
+                <div class="panel-heading">
+                    <h4>Catégories</h4>
+                </div>
+                </br>
+                {% for abonnementCategorie in abonnementsCategorie %}
                     <div id="project-column" class="col-md-3">
                         <div class="project-name">
-                            <strong>{{ abonnement.name }}</strong>
+                            <strong>{{ abonnementCategorie.name }}</strong>
                         </div>
                         <div class="panel panel-default">
-                        	<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+                        	<a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
                             	<div class="projectPicture"></div>
                         	</a>
                             <div class="panel-footer">
                                 <div class="row">
-                                	<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+                                	<a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
                                     	<div class="col-md-6 recentProject">
                                         	<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
-                                        	Page projet
+                                        	Page catégorie
                                     	</div>
                                 	</a>
                                     <div class="col-md-6 project">
-                                        {% if not abonnement in abonnements %}
+                                        {% if not abonnementCategorie in abonnementsCategorie %}
                                             <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ abonnement.name }}" id="follow">Suivre</div>
+                                            <div class ="{{ abonnementProjet.name }}" id="follow">Suivre</div>
                                         {% else %}
                                             <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ abonnement.name }}" id="follow">Ne plus suivre</div>
+                                            <div class ="{{ abonnementCategorie.name }}" id="follow">Ne plus suivre</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+
+                <div class="row panelThematics panel-primary">
+                </br></br></br>
+                <div class="panel-heading">
+                    <h4>Projets</h4>
+                </div>
+                </br>
+                {% for abonnementProjet in abonnementsProjet %}
+                    <div id="project-column" class="col-md-3">
+                        <div class="project-name">
+                            <strong>{{ abonnementProjet.name }}</strong>
+                        </div>
+                        <div class="panel panel-default">
+                            <a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+                                <div class="projectPicture"></div>
+                            </a>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+                                        <div class="col-md-6 recentProject">
+                                            <object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
+                                            Page projet
+                                        </div>
+                                    </a>
+                                    <div class="col-md-6 project">
+                                        {% if not abonnementProjet in abonnementsProjet %}
+                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+                                            <div class ="{{ abonnementProjet.name }}" id="follow">Suivre</div>
+                                        {% else %}
+                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                            <div class ="{{ abonnementProjet.name }}" id="follow">Ne plus suivre</div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -44,7 +88,6 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
 
     </div>
     <div class="col-md-3">
@@ -85,12 +128,12 @@
 
 var projectsName = [];
 
-{% for abonnement in abonnements %}
-    if (projectsName.indexOf("{{ abonnement.name }}") == -1) {
-        projectsName.push("{{ abonnement.name }}");
+{% for abonnementProjet in abonnementsProjet %}
+    if (projectsName.indexOf("{{ abonnementProjet.name }}") == -1) {
+        projectsName.push("{{ abonnementProjet.name }}");
 
-        $('[class="' + "{{ abonnement.name }}" + '"]').click(function() {
-            likefunction($('[class="' + "{{ abonnement.name }}" + '"]'), "{{ abonnement.name }}");
+        $('[class="' + "{{ abonnementProjet.name }}" + '"]').click(function() {
+            likefunction($('[class="' + "{{ abonnementProjet.name }}" + '"]'), "{{ abonnementProjet.name }}");
         });
 
     };
