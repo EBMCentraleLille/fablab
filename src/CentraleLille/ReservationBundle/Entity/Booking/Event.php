@@ -198,5 +198,4 @@ class Event
         $this->title = $title;
     }
 
-
 }

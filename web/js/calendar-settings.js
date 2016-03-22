@@ -32,22 +32,36 @@ $(function () {
         ],
         selectable: true,
         selectHelper: true,
-        select: function(start, end) {
+        select: function(start, end, allDay) {
             $('#myModal').modal('show');
             $('#submitEvent').click(function(){
                 var description =  $('#eventDescription').val();
-                var eventData = {
+                start = start.getTime();
+                end = end.getTime();
+                var e = {
+                        title: 'titre1',
                         description: description,
                         start: start,
-                        end: end
+                        end: end,
+                        allDay: allDay
                     };
+                if(e.title){
+                    $.ajax({
+                        url: Routing.generate('fullcalendar_loader'),
+                        data: 'title='+ e.title+'&start='+ e.start +'&end='+ e.end +'&description='+ e.description,
+                        type: "POST",
+                        success: function(json) {
+                            alert('Added Successfully');
+                        }
+                    });
+                }
                 $('#myModal').modal('hide');
-                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                $('#calendar').fullCalendar('renderEvent', e, true); // stick? = true
             });
             $('#calendar').fullCalendar('unselect');
         },
-        editable: true,
+        editable: false,
         eventLimit: true, // allow "more" link when too many events
-        defaultView: 'agendaWeek'
+        defaultView: 'agendaWeek',
     });
 });

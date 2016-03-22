@@ -6,6 +6,9 @@ use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
 use Proxies\__CG__\CentraleLille\ReservationBundle\Entity\Booking\Event;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
+
 
 /**
  * Event Class Doc
@@ -30,32 +33,40 @@ class CalendarEventListener
 
     public function loadEvents(CalendarEvent $calendarEvent)
     {
-        $startDate = $calendarEvent->getStartDatetime();
-        $endDate = $calendarEvent->getEndDatetime();
-
         $request = $calendarEvent->getRequest();
-        $id = $request->get('id');
+
+        $title = $request->get('title');
+        $description = $request->get('description');
+        $start = $request->get('start');
+        $end = $request->get('end');
+
+        $id = 1; /////TO FIX --> get ID from route
+
         //create some dummy event
-
-        $id = '1';
-
-        $em = $this->entityManager;
-        $repository = $em->getRepository('ReservationBundle:Booking\Event');
-        $resource = $repository ->find($id)->getBookable();
-        $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
-        $event->setBookable($resource);
-        $event->setStartDateTime(getdate());
-        $event->setEndDateTime(getdate());
+        if ($title && $description && $start && $end){
+            //converting unix timestamp from ms to s (because javascript provide ms)
+            $start = \DateTime::createFromFormat( 'U', $start/1000 );
+            $end = \DateTime::createFromFormat( 'U', $end/1000 );
 
 
-
-        $em->persist($event);
+            $em = $this->entityManager;
+            $repository = $em->getRepository('ReservationBundle:Booking\Event');
+            $resource = $repository ->find($id)->getBookable();
+            $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
+            $event->setBookable($resource);
+            $event->setTitle($title);
+            $event->setDescription($description);
+            $time = new \DateTime('now');
+            $event->setCreationDateTime($time);
+            $event->setStartDateTime($start);
+            $event->setEndDateTime($end);
+            $em->persist($event);
+            $em->flush();
+        }
 
 
         // The original request so you can get filters from the calendar
         // Use the filter in your query for example
-
-
 
 
         // load events using your custom logic here,
@@ -89,7 +100,7 @@ class CalendarEventListener
             //optional calendar event settings
                 $eventEntity->setBgColor('#FF0000'); //set the background color of the event's label
                 $eventEntity->setFgColor('#FFFFFF'); //set the foreground color of the event's label
-                $eventEntity->setUrl('http://www.google.com'); // url to send user to when event label is clicked
+                $eventEntity->setUrl('#'); // url to send user to when event label is clicked
 
             //finally, add the event to the CalendarEvent for displaying on the calendar
                 $calendarEvent->addEvent($eventEntity);
