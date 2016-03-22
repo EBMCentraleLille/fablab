@@ -1,0 +1,115 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/abonnements.css') }}" />
+
+{% endblock stylesheets %}
+
+{% block body %}
+
+    <div class="abonnements">
+        <div class="col-md-9">
+            <div class="col-md-11">
+                <h2>Abonnements</h2>
+                </br>
+                {% for abonnement in abonnements %}
+                    <div id="project-column" class="col-md-3">
+                        <div class="project-name">
+                            <strong>{{ abonnement.name }}</strong>
+                        </div>
+                        <div class="panel panel-default">
+                        	<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+                            	<div class="projectPicture"></div>
+                        	</a>
+                            <div class="panel-footer">
+                                <div class="row">
+                                	<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+                                    	<div class="col-md-6 recentProject">
+                                        	<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
+                                        	Page projet
+                                    	</div>
+                                	</a>
+                                    <div class="col-md-6 project">
+                                        {% if not abonnement in abonnements %}
+                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+                                            <div class ="{{ abonnement.name }}" id="follow">Suivre</div>
+                                        {% else %}
+                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                            <div class ="{{ abonnement.name }}" id="follow">Ne plus suivre</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="col-md-3">
+        <div class="right-menu">
+            <div class="row">
+                <form role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Rechecher un projet dans mes abonnements">
+                    </div>
+                </form>
+
+				<div class="panel-heading">
+					<h4>Suggestions</h4>
+				</div>
+		  		<div class="recent-news">
+			  		{% for recentProject in recentProjects %}
+		  				<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+		  					<li class="list-group-items">
+			  					<div class="row">
+				  					<div class="col-md-3">
+				  						<div class="recentProjectPicture"></div>
+				  					</div>
+				  					<div class="recentProjectSide">
+		  								<strong>{{ recentProject.name }}</strong>
+				  					</div>
+			  				</li>
+			  			</a>
+		  			{% endfor %}
+		  		</div>
+
+            </div>
+        </div>
+    </div>
+
+<script src="{{ asset('jquery.js') }}"></script>
+<script src="{{ asset('js/oXHR.js') }}"></script>
+<script>
+
+var projectsName = [];
+
+{% for abonnement in abonnements %}
+    if (projectsName.indexOf("{{ abonnement.name }}") == -1) {
+        projectsName.push("{{ abonnement.name }}");
+
+        $('[class="' + "{{ abonnement.name }}" + '"]').click(function() {
+            likefunction($('[class="' + "{{ abonnement.name }}" + '"]'), "{{ abonnement.name }}");
+        });
+
+    };
+{% endfor %}
+
+function likefunction(projectLike, projectLikeName) {
+    var xhr = getXMLHttpRequest();
+    if (projectLike.eq(0).text() == "Suivre") {
+        projectLike.text("Ne Plus Suivre");
+        projectLike.prev().attr('data',"{{ asset('icons/likeOn.svg') }}");
+    } else {
+        projectLike.text("Suivre");
+        projectLike.prev().attr('data',"{{ asset('icons/like.svg') }}");
+    }
+    xhr.open("POST", "{{ path('news_feed_subscribe') }}", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("projet=" + projectLikeName);
+    xhr.send(null);
+};
+
+</script>
+{% endblock body %}

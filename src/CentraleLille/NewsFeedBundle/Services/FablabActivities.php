@@ -66,9 +66,9 @@ class FablabActivities implements FablabActivitiesInterface
         $activity->setUser($user);
         $activity->setProject($projet);
         $activity->setType($type);
-        if ($type = 1) {
+        if ($type = 'creation') {
             $content = "Martin a créé le projet.";
-        } elseif ($type = 2) {
+        } elseif ($type = 'update') {
             $content = "Martin a mis à jour le projet.";
         }
 
@@ -130,8 +130,8 @@ class FablabActivities implements FablabActivitiesInterface
      * Fonction de recherche des activités en fonction des abonnements d'un user
      *
      * @param array   $abonnements Entité Projet
-     * @param integer $nb     Nombre d'activités recherchées
-     * @param integer $from   Offset de recherche
+     * @param integer $nb          Nombre d'activités recherchées
+     * @param integer $offset      Offset de recherche
      *
      * @return array $activities Array d'Entités activités
      */
@@ -140,29 +140,31 @@ class FablabActivities implements FablabActivitiesInterface
         $activities = [];
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
 
-        foreach($abonnements as $abonnement) {
+        foreach ($abonnements as $abonnement) {
             $query = $repository->createQueryBuilder('a')
-            ->where('a.project = :abonnement' )
-            ->orderBy('a.date', 'DESC')
-            ->setParameter('abonnement', $abonnement)
-            ->setFirstResult($offset)
-            ->setMaxResults($nb)
-            ->getQuery();
-        $activitiesProjet = $query->getResult();
-        array_push($activities, $activitiesProjet);
+                ->where('a.project = :abonnement')
+                ->orderBy('a.date', 'DESC')
+                ->setParameter('abonnement', $abonnement)
+                ->setFirstResult($offset)
+                ->setMaxResults($nb)
+                ->getQuery();
+            $activitiesProjet = $query->getResult();
+            array_push($activities, $activitiesProjet);
         }
 
         $activities = call_user_func_array('array_merge', $activities);
-        usort($activities, function($a, $b)
-            {
-                if ($a > $b) { 
+        usort(
+            $activities,
+            function ($a, $b) {
+                if ($a > $b) {
                     return -1;
                 } elseif ($a < $b) {
                     return 1;
                 } else {
                     return 0;
                 }
-            });
+            }
+        );
 
         return array_splice($activities, 0, $nb);
     }

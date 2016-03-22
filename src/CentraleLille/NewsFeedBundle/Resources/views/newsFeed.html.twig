@@ -21,36 +21,40 @@
             <div class="col-md-1"></div>
             <div class="col-md-11">
                 <h2>Fil d'actualité</h2>
-                {% for recentActivity in recentActivities %}
-                    <div class="news row">
-                        <div class="project-name">
-                            {{ recentActivity.project.name }}
-                            <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
-                        <div class="activity-content">
-                                {{ recentActivity.content }}
+                {% if not recentActivities %}
+                    Vous n'avez aucune activité à afficher. N'hésitez pas à suivre des projets où des catégories pour voir leurs actualités.
+                {% else %}
+                    {% for recentActivity in recentActivities %}
+                        <div class="news row">
+                            <div class="project-name">
+                                {{ recentActivity.project.name }}
+                                <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
+                            <div class="activity-content">
+                                    {{ recentActivity.content }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="recentProjectPicture"></div>
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-md-6 recentProject">
-                                        {% if recentActivity.project in abonnements %}
-                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
-                                        {% else %}
-                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-md-6 recentProject">
-                                        <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
+                            <div class="panel panel-default">
+                                <div class="recentProjectPicture"></div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-6 recentProject">
+                                            {% if recentActivity.project in abonnements %}
+                                                <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+                                                <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
+                                            {% else %}
+                                                <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                                <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-6 recentProject">
+                                            <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
             </div>
             
         </div>
@@ -78,10 +82,13 @@
                     </div>
                 </div>
                 <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mes Abonnements
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
+                    <a href="{{ path("centrale_lille_newsfeed_abonnements")}}">
+                        <div class="panel-body">
+                            Mes Abonnements
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

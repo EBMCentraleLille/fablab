@@ -67,9 +67,9 @@ class Activity
     private $user;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="Type", type="integer")
+     * @ORM\Column(name="Name", type="string", length=255)
      */
     private $type;
 
