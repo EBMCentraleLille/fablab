@@ -85,10 +85,13 @@ class HomepageController extends Controller
         //Récupération des projets de la catégories en question
         $categoryService = $this->container->get('fablab_newsfeed.categories');
         $projects=$categoryService->getProjectsCategory($category);
+        $users=$categoryService->getUsersCategory($category);
         return $this->render(
             'CentraleLilleHomepageBundle:category.html.twig',
             [
                 'projects' => $projects,
+                'users' => $users,
+                'category' => $category,
             ]
         );
     }
