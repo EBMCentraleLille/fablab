@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
             new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle(),
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
