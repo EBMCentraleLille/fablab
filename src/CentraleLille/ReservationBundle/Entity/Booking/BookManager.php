@@ -22,12 +22,22 @@ class BookManager
         $this->BookStrategy = $bookStrategy;
     }
 
-    public function book($user,$project,$start,$end,$bookable){
+    /**
+     * @param $user
+     * @param $project
+     * @param $start
+     * @param $end
+     * @param $bookable
+     */
+    public function book($user, $project, $start, $end, $bookable){
         $bookstrategy = $this->BookStrategy;
 
         $bookstrategy->book($user,$project,$start,$end,$bookable);
     }
 
+    /**
+     * @param $event
+     */
     public function release($event)
     {
         $bookstrategy = $this->BookStrategy;

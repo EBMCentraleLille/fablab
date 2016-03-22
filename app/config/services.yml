@@ -24,3 +24,8 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: kernel.event_listener, event: calendar.load_events, method: loadEvents}
+
+    centrale.reservation.event_booker:
+        class: CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookManager
+        tags:
+            - { name: event_booker }

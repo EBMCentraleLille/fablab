@@ -5,9 +5,6 @@ namespace CentraleLille\ReservationBundle\Event;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
-use Proxies\__CG__\CentraleLille\ReservationBundle\Entity\Booking\Event;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -40,19 +37,18 @@ class CalendarEventListener
         $start = $request->get('start');
         $end = $request->get('end');
 
-        $id = 1; /////TO FIX --> get ID from route
+        $idMachine = 1; /////TO FIX --> get ID from route
 
-        //create some dummy event
         if ($title && $description && $start && $end){
             //converting unix timestamp from ms to s (because javascript provide ms)
             $start = \DateTime::createFromFormat( 'U', $start/1000 );
             $end = \DateTime::createFromFormat( 'U', $end/1000 );
 
-
             $em = $this->entityManager;
-            $repository = $em->getRepository('ReservationBundle:Booking\Event');
-            $resource = $repository ->find($id)->getBookable();
+            $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
+            $resource = $repository ->find($idMachine);
             $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
+
             $event->setBookable($resource);
             $event->setTitle($title);
             $event->setDescription($description);
@@ -60,6 +56,12 @@ class CalendarEventListener
             $event->setCreationDateTime($time);
             $event->setStartDateTime($start);
             $event->setEndDateTime($end);
+            $event->setStatus('');
+
+            //$booker = $this->get('event_booker');
+
+            //$booker->book();
+
             $em->persist($event);
             $em->flush();
         }
@@ -76,7 +78,7 @@ class CalendarEventListener
             ->getRepository('ReservationBundle:Booking\Event')
             ->createQueryBuilder('event')
             ->where('event.bookable = :id')
-            ->setParameter('id', $id)
+            ->setParameter('id', $idMachine)
             ->getQuery()->getResult();
 
         // $companyEvents and $companyEvent in this example
