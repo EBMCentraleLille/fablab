@@ -3,7 +3,12 @@ service_task:
   prefix: /api
   resource: CentraleLille\GdpBundle\Controller\TaskController
 
-service list:
+service_event:
+  type: rest
+  prefix: /api
+  resource: CentraleLille\GdpBundle\Controller\EventController
+
+service_list:
   type: rest
   prefix: /api
   resource: CentraleLille\GdpBundle\Controller\TaskListController
