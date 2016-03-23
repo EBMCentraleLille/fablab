@@ -52,9 +52,12 @@ class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
         $projet1->setName('projet de martin');
         $projet2->setName('projet de charles');
         $projet3->setName('projet de gregoire');
-        $projet1->setPicture('http://thingiverse-production-new.s3.amazonaws.com/renders/81/3a/fe/1b/67/s105_preview_featured.jpg');
-        $projet2->setPicture('http://thingiverse-production-new.s3.amazonaws.com/renders/8d/14/ce/a2/af/d7cd591717d65159d228d939146d31b4_preview_featured.JPG');
-        $projet3->setPicture('https://thingiverse-production-new.s3.amazonaws.com/renders/f4/3f/0a/ce/2b/3dc783ba406af2c3a1a9ae087654c83f_preview_featured.jpg');
+        $projet1->setPicture('http://thingiverse-production-new.s3.amazonaws.com/'
+                                .'renders/81/3a/fe/1b/67/s105_preview_featured.jpg');
+        $projet2->setPicture('http://thingiverse-production-new.s3.amazonaws.com/'
+                                .'renders/8d/14/ce/a2/af/d7cd591717d65159d228d939146d31b4_preview_featured.JPG');
+        $projet3->setPicture('https://thingiverse-production-new.s3.amazonaws.com/'
+                                .'renders/f4/3f/0a/ce/2b/3dc783ba406af2c3a1a9ae087654c83f_preview_featured.jpg');
 
         $manager->persist($projet1);
         $manager->persist($projet2);

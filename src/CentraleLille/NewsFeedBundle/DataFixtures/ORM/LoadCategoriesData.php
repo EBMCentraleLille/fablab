@@ -65,17 +65,20 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
         $category2->setName('Impression 3D');
         $category2->addProject($this->getReference('projet-martin'));
         $category2->addProject($this->getReference('projet-gregoire'));
-        $category2->setPicture('http://www.metronews.fr/_internal/gxml!0/r0dc21o2f3vste5s7ezej9x3a10rp3w$jf8ubqtwt541moqj1c66vgxo4bbj2a3/Replicator-21.jpeg');
+        $category2->setPicture('http://www.metronews.fr/_internal/gxml!0/r0dc21o2f3vste5s7ezej9x3'
+                                .'a10rp3w$jf8ubqtwt541moqj1c66vgxo4bbj2a3/Replicator-21.jpeg');
 
         $category3->setName('Electronique');
         $category3->addProject($this->getReference('projet-martin'));
         $category3->addProject($this->getReference('projet-charles'));
-        $category3->setPicture('http://industrie.meosix.fr/nfelec/wp-content/uploads/sites/11/2014/10/composant-electronique.jpg');
+        $category3->setPicture('http://industrie.meosix.fr/nfelec/wp-content/uploads/sites/'
+                                .'11/2014/10/composant-electronique.jpg');
 
         $category4->setName('Informatique');
         $category4->addProject($this->getReference('projet-charles'));
         $category4->addProject($this->getReference('projet-gregoire'));
-        $category4->setPicture('http://ceryom.com/wp-content/uploads/2015/06/developpement-web-nancy-concept-programmation-web-developpeur-web-agence-web-nancy-communication.png');
+        $category4->setPicture('http://ceryom.com/wp-content/uploads/2015/06/developpement-web-nancy'
+                                .'-concept-programmation-web-developpeur-web-agence-web-nancy-communication.png');
 
         $category5->setName('CAO');
         $category5->addProject($this->getReference('projet-martin'));

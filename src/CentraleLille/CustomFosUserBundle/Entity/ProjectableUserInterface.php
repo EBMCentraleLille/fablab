@@ -8,7 +8,7 @@
 
 namespace CentraleLille\CustomFosUserBundle\Entity;
 
-interface ProjectableInterface
+interface ProjectableUserInterface
 {
 
     /**
