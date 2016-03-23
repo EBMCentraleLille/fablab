@@ -5,6 +5,8 @@ namespace CentraleLille\ReservationBundle\Event;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Validator\Constraints\DateTime;
+use CentraleLille\ReservationBundle\Entity\Booking\Event;
 
 /**
  * Event Class Doc
@@ -46,13 +48,12 @@ class CalendarEventListener
             $em = $this->entityManager;
             $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
             $resource = $repository ->find($idMachine);
-            $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
+            $event = new Event();
 
             $event->setBookable($resource);
             $event->setTitle($title);
             $event->setDescription($description);
-            $time = new \DateTime('now');
-            $event->setCreationDateTime($time);
+            $event->setCreationDateTime();
             $event->setStartDateTime($start);
             $event->setEndDateTime($end);
             $event->setStatus('');
