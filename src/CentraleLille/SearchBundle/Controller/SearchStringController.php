@@ -44,6 +44,10 @@ class SearchStringController extends Controller
         $jsonContentProjet = '';
         $jsonContentSkills = '';
         $jsonTotal = '';
+        $datauser = [];
+        $dataprojet = [];
+        $dataskills = [];
+        $datamachine = [];
         $search = new SearchString();
         $searchForm = $this->get('form.factory')->createNamed(
             '',
@@ -183,8 +187,8 @@ class SearchStringController extends Controller
 
             $fieldQuery5 = new \Elastica\Query\Match();
             $fieldQuery5->setFieldQuery('name', $search->getStringSearch());
-            $fieldQuery5->setFieldFuzziness('name', 0.7);
-            $fieldQuery5->setFieldMinimumShouldMatch('name', '80%');
+            $fieldQuery5->setFieldFuzziness('name', 2);
+            $fieldQuery5->setFieldMinimumShouldMatch('name', '40%');
             $query_part_skills->addShould($fieldQuery5);
 
 
