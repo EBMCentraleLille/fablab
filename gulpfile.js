@@ -30,7 +30,7 @@ var vendorJS = [
 
 var vendorCSS = [
     './node_modules/angular-toastr/dist/angular-toastr.min.css',
-    './node_modules/bootstrap/dist/css/bootstrap.min.css'
+    //'./node_modules/bootstrap/dist/css/bootstrap.min.css'
 ]
 
 
