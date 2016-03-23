@@ -38,6 +38,7 @@
 
 
     <div class="result">
+  
       <h3>Projets</h3>
       {% if result_project|length > 0 %}
 
@@ -147,10 +148,21 @@ var options = {
     listLocation: "user",
     maxNumberOfElements: 4,
     header: "Utilisateur"
-  }, {
+  }, 
+  {
     listLocation: "machine",
     maxNumberOfElements: 4,
     header: "Machine"
+  },
+  {
+    listLocation: "competence",
+    maxNumberOfElements: 4,
+    header: "Compétences"
+  },
+  {
+  listLocation: "projet",
+    maxNumberOfElements: 4,
+    header: "Projet"
   }],
 
   getValue: function(element) {
@@ -165,7 +177,7 @@ var options = {
   },
 
   list: {
-    maxNumberOfElements: 8,
+    maxNumberOfElements: 20,
     match: {
       enabled: true
     },
@@ -182,7 +194,7 @@ var options = {
     }
   },
 
-  requestDelay: 300
+  requestDelay: 150
 };
 
 $("#stringSearch").easyAutocomplete(options);
