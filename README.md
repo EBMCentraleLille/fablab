@@ -17,7 +17,9 @@ Bower will install bootstrap for layout.
 
 ###Integration
 
-Local serv at : 172.31.4.227
+Local server at : http://172.31.4.227
+
+It actualizes from GitHub once every day.
 
 
 ###Tests
@@ -96,7 +98,7 @@ Ex : ProjectController
 Il suffit d'ajouter dans le template la ligne suivante:
 
 ```
-{% if currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
+{% if project_service.isAllowedLeader(currentUser, project) %}
     <p>This part is visible only by the PROJECT_LEADER</p>
 {% endif %}
 ```

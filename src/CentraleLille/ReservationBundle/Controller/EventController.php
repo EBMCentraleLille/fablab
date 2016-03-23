@@ -12,12 +12,11 @@
 
 namespace CentraleLille\ReservationBundle\Controller;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use ADesigns\CalendarBundle\Event\CalendarEvent;
+use CentraleLille\ReservationBundle\Entity\Bookables\Machine;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
-use CentraleLille\ReservationBundle\Entity\Event;
-use CentraleLille\ReservationBundle\Entity\Machine;
+use CentraleLille\ReservationBundle\Entity\Booking\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -44,101 +43,83 @@ class EventController extends Controller
      * @return Redirect
      */
 
-    public function reserverAction(Request $request)
+    public function bookAction(Request $request)
     {
-        $event = new Event();
-        $event->setCreationDateTime();
-        $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
+        $em = $this->getDoctrine()->getManager();
 
-        $formBuilder->add(
-            'startDateTime',
-            'datetime',
-            array(
+        $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
-            'placeholder' => array(
-                'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-            ))
-        )
-            ->add(
-                'endDateTime',
-                'datetime',
-                array(
-                'placeholder'=> array(
-                    'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
-                    'hour'=>'Heure','minute'=>'Minute',
-                ))
-            )
-            ->add(
-                'machine',
-                EntityType::class,
-                array(
-                'class' => 'ReservationBundle:Machine',
-                'choice_label' => 'machineName',
-                'multiple' => false,
-                'required' => true,
-                'expanded' => true)
-            )
-            ->add('sauvegarder', 'submit');
+        $machines = $repository->findAll();
 
+        // machines fitering
 
-            $form = $formBuilder->getForm();
+        $machinesAvailables = array();
+        $machinesUnavailables = array();
+        $machinesOutOfOrder = array();
+        $machinesBeingTested = array();
 
-            $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $request->isMethod("POST")) {
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($event);
-                $em->flush();
-                $event = new Event();
-                $formBuilder = $this->get('form.factory')->createBuilder('form', $event);
-                $formBuilder->add(
-                    'startDateTime',
-                    'datetime',
-                    array(
-                    'placeholder' => array(
-                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
-                    ))
-                )
-                    ->add(
-                        'endDateTime',
-                        'datetime',
-                        array(
-                        'placeholder'=> array(
-                            'year'=>'Année','month'=> 'Mois', 'day'=> 'Jour',
-                            'hour'=>'Heure','minute'=>'Minute',
-                        ))
-                    )
-                    ->add(
-                        'machine',
-                        EntityType::class,
-                        array(
-
-                        'class' => 'ReservationBundle:Machine',
-                        'choice_label' => 'machineName',
-                        'multiple' => false,
-                        'required' => true,
-
-                        'expanded' => true)
-                    )
-
-                    ->add('sauvegarder', 'submit');
-
-                $form = $formBuilder ->getForm();
-
-                return $this->render(
-                    'ReservationBundle::reservation.html.twig',
-                    array('form'=> $form->createView())
-                );
+        foreach ($machines as $machine) {
+            switch ($machine->getStatut()) {
+                case 'Disponible':
+                    array_push($machinesAvailables, $machine);
+                    break;
+                case 'Indisponible':
+                    array_push($machinesUnavailables, $machine);
+                    break;
+                case 'Hors Service':
+                    array_push($machinesOutOfOrder, $machine);
+                    break;
+                case 'En Test':
+                    array_push($machinesBeingTested, $machine);
+                    break;
             }
+
         }
 
-            return $this->render(
-                'ReservationBundle::reservation.html.twig',
-                array('form' => $form->createView())
-            );
+        return $this->render(
+            'ReservationBundle::booking.html.twig',
+            array(
+                'machinesAvailables'=>$machinesAvailables,
+                'machinesUnavailables'=>$machinesUnavailables,
+                'machinesOutOfOrder'=>$machinesOutOfOrder,
+                'machinesBeingTested'=>$machinesOutOfOrder
+                )
+        );
+    }
 
+    public function viewResourceAction($resourceType, $id)
+    {
+        switch ($resourceType) {
+            case 'machine':
+                $em = $this->getDoctrine()->getManager();
+                $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
+
+                if (is_numeric($id)) {
+                    $machine = $repository ->find($id);
+                    if (! is_null($machine)) { //if machine id is good, display planning
+                        return $this->render(
+                            'ReservationBundle::resourceBooking.html.twig',
+                            array('machine'=>$machine)
+                        );
+                    } else { //if this machine id does not return something, do smthg else
+                        $machines = $repository->findAll();
+                        return $this->render(
+                            'ReservationBundle::reservation.html.twig',
+                            array('machines'=>$machines)
+                        );
+                    }
+
+                } else { // if id is not a number, go back
+                    $machines = $repository->findAll();
+                    return $this->render(
+                        'ReservationBundle::reservation.html.twig',
+                        array('machines'=>$machines)
+                    );
+                }
+                break;
+            case 'room':
+                break;
+        }
     }
 
     /**
@@ -153,7 +134,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $repository = $em->getRepository('ReservationBundle:Machine');
+        $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
 
         $machines = $repository->findAll();
 
