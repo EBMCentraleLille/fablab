@@ -67,7 +67,7 @@ class TaskListController extends FOSRestController
      */
      public function deleteListAction($taskListId)
      {
-          $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TasklList');
+          $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
           $taskList = $repo->findOneBy(
             array('id' => $taskListId)
           );
@@ -105,7 +105,7 @@ class TaskListController extends FOSRestController
      */
 	public function getListAction($taskListId)
      {
-          $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TasklList');
+          $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
           $taskList = $repo->findOneBy(
                array('id' => $taskListId)
           );
@@ -135,7 +135,7 @@ class TaskListController extends FOSRestController
      *
      * @return View
      */
-     public function putAddTaskAction($taskListId, $taskId)
+     public function putListAddAction($taskListId, $taskId)
      {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $repoTaskLists = $this->getDoctrine()->getRepository('CustomFosUserBundle:TaskList');
