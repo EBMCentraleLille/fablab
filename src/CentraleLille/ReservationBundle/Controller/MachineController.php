@@ -61,7 +61,8 @@ class MachineController extends Controller
                 'choices'=>array(
                     'Disponible'=>'Disponible',
                     'Indisponible'=>'Indisponible',
-                    'Hors Service'=>'Hors Service'
+                    'Hors Service'=>'Hors Service',
+                    'En Test'=>'En Test'
                 ),
                 'choices_as_values'=>true
                 ])

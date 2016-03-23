@@ -22,7 +22,7 @@
                 <img src="http://centrale.ec-lille.fr/img/logo_site_1.gif" alt="logo fablab"/>
             </div>
             <div class="col-md-4 pull-right text-center">
-                <h3>Bonjour NOM PRENOM !</h3>
+                <h3>Bonjour {{ app.user.username|upper }} !</h3>
                 <p>Nous sommes le {{date().timestamp |date('d/m/Y H:i')}}</p>
             </div>
                 </row>
