@@ -1,0 +1,25 @@
+<ul class="list-group col-md-4" >
+	<div class="list-group-item active">
+	    <h4>Dernières Actualités</h4>
+  	</div>
+  	<div class="recent-news">
+	  	{% for recentActivity in recentActivities %}
+  			<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+  				<li class="list-group-items">
+	  				<div class="row">
+		  				<div class="news col-md-3"></div>
+		  				<div class="col-md-9">
+		  					{% for project in recentActivity %}
+		  						<strong>{{ project.name }}:</strong></br>
+		  					{% endfor %}
+		  					{% for user in recentActivity %}
+		  						<strong>{{ user.firstname }}:</strong></br>
+		  					{% endfor %}
+		  					{{ recentActivity.content }}
+		  				</div>
+		  			</div>
+	  			</li>
+	  		</a>
+  		{% endfor %}
+  	</div>
+</ul>
