@@ -12,15 +12,17 @@
                 {{ form_label(form.name, 'Intitué du projet', {'label_attr':{'class': 'control-label'}}) }}
                 {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
             </div>
-            <div class="form-group">
+            <div>
                 {{ form_errors(form.dateBegin) }}
                 {{ form_label(form.dateBegin, 'Date de début', {'label_attr':{'class': 'control-label'}}) }}
-                {{ form_widget(form.dateBegin, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_widget(form.dateBegin) }}
+                </br>
             </div>
-            <div class="form-group">
+            <div>
                 {{ form_errors(form.dateEnd) }}
                 {{ form_label(form.dateEnd, 'Date de fin', {'label_attr':{'class': 'control-label'}}) }}
-                {{ form_widget(form.dateEnd, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_widget(form.dateEnd) }}
+                </br>
             </div>
             <div class="form-group">
                 {{ form_errors(form.picture) }}

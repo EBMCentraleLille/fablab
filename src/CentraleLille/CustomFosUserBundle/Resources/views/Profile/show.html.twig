@@ -2,25 +2,48 @@
 
 {% block body %}
 <br><br><br>
-<div class="row">
-	<div class="col-md-4 col-md-offset-4">
-		<h1 class="text-primary text-center">Mon profil</h1>
+
+		<h1 class="text-primary text-center">Mon compte</h1>
 		</br>
 		<div class="fos_user_user_show">
-			<p>Prénom : {{ user.firstname }}</p>
-			<p>Nom : {{ user.lastname }}</p>
-			<p>Username : {{ user.username }}</p>
-			<p>Email : {{ user.email }}</p>
-			<p>Promo : {{ user.promo }}</p>
-			<p>Téléphone : {{ user.phone }}</p>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">Prénom : </div>
+				<div class="col-md-2">{{ user.firstname }}</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">Nom : </div>
+				<div class="col-md-2">{{ user.lastname }}</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">Nom : </div>
+				<div class="col-md-2">{{ user.lastname }}</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">Email : </div>
+				<div class="col-md-2">{{ user.email }}</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">Promo : </div>
+				<div class="col-md-2">{{ user.promo }}</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">Téléphone : </div>
+				<div class="col-md-2">{{ user.phone }}</div>
+			</div>
+			</br>
 		</div>
 		</br>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-md-4 col-md-offset-4">
-		<a href={{path('fos_user_profile_edit')}} class="btn btn-primary">Modifier</a>
+	<div class="col-md-3 col-md-offset-4">
+		<a href={{path('fos_user_profile_edit')}} class="btn btn-primary btn-block">Modifier</a>
 	</div>
 </div>
 {% endblock body %}
