@@ -55,38 +55,6 @@
                 </ul>
               </div>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li><a href="{{ path("homepage")}}">Accueil <span class="sr-only"></span></a></li>
-                <li><a href="{{ path("news_feed")}}">Fil d'actualité</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path('project_new') }}">Créer un projet</a></li>
-                <li><a href="#">Réserver une machine</a></li>
-                <li>
-                  <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Rechercher sur le site">
-                    </div>
-                  </form>
-                </li>
-                <li class="dropdown">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Mon Profil <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Username</a></li>
-                            <li><a href="#">Mes Messages <img  src="{{ asset('icons/message.svg') }}"></a></li>
-                            <li><a href="#">Mes Projets</a></li>
-                            <li><a href="#">Mes Projets</a></li>
-                            <li><a href="#">Mes Abonnements</a></li>
-                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><li>
-                        </ul>
-                    {% else %}
-                        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-                    {% endif %}
-                </li>
-              </ul>
-            </div>
           </div>
         </nav>
       </div>
