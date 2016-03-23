@@ -82,8 +82,56 @@ class NewsFeedController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                return $this->redirectToRoute(
-                    'centrale_lille_newsfeed'
+                $data = $form->getData();
+
+                foreach($recentActivities as $index => $recentActivity){
+                    $isDeleted = false;
+                    foreach($data as $key => $datavalue){
+                        if(!$isDeleted) {
+                            switch ($key) {
+                                case 'creation':
+                                    if ($recentActivity->getType() != 'Creation') {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                case 'update':
+                                    if ($recentActivity->getType() != 'update') {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                case 'dateMin':
+                                    if ($recentActivity->getDate() <= $datavalue['dateMin']) {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                case 'dateMax':
+                                    if ($recentActivity->getDate() >= $datavalue['dateMax']) {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                break;
+                                default:
+                                    if (is_numeric($key) /*&& $recentActivity->getProject()->getCategory() !== $thematics*/) {
+                                        //unset($recentActivity);
+                                        //$isDeleted = true;
+                                    }
+                            }
+                        }
+                    }
+
+                }
+
+                return $this->render(
+                    'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
+                    [
+                        'recentActivities' => $recentActivities,
+                        'abonnements' => $abonnementsProjet,
+                        'thematics' => $thematics,
+                        'form' => $form->createView(),
+                    ]
                 );
             }
 

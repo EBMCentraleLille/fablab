@@ -166,7 +166,7 @@ class Activity
     /**
      * Set type
      *
-     * @param integer $type Type de l'actualité: Création/Update/Personnalisé
+     * @param string $type Type de l'actualité: Création/Update/Personnalisé
      *
      * @return Activity
      */
@@ -180,7 +180,7 @@ class Activity
     /**
      * Get type
      *
-     * @return int
+     * @return string
      */
     public function getType()
     {
