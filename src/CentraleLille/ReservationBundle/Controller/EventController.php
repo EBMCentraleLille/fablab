@@ -140,7 +140,7 @@ class EventController extends Controller
 
 
         return $this->render(
-            'ReservationBundle::admin.html.twig',
+            'admin_list_resources.html.twig',
             array('machines'=>$machines)
         );
     }

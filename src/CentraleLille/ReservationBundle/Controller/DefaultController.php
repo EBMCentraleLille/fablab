@@ -73,9 +73,15 @@ class DefaultController extends Controller
 
         $machines = $repository->findAll();
 
+        $currentUser = $this->getUser();
+
         return $this->render(
-            'ReservationBundle::admin.html.twig',
-            array('machines'=>$machines, 'types'=>$types)
+            'ReservationBundle::admin_list_resources.html.twig',
+            array(
+                'machines'=>$machines,
+                'types'=>$types,
+                'currentUser'=>$currentUser
+            )
         );
     }
 

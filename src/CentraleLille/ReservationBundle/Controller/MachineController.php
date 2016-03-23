@@ -103,8 +103,8 @@ class MachineController extends Controller
     public function deleteMachineAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('ReservationBundle:Machine');
-        $repository_event = $em->getRepository('ReservationBundle:Event');
+        $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
+        $repository_event = $em->getRepository('ReservationBundle:Booking\Event');
         $machine = $repository ->find($id);
         $events = $repository_event->findByBookable($machine);
 
