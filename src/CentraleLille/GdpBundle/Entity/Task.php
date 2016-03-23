@@ -62,15 +62,24 @@ class Task
      */
     private $inChargeUser;
 
+
+    /* @ORM\ManyToMany(targetEntity="TaskList", inversedBy="tasks")
+     * @ORM\    JoinTable(name="tasks_lists")
+     */
+    private $taskLists;
+
+
     /**
      * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $project;
 
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -241,5 +250,21 @@ class Task
     public function setProject($project)
     {
         $this->project = $project;
+    }
+
+    /**
+     * @param mixed $taskList
+     */
+    public function addTaskList($taskList)
+    {
+        $this->taskLists[] = $taskList;
+    }
+
+    /**
+     * @return \CentraleLille\GdpBundle\Entity\User
+     */
+    public function getTaskList()
+    {
+        return $this->taskLists;
     }
 }
