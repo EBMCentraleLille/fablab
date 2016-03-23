@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block body %}
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-1"></div>
+	        <div class="col-md-10">
+	        	{% for recentActivity in recentActivities %}
+	        		{{ recentActivity.date|date('Y-m-d') }}, {{ recentActivity.content }}, {{ recentActivity.project.name }}, {{ recentActivity.user.firstname }} </br>
+	        	{% endfor %}
+	        	<a href="{{ path("centrale_lille_newsfeed_new_activity") }}" class="btn btn-primary"> 
+	        		Ajouter une activité
+	        	</a>
+	        </div>
+	    	<div class="col-md-1"></div>
+	    </div>	
+	</div>
+{% endblock body %}

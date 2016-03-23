@@ -1,0 +1,101 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
+{% endblock stylesheets %}
+{% block body %}
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-1"></div>
+	        <div class="col-md-10">
+	          	<div class="row panelHome weeklyProjectPicture panelHome-default" style="background-image:url('{{ starProject.projectPicture }}')">
+	            	<div class="jumbotronHome col-md-4" >
+	            		<h2> {{ starProject.projectName }} </h2>
+	  					<p> {{ starProject.content }} </p>
+	  					<p><a  class="btn btn-primary btn-lg"href="{{ path("project_page_homepage", { 'projectId':	starProject.projectId }) }}">En Savoir Plus</a></p>
+	            	</div>
+	            </div>
+	        </div>
+	    	<div class="col-md-1"></div>
+	    </div>
+	<div class="row">
+		<div class="col-md-1 "></div>
+		<ul class="list-group col-md-4" >
+			<div class="list-group-item active">
+	    		<h4>Dernières Actualités</h4>
+	  		</div>
+	  		<div class="recent-news">
+		  		{% for recentActivity in recentActivities %}
+		  			<a href="{{ path("project_page_homepage", { 'projectId': "5" }) }}">
+		  				<li class="list-group-items">
+			  				<div class="row">
+				  				<div class="news col-md-3" style="background-image:url('{{ recentActivity.project.picture }}')"></div>
+				  				<div class="col-md-9">
+				  					{% for project in recentActivity %}
+				  						<strong>{{ project.name }}:</strong></br>
+				  					{% endfor %}
+				  					{% for user in recentActivity %}
+				  						<strong>{{ user.firstname }}:</strong></br>
+				  					{% endfor %}
+				  					{{ recentActivity.content }}
+				  				</div>
+				  			</div>
+			  			</li>
+			  		</a>
+		  		{% endfor %}
+		  	</div>
+		</ul>
+		<div class="col-md-6">
+			<div class="row panelThematics panel-primary">
+				<div class="panel-heading">
+	    			<h4>Catégories</h4>
+	    		</div>
+	    		<div class="panel-body">
+				    {% for category in categories %}
+					    <div id="thematic-column" class="col-md-3">
+					    	<a href="{{ path("centrale_lille_homepage_category", { 'category': category.name }) }}">
+					    		<h4 class="thematicTitle"> {{ category.name }} </h4>
+					    	</a>
+					    	<a href="{{ path("centrale_lille_homepage_category", { 'category': category.name }) }}">
+					    		<div class="thematics" style="background-image:url('{{ category.picture }}')"></div>
+					    	</a>
+					    </div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row panel panel-primary ">
+				<div class="panel-heading">
+					<h4>Projets Récemment créés</h4>
+				</div>
+				<div class="panel-body">
+					{% for recentProject in recentProjects %}
+						<div class="col-md-4">
+							<div class="panel panel-default">
+							  	<div class="panel-heading">{{ recentProject.name }}</div>
+							  	<div class="recentProjectPicture" style="background-image:url('{{ recentProject.picture }}');"></div>
+							  	<div class="panel-footer">
+							  		<div class="row">
+								  		<div class="col-md-6 recentProjectSide">
+								  			<object data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+								  		</div>
+								  		<div class="col-md-4 recentProjectSide">
+								  			<object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object>
+								  		</div>
+								  	</div>
+							  	</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	</div>
+{% endblock body %}

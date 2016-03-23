@@ -79,6 +79,26 @@ interface FablabAbonnementsInterface
     public function getAboAll($user);
     
     /**
+     * Permet de savoir si un user est déja abonné à un projet
+     *
+     * @param array $user   Entité User
+     * @param array $projet Entité Projet
+     *
+     * @return void
+     */
+    public function isAboProjet($user, $projet);
+
+    /**
+     * Permet de savoir si un user est déja abonné à une catégorie
+     *
+     * @param array $user     Entité User
+     * @param array $category Entité Category
+     *
+     * @return void
+     */
+    public function isAboCategory($user, $category);
+    
+    /**
      * Ajoute l'abonnement d'un user à une categorie
      *
      * @param array $user     Entité User

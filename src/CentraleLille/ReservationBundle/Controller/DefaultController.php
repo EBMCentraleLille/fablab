@@ -58,26 +58,6 @@ class DefaultController extends Controller
         return new Response("Ici on va réserver les casiers");
     }
 
-    /**
-     *
-     * @return Response
-     */
-    public function adminAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $repository = $em->getRepository('CentraleLille\ReservationBundle\Entity\Bookables\Machine');
-        $repository_type = $em->getRepository('CentraleLille\ReservationBundle\Entity\Bookables\Type');
-
-        $types = $repository_type->findAll();
-
-        $machines = $repository->findAll();
-
-        return $this->render(
-            'ReservationBundle::admin.html.twig',
-            array('machines'=>$machines, 'types'=>$types)
-        );
-    }
 
     /**
      * @return Response

@@ -14,9 +14,13 @@ centrale_lille_casier:
     path: /casier
     defaults: {_controller:ReservationBundle:Default:casier}
 
-centrale_lille_administration:
+centrale_lille_administration_resources:
     path: machine/admin
-    defaults: {_controller:ReservationBundle:Default:admin}
+    defaults: {_controller:ReservationBundle:Admin:adminResources}
+
+centrale_lille_administration_events:
+    path: /admin
+    defaults: {_controller:ReservationBundle:Admin:adminEvents}
 
 centrale_lille_delete_machine:
     path: /machine/delete/{id}

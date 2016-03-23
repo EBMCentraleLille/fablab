@@ -2,3 +2,9 @@ services:
     fablab_newsfeed.abonnements:
         class: CentraleLille\NewsFeedBundle\Services\FablabAbonnements
         arguments: ['@doctrine.orm.entity_manager']
+    fablab_newsfeed.activities:
+        class: CentraleLille\NewsFeedBundle\Services\FablabActivities
+        arguments: ['@doctrine.orm.entity_manager']
+    fablab_newsfeed.categories:
+        class: CentraleLille\NewsFeedBundle\Services\FablabCategories
+        arguments: ['@doctrine.orm.entity_manager']
