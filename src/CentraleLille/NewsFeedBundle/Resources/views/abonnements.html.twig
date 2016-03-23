@@ -112,35 +112,18 @@
 
 <script src="{{ asset('jquery.js') }}"></script>
 <script src="{{ asset('js/oXHR.js') }}"></script>
+<script src="{{ asset('js/like.js') }}"></script>
 <script>
+    var projectsName = [];
 
-var projectsName = [];
+    {% for abonnementProjet in abonnementsProjet %}
+        if (projectsName.indexOf("{{ abonnementProjet.name }}") == -1) {
+            projectsName.push("{{ abonnementProjet.name }}");
 
-{% for abonnementProjet in abonnementsProjet %}
-    if (projectsName.indexOf("{{ abonnementProjet.name }}") == -1) {
-        projectsName.push("{{ abonnementProjet.name }}");
-
-        $('[class="' + "{{ abonnementProjet.name }}" + '"]').click(function() {
-            likefunction($('[class="' + "{{ abonnementProjet.name }}" + '"]'), "{{ abonnementProjet.name }}");
-        });
-
-    };
-{% endfor %}
-
-function likefunction(projectLike, projectLikeName) {
-    var xhr = getXMLHttpRequest();
-    if (projectLike.eq(0).text() == "Suivre") {
-        projectLike.text("Ne Plus Suivre");
-        projectLike.prev().attr('data',"{{ asset('icons/likeOn.svg') }}");
-    } else {
-        projectLike.text("Suivre");
-        projectLike.prev().attr('data',"{{ asset('icons/like.svg') }}");
-    }
-    xhr.open("POST", "{{ path('news_feed_subscribe') }}", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("projet=" + projectLikeName);
-    xhr.send(null);
-};
-
+            $('[class="' + "{{ abonnementProjet.name }}" + '"]').click(function() {
+                likefunction($('[class="' + "{{ abonnementProjet.name }}" + '"]'), "{{ abonnementProjet.name }}");
+            });
+        };
+    {% endfor %}
 </script>
 {% endblock body %}
