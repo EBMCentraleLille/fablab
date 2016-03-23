@@ -5,6 +5,7 @@ namespace CentraleLille\ReservationBundle\Event;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
+use CentraleLille\ReservationBundle\Entity\Booking\Event;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
