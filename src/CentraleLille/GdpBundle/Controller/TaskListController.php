@@ -1,10 +1,16 @@
 <?php
 namespace CentraleLille\GdpBundle\Controller;
 
+use FOS\RestBundle\Controller\FOSRestController;
+use CentraleLille\GdpBundle\Entity\Task;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\View\View;
+use FOS\RestBundle\Request\ParamFetcher;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 /**
  * Abstract list of tasks.
  */
-class TaskListController extends FOSTRestController
+class TaskListController extends FOSRestController
 {
     /**
      * Create a Task List from the submitted data.<br/>
@@ -25,7 +31,7 @@ class TaskListController extends FOSTRestController
      *
      * @return View
      */
-     public postTaskListAction(ParamFetcher $paramFetcher)
+     public function postTaskListAction(ParamFetcher $paramFetcher)
      {
         $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $taskList = new Task();
@@ -129,7 +135,7 @@ class TaskListController extends FOSTRestController
      *
      * @return View
      */
-     putAddTaskAction($taskListId, $taskId)
+     public function putAddTaskAction($taskListId, $taskId)
      {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $repoTaskLists = $this->getDoctrine()->getRepository('CustomFosUserBundle:TaskList');
