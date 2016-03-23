@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block body %}
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-1"></div>
+	        <div class="col-md-10">
+	        	{% for starProject in starProjects %}
+	        		{{ starProject.projectName }}, {{ starProject.content }} </br>
+	        	{% endfor %}
+	        	<a href="{{ path("centrale_lille_homepage_star_project_new") }}" class="btn btn-primary"> 
+	        		Ajouter un Projet Star
+	        	</a>
+	        </div>
+	    	<div class="col-md-1"></div>
+	    </div>	
+	</div>
+{% endblock body %}

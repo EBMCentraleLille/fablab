@@ -1,14 +1,24 @@
-{% extends "ReservationBundle:Default:index.html.twig" %}
+{% extends 'layout.html.twig' %}
 
 {% block title %} {{ parent() }} - Index {% endblock %}
 
 {% block body %}
-    <div class="container">
-    <div class="col-lg-3 col-md-3">
-    <h3>  Ajouter une machine </h3>
+    <div style="margin-top:75px">
+        <div class="row" >
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                <h3>  Ajouter une machine </h3>
+                <div class="well">
+                    {{ form(form) }}
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
     </div>
-    </div>
-<div class="well">
-    {{ form(form) }}
-</div>
 {% endblock %}

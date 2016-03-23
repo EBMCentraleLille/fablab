@@ -71,7 +71,7 @@ class ProjectController extends Controller
         /**
          * Control access for members only
          */
-        $this->denyAccessUnlessGranted(ProjectRole::PROJECT_ROLE_LEADER, $project);
+        $this->denyAccessUnlessGranted(ProjectRole::PROJECT_ROLE_MEMBER, $project);
 
         return $this->render(
             'CustomFosUserBundle:Project:edit.html.twig',

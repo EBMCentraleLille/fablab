@@ -2,7 +2,7 @@
 /**
  * Category.php File Doc
  *
- * Entité Category qui décrit les catégories de projets
+ * Entité Category qui décrit les catégories de Projects
  *
  * PHP Version 5.6
  *
@@ -52,10 +52,23 @@ class Category
     private $name;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-    **/
-    private $projets;
+     * @var string
+     *
+     * @ORM\Column(name="Picture", type="string", length=255,nullable=true)
+     */
+    private $picture;
 
+    /**
+     *
+     * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     **/
+    private $Projects;
+
+    /**
+     *
+     * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
+     **/
+    private $Users;
 
     /**
      * Get id
@@ -92,59 +105,119 @@ class Category
     }
 
     /**
-     * Set projets
+     * Set Projects
      *
-     * @param string $projets Objet Projects
+     * @param string $Projects Objet Projects
      *
      * @return Category
      */
-    public function setProjets($projets)
+    public function setProjects($Projects)
     {
-        $this->projets = $projets;
+        $this->Projects = $Projects;
 
         return $this;
     }
 
     /**
-     * Get projets
+     * Get Projects
      *
      * @return string
      */
-    public function getProjets()
+    public function getProjects()
     {
-        return $this->projets;
+        return $this->Projects;
     }
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->projets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Projects = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add projet
+     * Add Project
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $projet Objet Project
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $Project Objet Project
      *
      * @return Category
      */
-    public function addProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
+    //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $Project)
+    public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $Project)
     {
-        $this->projets[] = $projet;
+        $this->Projects[] = $Project;
 
         return $this;
     }
 
     /**
-     * Remove projet
+     * Remove Project
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $projet Objet Project
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $Project Objet Project
      *
      * @return void
      */
-    public function removeProjet(\CentraleLille\CustomFosUserBundle\Entity\Project $projet)
+    //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $Project)
+    public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $Project)
     {
-        $this->projets->removeElement($projet);
+        $this->Projects->removeElement($Project);
+    }
+
+    /**
+     * Add user
+     *
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user
+     *
+     * @return Category
+     */
+    public function addUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
+    {
+        $this->Users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \CentraleLille\CustomFosUserBundle\Entity\User $user
+     */
+    public function removeUser(\CentraleLille\CustomFosUserBundle\Entity\User $user)
+    {
+        $this->Users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->Users;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return Category
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }

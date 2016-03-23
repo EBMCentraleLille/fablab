@@ -261,6 +261,10 @@ class SearchStringController extends Controller
     public function autocompleteAction()
     {
         $search = $this->get('request')->request->get('phrase');
+        $datauser = [];
+        $dataprojet = [];
+        $dataskills = [];
+        $datamachine = [];
       //User Json
            $queryall = new \Elastica\Query\MatchAll();
 
@@ -268,14 +272,14 @@ class SearchStringController extends Controller
             $queryall = new \Elastica\Query\MatchAll();
             $typeUser = $this->get('fos_elastica.index.fablab.User');
             $result_alluser = $typeUser->search($queryall)->getResults();
-            foreach ($result_alluser as $result) {
-                $source = $result->getSource();
-                $datauser[] = array(
+        foreach ($result_alluser as $result) {
+            $source = $result->getSource();
+            $datauser[] = array(
 
-                'name' => $source['username'],
-                'link'   => 'userId',
-                );
-            }
+            'name' => $source['username'],
+            'link'   => 'userId',
+            );
+        }
             $jsonContentUser = new JsonResponse($datauser, 200, array(
             'Cache-Control' => 'no-cache',
             ));
@@ -363,8 +367,8 @@ class SearchStringController extends Controller
   }
   */
 
-        $string = $jsonTotal;
+            $string = $jsonTotal;
 
-        return new Response($string);
+            return new Response($string);
     }
 }
