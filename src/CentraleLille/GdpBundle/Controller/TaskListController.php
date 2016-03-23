@@ -31,7 +31,7 @@ class TaskListController extends FOSRestController
      *
      * @return View
      */
-     public function postTaskListAction(ParamFetcher $paramFetcher)
+     public function postListAction(ParamFetcher $paramFetcher)
      {
         $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $taskList = new Task();
@@ -65,7 +65,7 @@ class TaskListController extends FOSRestController
      *
      * @return View
      */
-     public function deleteTaskListAction($taskListId)
+     public function deleteListAction($taskListId)
      {
           $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TasklList');
           $taskList = $repo->findOneBy(
@@ -83,7 +83,7 @@ class TaskListController extends FOSRestController
      }
 
      //TODO
-     public function putTaskList(ParamFetcher $param)
+     public function putList(ParamFetcher $param)
      {
           //TODO
      }
@@ -103,7 +103,7 @@ class TaskListController extends FOSRestController
      *
      * @return View
      */
-	public function getTasksAction($taskListId)
+	public function getListAction($taskListId)
      {
           $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TasklList');
           $taskList = $repo->findOneBy(
