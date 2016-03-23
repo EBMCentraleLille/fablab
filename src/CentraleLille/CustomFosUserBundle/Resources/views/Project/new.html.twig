@@ -2,14 +2,16 @@
 
 {% block body %}
     <br><br><br>
-    <h1 class="text-primary text-center">Nouveau projet</h1>
+    <div class="col-md-3 col-md-offset-4">
+        <h1 class="text-primary">Nouveau projet</h1>
+    </div>
     {{ form_start(form, { 'action': path('project_new')}) }}
     <div class="row">
         <div class="col-md-3 col-md-offset-4">
             <div class="form-group">
             </br>
                 {{ form_errors(form.name) }}
-                {{ form_label(form.name, 'Intitué du projet', {'label_attr':{'class': 'control-label'}}) }}
+                {{ form_label(form.name, 'Nom du projet', {'label_attr':{'class': 'control-label'}}) }}
                 {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
             </div>
             <div>
