@@ -8,15 +8,13 @@
         <meta charset="UTF-8"/>
         <title>{% block title %}Fablab - École Centrale de Lille{% endblock %}</title>
         {% block stylesheets %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
             <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
             <link rel="stylesheet" href="{{ asset('bundles/adesignscalendar/css/fullcalendar/fullcalendar.css') }}" />
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>
       <div class="row">
@@ -40,6 +38,7 @@
                               <li><a href="{{ path('centrale_lille_machine') }}">Réservation Machine</a></li>
                               <li><a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a></li>
                               <li><a href="{{ path('centrale_lille_salle') }}">Réservation Salle</a></li>
+                              <li>-------ADMINISTRATION-------</li>
                               <li><a href="{{ path('centrale_lille_administration_events') }}">Gestion des réservations</a></li>
                               <li><a href="{{ path('centrale_lille_administration_resources') }}">Gestion des ressources</a></li>
                           </ul>
