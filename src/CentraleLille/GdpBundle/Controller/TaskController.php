@@ -270,5 +270,6 @@ class TaskController extends FOSRestController
         $view = View::create($msgs);
         $view->setStatusCode(400);
         return $view;
+        return $this->render('CentraleLilleGdpBundle:Tasks:tasks.html.twig');
     }
 }

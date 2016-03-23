@@ -6,7 +6,10 @@ function getRequester($http) {
     var service = {
         'createTask': createTask,
         'getTasks': getTasks,
-        'deleteTask': deleteTask
+        'deleteTask': deleteTask,
+        'getUsers': getUsers,
+        'getProjects':getProjects
+
         /*'getPosts': getPosts,
         'deletePost': deletePost,
         'savePost': savePost,
@@ -41,7 +44,9 @@ function getRequester($http) {
     function Resolver(id) {
         return {
             'tasks':'/gdp/api/projects/'+id+'/tasks',
-            'deleteTask': '/gdp/api/tasks/'+id
+            'deleteTask': '/gdp/api/tasks/'+id,
+            'users': '/gdp/api/projects/'+id+'/users',
+            'projects' :'/gdp/api/projects/'
         }
     }
 
@@ -60,6 +65,16 @@ function getRequester($http) {
     function deleteTask(id,cb) {
         var r = new Resolver(id);
         del_request(r.deleteTask,cb);
+    }
+
+    function getUsers(id,cb) {
+        var r = new Resolver(id);
+        get_request(r.users,cb);
+    }
+
+    function getProjects(cb) {
+        var r = new Resolver(null);
+        get_request(r.projects,cb);
     }
     /*function getPosts(cb) {
         var r = new Resolver();

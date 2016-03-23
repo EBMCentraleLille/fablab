@@ -3,10 +3,23 @@ var uiModule = require('./_index');
 uiModule.controller('taskController',['$scope','rq','toastr',taskController]);
 
 function taskController($scope,rq,toastr) {
+    $scope.showTaskCreated=false;
+
+
     $scope.newTask = {
         'title':'',
         'body':''
     }
+
+    $scope.status = {
+        isopen: false
+    };
+
+    $scope.toggleDropdown = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
+    };
 
     $scope.selectedDay = Date.today()
 
@@ -35,7 +48,6 @@ function taskController($scope,rq,toastr) {
 
     $scope.spaceData=[{},{},{}];
 
-    $scope.taskCreateShow=false;
 
 
     $scope.currentProject={
@@ -53,7 +65,8 @@ function taskController($scope,rq,toastr) {
 
     (function() {
         getTasks()
-
+        getProjectUsers()
+        getProjects()
         for(var t in $scope.tasks) {
             var taskgroup = $scope.tasks[t];
             $scope.spaceData[taskgroup.space-1]=taskgroup;
@@ -64,8 +77,8 @@ function taskController($scope,rq,toastr) {
     /* Controller functions */
 
     function createTask() {
+
         rq.createTask($scope.currentProject.id,$scope.newTask,function() {
-            $scope.taskCreateShow=false;
             toastr.success(['Task',$scope.newTask.title,'created!'].join(" "));
             $scope.newTask = {'title':'','body':''};
             getTasks();
@@ -89,6 +102,18 @@ function taskController($scope,rq,toastr) {
     function getTasks() {
         rq.getTasks($scope.currentProject.id,function(res) {
             $scope.tasks[0].data=res.data;
+        })
+    }
+
+    function getProjectUsers() {
+        rq.getUsers($scope.currentProject.id,function(res) {
+            $scope.projectsUsers=res.data;
+        })
+    }
+
+    function getProjects() {
+        rq.getProjects(function(res) {
+            console.log(res.data)
         })
     }
 

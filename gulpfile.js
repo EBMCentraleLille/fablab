@@ -22,6 +22,7 @@ var vendorJS = [
     './node_modules/angular-ui-router/release/angular-ui-router.min.js',
     './node_modules/angular-cookies/angular-cookies.min.js',
     './node_modules/angular-sanitize/angular-sanitize.min.js',
+    './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
     './node_modules/angular-toastr/dist/angular-toastr.tpls.min.js',
     './node_modules/angular-draganddrop/angular-draganddrop.js',
     './static/vendor/date-fr-FR.js'
@@ -29,6 +30,7 @@ var vendorJS = [
 
 var vendorCSS = [
     './node_modules/angular-toastr/dist/angular-toastr.min.css',
+    './node_modules/bootstrap/dist/css/bootstrap.min.css'
 ]
 
 
@@ -78,8 +80,14 @@ gulp.task('html', function() {
         .pipe(gulp.dest(DEST_BASEDIR+"views/"))
 })
 
+gulp.task('fonts', function() {
+    gulp.src('./node_modules/bootstrap/fonts/**/*')
+        .pipe(gulp.dest('web/fonts/'))
+})
+
+
 gulp.task('default', function() {
-    gulp.run('vendorJS', 'scripts', 'styles', 'html','vendorCSS');
+    gulp.run('vendorJS', 'scripts', 'styles', 'html','vendorCSS','fonts');
 
     gulp.watch(SRC_BASEDIR+"**/*.js", ['scripts'])
     gulp.watch(SRC_BASEDIR+"styles/**", ['styles'])
