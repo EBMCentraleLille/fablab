@@ -36,7 +36,7 @@ class CalendarEventListener
         $start = $request->get('start');
         $end = $request->get('end');
 
-        $idMachine = 1; /////TO FIX --> get ID from route
+        $idMachine = 2; /////TO FIX --> get ID from route
 
         if ($title && $description && $start && $end) {
             //converting unix timestamp from ms to s (because javascript provide ms)

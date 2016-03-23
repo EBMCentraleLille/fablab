@@ -14,7 +14,7 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>
       <div class="row">
@@ -29,8 +29,26 @@
                   <li><a href="{{ path("news_feed")}}">Fil d'actualité</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="{{ path("project_new")}}">Créer un projet</a></li>
-                  <li><a href="{{ path("centrale_lille_machine")}}">Réserver une machine</a></li>
+                  <li>
+                    <a href="{{ path("project_new")}}">Créer un projet</a>
+                  </li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Réservations<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="{{ path('centrale_lille_my_booking') }}">Mes réservations</a></li>
+                          <li><a href="{{ path('centrale_lille_machine') }}">Réservation Machine</a></li>
+                          <li><a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a></li>
+                          <li><a href="{{ path('centrale_lille_salle') }}">Réservation Salle</a></li>
+                          <li>-------ADMINISTRATION-------</li>
+                          <li><a href="{{ path('centrale_lille_administration_events') }}">Gestion des réservations</a></li>
+                          <li><a href="{{ path('centrale_lille_administration_resources') }}">Gestion des ressources</a></li>
+                        </ul>
+                      </li>
+                    {% else %}
+                      <a href="{{ path('fos_user_security_login') }}">Réservations</a>
+                    {% endif %}
+                  </li>
                   <li>
                     <form class="navbar-form navbar-right" role="search">
                       <div class="form-group">
@@ -58,5 +76,11 @@
           </nav>
         </div>
     {% block body %}{% endblock %}
+      <script src="http://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+      <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+      <script type="text/javascript" src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+      <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('js/calendar-settings.js') }}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
     </body>
 </html>

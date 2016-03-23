@@ -1,3 +1,5 @@
+{% extends 'layout.html.twig' %}
+
 <!DOCTYPE html>
 <html lang="FR">
     <head>
@@ -22,7 +24,7 @@
                 <img src="http://centrale.ec-lille.fr/img/logo_site_1.gif" alt="logo fablab"/>
             </div>
             <div class="col-md-4 pull-right text-center">
-                <h3>Bonjour NOM PRENOM !</h3>
+                <h3>Bonjour {{ app.user.username|upper }} !</h3>
                 <p>Nous sommes le {{date().timestamp |date('d/m/Y H:i')}}</p>
             </div>
                 </row>
@@ -41,10 +43,13 @@
                         <a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a>
                     </li>
                     <li>
-                        <a href="{{ path('centrale_lille_salle') }}">Réservation Salle </a>
+                        <a href="{{ path('centrale_lille_salle') }}">Réservation Salle</a>
                     </li>
                     <li>
-                        <a href="{{ path('centrale_lille_administration') }}">Administration </a>
+                        <a href="{{ path('centrale_lille_administration_machines') }}">Admin machines</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('centrale_lille_administration_events') }}">Admin reservations</a>
                     </li>
                 </ul>
             </div>
@@ -74,7 +79,6 @@
             <script type="text/javascript" src="{{ asset('js/calendar-settings.js') }}"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
-
         {% block javascripts %}
         {% endblock %}
 
