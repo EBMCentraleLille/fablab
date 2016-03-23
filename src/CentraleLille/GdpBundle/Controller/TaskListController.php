@@ -99,7 +99,7 @@ class TaskListController extends FOSRestController
      *
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
-     * @RequestParam(name="name", nullable=true, strict=true, description="Name.")
+     * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
      *
      * @return View
      */
@@ -132,7 +132,7 @@ class TaskListController extends FOSRestController
      *   description = "Return all tasks from TaskList",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     404 = "Returned when the task is not found"
+     *     404 = "Returned when the task list is not found"
      *   }
      * )
      *
