@@ -58,7 +58,7 @@ class TaskListController extends FOSRestController
      *   description = "Delete a task list identified by TaskList id",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     404 = "Returned when the task is not found"
+     *     404 = "Returned when the task list is not found"
      *   }
      * )
      *
