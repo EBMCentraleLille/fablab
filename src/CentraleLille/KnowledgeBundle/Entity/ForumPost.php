@@ -28,7 +28,7 @@ class ForumPost
     private $author;
 
     /**
-    * @ORM\ManyToOne(targetEntity="\CentraleLille\CustomFosUserBundle\Entity\ForumThread")
+    * @ORM\ManyToOne(targetEntity="\CentraleLille\KnowledgeBundle\Entity\ForumThread")
     * @ORM\JoinColumn(name="thread_id", referencedColumnName="id")
      */
     private $thread;

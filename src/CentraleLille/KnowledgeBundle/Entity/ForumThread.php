@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ForumPost
  *
- * @ORM\Table(name="forum_post")
- * @ORM\Entity(repositoryClass="CentraleLille\KnowledgeBundle\Repository\ForumPostRepository")
+ * @ORM\Table(name="forum_thread")
+ * @ORM\Entity(repositoryClass="CentraleLille\KnowledgeBundle\Repository\ForumThreadRepository")
  */
-class ForumPost
+class ForumThread
 {
     /**
      * @var int
@@ -167,7 +167,7 @@ class ForumPost
      *
      * @return ForumThread
      */
-    public function setAuthor($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         return $this;
