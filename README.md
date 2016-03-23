@@ -1,4 +1,4 @@
-# fablab
+﻿# fablab
 Site de gestion du FabLab de CentraleLille
 
 ## Installation
@@ -10,6 +10,12 @@ composer install
 npm install -g bower
 bower install
 ```
+
+Install ElasticSearch :
+
+Downdload & dezip V1.7.5 => https://www.elastic.co/downloads/past-releases/elasticsearch-1-7-5
+Launch Elasticsearch
+
 
 Bower will install bootstrap for layout.
 
