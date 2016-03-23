@@ -1,1 +1,87 @@
-Tasklist
+<div ng-repeat="taskgroup in spaceData"
+     class="col-md-3 taskspace">
+     <div
+         drop="onDropTaskInList($data, taskgroup)"
+         class="panel panel-primary"
+         drop-effect="move"
+         drop-accept="'json/task'"
+         drag-over-class="drag-over-accept-task">
+         <div class="panel-heading task-title">{{taskgroup.name}}</div>
+         <div class="panel-body taskgroup">
+            <div ng-repeat="task in taskgroup.data"
+                 draggable="true"
+                 effect-allowed="move"
+                 draggable-type="task"
+                 draggable-data="{name: task,sourceGroup:$parent.$index,sourceTask:$index}">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{task.title}}
+                    <span class="task-delete" ng-click="deleteTask(task.id,task.title)">(supprimer)</span>
+                    </div>
+                    <div class="panel-body">
+                        BODY
+                    </div>
+
+                </div>
+
+            </div>
+         </div>
+
+
+         <!-- New task -->
+
+         <div class="panel panel-default">
+             <button class="btn btn-success btn-group-justified new-task"
+                     ng-click="taskCreateShow=true">Nouvelle tâche</button>
+         </div>
+
+         <!-- Task edit -->
+
+         <form class="" ng-show="taskCreateShow">
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="form-group">
+                        <input type="text" ng-model="newTask.title" placeholder="Titre" required>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <textarea class="task-edit-content" ng-model="newTask.body" placeholder="contenu" required></textarea>
+                    </div>
+                </div>
+                 <div class="form-group">
+                     <datepicker min=0 max=20></datepicker>
+                 </div>
+
+
+                 <div class="form-group">
+                     <button class="btn btn-primary" ng-click="createTask()">Créer</button>
+                 </div>
+
+             </div>
+         </form>
+
+
+     </div>
+</div>
+
+<div class="col-md-3">
+    <div class="panel panel-default task-title">
+        <div class="panel-heading">
+            Echeances
+        </div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+

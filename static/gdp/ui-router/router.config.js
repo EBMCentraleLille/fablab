@@ -13,7 +13,13 @@ function setupRouter($stateProvider, $urlRouterProvider) {
         .state('tasks', {
             url: "/tasks",
             templateUrl: "views/tasks/tasks.html",
-            controller: 'uiController',
+            controller: 'taskController',
+            data: { access: 'user' }
+        })
+        .state('planning', {
+            url: "/planning",
+            templateUrl: "views/planning/planning.html",
+            controller: 'planningController',
             data: { access: 'user' }
         })
 
