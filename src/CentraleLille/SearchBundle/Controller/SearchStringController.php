@@ -61,6 +61,8 @@ class SearchStringController extends Controller
         if (is_null($search->getStringSearch())) {
             $result_machine = [];
             $result_user = [];
+            $result_skills = [];
+            $result_projet = [];
         } else {
 
           //User Json
@@ -70,7 +72,7 @@ class SearchStringController extends Controller
             foreach ($result_alluser as $result) {
                 $source = $result->getSource();
                 $datauser[] = array(
-            
+
                 'name' => $source['username'],
                 'link'   => 'userId',
                 );
@@ -86,7 +88,7 @@ class SearchStringController extends Controller
             foreach ($result_allprojet as $result) {
                 $source = $result->getSource();
                 $dataprojet[] = array(
-            
+
                 'name' => $source['name'],
                 'link'   => 'projectId',
                 );
@@ -102,7 +104,7 @@ class SearchStringController extends Controller
             foreach ($result_allskills as $result) {
                 $source = $result->getSource();
                 $dataskills[] = array(
-            
+
                 'name' => $source['name'],
                 'link'   => 'skillsId',
                 );
@@ -117,7 +119,7 @@ class SearchStringController extends Controller
             $queryall = new \Elastica\Query\MatchAll();
             $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
             $result_allmachine = $typeMachine->search($queryall)->getResults();
-      
+
 
 
             foreach ($result_allmachine as $result) {
@@ -169,12 +171,12 @@ class SearchStringController extends Controller
             $fieldQuery4->setFieldFuzziness('description', 2);
             $fieldQuery4->setFieldMinimumShouldMatch('description', '100%');
             $query_part_machine->addShould($fieldQuery4);
-       
+
             $filters = new \Elastica\Filter\Bool();
             $query_machine = new \Elastica\Query\Filtered($query_part_machine, $filters);
             $result_machine = $typeMachine->search($query_machine);
 
-            
+
 
               //Recherche Skills
             $typeSkills = $this->get('fos_elastica.index.fablab.Competence');
@@ -185,9 +187,9 @@ class SearchStringController extends Controller
             $fieldQuery5->setFieldFuzziness('name', 0.7);
             $fieldQuery5->setFieldMinimumShouldMatch('name', '80%');
             $query_part_skills->addShould($fieldQuery5);
-            
-           
-       
+
+
+
             $filters = new \Elastica\Filter\Bool();
             $query_skills = new \Elastica\Query\Filtered($query_part_skills, $filters);
             $result_skills = $typeSkills->search($query_skills);
@@ -207,9 +209,9 @@ class SearchStringController extends Controller
             $fieldQuery7->setFieldFuzziness('summary', 2);
             $fieldQuery7->setFieldMinimumShouldMatch('summary', '100%');
             $query_part_projet->addShould($fieldQuery7);
-            
-           
-       
+
+
+
             $filters = new \Elastica\Filter\Bool();
             $query_projet = new \Elastica\Query\Filtered($query_part_projet, $filters);
             $result_projet = $typeProjet->search($query_projet);
@@ -224,10 +226,10 @@ class SearchStringController extends Controller
             $serializer = new Serializer($normalizer, $encoder);
 
 
-           
 
 
-           
+
+
 
 
 
@@ -266,7 +268,7 @@ class SearchStringController extends Controller
             foreach ($result_alluser as $result) {
                 $source = $result->getSource();
                 $datauser[] = array(
-            
+
                 'name' => $source['username'],
                 'link'   => 'userId',
                 );
@@ -282,7 +284,7 @@ class SearchStringController extends Controller
             foreach ($result_allprojet as $result) {
                 $source = $result->getSource();
                 $dataprojet[] = array(
-            
+
                 'name' => $source['name'],
                 'link'   => 'projectId',
                 );
@@ -298,7 +300,7 @@ class SearchStringController extends Controller
             foreach ($result_allskills as $result) {
                 $source = $result->getSource();
                 $dataskills[] = array(
-            
+
                 'name' => $source['name'],
                 'link'   => 'skillsId',
                 );
@@ -313,7 +315,7 @@ class SearchStringController extends Controller
             $queryall = new \Elastica\Query\MatchAll();
             $typeMachine = $this->get('fos_elastica.index.fablab.Machine');
             $result_allmachine = $typeMachine->search($queryall)->getResults();
-      
+
 
 
             foreach ($result_allmachine as $result) {
@@ -335,14 +337,14 @@ class SearchStringController extends Controller
 
 
 
-          
 
 
-           
+
+
 
 
       //get request search
-    
+
 
 
       /*Renvoyer un seul document json avec la structure suivante :
