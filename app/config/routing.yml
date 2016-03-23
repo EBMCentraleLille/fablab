@@ -1,6 +1,11 @@
 centrale_lille_gdp:
+    resource: "@CentraleLilleGdpBundle/Resources/config/routing_rest.yml"
+    prefix:   /gdp/api
+
+centrale_lille_gdp:
     resource: "@CentraleLilleGdpBundle/Resources/config/routing.yml"
     prefix:   /gdp
+
 
 custom_fos_user:
     resource: "@CustomFosUserBundle/Controller/"
