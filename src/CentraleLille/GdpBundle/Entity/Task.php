@@ -64,7 +64,7 @@ class Task
 
 
     /* @ORM\ManyToMany(targetEntity="TaskList", inversedBy="tasks")
-     * @ORM\JoinTable(name="tasks_lists")
+     * @ORM\    JoinTable(name="tasks_lists")
      */
     private $taskLists;
 
@@ -250,5 +250,21 @@ class Task
     public function setProject($project)
     {
         $this->project = $project;
+    }
+
+    /**
+     * @param mixed $taskList
+     */
+    public function addTaskList($taskList)
+    {
+        $this->taskLists[] = $taskList;
+    }
+
+    /**
+     * @return \CentraleLille\GdpBundle\Entity\User
+     */
+    public function getTaskList()
+    {
+        return $this->taskLists;
     }
 }

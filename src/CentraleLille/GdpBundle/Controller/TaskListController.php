@@ -3,6 +3,7 @@ namespace CentraleLille\GdpBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use CentraleLille\GdpBundle\Entity\Task;
+use CentraleLille\GdpBundle\Entity\TaskList;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -33,7 +34,7 @@ class TaskListController extends FOSRestController
      public function postListAction(ParamFetcher $paramFetcher)
      {
         $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
-        $taskList = new Task();
+        $taskList = new TaskList();
         $taskList->setTitle($paramFetcher->get('name'));
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
@@ -82,10 +83,46 @@ class TaskListController extends FOSRestController
           return $view;
      }
 
-     //TODO
-     public function putList(ParamFetcher $param)
+    /**
+     * Add a list specified by id to the taskList.<br/>
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Update a task list with the specified params.",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @param int $taskListId TaskListId
+     *
+     * @param ParamFetcher $paramFetcher Paramfetcher
+     *
+     * @RequestParam(name="name", nullable=true, strict=true, description="Name.")
+     *
+     * @return View
+     */
+     public function putListAction($taskListId, ParamFetcher $param)
      {
-          //TODO
+          $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
+          if ($paramFetcher->get('name')) {
+            $taskList->setName($paramFetcher->get('name'));
+          }
+          $view = View::create();
+          $errors = $this->get('validator')->validate($task, array('Update'));
+          if (count($errors) == 0) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($taskList);
+            $em->flush();
+            $view->setData($taskList)->setStatusCode(200);
+            return $view;
+          }
+          else 
+          {
+            $view = $this->getErrorsView($errors);
+            return $view;
+          }
      }
     /**
      * Return the tasks corresponding to the given task list id
@@ -112,9 +149,8 @@ class TaskListController extends FOSRestController
           if (!$taskList) {
             throw $this->createNotFoundException('Data not found.');
           }
-          $allTasks = $taskList->getTasks();
           $view = View::create();
-          $view->setData($allTasks);
+          $view->setData($taskList);
           return $view;
      }
 
@@ -126,7 +162,7 @@ class TaskListController extends FOSRestController
      *   description = "Add a task to the list",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     404 = "Returned when the user is not found"
+     *     404 = "Returned when the task list is not found"
      *   }
      * )
      *
@@ -138,11 +174,11 @@ class TaskListController extends FOSRestController
      public function putListAddAction($taskListId, $taskId)
      {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
-        $repoTaskLists = $this->getDoctrine()->getRepository('CustomFosUserBundle:TaskList');
+        $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $task = $repoTasks->findOneBy(
             array('id' => $taskId)
         );
-        // Retrieves task & user
+        // Retrieves task & taskList
         if (!$task) {
             throw $this->createNotFoundException('Task not found.');
         }

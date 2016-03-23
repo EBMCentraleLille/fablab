@@ -83,6 +83,7 @@ class TaskList
 
     /**
      * Add a task to the task list
+     * @param \CentraleLille\GdpBundle\Entity\User $task
      */
     public function addTask($task)
     {
