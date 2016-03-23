@@ -26,8 +26,7 @@ class TaskListController extends FOSRestController
      *
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
-     * @RequestParam(name="title", nullable=false, strict=true, description="Title.")
-     * @RequestParam(name="body", nullable=false, strict=true, description="Body.")
+     * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
      *
      * @return View
      */
@@ -49,7 +48,8 @@ class TaskListController extends FOSRestController
             return $view;
         }
      }
-         /**
+     
+     /**
      * Delete a task list identified by id.
      *
      * @ApiDoc(
@@ -61,7 +61,7 @@ class TaskListController extends FOSRestController
      *   }
      * )
      *
-     * @param int $taskId id
+     * @param int $taskListId id
      *
      * @return View
      */
@@ -99,7 +99,7 @@ class TaskListController extends FOSRestController
      *   }
      * )
      *
-     * @param int $id id
+     * @param int $taskListId taskListId
      *
      * @return View
      */

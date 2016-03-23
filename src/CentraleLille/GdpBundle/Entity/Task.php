@@ -63,8 +63,8 @@ class Task
     private $inChargeUser;
 
 
-    /* @ManyToMany(targetEntity="TaskList", inversedBy="tasks")
-     * @JoinTable(name="tasks_lists")
+    /* @ORM\ManyToMany(targetEntity="TaskList", inversedBy="tasks")
+     * @ORM\JoinTable(name="tasks_lists")
      */
     private $taskLists;
 

@@ -22,7 +22,7 @@ class TaskList
     private $id;
 
     /**
-     * @ManyToMany(targetEntity="Task", mappedBy="taskLists")
+     * @@ORM\ManyToMany(targetEntity="Task", mappedBy="taskLists")
      */
     private $tasks;
 
