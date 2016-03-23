@@ -30,17 +30,17 @@ function taskController($scope,rq,toastr) {
 
     $scope.tasks=[
         {
-            "name":"fait",
+            "name":"à faire",
             "data":[],
             "space":1
         },
         {
-            "name":"à faire",
+            "name":"en cours",
             "data":[],
             "space":2
         },
         {
-            "name":"en cours",
+            "name":"fait",
             "data":[],
             "space":3
         }
@@ -51,7 +51,7 @@ function taskController($scope,rq,toastr) {
 
 
     $scope.currentProject={
-        'id':3,
+        'id':2,
         'name':'projet_test'
     }
 
