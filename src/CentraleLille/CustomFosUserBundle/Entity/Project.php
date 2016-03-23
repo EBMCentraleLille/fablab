@@ -50,7 +50,7 @@ class Project
 
     /**
      * @var string
-     * @ORM\Column(name="picture", type="string", length=80, nullable=true)
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     protected $picture;
 
