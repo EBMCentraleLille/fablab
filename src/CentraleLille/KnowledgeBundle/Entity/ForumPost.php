@@ -22,17 +22,16 @@ class ForumPost
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
     * @ORM\ManyToOne(targetEntity="\CentraleLille\CustomFosUserBundle\Entity\User")
     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="\CentraleLille\KnowledgeBundle\Entity\ForumThread")
+    * @ORM\JoinColumn(name="thread_id", referencedColumnName="id")
+     */
+    private $thread;
 
     /**
      * @var string
@@ -40,13 +39,6 @@ class ForumPost
      * @ORM\Column(name="content", type="text")
      */
     private $content;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="tags", type="array")
-     */
-    private $tags;
 
 
     /**
@@ -57,30 +49,6 @@ class ForumPost
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return ForumPost
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -108,30 +76,6 @@ class ForumPost
     }
 
     /**
-     * Set tags
-     *
-     * @param array $tags
-     *
-     * @return ForumPost
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
      * Get author
      *
      * @return User
@@ -144,11 +88,32 @@ class ForumPost
     /**
      * Set author
      *
-     * @return User
+     * @return ForumPost
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * Get thread
+     *
+     * @return ForumThread
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Set thread
+     *
+     * @return ForumPost
+     */
+    public function setThread($thread)
+    {
+        $this->thread = $thread;
         return $this;
     }
 }
