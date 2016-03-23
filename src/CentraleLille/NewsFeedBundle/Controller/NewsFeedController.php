@@ -19,7 +19,6 @@ namespace CentraleLille\NewsFeedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use CentraleLille\CustomFosUserBundle\Entity\User;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\NewsFeedBundle\Form\FilterType;
 
@@ -154,7 +153,6 @@ class NewsFeedController extends Controller
                             }
                         }
                     }
-
                 }
 
                 return $this->render(
@@ -164,6 +162,7 @@ class NewsFeedController extends Controller
                         'abonnements' => $abonnementsProjet,
                         'thematics' => $thematics,
                         'form' => $form->createView(),
+                        'likes' => $likes,
                     ]
                 );
             }
