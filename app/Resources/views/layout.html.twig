@@ -14,7 +14,7 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>
       <div class="row">
@@ -29,7 +29,7 @@
                 <li><a href="{{ path("news_feed")}}">Fil d'actualité</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Créer un projet</a></li>
+                <li><a href="{{ path('project_new') }}">Créer un projet</a></li>
                 <li><a href="#">Réserver une machine</a></li>
                 <li>
                   <form class="navbar-form navbar-right" role="search">
@@ -39,14 +39,19 @@
                   </form>
                 </li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Mon Profil <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Username</a></li>
-                    <li><a href="#">Mes Messages <img  src="{{ asset('icons/message.svg') }}"></a></li>
-                    <li><a href="#">Mes Projets</a></li>
-                    <li><a href="#">Mes Projets</a></li>
-                    <li><a href="#">Mes Abonnements</a></li>
-                  </ul>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Mon Profil <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Username</a></li>
+                            <li><a href="#">Mes Messages <img  src="{{ asset('icons/message.svg') }}"></a></li>
+                            <li><a href="#">Mes Projets</a></li>
+                            <li><a href="#">Mes Projets</a></li>
+                            <li><a href="#">Mes Abonnements</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><li>
+                        </ul>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+                    {% endif %}
                 </li>
               </ul>
             </div>
