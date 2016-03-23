@@ -27,6 +27,10 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
 
+        doc:
+            pattern: ^/gdp/api/doc
+            anonymous: true
+
         api:
             pattern:   ^/gdp/api
             provider : fos_userbundle
