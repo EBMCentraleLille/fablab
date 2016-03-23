@@ -58,7 +58,8 @@ class FilterType extends AbstractType
      *
      * @return void
      */
-    public function __construct($thematics) {
+    public function __construct($thematics)
+    {
         $this->thematics = $thematics;
     }
 
@@ -80,7 +81,7 @@ class FilterType extends AbstractType
                 'label'    => 'Mise à jour',
                 'required' => false,
             ));
-        for($i = 0; $i < count($this->thematics);$i++){
+        for ($i = 0; $i < count($this->thematics); $i++) {
             $builder
                 ->add($this->thematics[$i]->getId(), CheckboxType::class, array(
                     'label' => $this->thematics[$i]->getName(),

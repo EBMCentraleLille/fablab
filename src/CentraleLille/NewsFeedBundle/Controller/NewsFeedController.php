@@ -22,7 +22,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\NewsFeedBundle\Form\FilterType;
 
-
 /**
  * NewsFeedController Class Doc
  *
@@ -85,20 +84,21 @@ class NewsFeedController extends Controller
             foreach ($abonnements as $abonnement) {
                 if (in_array($abonnement, $abo)) {
                     $aboProjet = array($abonnement->getName() => 1);
-                    $likes = array_merge($likes,$aboProjet);
+                    $likes = array_merge($likes, $aboProjet);
                 } else {
                     $aboProjet = array($abonnement->getName() => 0);
-                    $likes = array_merge($likes,$aboProjet);
+                    $likes = array_merge($likes, $aboProjet);
                 }
             }
             $count=0;
             foreach ($abonnements as $abonnement) {
-                $count++;break;
+                $count++;
+                break;
             }
             if ($count != 0) {
                 //Récupération des dernières actualités
                 $activityService = $this->container->get('fablab_newsfeed.activities');
-                $recentActivities = $activityService->getActivitiesNewsFeed($abonnements, 10);   
+                $recentActivities = $activityService->getActivitiesNewsFeed($abonnements, 10);
             } else {
                 $recentActivities=[];
             }
@@ -146,7 +146,8 @@ class NewsFeedController extends Controller
                                     }
                                     break;
                                 default:
-                                    if (is_numeric($key) /*&& $recentActivity->getProject()->getCategory() !== $thematics*/) {
+                                    if (is_numeric($key)) {
+                                        /*if&& $recentActivity->getProject()->getCategory() !== $thematics*/
                                         //unset($recentActivity);
                                         //$isDeleted = true;
                                     }
