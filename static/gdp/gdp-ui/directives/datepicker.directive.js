@@ -1,6 +1,6 @@
 var uiModule = require('../_index');
 
-uiModule.directive('datepicker',getDatepicker);
+uiModule.directive('datePick',getDatepicker);
 
 function getDatepicker() {
     return {

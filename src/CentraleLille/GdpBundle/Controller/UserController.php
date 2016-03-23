@@ -34,7 +34,7 @@ class UserController extends FOSRestController
      */
     public function getProjectUsersAction($id)
     {
-        $projectRepository = $this->getDoctrine()->getRepository('CentraleLilleCustomFosUserBundle:Project');
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $users = $projectRepository->find($id)->getProjectUsers();
         if (!$users) {
             throw $this->createNotFoundException('Data not found.');
