@@ -7,7 +7,6 @@
     <head>
         <meta charset="UTF-8"/>
         <title>{% block title %}Fablab - École Centrale de Lille{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
@@ -40,9 +39,9 @@
                               <li><a href="{{ path('centrale_lille_my_booking') }}">Mes réservations</a></li>
                               <li><a href="{{ path('centrale_lille_machine') }}">Réservation Machine</a></li>
                               <li><a href="{{ path('centrale_lille_casier') }}">Réservation Casier</a></li>
-                              <li><a href="{{ path('centrale_lille_salle') }}">Réservation Salle </a></li>
-                              <li><a href="{{ path('centrale_lille_administration_events') }}">Gestion des réservations </a></li>
-                              <li><a href="{{ path('centrale_lille_administration_resources') }}">Gestion des ressources </a></li>
+                              <li><a href="{{ path('centrale_lille_salle') }}">Réservation Salle</a></li>
+                              <li><a href="{{ path('centrale_lille_administration_events') }}">Gestion des réservations</a></li>
+                              <li><a href="{{ path('centrale_lille_administration_resources') }}">Gestion des ressources</a></li>
                           </ul>
                       {% else %}
                           <a href="{{ path('fos_user_security_login') }}">Réservations</a>
