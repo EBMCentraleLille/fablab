@@ -12,12 +12,8 @@ namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
 use CentraleLille\ReservationBundle\Entity\Type;
 use Doctrine\ORM\Mapping as ORM;
-<<<<<<< HEAD:src/CentraleLille/ReservationBundle/Entity/Machine.php
-=======
 use Symfony\Component\Validator\Constraints as Assert;
 use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
->>>>>>> FabLabOrigin/develop:src/CentraleLille/ReservationBundle/Entity/Bookables/Machine.php
-
 /**
  * Entity Class Doc
  *
@@ -33,10 +29,7 @@ use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 /**
  *
  * @ORM\Entity(repositoryClass="CentraleLille\ReservationBundle\Repository\MachineRepository")
-<<<<<<< HEAD:src/CentraleLille/ReservationBundle/Entity/Machine.php
  * @ORM\HasLifecycleCallbacks
-=======
->>>>>>> FabLabOrigin/develop:src/CentraleLille/ReservationBundle/Entity/Bookables/Machine.php
  */
 class Machine extends Bookable
 {
