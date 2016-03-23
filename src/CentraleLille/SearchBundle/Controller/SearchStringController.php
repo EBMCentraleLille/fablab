@@ -104,7 +104,6 @@ class SearchStringController extends Controller
             foreach ($result_allskills as $result) {
                 $source = $result->getSource();
                 $dataskills[] = array(
-
                 'name' => $source['name'],
                 'link'   => 'skillsId',
                 );
