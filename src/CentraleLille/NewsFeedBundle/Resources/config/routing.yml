@@ -3,7 +3,7 @@ news_feed:
     defaults: { _controller: CentraleLilleNewsFeedBundle:NewsFeed:index }
 news_feed_subscribe:
   path:  /follow
-  defaults: { _controller: CentraleLilleNewsFeedBundle:NewsFeed:subscribe }
+  defaults: { _controller: CentraleLilleNewsFeedBundle:NewsFeed:index }
   requirements:
     methods: POST
 centrale_lille_newsfeed_activity:

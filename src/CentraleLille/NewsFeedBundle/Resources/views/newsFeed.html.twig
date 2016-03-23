@@ -20,8 +20,8 @@
                     </div>
                 <h4>Thématiques</h4>
                     <div class = chkbox-filter>
-                            {% for thematics in thematics %}
-                                {{ form_row(attribute(form, thematics.id))}}
+                            {% for category in categories %}
+                                {{ form_row(attribute(form, category.id))}}
                             {% endfor %}
                     </div>
                 <h4>Date</h4>
@@ -54,7 +54,7 @@
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-6 recentProject">
-                                            {% if not recentActivity.project in abonnements %}
+                                            {% if not likes[recentActivity.project.name] %}
                                                 <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
                                                 <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
                                             {% else %}
