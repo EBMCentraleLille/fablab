@@ -34,13 +34,8 @@
                                     	</div>
                                 	</a>
                                     <div class="col-md-6">
-                                        {% if not abonnementCategorie in abonnementsCategorie %}
-                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ abonnementProjet.name }}" id="follow">Suivre</div>
-                                        {% else %}
-                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ abonnementCategorie.name }}" id="follow">Ne plus suivre</div>
-                                        {% endif %}
+                                        <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                        <div class ="{{ abonnementCategorie.name }}" id="follow">Ne plus suivre</div>
                                     </div>
                                 </div>
                             </div>
@@ -72,13 +67,8 @@
                                         </div>
                                     </a>
                                     <div class="col-md-6">
-                                        {% if not abonnementProjet in abonnementsProjet %}
-                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ abonnementProjet.name }}" id="follow">Suivre</div>
-                                        {% else %}
-                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-                                            <div class ="{{ abonnementProjet.name }}" id="follow">Ne plus suivre</div>
-                                        {% endif %}
+                                        <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                        <div class ="{{ abonnementProjet.name }}" id="follow">Ne plus suivre</div>
                                     </div>
                                 </div>
                             </div>

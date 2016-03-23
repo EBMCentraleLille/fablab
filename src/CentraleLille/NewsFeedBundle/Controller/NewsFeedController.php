@@ -61,24 +61,43 @@ class NewsFeedController extends Controller
             //Récupération des abonnements du user
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $abonnements = $abonnementService->getAboAll($user);
-            $abonnementsProjet = $abonnementService->getAboProjet($user);
+            $abonnementsProjets = $abonnementService->getAboProjet($user);
+            $likes=[];
+            $abo=[];
 
-            //Récupération des dernières actualités
-            $activityService = $this->container->get('fablab_newsfeed.activities');
-            $recentActivities = $activityService->getActivitiesNewsFeed($abonnements, 10);
+            //récupération des likes
+            foreach ($abonnementsProjets as $abonnementsProjet) {
+                array_push($abo, $abonnementsProjet);
+            }
+            foreach ($abonnements as $abonnement) {
+                if (in_array($abonnement, $abo)) {
+                    $aboProjet = array($abonnement->getName() => 1);
+                    $likes = array_merge($likes,$aboProjet);
+                } else {
+                    $aboProjet = array($abonnement->getName() => 0);
+                    $likes = array_merge($likes,$aboProjet);
+                }
+            }
+            $count=0;
+            foreach ($abonnements as $abonnement) {
+                $count++;break;
+            }
+            if ($count != 0) {
+                //Récupération des dernières actualités
+                $activityService = $this->container->get('fablab_newsfeed.activities');
+                $recentActivities = $activityService->getActivitiesNewsFeed($abonnements, 10);   
+            } else {
+                $recentActivities=[];
+            }
 
-            //Récupération des abonnements projets
-            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
-            $abonnementsProjet = $abonnementService->getAboProjet($user);
-
-            //Récupération des thématiques pour le filtre
+            //Récupération des catégories pour le filtre
             $categoryService = $this->container->get('fablab_newsfeed.categories');
-            $thematics = $categoryService->getCategories();
+            $categories = $categoryService->getCategories();
 
             $filter = [];
             $form = $this
                 ->get('form.factory')
-                ->create(new FilterType($thematics), $filter);
+                ->create(new FilterType($categories), $filter);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -91,9 +110,10 @@ class NewsFeedController extends Controller
                 'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
                 [
                     'recentActivities' => $recentActivities,
-                    'abonnements' => $abonnementsProjet,
-                    'thematics' => $thematics,
+                    'abonnements' => $abonnements,
+                    'categories' => $categories,
                     'form' => $form->createView(),
+                    'likes' => $likes,
                 ]
             );
         }
@@ -133,21 +153,46 @@ class NewsFeedController extends Controller
                 $recentActivities=$abonnementService->addAboProjet($user, $projet);
             }
 
-            //Récupération des dernières actualités
-            $activityService=$this->container->get('fablab_newsfeed.activities');
-            $recentActivities=$activityService->getActivities(10);
+            //Récupération des abonnements du user
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $abonnements = $abonnementService->getAboAll($user);
+            $abonnementsProjets = $abonnementService->getAboProjet($user);
+            $likes=[];
+            $abo=[];
+            
+            //récupération des likes
+            foreach ($abonnementsProjets as $abonnementsProjet) {
+                array_push($abo, $abonnementsProjet);
+            }
+            foreach ($abonnements as $abonnement) {
+                if (in_array($abonnement, $abo)) {
+                    $aboProjet = array($abonnement->getName() => 1);
+                    $likes = array_merge($likes,$aboProjet);
+                } else {
+                    $aboProjet = array($abonnement->getName() => 0);
+                    $likes = array_merge($likes,$aboProjet);
+                }
+            }
+            $count=0;
+            foreach ($abonnements as $abonnement) {
+                $count++;break;
+            }
+            if ($count != 0) {
+                //Récupération des dernières actualités
+                $activityService = $this->container->get('fablab_newsfeed.activities');
+                $recentActivities = $activityService->getActivitiesNewsFeed($abonnements, 10);   
+            } else {
+                $recentActivities=[];
+            }
 
-            //Récupération des abonnements projets
-            $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
-            $abonnementsProjet=$abonnementService->getAboProjet($user);
-            //Récupération des thématiques pour le filtre
+            //Récupération des catégories pour le filtre
             $categoryService = $this->container->get('fablab_newsfeed.categories');
-            $thematics = $categoryService->getCategories();
+            $categories = $categoryService->getCategories();
 
             $filter = [];
             $form = $this
                 ->get('form.factory')
-                ->create(new FilterType($thematics), $filter);
+                ->create(new FilterType($categories), $filter);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -160,9 +205,10 @@ class NewsFeedController extends Controller
                 'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
                 [
                     'recentActivities' => $recentActivities,
-                    'abonnements' => $abonnementsProjet,
+                    'abonnements' => $abonnements,
+                    'abonnementsProjets' => $abonnementsProjets,
                     'form' => $form->createView(),
-                    'thematics' => $thematics
+                    'categories' => $categories
                 ]
             );
         }
