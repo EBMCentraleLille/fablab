@@ -153,14 +153,47 @@ class HomepageController extends Controller
                     $abonnementService->addAboCategory($user, $cat);
                 }
             }
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $recentActivities=$abonnementService->addAboProjet($user, $projet);
+                }
+            }
+            //Récupération des abonnements du user
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $abonnementsProjets = $abonnementService->getAboProjet($user);
+            $likes=[];
+            $abo=[];
+            foreach ($abonnementsProjets as $abonnementsProjet) {
+                array_push($abo, $abonnementsProjet);
+            }
+            foreach ($projects as $project) {
+                if (in_array($project, $abo)) {
+                    $aboProjet = array($project->getName() => 1);
+                    $likes = array_merge($likes, $aboProjet);
+                } else {
+                    $aboProjet = array($project->getName() => 0);
+                    $likes = array_merge($likes, $aboProjet);
+                }
+            }
         }
+
         return $this->render(
             'CentraleLilleHomepageBundle:category.html.twig',
             [
                 'projects' => $projects,
-                'users' => $users,
+                'users'    => $users,
                 'category' => $category,
-                'isAbo' => $isAbo
+                'isAbo'    => $isAbo,
+                'likes'    =>$likes
             ]
         );
     }
