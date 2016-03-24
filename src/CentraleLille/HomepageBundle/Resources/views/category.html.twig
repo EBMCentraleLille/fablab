@@ -41,7 +41,7 @@
 									</a>
 									<div class="panel-footer">
 										<div class="row">
-										  	<div class="col-md-6 recentProject">
+										  	<div class="recentProject">
 											  	{% if not likes[project.name] %}
 			                                      	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
 			                                      	<div class ="{{ project.name }}" id="follow">Suivre</div>
@@ -49,9 +49,6 @@
 			                                      	<object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
 			                                      	<div class ="{{ project.name }}" id="follow">Ne Plus Suivre</div>
 			                                  	{% endif %}
-			                                </div>
-											<div class="col-md-6 recentProject">
-			                                    <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
 			                                </div>
 			                            </div>
 									</div>
