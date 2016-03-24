@@ -9,15 +9,17 @@
 		<div class="col-md-10">
 			<div class="row">
 				<div class="h2">{{ category }}
-					{% if not isAbo %}
-		                   <div class="btn btn-primary">
-		                    <div class ="{{ category }}">Suivre</div>
-		                   </div>
-		               {% else %}
-		                   <div class="btn btn-primary">
-		                    <div class ="{{ category }}">Ne plus suivre</div>
-		                   </div>
-		               {% endif %}
+					{% if app.user %}
+						{% if not isAbo %}
+			                <div class="btn btn-primary">
+			                <div class ="{{ category }}">Suivre</div>
+			                </div>
+			            {% else %}
+			                <div class="btn btn-primary">
+			                	<div class ="{{ category }}">Ne plus suivre</div>
+			                </div>
+			            {% endif %}
+			        {% endif %}
 				</div>
 			</div>
 			<div class="row panel panel-primary ">
@@ -42,13 +44,17 @@
 									<div class="panel-footer">
 										<div class="row">
 										  	<div class="recentProject">
-											  	{% if not likes[project.name] %}
-			                                      	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-			                                      	<div class ="{{ project.name }}" id="follow">Suivre</div>
-			                                  	{% else %}
-			                                      	<object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-			                                      	<div class ="{{ project.name }}" id="follow">Ne Plus Suivre</div>
-			                                  	{% endif %}
+										  		{% if app.user %}
+												  	{% if not likes[project.name] %}
+				                                      	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+				                                      	<div class ="{{ project.name }}" id="follow">Suivre</div>
+				                                  	{% else %}
+				                                      	<object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+				                                      	<div class ="{{ project.name }}" id="follow">Ne Plus Suivre</div>
+				                                  	{% endif %}
+				                                {% else %}
+				                                	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+				                                {% endif %}
 			                                </div>
 			                            </div>
 									</div>
