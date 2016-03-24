@@ -1,6 +1,9 @@
 centrale_lille_homepage:
     path:     /
     defaults: { _controller: CentraleLilleHomepageBundle:Homepage:index }
+centrale_lille_homepage_subscribe:
+    path:     /follow
+    defaults: { _controller: CentraleLilleHomepageBundle:Homepage:index }
 centrale_lille_homepage_category:
     path:     /category/{category}
     defaults: { _controller: CentraleLilleHomepageBundle:Homepage:category }
