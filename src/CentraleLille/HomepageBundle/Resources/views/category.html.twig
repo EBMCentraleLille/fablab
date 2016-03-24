@@ -25,36 +25,40 @@
 					<h4>Projets dans cette catégorie</h4>
 				</div>
 				<div class="panel-body">
-					{% for project in projects %}
-						<div class="col-md-4">
-							<div class="panel panel-default">
-								<div class="panel-heading">
+					{% if projects is empty %}
+                        Il n'y a aucun projet dans cette catégorie.
+                    {% else %}
+						{% for project in projects %}
+							<div class="col-md-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+										  	{{ project.name }}
+										</a>
+									</div>
 									<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
-									  	{{ project.name }}
+										<div class="RecentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
 									</a>
-								</div>
-								<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
-									<div class="RecentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
-								</a>
-								<div class="panel-footer">
-									<div class="row">
-									  	<div class="col-md-6 recentProject">
-										  	{% if not likes[project.name] %}
-		                                      	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-		                                      	<div class ="{{ project.name }}" id="follow">Suivre</div>
-		                                  	{% else %}
-		                                      	<object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-		                                      	<div class ="{{ project.name }}" id="follow">Ne Plus Suivre</div>
-		                                  	{% endif %}
-		                                </div>
-										<div class="col-md-6 recentProject">
-		                                    <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
-		                                </div>
-		                            </div>
-								</div>
-							</div>		
-						</div>
-					{% endfor %}
+									<div class="panel-footer">
+										<div class="row">
+										  	<div class="col-md-6 recentProject">
+											  	{% if not likes[project.name] %}
+			                                      	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+			                                      	<div class ="{{ project.name }}" id="follow">Suivre</div>
+			                                  	{% else %}
+			                                      	<object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+			                                      	<div class ="{{ project.name }}" id="follow">Ne Plus Suivre</div>
+			                                  	{% endif %}
+			                                </div>
+											<div class="col-md-6 recentProject">
+			                                    <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
+			                                </div>
+			                            </div>
+									</div>
+								</div>		
+							</div>
+						{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 			<div class="row panel panel-primary ">
@@ -62,14 +66,18 @@
 					<h4> Utilisateurs abonnés </h4>
 				</div>
 				<div class="panel-body">
-					{% for user in users %}
-						<div class="col-md-4">
-							<div class="panel panel-default">
-								<div class="panel-heading">{{ user }}</div>
-								<div class="RecentProjectPicture"></div>
+					{% if users is empty %}
+                        Il n'y a aucun utilisateur abonné à cette catégorie. Soyez le premier ! :)
+                    {% else %}
+						{% for user in users %}
+							<div class="col-md-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">{{ user }}</div>
+									<div class="RecentProjectPicture"></div>
+								</div>
 							</div>
-						</div>
-					{% endfor %}
+						{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 		</div>

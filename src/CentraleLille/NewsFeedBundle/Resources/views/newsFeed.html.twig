@@ -83,26 +83,28 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mon Profil
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
+                    <a href="{{ path("fos_user_profile_show")}}">
+                        <div class="panel-body">
+                            Mon Profil
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mes Projets
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
+                    <a href="#">
+                        <div class="panel-body">
+                            Mes Projets
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
                 </div>
                 <div class="button-right-menu">
                     <a href="{{ path("centrale_lille_newsfeed_abonnements")}}">
                         <div class="panel-body">
                             Mes Abonnements
                             <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                        </div>
                         </div>
                     </a>
                 </div>
