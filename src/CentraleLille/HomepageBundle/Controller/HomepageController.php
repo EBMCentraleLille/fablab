@@ -86,7 +86,6 @@ class HomepageController extends Controller
             //Récupération des abonnements du user
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $abonnementsProjets = $abonnementService->getAboProjet($user);
-            $likes=[];
             $abo=[];
             foreach ($abonnementsProjets as $abonnementsProjet) {
                 array_push($abo, $abonnementsProjet);
@@ -125,6 +124,7 @@ class HomepageController extends Controller
     */
     public function categoryAction(Request $request, $category)
     {
+        $likes = [];
         //Récupération des projets de la catégories en question
         $categoryService = $this->container->get('fablab_newsfeed.categories');
         $projects = $categoryService->getProjectsCategory($category);
@@ -132,7 +132,10 @@ class HomepageController extends Controller
 
         $user = $this->getUser();
         if (!$user) {
-            $isAbo=0;
+            $isAbo = 0;
+            foreach ($projects as $project) {
+                $likes = array_merge($likes, array($project->getName() => 0));
+            }
         } else {
             $em = $this->getDoctrine()->getManager();
             $cat=$em->getRepository("CentraleLilleNewsFeedBundle:"
@@ -170,8 +173,7 @@ class HomepageController extends Controller
             //Récupération des abonnements du user
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $abonnementsProjets = $abonnementService->getAboProjet($user);
-            $likes=[];
-            $abo=[];
+            $abo = [];
             foreach ($abonnementsProjets as $abonnementsProjet) {
                 array_push($abo, $abonnementsProjet);
             }
