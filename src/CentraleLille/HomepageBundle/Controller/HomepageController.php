@@ -123,18 +123,44 @@ class HomepageController extends Controller
     *
     * @return Twig La vue Twig à display
     */
-    public function categoryAction($category)
+    public function categoryAction(Request $request, $category)
     {
         //Récupération des projets de la catégories en question
         $categoryService = $this->container->get('fablab_newsfeed.categories');
-        $projects=$categoryService->getProjectsCategory($category);
-        $users=$categoryService->getUsersCategory($category);
+        $projects = $categoryService->getProjectsCategory($category);
+        $users = $categoryService->getUsersCategory($category);
+
+        $user = $this->getUser();
+        if (!$user) {
+            $isAbo=0;
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $cat=$em->getRepository("CentraleLilleNewsFeedBundle:"
+                    ."Category")->findOneBy(array('name'=>$category));
+
+            //Le user est-il abonné à cette catégorie?
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $isAbo = $abonnementService->isAboCategory($user, $cat);
+
+            //récupération de la catégorie likée/délikée
+            $categoryGet = $request->request->get('category');
+            if ($categoryGet) {
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($isAbo) {
+                    $abonnementService->removeAboCategory($user, $cat);
+                } else {
+                    $abonnementService->addAboCategory($user, $cat);
+                }
+            }
+        }
         return $this->render(
             'CentraleLilleHomepageBundle:category.html.twig',
             [
                 'projects' => $projects,
                 'users' => $users,
                 'category' => $category,
+                'isAbo' => $isAbo
             ]
         );
     }

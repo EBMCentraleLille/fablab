@@ -10,9 +10,21 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
+				<div class="row">
+					<div class="h2">{{ category }}
+						{% if not isAbo %}
+		                    <div class="btn btn-primary">
+		                    	<div class ="{{ category }}">Suivre</div>
+		                    </div>
+		                {% else %}
+		                    <div class="btn btn-primary">
+		                    	<div class ="{{ category }}">Ne plus suivre</div>
+		                    </div>
+		                {% endif %}
+				</div>
 				<div class="row panel panel-primary ">
 					<div class="panel-heading">
-					<h4>{{ category }}</h4>
+					<h4>Projets dans cette catégorie</h4>
 					</div>
 					<div class="panel-body">
 					{% for project in projects %}
@@ -72,7 +84,11 @@
 		<div class="col-md-1"></div>
 	</div>
 	</div>
-
-
+{{ include('like.html.twig') }}
+<script>
+$('[class="' + "{{ category }}" + '"]').click(function() {
+    likeCategoryfunction($('[class="' + "{{ category }}" + '"]'), "{{ category }}","{{ path('centrale_lille_homepage_category_follow', { 'category': category }) }}");
+});
+</script>
 	
 {% endblock body %}
