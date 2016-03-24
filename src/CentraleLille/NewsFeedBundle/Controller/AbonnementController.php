@@ -40,7 +40,7 @@ class AbonnementController extends Controller
     *
     * @return Twig La vue Twig à display
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $user = $this->getUser();
         if (!$user) {
@@ -50,6 +50,36 @@ class AbonnementController extends Controller
             );
             return $this->redirectToRoute('fos_user_security_login');
         } else {
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $abonnementService->addAboProjet($user, $projet);
+                }
+            }
+
+            //récupération de la catégorie likée/délikée
+            $categoryName = $request->request->get('category');
+            if ($categoryName) {
+                $em = $this->getDoctrine()->getManager();
+                $category=$em->getRepository("CentraleLilleNewsFeedBundle:"
+                    ."Category")->findOneBy(array('name'=>$categoryName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboCategory($user, $category)) {
+                    $abonnementService->removeAboCategory($user, $category);
+                } else {
+                    $abonnementService->addAboCategory($user, $category);
+                }
+            }
             //Récupération des abonnements projet
             $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
             $abonnementsProjet=$abonnementService->getAboProjet($user);

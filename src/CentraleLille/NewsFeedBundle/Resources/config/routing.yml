@@ -15,3 +15,6 @@ centrale_lille_newsfeed_new_activity:
 centrale_lille_newsfeed_abonnements:
     path:     /abonnements
     defaults: { _controller: CentraleLilleNewsFeedBundle:Abonnement:index }
+centrale_lille_newsfeed_abonnements_follow:
+    path:     /abonnements/follow
+    defaults: { _controller: CentraleLilleNewsFeedBundle:Abonnement:index }
