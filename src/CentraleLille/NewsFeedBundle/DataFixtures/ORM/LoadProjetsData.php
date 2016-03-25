@@ -20,6 +20,8 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * LoadProjetsData Class Doc
@@ -35,8 +37,14 @@ use CentraleLille\CustomFosUserBundle\Entity\Project;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
-class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
+class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
     /**
      * Fonction chargeants les données de projets
      *
@@ -67,6 +75,13 @@ class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('projet-martin', $projet1);
         $this->addReference('projet-charles', $projet2);
         $this->addReference('projet-gregoire', $projet3);
+
+        $projectService = $this->container->get('app.project.service');
+        $projectService->addUserToProject($this->getReference('user-martin'), $projet1);
+        $projectService->addUserToProject($this->getReference('user-charles'), $projet2);
+        $projectService->addUserToProject($this->getReference('user-gregoire'), $projet3);
+        $projectService->setUserToProjectLeader($this->getReference('user-martin'), $projet1);
+        $projectService->setUserToProjectLeader($this->getReference('user-gregoire'), $projet3);
     }
     /**
      * Attribue un ordre d'exécution aux fixtures

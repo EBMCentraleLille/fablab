@@ -14,7 +14,7 @@
  * @link       https://github.com/EBMCentraleLille/fablab
  */
 
-namespace CentraleLille\ProjectPage\Form;
+namespace CentraleLille\ProjectPageBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
