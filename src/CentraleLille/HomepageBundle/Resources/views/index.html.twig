@@ -79,21 +79,19 @@
 									  	</a>
 									  	<div class="panel-footer">
 									  		<div class="row">
-										  	
-											  	<div class="col-md-6 recentProject">
-		                                            {% if not likes[recentProject.name] %}
-		                                                <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-		                                                <div class ="{{ recentProject.name }}" id="follow">Suivre</div>
-		                                            {% else %}
-		                                                <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-		                                                <div class ="{{ recentProject.name }}" id="follow">Ne Plus Suivre</div>
-		                                            {% endif %}
-		                                        </div>
-		                                        <div class="col-md-6 recentProject">
-		                                            <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
-		                                        </div>
+											  	{% if app.user %}
+			                               	        {% if not likes[recentProject.name] %}
+			                                            <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+			                                            <div class ="{{ recentProject.name }}" id="follow">Suivre</div>
+			                                        {% else %}
+			                                            <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+			                                            <div class ="{{ recentProject.name }}" id="follow">Ne Plus Suivre</div>
+			                                        {% endif %}
+			                                    {% else %}
+			                                    	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+			                                   	{% endif %}
 		                                    </div>
-										 </div>
+		                                </div>
 									</div>
 								</div>
 							{% endfor %}
@@ -105,7 +103,6 @@
 		</div>		
 	</div>
 {{ include('like.html.twig') }}
-
 <script>
     var projectsName = [];
     {% for recentProject in recentProjects %}

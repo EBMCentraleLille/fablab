@@ -75,8 +75,10 @@ class AbonnementController extends Controller
                 //Abonnement/désabonnement du user au projet en question
                 $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
                 if ($abonnementService->isAboCategory($user, $category)) {
+
                     $abonnementService->removeAboCategory($user, $category);
                 } else {
+                    
                     $abonnementService->addAboCategory($user, $category);
                 }
             }

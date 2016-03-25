@@ -53,7 +53,7 @@ class StarProjectController extends Controller
                 'notice',
                 "Vous devez être connecté pour accéder à cette page."
             );
-            return $this->redirectToRoute('fos_user_security_login ');
+            return $this->redirectToRoute('fos_user_security_login');
         } elseif (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
             $session=$request->getSession()->getFlashBag()->add(
                 'notice',

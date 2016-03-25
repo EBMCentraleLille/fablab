@@ -86,7 +86,6 @@ class HomepageController extends Controller
             //Récupération des abonnements du user
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $abonnementsProjets = $abonnementService->getAboProjet($user);
-            $likes=[];
             $abo=[];
             foreach ($abonnementsProjets as $abonnementsProjet) {
                 array_push($abo, $abonnementsProjet);
@@ -123,18 +122,80 @@ class HomepageController extends Controller
     *
     * @return Twig La vue Twig à display
     */
-    public function categoryAction($category)
+    public function categoryAction(Request $request, $category)
     {
+        $likes = [];
         //Récupération des projets de la catégories en question
         $categoryService = $this->container->get('fablab_newsfeed.categories');
-        $projects=$categoryService->getProjectsCategory($category);
-        $users=$categoryService->getUsersCategory($category);
+        $projects = $categoryService->getProjectsCategory($category);
+        $users = $categoryService->getUsersCategory($category);
+
+        $user = $this->getUser();
+        if (!$user) {
+            $isAbo = 0;
+            foreach ($projects as $project) {
+                $likes = array_merge($likes, array($project->getName() => 0));
+            }
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $cat=$em->getRepository("CentraleLilleNewsFeedBundle:"
+                    ."Category")->findOneBy(array('name'=>$category));
+
+            //Le user est-il abonné à cette catégorie?
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $isAbo = $abonnementService->isAboCategory($user, $cat);
+
+            //récupération de la catégorie likée/délikée
+            $categoryGet = $request->request->get('category');
+            if ($categoryGet) {
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($isAbo) {
+                    $abonnementService->removeAboCategory($user, $cat);
+                } else {
+                    $abonnementService->addAboCategory($user, $cat);
+                }
+            }
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $recentActivities=$abonnementService->addAboProjet($user, $projet);
+                }
+            }
+            //Récupération des abonnements du user
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $abonnementsProjets = $abonnementService->getAboProjet($user);
+            $abo = [];
+            foreach ($abonnementsProjets as $abonnementsProjet) {
+                array_push($abo, $abonnementsProjet);
+            }
+            foreach ($projects as $project) {
+                if (in_array($project, $abo)) {
+                    $aboProjet = array($project->getName() => 1);
+                    $likes = array_merge($likes, $aboProjet);
+                } else {
+                    $aboProjet = array($project->getName() => 0);
+                    $likes = array_merge($likes, $aboProjet);
+                }
+            }
+        }
+
         return $this->render(
             'CentraleLilleHomepageBundle:category.html.twig',
             [
                 'projects' => $projects,
-                'users' => $users,
+                'users'    => $users,
                 'category' => $category,
+                'isAbo'    => $isAbo,
+                'likes'    =>$likes
             ]
         );
     }

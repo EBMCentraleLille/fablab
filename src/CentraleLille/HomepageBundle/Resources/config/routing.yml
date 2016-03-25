@@ -7,6 +7,9 @@ centrale_lille_homepage_subscribe:
 centrale_lille_homepage_category:
     path:     /category/{category}
     defaults: { _controller: CentraleLilleHomepageBundle:Homepage:category }
+centrale_lille_homepage_category_follow:
+    path:     /category/follow/{category}
+    defaults: { _controller: CentraleLilleHomepageBundle:Homepage:category }
 centrale_lille_homepage_star_project:
     path:     /starproject
     defaults: { _controller: CentraleLilleHomepageBundle:StarProject:index }
