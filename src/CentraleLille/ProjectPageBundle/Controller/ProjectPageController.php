@@ -21,6 +21,8 @@ use CentraleLille\NewsFeedBundle\Entity\Activity;
 use CentraleLille\ProjectPageBundle\Form\ActivityType;
 use CentraleLille\CustomFosUserBundle\Entity\User;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
 
 /**
 
@@ -52,13 +54,29 @@ class ProjectPageController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+        $project = new Project();
         $project = $em
             ->getRepository('CustomFosUserBundle:Project')
             ->findOneBy(array('id'=>$projectId));
 
+        if (!$project) {
+        throw $this->createNotFoundException('Ce projet n\'existe pas !');
+        }
+
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
         $activities=$activityService->getActivityProjet($project, 3);     
+
+        //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
+        //pour accéder à l'user
+        $projectUsers = $em
+            ->getRepository('CustomFosUserBundle:ProjectUser')
+            ->findBy(array('project'=>$project));
+        /* En fait c'est pas grave
+        if (!$projectUsers) {
+        throw $this->createNotFoundException('Ce projet n\'a pas d\'utilisateurs !');
+        }
+        */
 
         if($user){
             if ($user->hasProject($project->getName())) {
@@ -91,7 +109,8 @@ class ProjectPageController extends Controller
                 array(
                     'project' => $project,
                     'recentActivities' => $activities,
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'projectUsers' => $projectUsers
                 )
             );
             }
@@ -99,7 +118,8 @@ class ProjectPageController extends Controller
                 'ProjectPageBundle:Default:projectpage.html.twig',
                 array(
                     'project' => $project,
-                    'recentActivities' => $activities
+                    'recentActivities' => $activities,
+                    'projectUsers' => $projectUsers
                 )
             );
         }
@@ -109,6 +129,7 @@ class ProjectPageController extends Controller
                 array(
                     'project' => $project,
                     'recentActivities' => $activities,
+                    'projectUsers' => $projectUsers
                     )
                 );
         }

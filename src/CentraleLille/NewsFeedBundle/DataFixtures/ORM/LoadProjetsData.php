@@ -20,6 +20,8 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -57,9 +59,9 @@ class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
         $projet1 = new Project();
         $projet2 = new Project();
         $projet3 = new Project();
-        $projet1->setName('projet de martin');
-        $projet2->setName('projet de charles');
-        $projet3->setName('projet de gregoire');
+        $projet1->setName('Projet de martin');
+        $projet2->setName('Projet de charles');
+        $projet3->setName('Projet de gregoire');
         $projet1->setPicture('http://thingiverse-production-new.s3.amazonaws.com/'
                                 .'renders/81/3a/fe/1b/67/s105_preview_featured.jpg');
         $projet2->setPicture('http://thingiverse-production-new.s3.amazonaws.com/'
@@ -79,7 +81,9 @@ class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface
         $projectService = $this->container->get('app.project.service');
         $projectService->addUserToProject($this->getReference('user-martin'), $projet1);
         $projectService->addUserToProject($this->getReference('user-charles'), $projet2);
+        $projectService->addUserToProject($this->getReference('user-charles'), $projet3);
         $projectService->addUserToProject($this->getReference('user-gregoire'), $projet3);
+        $projectService->addUserToProject($this->getReference('user-gregoire'), $projet1);
         $projectService->setUserToProjectLeader($this->getReference('user-martin'), $projet1);
         $projectService->setUserToProjectLeader($this->getReference('user-gregoire'), $projet3);
     }

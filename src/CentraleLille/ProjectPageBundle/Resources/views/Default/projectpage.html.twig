@@ -12,6 +12,13 @@
             <div class="col-md-1"></div>
             <div class="col-md-11">
                 <h2>{{ project.getName() }}</h2>
+                {% if form is defined %}
+                    {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <input type="submit" value="Ajouter l'activité"
+                                class="btn btn-primary" />
+                    {{ form_end(form) }}
+                {% endif %}
                 {% if not recentActivities %}
                     Vous n'avez aucune activité à afficher. N'hésitez pas à suivre des projets où des catégories pour voir leurs actualités.
                 {% else %}
@@ -53,46 +60,49 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            {% if form is defined %}
-                {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                        <input type="submit" value="Ajouter l'activité"
-                            class="btn btn-primary" />
-                {{ form_end(form) }}
-            {% endif %}
         </div>
         <div class="col-md-3">
             <div class="right-menu">
-                <div class="row">
-                    <form role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Personnes,thématiques, projets...">
-                        </div>
-                    </form>
+            <div class="panel panel-primary ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Membres du projet</h3>
                 </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {% if projectUsers is defined %}
+                            {% for projectUser in projectUsers %}
+                                
+                                <li class="list-group-item">
+                                    {% if project_service.isAllowedLeader(projectUser.user, project) %}
+                                        <span class="badge">Leader</span>
+                                    {% endif %}
+                                        {{ projectUser.user.firstname }}
+                                        {{ projectUser.user.lastname }}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
 
-                <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mon Profil
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Résumé du projet</h3>
                 </div>
-
-                <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mes Projets
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
+                <div class="panel-body">
+                    {{ project.summary }}
                 </div>
-                <div class="button-right-menu">
-                    <a href="{{ path("centrale_lille_newsfeed_abonnements")}}">
+            </div>
+            {% if form is defined %}
+            <div class="button-right-menu">
+                    <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
                         <div class="panel-body">
-                            Mes Abonnements
+                            Editer le projet / Ajouter des membres
                             <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
                         </div>
-                        </div>
                     </a>
-                </div>
+            </div>
+            {% endif %}
             </div>
         </div>
     <div class="col-md-1"></div>
