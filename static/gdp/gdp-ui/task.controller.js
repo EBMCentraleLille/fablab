@@ -107,6 +107,7 @@ function taskController($scope,rq,toastr) {
 
     function getProjectUsers() {
         rq.getUsers($scope.currentProject.id,function(res) {
+            console.log(res.data)
             $scope.projectsUsers=res.data;
         })
     }
