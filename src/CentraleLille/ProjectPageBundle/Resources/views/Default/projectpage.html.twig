@@ -14,7 +14,7 @@
                 <h2>{{ project.getName() }}</h2>
                 {% if form is defined %}
                     {{ form_start(form) }}
-                            {{ form_widget(form) }}
+                            {{ form_row(form.Content) }}
                             <input type="submit" value="Ajouter l'activité"
                                 class="btn btn-primary" />
                     {{ form_end(form) }}
@@ -49,9 +49,6 @@
                                                 <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
                                             {% endif %}
                                         {% endif %}
-                                        </div>
-                                        <div class="col-md-6 recentProject">
-                                            <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
                                         </div>
                                     </div>
                                 </div>

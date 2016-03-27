@@ -65,7 +65,8 @@ class ProjectPageController extends Controller
 
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 3);     
+        $activities=$activityService->getActivityProjet($project, 10);     
+
 
         //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
         //pour accéder à l'user
@@ -80,11 +81,37 @@ class ProjectPageController extends Controller
 
         if($user){
             if ($user->hasProject($project->getName())) {
+
+                //Récupération des abonnements du user
+                $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+                $abonnements = $abonnementService->getAboAll($user);
+                $abonnementsProjets = $abonnementService->getAboProjet($user);
+                $likes=[];
+                $abo=[];
+
+                
+                //Récupération des likes
+                foreach ($abonnementsProjets as $abonnementsProjet) {
+                    array_push($abo, $abonnementsProjet);
+                }
+                foreach ($abonnements as $abonnement) {
+                if (in_array($abonnement, $abo)) {
+                    $aboProjet = array($abonnement->getName() => 1);
+                    $likes = array_merge($likes, $aboProjet);
+                } 
+                else {
+                    $aboProjet = array($abonnement->getName() => 0);
+                    $likes = array_merge($likes, $aboProjet);
+                }
+                } 
                 
                 //affichage du formulaire et gestion de la requête
                 $activity = new Activity();
                 $form = $this->createForm(ActivityType::class, $activity);
-                
+                $activity->setUser($user);
+                $activity->setProject($project);
+                $activity->setType('custom');
+
                 $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -99,9 +126,12 @@ class ProjectPageController extends Controller
                     
                     return $this->redirect(
                         $this->generateUrl(
+                            'project_page_homepage', 
+                            array(
+                                'projectId' => $projectId
+                                )
                         )
-                    );
-                    
+                    );   
                 }
                 
             return $this->render(
@@ -110,7 +140,8 @@ class ProjectPageController extends Controller
                     'project' => $project,
                     'recentActivities' => $activities,
                     'form' => $form->createView(),
-                    'projectUsers' => $projectUsers
+                    'projectUsers' => $projectUsers,
+                    'likes' => $likes
                 )
             );
             }
@@ -119,7 +150,8 @@ class ProjectPageController extends Controller
                 array(
                     'project' => $project,
                     'recentActivities' => $activities,
-                    'projectUsers' => $projectUsers
+                    'projectUsers' => $projectUsers,
+                    'likes' => $likes
                 )
             );
         }
