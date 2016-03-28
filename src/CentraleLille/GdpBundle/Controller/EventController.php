@@ -123,7 +123,7 @@ class EventController extends FOSRestController
    *
    * @return View
    */
-    public function putTaskAction($eventId, ParamFetcher $paramFetcher)
+    public function putEventAction($eventId, ParamFetcher $paramFetcher)
     {
         $event = $this->getDoctrine()->getRepository('ReservationBundle:Event')->findOneBy($eventId);
         if ($paramFetcher->get('title')) {
