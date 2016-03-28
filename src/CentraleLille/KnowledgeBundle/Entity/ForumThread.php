@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ForumPost
  *
- * @ORM\Table(name="forum_post")
- * @ORM\Entity(repositoryClass="CentraleLille\KnowledgeBundle\Repository\ForumPostRepository")
+ * @ORM\Table(name="forum_thread")
+ * @ORM\Entity(repositoryClass="CentraleLille\KnowledgeBundle\Repository\ForumThreadRepository")
  */
-class ForumPost
+class ForumThread
 {
     /**
      * @var int
@@ -28,17 +28,25 @@ class ForumPost
     private $author;
 
     /**
-    * @ORM\ManyToOne(targetEntity="\CentraleLille\KnowledgeBundle\Entity\ForumThread")
-    * @ORM\JoinColumn(name="thread_id", referencedColumnName="id")
-     */
-    private $thread;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string")
+     */
+    private $status;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="tags", type="array")
+     */
+    private $tags;
 
 
     /**
@@ -49,6 +57,30 @@ class ForumPost
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return ForumPost
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -76,6 +108,30 @@ class ForumPost
     }
 
     /**
+     * Set tags
+     *
+     * @param array $tags
+     *
+     * @return ForumPost
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
      * Get author
      *
      * @return User
@@ -88,7 +144,7 @@ class ForumPost
     /**
      * Set author
      *
-     * @return ForumPost
+     * @return User
      */
     public function setAuthor($author)
     {
@@ -97,23 +153,23 @@ class ForumPost
     }
 
     /**
-     * Get thread
+     * Get status
      *
-     * @return ForumThread
+     * @return string
      */
-    public function getThread()
+    public function getStatus()
     {
-        return $this->thread;
+        return $this->status;
     }
 
     /**
-     * Set thread
+     * Set status
      *
-     * @return ForumPost
+     * @return ForumThread
      */
-    public function setThread($thread)
+    public function setStatus($status)
     {
-        $this->thread = $thread;
+        $this->status = $status;
         return $this;
     }
 }

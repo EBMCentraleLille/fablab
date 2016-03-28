@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use CentraleLille\ReservationBundle\Entity\Booking\Event;
 use Symfony\Component\HttpFoundation\Request;
+use CentraleLille\ReservationBundle\Entity\Bookables\Type;
 
 /**
  * Controller Class Doc
@@ -51,6 +52,8 @@ class EventController extends Controller
 
         $machines = $repository->findAll();
 
+        $types = $em->getRepository('ReservationBundle:Bookables\Type');
+
         // machines fitering
 
         $machinesAvailables = array();
@@ -82,7 +85,8 @@ class EventController extends Controller
                 'machinesAvailables'=>$machinesAvailables,
                 'machinesUnavailables'=>$machinesUnavailables,
                 'machinesOutOfOrder'=>$machinesOutOfOrder,
-                'machinesBeingTested'=>$machinesOutOfOrder
+                'machinesBeingTested'=>$machinesOutOfOrder,
+                'types'=>$types
                 )
         );
     }

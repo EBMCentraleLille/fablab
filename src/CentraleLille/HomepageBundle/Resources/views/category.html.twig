@@ -19,8 +19,14 @@
 					<div class="col-md-4">
 					
 							<div class="panel panel-default">
-							  	<div class="panel-heading">{{ project.name }}</div>
-							  	<div class="RecentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
+							  	<div class="panel-heading">
+							  		<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+							  			{{ project.name }}
+									</a>
+							  	</div>
+							  	<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+							  		<div class="RecentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
+							  	</a>
 							  	<div class="panel-footer">
 							  		<div class="row">
 								  		<div class="col-md-6 recentProjectSide">
@@ -54,7 +60,7 @@
 					<div class="col-md-4">
 					
 							<div class="panel panel-default">
-							  	<div class="panel-heading">{{ user }}</div
+							  	<div class="panel-heading">{{ user }}</div>
 							  	<div class="RecentProjectPicture"></div>
 							  	
 							</div>

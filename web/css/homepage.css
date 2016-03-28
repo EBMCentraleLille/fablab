@@ -79,7 +79,7 @@
 .list-group-items {
     position: relative;
     display: block;
-    padding: 10px 15px;
+    padding: 10px;
     margin-bottom: -1px;
     background-color: #ffffff;
     border-top: 1px solid #dddddd;
@@ -88,6 +88,12 @@
 .list-group-items:hover{
     background-color: #ecf0f1;
 }
+
+.categories{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 /** Projets Récents */
 .recentProjectSide{
 text-align: center;
@@ -112,4 +118,8 @@ text-align: center;
 
 .likeIcon:hover{
     color:red;
+}
+#follow:hover{
+  text-decoration: underline;
+  cursor: hand;
 }
