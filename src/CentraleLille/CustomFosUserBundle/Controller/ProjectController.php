@@ -60,9 +60,8 @@ class ProjectController extends Controller
      */
     public function editAction($projectId)
     {
-        $project = $this
-            ->getDoctrine()
-            ->getManager()
+        $em = $this->getDoctrine()->getManager();
+        $project = $em
             ->getRepository('CustomFosUserBundle:Project')
             ->findOneById($projectId);
 
@@ -73,13 +72,18 @@ class ProjectController extends Controller
          */
         $this->denyAccessUnlessGranted(ProjectRole::PROJECT_ROLE_MEMBER, $project);
 
-        return $this->render(
-            'CustomFosUserBundle:Project:edit.html.twig',
-            array(
-                'project' => $project,
-                'currentUser' => $currentUser
-            )
-        );
+        $form = $this->get('form.factory')->create(new ProjectFormType(), $project);
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em->flush();
+            return $this->redirect($this->generateUrl('project_edit'));
+        }
+
+        return $this->render('CustomFosUserBundle:Project:edit.html.twig', array(
+            'form' => $form->createview(),
+            'project' => $project,
+            'currentUser' => $currentUser
+        ));
     }
 
     /**
