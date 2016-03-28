@@ -22,4 +22,6 @@ interface ProjectServiceInterface
     public function removeUserFromProject($user, $project);
 
     public function setUserToProjectLeader($user, $project);
+
+    public function getUsersOfProject($project);
 }

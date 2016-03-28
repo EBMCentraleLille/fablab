@@ -8,6 +8,7 @@
 
 namespace CentraleLille\CustomFosUserBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,7 +51,7 @@ class Project
 
     /**
      * @var string
-     * @ORM\Column(name="picture", type="string", length=80, nullable=true)
+     * @ORM\Column(name="picture", type="string", length=2000, nullable=true)
      */
     protected $picture;
 
@@ -70,7 +71,7 @@ class Project
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\ProjectUser", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\ProjectUser", mappedBy="project")
      */
     protected $projectUsers;
 

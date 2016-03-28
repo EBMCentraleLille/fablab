@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CentraleLille\CustomFosUserBundle\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class ProjectController
@@ -29,8 +30,9 @@ class ProjectController extends Controller
      * @param $projectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($projectId)
+    public function showAction($projectId, Request $request)
     {
+        $session = new Session();
         $project = $this
             ->getDoctrine()
             ->getManager()
@@ -38,6 +40,38 @@ class ProjectController extends Controller
             ->findOneById($projectId);
 
         $currentUser = $this->getUser();
+
+        $projectService = $this->container->get('app.project.service');
+        $usersOfProject = $projectService->getUsersOfProject($project);
+
+        $usernameData = array();
+        $form = $this->createFormBuilder($usernameData)
+            ->add('username', 'text')
+            ->getForm();
+
+        $error = $session->get('error');
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $data = $form->getData();
+            if($projectService->isAllowedLeader($currentUser,$project)){
+                $username = $data['username'];
+                $user = $this
+                    ->getDoctrine()
+                    ->getManager()
+                    ->getRepository('CustomFosUserBundle:User')
+                    ->findOneByUsername($username);
+                if($user != null){
+                    $projectService->addUserToProject($user, $project);
+                    $session->set('error',"");
+                } else {
+                    $session->set('error',"Cet utilisateur n'existe pas.");
+                }
+            } else {
+                $session->set('error',"Vous devez être PROJECT_LEADER pour ajouter un nouveau membre.");
+            }
+            return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId, 'error' => $error)));
+        }
+
 
         /**
          * Control access for members only
@@ -48,7 +82,10 @@ class ProjectController extends Controller
             'CustomFosUserBundle:Project:show.html.twig',
             array(
                 'project' => $project,
-                'currentUser' => $currentUser
+                'currentUser' => $currentUser,
+                'projectUsers' => $usersOfProject,
+                'formUsername' => $form->createView(),
+                'error' => $error
             )
         );
     }
@@ -111,4 +148,32 @@ class ProjectController extends Controller
             ));
         }
     }
+
+    /**
+     * @Route("/show/{projectId}/{userId}", name="project_remove_user"))
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeUserFromProject($projectId,$userId)
+    {
+        $session = new Session();
+        $project = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('CustomFosUserBundle:Project')
+            ->findOneById($projectId);
+        $user = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('CustomFosUserBundle:User')
+            ->findOneById($userId);
+        $currentUser = $this->getUser();
+        $projectService = $this->container->get('app.project.service');
+        if($projectService->isAllowedLeader($currentUser,$project)){
+            $projectService->removeUserFromProject($user,$project);
+        } else {
+            $session->set('error',"Vous devez être PROJECT_LEADER pour retirer un membre.");
+        }
+        return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId)));
+    }
+
 }
