@@ -18,6 +18,7 @@
 namespace CentraleLille\HomepageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * HomepageController Class Doc
@@ -41,8 +42,9 @@ class HomepageController extends Controller
     *
     * @return Twig La vue Twig à display
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $likes=[];
         //Récupération des catégories
         $categoryService=$this->container->get('fablab_newsfeed.categories');
         $categories=$categoryService->getCategories(8);
@@ -57,16 +59,57 @@ class HomepageController extends Controller
 
         //Récupération des projets récents
         $recentProjectService=$this->container->get('fablab_homepage.recentProject');
-        $recentProjects = $recentProjectService -> getRecentProjects(3);
+        $recentProjects = $recentProjectService -> getRecentProjects(6);
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            foreach ($recentProjects as $recentProject) {
+                $likes = array_merge($likes, array($recentProject->getName() => 0));
+            }
+        } else {
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $recentActivities=$abonnementService->addAboProjet($user, $projet);
+                }
+            }
+
+            //Récupération des abonnements du user
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $abonnementsProjets = $abonnementService->getAboProjet($user);
+            $likes=[];
+            $abo=[];
+            foreach ($abonnementsProjets as $abonnementsProjet) {
+                array_push($abo, $abonnementsProjet);
+            }
+            foreach ($recentProjects as $recentProject) {
+                if (in_array($recentProject, $abo)) {
+                    $aboProjet = array($recentProject->getName() => 1);
+                    $likes = array_merge($likes, $aboProjet);
+                } else {
+                    $aboProjet = array($recentProject->getName() => 0);
+                    $likes = array_merge($likes, $aboProjet);
+                }
+            }
+        }
 
         return $this->render(
             'CentraleLilleHomepageBundle:index.html.twig',
             [
-                'starProject' => $starProject,
+                'starProject'      => $starProject,
                 'recentActivities' => $recentActivities,
-                'categories' => $categories,
-                'recentProjects' => $recentProjects,
-                'username'=>"Martin"
+                'categories'       => $categories,
+                'recentProjects'   => $recentProjects,
+                'likes'            =>$likes
             ]
         );
     }

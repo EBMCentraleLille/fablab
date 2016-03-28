@@ -2,11 +2,8 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/newsFeed.css') }}" />
-
 {% endblock stylesheets %}
-
 {% block body %}
-
     <div class="newsFeed">
         <div class="col-md-1"></div>
         <div class="col-md-2 filter-menu">
@@ -19,18 +16,17 @@
                         {{ form_row(form.update) }}
                     </div>
                 <h4>Thématiques</h4>
-                    <div class = chkbox-filter>
-                            {% for category in categories %}
-                                {{ form_row(attribute(form, category.id))}}
-                            {% endfor %}
-                    </div>
+                <div class = chkbox-filter>
+                    {% for category in categories %}
+                        {{ form_row(attribute(form, category.id))}}
+                    {% endfor %}
+                </div>
                 <h4>Date</h4>
                 {{ form_row(form.dateMin) }}
                 {{ form_row(form.dateMax) }}
                 <input type="submit" value="Appliquer les filtres"
                        class="btn btn-primary" />
-                    {{ form_end(form) }}
-
+                {{ form_end(form) }}
             <form/>
         </div>
         <div class="col-md-5">
@@ -43,14 +39,18 @@
                     {% for recentActivity in recentActivities %}
                         <div class="news row">
                             <div class="project-name">
-                                {{ recentActivity.project.name }}
+                                <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
+                                    {{ recentActivity.project.name }}
+                                </a>
                                 <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
                             <div class="activity-content">
                                     {{ recentActivity.content }}
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="recentProjectPicture" style="background-image:url('{{ recentActivity.project.picture }}');"></div>
+                                <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
+                                    <div class="recentProjectPicture" style="background-image:url('{{ recentActivity.project.picture }}');"></div>
+                                </a>
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-6 recentProject">
@@ -112,36 +112,18 @@
 </div>
 <script src="{{ asset('jquery.js') }}"></script>
 <script src="{{ asset('js/oXHR.js') }}"></script>
+{{ include('like.html.twig') }}
 <script>
+    var projectsName = [];
+    {% for recentActivity in recentActivities %}
+        if (projectsName.indexOf("{{ recentActivity.project.name }}") == -1) {
+            projectsName.push("{{ recentActivity.project.name }}");
 
-var projectsName = [];
-
-{% for recentActivity in recentActivities %}
-    if (projectsName.indexOf("{{ recentActivity.project.name }}") == -1) {
-        projectsName.push("{{ recentActivity.project.name }}");
-
-        $('[class="' + "{{ recentActivity.project.name }}" + '"]').click(function() {
-            likefunction($('[class="' + "{{ recentActivity.project.name }}" + '"]'), "{{ recentActivity.project.name }}");
-        });
-
-    };
-{% endfor %}
-
-function likefunction(projectLike, projectLikeName) {
-    var xhr = getXMLHttpRequest();
-    if (projectLike.eq(0).text() == "Suivre") {
-        projectLike.text("Ne Plus Suivre");
-        projectLike.prev().attr('data',"{{ asset('icons/likeOn.svg') }}");
-    } else {
-        projectLike.text("Suivre");
-        projectLike.prev().attr('data',"{{ asset('icons/like.svg') }}");
-    }
-    xhr.open("POST", "{{ path('news_feed_subscribe') }}", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("projet=" + projectLikeName);
-    xhr.send(null);
-};
-
+            $('[class="' + "{{ recentActivity.project.name }}" + '"]').click(function() {
+                likefunction($('[class="' + "{{ recentActivity.project.name }}" + '"]'), "{{ recentActivity.project.name }}","{{ path('news_feed_subscribe') }}");
+            });
+        };
+    {% endfor %}
 </script>
 {% endblock body %}
 

@@ -78,4 +78,13 @@ class ProjectService implements ProjectServiceInterface
         }
         return false;
     }
+
+    public function getUsersOfProject($project)
+    {
+        $users = array();
+        foreach ($project->getProjectUsers() as $projectUser) {
+            $users[] = $projectUser->getUser();
+        }
+        return $users;
+    }
 }
