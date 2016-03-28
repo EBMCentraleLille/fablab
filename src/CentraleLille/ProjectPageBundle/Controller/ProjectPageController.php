@@ -51,6 +51,8 @@ class ProjectPageController extends Controller
      */
     public function displayProjectAction($projectId, Request $request)
     {
+
+        
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $project = $em
@@ -79,6 +81,21 @@ class ProjectPageController extends Controller
             //Le user est-il abonné à ce projet?
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $isAbo = $abonnementService->isAboProjet($user, $project);
+            
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $recentActivities=$abonnementService->addAboProjet($user, $projet);
+                }
+            }
 
             if ($user->hasProject($project->getName())) {
                 //affichage du formulaire et gestion de la requête
@@ -114,17 +131,130 @@ class ProjectPageController extends Controller
                         'project'          => $project,
                         'recentActivities' => $activities,
                         'form'             => $form->createView(),
-                        'projectUsers'     => $projectUsers
+                        'projectUsers'     => $projectUsers,
+                        'isAbo'            => $isAbo
                     )
                 );
             }
         }
+        $isAbo = 0;
         return $this->render(
             'ProjectPageBundle:Default:projectpage.html.twig', 
             array(
                 'project'          => $project,
                 'recentActivities' => $activities,
-                'projectUsers'     => $projectUsers
+                'projectUsers'     => $projectUsers,
+                'isAbo'            => $isAbo
+                )
+        );
+    }
+    public function deleteActivityAction($projectId, $activityId, Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $project = $em
+            ->getRepository('CustomFosUserBundle:Project')
+            ->findOneBy(array('id'=>$projectId));
+        if (!$project) {
+        throw $this->createNotFoundException('Ce projet n\'existe pas !');
+        }
+
+        //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
+        //pour accéder à l'user
+        $projectUsers = $em
+            ->getRepository('CustomFosUserBundle:ProjectUser')
+            ->findBy(array('project'=>$project));
+        /* En fait c'est pas grave
+        if (!$projectUsers) {
+        throw $this->createNotFoundException('Ce projet n\'a pas d\'utilisateurs !');
+        }
+        */
+
+        if($user){
+            //Le user est-il abonné à ce projet?
+            $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
+            $isAbo = $abonnementService->isAboProjet($user, $project);
+            
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $recentActivities=$abonnementService->addAboProjet($user, $projet);
+                }
+            }
+
+            if ($user->hasProject($project->getName())) {
+                //suppression de l'activity visée
+                $activitydeleted = $em
+                    ->getRepository('CentraleLilleNewsFeedBundle:Activity')
+                    ->findOneBy(array('id'=>$activityId));
+                if ($activitydeleted) {
+                    $em->remove($activitydeleted);
+                    $em->flush();
+                }
+                
+
+                //affichage du formulaire et gestion de la requête
+                $activity = new Activity();
+                $form = $this->createForm(ActivityType::class, $activity);
+                $activity->setUser($user);
+                $activity->setProject($project);
+                $activity->setType('custom');
+
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $activity->setDate(new \Datetime());
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($activity);
+                    $em->flush();
+                    $session=$request->getSession()->getFlashBag()->add(
+                        'notice',
+                        "L'activité a bien été ajoutée."
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'project_page_homepage',
+                            array(
+                                'projectId' => $projectId
+                            )
+                        )
+                    );
+                }
+                //Récupération des activités
+                $activityService=$this->container->get('fablab_newsfeed.activities');
+                $activities=$activityService->getActivityProjet($project, 10);
+                return $this->render(
+                    'ProjectPageBundle:Default:projectpage.html.twig',
+                    array(
+                        'project'          => $project,
+                        'recentActivities' => $activities,
+                        'form'             => $form->createView(),
+                        'projectUsers'     => $projectUsers,
+                        'isAbo'            => $isAbo
+                    )
+                );
+            }
+        }
+        //Récupération des activités
+        $activityService=$this->container->get('fablab_newsfeed.activities');
+        $activities=$activityService->getActivityProjet($project, 10);
+        $isAbo = 0;
+        return $this->render(
+            'ProjectPageBundle:Default:projectpage.html.twig', 
+            array(
+                'project'          => $project,
+                'recentActivities' => $activities,
+                'projectUsers'     => $projectUsers,
+                'isAbo'            => $isAbo
                 )
         );
     }

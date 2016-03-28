@@ -9,11 +9,24 @@
     <div class="newsFeed">
         <div class="col-md-2"></div>
         <div class="col-md-5">
-            <h2>{{ project.getName() }}</h2>
+            <div class="h2">
+                {{ project.getName() }}
+                {% if app.user %}
+                    {% if not isAbo %}
+                        <div class="btn btn-primary">
+                        <div class ="{{ project.name }}">Suivre</div>
+                        </div>
+                    {% else %}
+                        <div class="btn btn-primary">
+                            <div class ="{{ project.name }}">Ne plus suivre</div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
             {% if form is defined %}
                 {{ form_start(form) }}
                         {{ form_row(form.Content) }}
-                        <input type="submit" value="Ajouter l'activité"
+                        <input type="submit" value="Publier l'activité"
                             class="btn btn-primary" />
                 {{ form_end(form) }}
             {% endif %}
@@ -31,10 +44,17 @@
                         <div class="project-name">
                             <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
                             </a>
-                            <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
-                        <div class="activity-content">
+                            <div class="time-elapsed">
+                                Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}
+                            </div>
+                            <div class="activity-content">
                                 {{ recentActivity.content }}
                             </div>
+                            {% if form is defined %}
+                                <a href="{{ path("project_page_delete_activity", { 'activityId': recentActivity.id, 'projectId': project.id }) }}">
+                                    Supprimer
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
@@ -74,12 +94,12 @@
             </div>
             {% if form is defined %}
             <div class="button-right-menu">
-                    <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
-                        <div class="panel-body">
-                            Editer le projet / Ajouter des membres
-                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                        </div>
-                    </a>
+                <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
+                    <div class="panel-body">
+                        Editer le projet / Ajouter des membres
+                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                    </div>
+                </a>
             </div>
             {% endif %}
             </div>
@@ -90,16 +110,9 @@
 <script src="{{ asset('js/oXHR.js') }}"></script>
 {{ include('like.html.twig') }}
 <script>
-    var projectsName = [];
-    {% for recentActivity in recentActivities %}
-        if (projectsName.indexOf("{{ recentActivity.project.name }}") == -1) {
-            projectsName.push("{{ recentActivity.project.name }}");
-
-            $('[class="' + "{{ recentActivity.project.name }}" + '"]').click(function() {
-                likefunction($('[class="' + "{{ recentActivity.project.name }}" + '"]'), "{{ recentActivity.project.name }}","{{ path('news_feed_subscribe') }}");
-            });
-        };
-    {% endfor %}
+    $('[class="' + "{{ project.name }}" + '"]').click(function() {
+        likefunction($('[class="' + "{{ project.name }}" + '"]'), "{{ project.name }}","{{ path('project_page_homepage', { 'projectId': project.name }) }}");
+    });
 </script>
 {% endblock body %}
 
