@@ -53,23 +53,24 @@ class ProjectController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             $data = $form->getData();
-            if($projectService->isAllowedLeader($currentUser,$project)){
+            if ($projectService->isAllowedLeader($currentUser, $project)) {
                 $username = $data['username'];
                 $user = $this
                     ->getDoctrine()
                     ->getManager()
                     ->getRepository('CustomFosUserBundle:User')
                     ->findOneByUsername($username);
-                if($user != null){
+                if ($user != null) {
                     $projectService->addUserToProject($user, $project);
-                    $session->set('error',"");
+                    $session->set('error', "");
                 } else {
-                    $session->set('error',"Cet utilisateur n'existe pas.");
+                    $session->set('error', "Cet utilisateur n'existe pas.");
                 }
             } else {
-                $session->set('error',"Vous devez être PROJECT_LEADER pour ajouter un nouveau membre.");
+                $session->set('error', "Vous devez être PROJECT_LEADER pour ajouter un nouveau membre.");
             }
-            return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId, 'error' => $error)));
+            return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId,
+                                                                            'error' => $error)));
         }
 
 
@@ -153,7 +154,7 @@ class ProjectController extends Controller
      * @Route("/show/{projectId}/{userId}", name="project_remove_user"))
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function removeUserFromProject($projectId,$userId)
+    public function removeUserFromProject($projectId, $userId)
     {
         $session = new Session();
         $project = $this
@@ -168,12 +169,11 @@ class ProjectController extends Controller
             ->findOneById($userId);
         $currentUser = $this->getUser();
         $projectService = $this->container->get('app.project.service');
-        if($projectService->isAllowedLeader($currentUser,$project)){
-            $projectService->removeUserFromProject($user,$project);
+        if ($projectService->isAllowedLeader($currentUser, $project)) {
+            $projectService->removeUserFromProject($user, $project);
         } else {
-            $session->set('error',"Vous devez être PROJECT_LEADER pour retirer un membre.");
+            $session->set('error', "Vous devez être PROJECT_LEADER pour retirer un membre.");
         }
         return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId)));
     }
-
 }
