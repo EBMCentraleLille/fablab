@@ -67,7 +67,7 @@ class ProjectController extends FOSRestController
      */
     public function getProjectAction($id)
     {
-        $projectRepository = $this->getDoctrine()->getRepository('CentraleLilleCustomFosUserBundle:Project');
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id);
         if (!$project) {
             throw $this->createNotFoundException('Data not found.');
