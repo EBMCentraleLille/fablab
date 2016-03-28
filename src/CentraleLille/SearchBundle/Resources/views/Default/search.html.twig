@@ -12,8 +12,10 @@
 
 {% block body %}
 
-<div class="container">
-  <h1>Outil de recherche</h1>
+<div class="container" style="margin-top:50px;">
+
+  <div class="col-lg-3" style="margin-top:50px;">
+  
   <div>
     {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
     {{ form_errors(form) }}
@@ -21,111 +23,159 @@
       {{ form_label(form.stringSearch, " ", {'label_attr': {'class': 'control-label'}}) }}
       {{ form_widget(form.stringSearch, {'attr': {'class': 'form-control'}})}}
       {{ form_errors(form.stringSearch) }}
+       {{ form_widget(form.search, {'attr': {'class': 'btn btn-primary', 'style': 'margin-top:10px'}})}}
     </div>
-    <div class="form-group">
-      {{ form_widget(form.search, {'attr': {'class': 'btn btn-primary'}})}}
-    </div>
+   
     {{ form_end(form) }}
   </div>
 
 
+  <div id="filters">
+<div class="filterblock">
+<input id="check1" type="checkbox" name="check" value="machine" class="category" checked>
+<label for="check1">Machine ({{ result_machine|length }})</label>
+</div>
+
+<div class="filterblock">
+<input id="check2" type="checkbox" name="check" value="user" class="category" checked>
+<label for="check2">Utilisateur ({{ result_user|length }})</label>
+</div>
+
+<div class="filterblock">
+<input id="check3" type="checkbox" name="check" value="competence" class="category" checked>
+<label for="check3">Compétence ({{ result_competence|length }})</label>
+</div>
+
+<div class="filterblock">
+<input id="check4" type="checkbox" name="check" value="projet" class="category" checked>
+<label for="check4">Projet ({{ result_project|length }})</label>
+</div>
+ 
+</div>
+</div>
+
+<div class="col-lg-6">
   <div class="results">
     {% if search is null %}
-    Aucun résultat
+    <h4 style="margin-top:50px">Aucun résultat</h4>
 
     {% else %}
 
 
 
-    <div class="result">
+    <div class="result" data-tag="projet">
   
-      <h3>Projets</h3>
+     
       {% if result_project|length > 0 %}
 
-      {% for project in result_project %}
-      <a href="#">
+       <h3>Projets - {{ result_project|length }} résultats </h3>
+     
         <div class="panel panel-default">
           <div class="panel-body">
+
+
+            {% for project in result_project %}
+             <a href="../users/project/show/{{ project.id }}">
+             <div class="col-lg-10">
             <h4>{{ project.name }}</h4>
+            {% if project.summary is defined %}
             <p>{{ project.summary }}</p>
+            {% endif %}
+            </div>
+            <div class="col-lg-2">
+           <h5>{{ "now"|date('d/m/Y') }}</h5>
+            </div>
+            </a>
+
+
+             {% endfor %}
           </div>
         </div>
-      </a>
-      {% endfor %}
+      
+     
 
       {% else %}
-      aucun résultat
       {% endif %}
     </div>
 
 
 
 
-    <div class="result">
-      <h3>Compétences</h3>
+    <div class="result" data-tag="competence">
+     
       {% if result_competence|length > 0 %}
-
-      {% for competence in result_competence %}
-      <a href="#">
+ <h3>Compétences - {{ result_competence|length }} résultats</h3>
+      
         <div class="panel panel-default">
           <div class="panel-body">
+          {% for competence in result_competence %}
+      <a href="#">
             <h4>{{ competence.name }}</h4>
+             </a>
+      {% endfor %}
           </div>
         </div>
-      </a>
-      {% endfor %}
+     
 
       {% else %}
-      aucun résultat
+      
       {% endif %}
     </div>
 
 
 
 
-    <div class="result">
-      <h3>Machines</h3>
+    <div class="result" data-tag="machine">
       {% if result_machine|length > 0 %}
-
-      {% for machine in result_machine %}
-      <a href="#">
+       <h3>Machines - {{ result_machine|length }} résultats</h3> 
         <div class="panel panel-default">
           <div class="panel-body">
-            <h4>{{ machine.machine_name }}</h4>
-            <p>{{ machine.description }}</p>
+          {% for machine in result_machine %}
+      <a href="../booking/resource/view/machine/{{ machine.id }}">
+      <div class="col-lg-9">
+            <h4>{{ machine.name }}</h4> 
+            </div>
+            <div class="col-lg-3">
+            <p><h5>{{ machine.statut }}</h5></p>
+            </div>
+            </a>
+      {% endfor %}
           </div>
         </div>
-      </a>
-      {% endfor %}
+      
 
       {% else %}
-      aucun résultat
+      
       {% endif %}
     </div>
 
 
 
-    <div class="result">
-      <h3>Utilisateurs</h3>
+    <div class="result" data-tag="user">
+      
       {% if result_user|length > 0 %}
 
-      {% for user in result_user %}
-      <a href="#">
+     <h3>Utilisateurs - {{ result_user|length }} résultats </h3>
         <div class="panel panel-default">
           <div class="panel-body">
+           {% for user in result_user %}
+      <a href="#">
             <h4>{{ user.username }}</h4>
             <p>{{ user.email }}</p>
+             </a>
+      {% endfor %}
           </div>
         </div>
-      </a>
-      {% endfor %}
+     
 
       {% else %}
-      aucun résultat
       {% endif %}
     </div>
 
     {% endif %}
+  </div>
+  </div>
+  <div class="col-lg-3">
   </div>
 
 </div>
@@ -198,5 +248,45 @@ var options = {
 };
 
 $("#stringSearch").easyAutocomplete(options);
+</script>
+<script type="text/javascript">
+var category_list = [];
+$('#filters :input:checked').each(function(){
+  var category = $(this).val();
+  category_list.push(category);//Push each check item's value into an array
+});
+
+$('.result').each(function(){
+  var item = $(this).attr('data-tag');
+  if(jQuery.inArray(item,category_list) > -1)//Check if data-tag's value exist in array
+    $(this).fadeIn('slow');
+  else
+    $(this).hide();
+});
+
+
+
+$(document).ready(function(){
+  $('.category').on('change', function(){
+    var category_list = [];
+    $('#filters :input:checked').each(function(){
+      var category = $(this).val();
+      category_list.push(category); //Push each check item's value into an array
+    });
+
+    if(category_list.length == 0)
+        $('.result').fadeIn();
+    else {
+      $('.result').each(function(){
+        var item = $(this).attr('data-tag');
+        if(jQuery.inArray(item,category_list) > -1) //Check if data-tag's value is in array
+          $(this).fadeIn('slow');
+
+        else
+          $(this).hide();
+      });
+
+    }});
+});
 </script>
 {% endblock body %}

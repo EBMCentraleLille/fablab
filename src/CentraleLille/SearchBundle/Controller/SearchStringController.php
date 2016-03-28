@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use ADesigns\CalendarBundle\ADesignsCalendarBundle;
+use FOS\JsRoutingBundle\FOSJsRoutingBundle;
 
 /**
 * SearchUser controller.
@@ -39,6 +41,7 @@ class SearchStringController extends Controller
   */
     public function searchAction(Request $request)
     {
+       
         $jsonContentUser = '';
         $jsonContentMachine = '';
         $jsonContentProjet = '';
@@ -129,7 +132,7 @@ class SearchStringController extends Controller
                 $source = $result->getSource();
                 $type = $result->getType();
                 $datamachine[] = array(
-                'name' => $source['machine_name'],
+                'name' => $source['name'],
                 'link'   => 'machineId',
                 );
             }
@@ -150,11 +153,21 @@ class SearchStringController extends Controller
 
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery2 = new \Elastica\Query\Match();
+            $fieldQuery9 = new \Elastica\Query\Match();
+            $fieldQuery10 = new \Elastica\Query\Match();
+
             $fieldQuery->setFieldQuery('email', $search->getStringSearch());
             $fieldQuery->setFieldFuzziness('email', 0.7);
             $query_part_user->addShould($fieldQuery);
+            $fieldQuery9->setFieldQuery('firstname', $search->getStringSearch());
+            $fieldQuery9->setFieldFuzziness('firstname', 0.7);
+            $query_part_user->addShould($fieldQuery9);
+            $fieldQuery10->setFieldQuery('lastname', $search->getStringSearch());
+            $fieldQuery10->setFieldFuzziness('lastname', 0.7);
+            $query_part_user->addShould($fieldQuery10);
             $fieldQuery2->setFieldQuery('username', $search->getStringSearch());
             $fieldQuery2->setFieldFuzziness('username', 0.7);
+
             $query_part_user->addShould($fieldQuery2);
             $filters = new \Elastica\Filter\Bool();
             $query_user = new \Elastica\Query\Filtered($query_part_user, $filters);
@@ -166,14 +179,16 @@ class SearchStringController extends Controller
 
             $fieldQuery3 = new \Elastica\Query\Match();
             $fieldQuery4 = new \Elastica\Query\Match();
-            $fieldQuery3->setFieldQuery('machine_name', $search->getStringSearch());
-            $fieldQuery3->setFieldFuzziness('machine_name', 0.7);
-            $fieldQuery3->setFieldMinimumShouldMatch('machine_name', '80%');
+            $fieldQuery3->setFieldQuery('name', $search->getStringSearch());
+            $fieldQuery3->setFieldFuzziness('name', 0.7);
+            $fieldQuery3->setFieldMinimumShouldMatch('name', '80%');
             $query_part_machine->addShould($fieldQuery3);
             $fieldQuery4->setFieldQuery('description', $search->getStringSearch());
             $fieldQuery4->setFieldFuzziness('description', 2);
             $fieldQuery4->setFieldMinimumShouldMatch('description', '100%');
-            $query_part_machine->addShould($fieldQuery4);
+             $query_part_machine->addShould($fieldQuery4);
+           
+      
 
             $filters = new \Elastica\Filter\Bool();
             $query_machine = new \Elastica\Query\Filtered($query_part_machine, $filters);
@@ -200,6 +215,8 @@ class SearchStringController extends Controller
 
               //Recherche projet
             $typeProjet = $this->get('fos_elastica.index.fablab.Projet');
+            
+          
             $query_part_projet = new \Elastica\Query\Bool();
 
             $fieldQuery6 = new \Elastica\Query\Match();
@@ -212,16 +229,15 @@ class SearchStringController extends Controller
             $fieldQuery7->setFieldFuzziness('summary', 2);
             $fieldQuery7->setFieldMinimumShouldMatch('summary', '100%');
             $query_part_projet->addShould($fieldQuery7);
-
-
-
-            $filters = new \Elastica\Filter\Bool();
+$filters = new \Elastica\Filter\Bool();
             $query_projet = new \Elastica\Query\Filtered($query_part_projet, $filters);
+
+
+
+
+
+
             $result_projet = $typeProjet->search($query_projet);
-
-
-
-
 
 //
             $encoder = array(new JsonEncoder());
@@ -250,6 +266,7 @@ class SearchStringController extends Controller
         'userjson' => $jsonContentUser,
         'machinejson' => $jsonContentMachine,
         'jsonTotal' => $jsonTotal,
+        'albert'=>$albert,
         ));
     }
 
@@ -293,7 +310,7 @@ class SearchStringController extends Controller
                 $dataprojet[] = array(
 
                 'name' => $source['name'],
-                'link'   => 'projectId',
+                'link'   => '../users/project/show/'.$source['id'],
                 );
             }
             $jsonContentProjet = new JsonResponse($dataprojet, 200, array(
@@ -329,8 +346,8 @@ class SearchStringController extends Controller
                 $source = $result->getSource();
                 $type = $result->getType();
                 $datamachine[] = array(
-                'name' => $source['machine_name'],
-                'link'   => 'machineId',
+                'name' => $source['name'],
+                'link'   => '../booking/resource/view/machine/'.$source['id'],
                 );
             }
             $jsonContentMachine = new JsonResponse($datamachine, 200, array(
