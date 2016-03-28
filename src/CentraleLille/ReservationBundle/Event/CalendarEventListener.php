@@ -5,6 +5,8 @@ namespace CentraleLille\ReservationBundle\Event;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use Doctrine\ORM\EntityManager;
+use CentraleLille\ReservationBundle\Entity\Booking\Event;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Event Class Doc
@@ -21,10 +23,12 @@ use Doctrine\ORM\EntityManager;
 class CalendarEventListener
 {
     private $entityManager;
+    private $requestStack;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
+        $this->requestStack = $requestStack;
     }
 
     public function loadEvents(CalendarEvent $calendarEvent)
@@ -36,7 +40,8 @@ class CalendarEventListener
         $start = $request->get('start');
         $end = $request->get('end');
 
-        $idMachine = 2; /////TO FIX --> get ID from route
+        $idMachine = $this->requestStack->getMasterRequest()->get('id');
+        $idMachine = 2;
 
         if ($title && $description && $start && $end) {
             //converting unix timestamp from ms to s (because javascript provide ms)
@@ -46,6 +51,7 @@ class CalendarEventListener
             $em = $this->entityManager;
             $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
             $resource = $repository ->find($idMachine);
+
             $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
 
             $event->setBookable($resource);

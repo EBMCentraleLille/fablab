@@ -3,51 +3,64 @@
 {% block body %}
 <br><br><br>
 		<div class="row">
-			<div class="col-md-3 col-md-offset-4">
-				<h1 class="text-primary text-center">Mon compte</h1>
+			<div class="col-md-3 col-md-offset-1">
+				<div class="row">
+					<h1 class="text-primary text-center">Mon compte</h1></br></br>
+				</div>
+				<div class="fos_user_user_show">
+					<div class="row">
+						<div class="col-md-6">Prénom : </div>
+						<div class="col-md-3">{{ user.firstname }}</div>
+					</div>
+					</br>
+					<div class="row">
+						<div class="col-md-6">Nom : </div>
+						<div class="col-md-3">{{ user.lastname }}</div>
+					</div>
+					</br>
+					<div class="row">
+						<div class="col-md-6">Nom : </div>
+						<div class="col-md-3">{{ user.lastname }}</div>
+					</div>
+					</br>
+					<div class="row">
+						<div class="col-md-6">Email : </div>
+						<div class="col-md-3">{{ user.email }}</div>
+					</div>
+					</br>
+					<div class="row">
+						<div class="col-md-6">Promo : </div>
+						<div class="col-md-3">{{ user.promo }}</div>
+					</div>
+					</br>
+					<div class="row">
+						<div class="col-md-6">Téléphone : </div>
+						<div class="col-md-3">{{ user.phone }}</div>
+					</div>
+					</br>
+					<div class="row">
+						<div class="col-md-12">
+							<a href={{path('fos_user_profile_edit')}} class="btn btn-primary btn-block">Modifier</a>
+						</div>
+					</div>
+				</div>
+				</br>
+
+			</div>
+			<div class="col-md-3 col-md-offset-2">
+				<h1 class="text-primary text-center">Mes projets</h1>
 				</br></br>
+				<ul>
+				    {% for project in projects %}
+				        <div class="row">{{ project.project.name }}</div>
+				        </br>
+				    {% endfor %}
+				</ul>
 			</div>
 		</div>
 		
-		<div class="fos_user_user_show">
-			<div class="row">
-				<div class="col-md-1 col-md-offset-4">Prénom : </div>
-				<div class="col-md-2">{{ user.firstname }}</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-md-1 col-md-offset-4">Nom : </div>
-				<div class="col-md-2">{{ user.lastname }}</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-md-1 col-md-offset-4">Nom : </div>
-				<div class="col-md-2">{{ user.lastname }}</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-md-1 col-md-offset-4">Email : </div>
-				<div class="col-md-2">{{ user.email }}</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-md-1 col-md-offset-4">Promo : </div>
-				<div class="col-md-2">{{ user.promo }}</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-md-2 col-md-offset-4">Téléphone : </div>
-				<div class="col-md-2">{{ user.phone }}</div>
-			</div>
-			</br>
-		</div>
-		</br>
+		
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-3 col-md-offset-4">
-		<a href={{path('fos_user_profile_edit')}} class="btn btn-primary btn-block">Modifier</a>
-	</div>
-</div>
 {% endblock body %}

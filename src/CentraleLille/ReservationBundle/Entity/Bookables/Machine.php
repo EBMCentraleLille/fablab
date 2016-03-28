@@ -10,11 +10,7 @@
  */
 namespace CentraleLille\ReservationBundle\Entity\Bookables;
 
-<<<<<<< HEAD
 use CentraleLille\ReservationBundle\Entity\Bookables\Type;
-
-use CentraleLille\ReservationBundle\Entity\Bookables;
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
