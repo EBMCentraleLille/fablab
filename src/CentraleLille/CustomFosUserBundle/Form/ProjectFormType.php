@@ -29,8 +29,8 @@ class ProjectFormType extends AbstractType
     {
         $builder
             ->add('name', 'text', array("label" => "Nom"))
-            ->add('dateBegin', 'text', array("label" => "Date de début"))
-            ->add('dateEnd', 'text', array("label" => "Date de fin"))
+            ->add('dateBegin', 'date', array("label" => "Date de début"))
+            ->add('dateEnd', 'date', array("label" => "Date de fin"))
             ->add('picture', 'text', array("label" => "Image"))
             ->add('summary', 'textarea', array("label" => "Résumé"))
             ->add('description', 'textarea', array("label" => "Description"));

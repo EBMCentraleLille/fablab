@@ -32,14 +32,14 @@ class Project
     protected $name;
 
     /**
-     * @var string
-     * @ORM\Column(name="dateBegin", type="string", nullable=true)
+     * @var date
+     * @ORM\Column(name="dateBegin", type="date", nullable=true)
      */
     protected $dateBegin;
 
     /**
-     * @var string
-     * @ORM\Column(name="dateEnd", type="string", nullable=true)
+     * @var date
+     * @ORM\Column(name="dateEnd", type="date", nullable=true)
      */
     protected $dateEnd;
 
