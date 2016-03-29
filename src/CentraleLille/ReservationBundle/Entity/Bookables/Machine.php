@@ -30,6 +30,7 @@ use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
 /**
  *
  * @ORM\Entity(repositoryClass="CentraleLille\ReservationBundle\Repository\MachineRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Machine extends Bookable
 {
