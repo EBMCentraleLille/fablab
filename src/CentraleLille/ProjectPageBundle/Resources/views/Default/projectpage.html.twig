@@ -3,60 +3,62 @@
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% endif %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/newsFeed.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/projectpage.css') }}" />
 {% endblock stylesheets %}
 {% block body %}
     <div class="newsFeed">
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
         <div class="col-md-5">
-            <div class="col-md-1"></div>
-            <div class="col-md-11">
-                <h2>{{ project.getName() }}</h2>
-                {% if form is defined %}
-                    {{ form_start(form) }}
-                            {{ form_row(form.Content) }}
-                            <input type="submit" value="Ajouter l'activité"
-                                class="btn btn-primary" />
-                    {{ form_end(form) }}
-                {% endif %}
-                {% if not recentActivities %}
-                    Vous n'avez aucune activité à afficher. N'hésitez pas à suivre des projets où des catégories pour voir leurs actualités.
-                {% else %}
-                    {% for recentActivity in recentActivities %}
-                        <div class="news row">
-                            <div class="project-name">
-                                <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
-                                    {{ recentActivity.project.name }}
-                                </a>
-                                <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
-                            <div class="activity-content">
-                                    {{ recentActivity.content }}
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
-                                    <div class="recentProjectPicture" style="background-image:url('{{ recentActivity.project.picture }}');"></div>
-                                </a>
-                                <div class="panel-footer">
-                                    <div class="row">
-                                        <div class="col-md-6 recentProject">
-                                        {% if likes is defined %}
-                                            {% if not likes[recentActivity.project.name] %}
-                                                <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
-                                                <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
-                                            {% else %}
-                                                <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
-                                                <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
-                                            {% endif %}
-                                        {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="h2">
+                {{ project.getName() }}
+                {% if app.user %}
+                    {% if not isAbo %}
+                        <div class="btn btn-primary">
+                        <div class ="{{ project.name }}">Suivre</div>
                         </div>
-                    {% endfor %}
+                    {% else %}
+                        <div class="btn btn-primary">
+                            <div class ="{{ project.name }}">Ne plus suivre</div>
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
+            {% if form is defined %}
+                {{ form_start(form) }}
+                        {{ form_row(form.Content) }}
+                        <input type="submit" value="Publier l'activité"
+                            class="btn btn-primary" />
+                {{ form_end(form) }}
+            {% endif %}
+            <div class="panel panel-default">
+                <a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+                    <div class="recentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
+                </a>
+            </div>
+            <h2>Dernières activités</h2>
+            {% if not recentActivities %}
+                    Aucune activité n'est lié à ce projet.
+            {% else %}
+                {% for recentActivity in recentActivities %}
+                    <div class="news row">
+                        <div class="project-name">
+                            <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
+                            </a>
+                            <div class="time-elapsed">
+                                Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}
+                            </div>
+                            <div class="activity-content">
+                                {{ recentActivity.content }}
+                            </div>
+                            {% if form is defined %}
+                                <a href="{{ path("project_page_delete_activity", { 'activityId': recentActivity.id, 'projectId': project.id }) }}">
+                                    Supprimer
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
         <div class="col-md-3">
             <div class="right-menu">
@@ -92,32 +94,25 @@
             </div>
             {% if form is defined %}
             <div class="button-right-menu">
-                    <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
-                        <div class="panel-body">
-                            Editer le projet / Ajouter des membres
-                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                        </div>
-                    </a>
+                <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
+                    <div class="panel-body">
+                        Editer le projet / Ajouter des membres
+                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                    </div>
+                </a>
             </div>
             {% endif %}
             </div>
         </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
 </div>
 <script src="{{ asset('jquery.js') }}"></script>
 <script src="{{ asset('js/oXHR.js') }}"></script>
 {{ include('like.html.twig') }}
 <script>
-    var projectsName = [];
-    {% for recentActivity in recentActivities %}
-        if (projectsName.indexOf("{{ recentActivity.project.name }}") == -1) {
-            projectsName.push("{{ recentActivity.project.name }}");
-
-            $('[class="' + "{{ recentActivity.project.name }}" + '"]').click(function() {
-                likefunction($('[class="' + "{{ recentActivity.project.name }}" + '"]'), "{{ recentActivity.project.name }}","{{ path('news_feed_subscribe') }}");
-            });
-        };
-    {% endfor %}
+    $('[class="' + "{{ project.name }}" + '"]').click(function() {
+        likefunction($('[class="' + "{{ project.name }}" + '"]'), "{{ project.name }}","{{ path('project_page_homepage', { 'projectId': project.name }) }}");
+    });
 </script>
 {% endblock body %}
 
