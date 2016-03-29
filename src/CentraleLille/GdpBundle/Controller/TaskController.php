@@ -16,7 +16,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class TaskController extends FOSRestController
+class TaskController extends GdpRestController
 {
     /**
      * Return the overall user list.
@@ -36,6 +36,7 @@ class TaskController extends FOSRestController
      */
     public function getProjectTasksAction($id)
     {
+        $this->existsProjectUser($id,$this->getUser()->getId());
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $list = $taskRepository->findByProject($id);
         if (!$list) {
@@ -71,9 +72,10 @@ class TaskController extends FOSRestController
      */
     public function postProjectTaskAction($id, ParamFetcher $paramFetcher)
     {
+        $this->existsProjectUser($id);
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
-        $project = $projectRepository->find($id);
+        $project = $projectRepository->find($id,$this->getUser()->getId());
         $task = new Task();
         $task->setTitle($paramFetcher->get('title'));
         $task->setBody($paramFetcher->get('body'));
@@ -120,7 +122,9 @@ class TaskController extends FOSRestController
      */
     public function putTaskAction($taskId, ParamFetcher $paramFetcher)
     {
+        $this->existsProjectUser($taskId);
         $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy($taskId);
+        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
         if ($paramFetcher->get('title')) {
             $task->setTitle($paramFetcher->get('title'));
         }
@@ -167,6 +171,7 @@ class TaskController extends FOSRestController
         $task = $repo->findOneBy(
             array('id' => $taskId)
         );
+        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
         if (!$task) {
             throw $this->createNotFoundException('Data not found.');
         }
@@ -199,9 +204,11 @@ class TaskController extends FOSRestController
     {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $repoUsers = $this->getDoctrine()->getRepository('CustomFosUserBundle:User');
+
         $task = $repoTasks->findOneBy(
             array('id' => $taskId)
         );
+        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
         // Retrieves task & user
         if (!$task) {
             throw $this->createNotFoundException('Task not found.');
@@ -212,6 +219,7 @@ class TaskController extends FOSRestController
         if (!$user) {
             throw $this->createNotFoundException('User not found.');
         }
+        $this->existsProjectUser($task->getProject()->getId(),$user->getid());
         $task->setInChargeUser($user);
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
@@ -246,6 +254,7 @@ class TaskController extends FOSRestController
         if (!$task) {
             throw $this->createNotFoundException('Task not found.');
         }
+        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
         $task->setInChargeUser(null);
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);

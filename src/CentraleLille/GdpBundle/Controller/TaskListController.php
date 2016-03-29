@@ -1,4 +1,5 @@
 <?php
+
 namespace CentraleLille\GdpBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -8,10 +9,11 @@ use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
 /**
  * Abstract list of tasks.
  */
-class TaskListController extends FOSRestController
+class TaskListController extends GdpRestController
 {
     /**
      * Create a Task List from the submitted data.<br/>
@@ -34,7 +36,6 @@ class TaskListController extends FOSRestController
      */
      public function postListAction(ParamFetcher $paramFetcher)
      {
-        $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $taskList = new TaskList();
         $taskList->setTitle($paramFetcher->get('name'));
         // assign the list to a project
@@ -42,45 +43,46 @@ class TaskListController extends FOSRestController
         $projectId = $paramFetcher->get('project_id');
         $project = $projectRepository->find($projectId);
         $taskList->setProject($project);
+
+        $this->existsProjectUser($projectId,$this->getUser()->getId());
+
         $view = View::create();
-        $errors = $this->get('validator')->validate($task, array('Registration'));
-        if (count($errors) == 0) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($taskList);
-            $em->flush();
-            $view->setData($taskList)->setStatusCode(201);
-            return $view;
-        } else {
-            $view = $this->getErrorsView($errors);
-            return $view;
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($taskList);
+        $em->flush();
+        $view->setData($taskList)->setStatusCode(201);
+        return $view;
      }
      
-     /**
-     * Delete a task list identified by id.
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Delete a task list identified by TaskList id",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     404 = "Returned when the task list is not found"
-     *   }
-     * )
-     *
-     * @param int $taskListId id
-     *
-     * @return View
-     */
-     public function deleteListAction($taskListId)
-     {
-          $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
-          $taskList = $repo->findOneBy(
+
+
+    /**
+    * Delete a task list identified by id.
+    *
+    * @ApiDoc(
+    *   resource = true,
+    *   description = "Delete a task list identified by TaskList id",
+    *   statusCodes = {
+    *     200 = "Returned when successful",
+    *     404 = "Returned when the task list is not found"
+    *   }
+    * )
+    *
+    * @param int $taskListId id
+    *
+    * @return View
+    */
+    public function deleteListAction($taskListId)
+    {
+        $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $taskList = $repo->findOneBy(
             array('id' => $taskListId)
-          );
-          if (!$taskList) {
+        );
+        if (!$taskList) {
             throw $this->createNotFoundException('Data not found.');
           }
+          $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+
           $em = $this->getDoctrine()->getManager();
           $em->remove($taskList);
           $em->flush();
@@ -109,27 +111,21 @@ class TaskListController extends FOSRestController
      *
      * @return View
      */
-     public function putListAction($taskListId, ParamFetcher $param)
+     public function putListAction($taskListId, ParamFetcher $paramFetcher)
      {
-          $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
+          $taskList = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
           if ($paramFetcher->get('name')) {
             $taskList->setName($paramFetcher->get('name'));
           }
-          $view = View::create();
-          $errors = $this->get('validator')->validate($task, array('Update'));
-          if (count($errors) == 0) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($taskList);
-            $em->flush();
-            $view->setData($taskList)->setStatusCode(200);
-            return $view;
-          }
-          else 
-          {
-            $view = $this->getErrorsView($errors);
-            return $view;
-          }
+         $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+         $view = View::create();
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($taskList);
+         $em->flush();
+         $view->setData($taskList)->setStatusCode(200);
+         return $view;
      }
+
     /**
      * Return the tasks corresponding to the given task list id
      *
@@ -152,33 +148,34 @@ class TaskListController extends FOSRestController
           $taskList = $repo->findOneBy(
                array('id' => $taskListId)
           );
-          if (!$taskList) {
-            throw $this->createNotFoundException('Data not found.');
-          }
-          $view = View::create();
-          $view->setData($taskList);
-          return $view;
-     }
+          $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+          if (!$taskList) {throw $this->createNotFoundException('Data not found.');
+        }
+        $view = View::create();
+        $view->setData($taskList);
+
+        return $view;
+    }
 
     /**
-     * Add a task to the list
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Add a task to the list",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     404 = "Returned when the task list is not found"
-     *   }
-     * )
-     *
-     * @param int $taskListId taskListId
-     * @param int $taskId taskId
-     *
-     * @return View
-     */
-     public function putListAddAction($taskListId, $taskId)
-     {
+    * Add a task to the list.
+    *
+    * @ApiDoc(
+    *   resource = true,
+    *   description = "Add a task to the list",
+    *   statusCodes = {
+    *     200 = "Returned when successful",
+    *     404 = "Returned when the task list is not found"
+    *   }
+    * )
+    *
+    * @param int $taskListId taskListId
+    * @param int $taskId taskId
+    *
+    * @return View
+    */
+    public function putListAddAction($taskListId, $taskId)
+    {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $task = $repoTasks->findOneBy(
@@ -194,6 +191,9 @@ class TaskListController extends FOSRestController
         if (!$taskList) {
             throw $this->createNotFoundException('Task list not found.');
         }
+
+        $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
         $taskList->addTask($task);
         $task->addTaskList($taskList);
         $em = $this->getDoctrine()->getManager();
@@ -202,27 +202,28 @@ class TaskListController extends FOSRestController
         $em->flush();
         $view = View::create();
         $view->setData($task)->setStatusCode(200);
+
         return $view;
-     }
+    }
 
     /**
-     * Return all the tasklists for a specific project
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Return all task lists for a given project",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     404 = "Returned when the project is not found"
-     *   }
-     * )
-     *
-     * @param int $id id
-     *
-     * @return View
-     */
-     public function getProjectListsAction($id)
-     {
+    * Return all the tasklists for a specific project.
+    *
+    * @ApiDoc(
+    *   resource = true,
+    *   description = "Return all task lists for a given project",
+    *   statusCodes = {
+    *     200 = "Returned when successful",
+    *     404 = "Returned when the project is not found"
+    *   }
+    * )
+    *
+    * @param int $id id
+    *
+    * @return View
+    */
+    public function getProjectListsAction($id)
+    {
         $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $list = $repoTaskLists->findByProject($id);
         if (!$list) {
@@ -230,16 +231,17 @@ class TaskListController extends FOSRestController
         }
         $view = View::create();
         $view->setData($list)->setStatusCode(200);
-        return $view;
-     }
 
-     /**
-     * Get the validation errors
-     *
-     * @param ConstraintViolationList $errors Validator error list
-     *
-     * @return View
-     */
+        return $view;
+    }
+
+    /**
+    * Get the validation errors.
+    *
+    * @param ConstraintViolationList $errors Validator error list
+    *
+    * @return View
+    */
     protected function getErrorsView(ConstraintViolationList $errors)
     {
         $msgs = array();
@@ -251,6 +253,7 @@ class TaskListController extends FOSRestController
         }
         $view = View::create($msgs);
         $view->setStatusCode(400);
+
         return $view;
-   }
+    }
 }
