@@ -49,7 +49,7 @@ class ProjectController extends FOSRestController
         return $view;
     }
 
-        /**
+    /**
      * Return the project with the indicated id.
      *
      * @ApiDoc(
