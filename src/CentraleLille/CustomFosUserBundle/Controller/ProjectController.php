@@ -15,6 +15,7 @@ use Proxies\__CG__\CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CentraleLille\CustomFosUserBundle\Form;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -47,6 +48,11 @@ class ProjectController extends Controller
         $usernameData = array();
         $form = $this->createFormBuilder($usernameData)
             ->add('username', 'text')
+            ->add('roles','choice', array(
+                'choices'  => array(
+                    1 => null,
+                    2 => 'PROJECT_LEADER'
+                )))
             ->getForm();
 
         $error = $session->get('error');
@@ -62,6 +68,9 @@ class ProjectController extends Controller
                     ->findOneByUsername($username);
                 if ($user != null) {
                     $projectService->addUserToProject($user, $project);
+                    $logger = $this->get('logger');
+                    $logger->info('TEST : '.$data['roles']);
+                        $projectService->setUserToProjectLeader($user, $project);
                     $session->set('error', "");
                 } else {
                     $session->set('error', "Cet utilisateur n'existe pas.");
@@ -69,8 +78,7 @@ class ProjectController extends Controller
             } else {
                 $session->set('error', "Vous devez être PROJECT_LEADER pour ajouter un nouveau membre.");
             }
-            return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId,
-                                                                            'error' => $error)));
+            return $this->redirect($this->generateUrl('project_show', array('projectId' => $projectId)));
         }
 
 

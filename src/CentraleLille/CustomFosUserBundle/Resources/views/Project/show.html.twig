@@ -75,12 +75,22 @@
         </div>
         <div class="panel-body">
             {{ form_start(formUsername, {'method': 'post', 'action': path('project_show',{'projectId':project.id})}) }}
-            <div class="form-group col-md-4">
-                {{ form_errors(formUsername.username) }}
-                {{ form_label(formUsername.username, 'Nom utilisateur', {'label_attr':{'class': 'control-label'}}) }}
-                {{ form_widget(formUsername.username, { 'attr': {'class': 'form-control'} }) }}
-                <br>
-                <input class="btn btn-primary" type="submit" value="Ajouter" />
+            <div class="row">
+                <div class="form-group col-md-4">
+                    {{ form_errors(formUsername.username) }}
+                    {{ form_label(formUsername.username, 'Nom utilisateur', {'label_attr':{'class': 'control-label'}}) }}
+                    {{ form_widget(formUsername.username, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form_errors(formUsername.roles) }}
+                    {{ form_label(formUsername.roles, 'Rôle', {'label_attr':{'class': 'control-label'}}) }}
+                    {{ form_widget(formUsername.roles, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <input class="btn btn-primary btn-block" type="submit" value="Ajouter" />
+                </div>
             </div>
             {{ form_end(formUsername) }}
         </div>

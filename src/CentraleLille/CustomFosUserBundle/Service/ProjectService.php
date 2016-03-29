@@ -72,6 +72,7 @@ class ProjectService implements ProjectServiceInterface
                     ->findOneBy(array("name" => ProjectRole::PROJECT_ROLE_LEADER));
 
                 $projectUser->addRole($role);
+                $this->em->persist($projectUser);
                 $this->em->flush();
                 return true;
             }
@@ -86,5 +87,14 @@ class ProjectService implements ProjectServiceInterface
             $users[] = $projectUser->getUser();
         }
         return $users;
+    }
+
+    public function getProjectsOfUser($user)
+    {
+        $projects = array();
+        foreach ($user->getProjectUsers() as $projectUser) {
+            $projects[] = $projectUser->getProject();
+        }
+        return $projects;
     }
 }
