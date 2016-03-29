@@ -191,11 +191,11 @@ class TaskListController extends GdpRestController
         if (!$taskList) {
             throw $this->createNotFoundException('Task list not found.');
         }
-
         $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
         $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
+        $task->getTaskList()->removeTask($task);
         $taskList->addTask($task);
-        $task->addTaskList($taskList);
+        $task->setTaskList($taskList);
         $em = $this->getDoctrine()->getManager();
         $em->persist($taskList);
         $em->persist($task);
