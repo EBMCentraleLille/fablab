@@ -69,7 +69,7 @@ class ProjectController extends GdpRestController
     {
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id);
-        $this->existsProjectUser($id,$this->getUser()->getId());
+        $this->existsProjectUser($id, $this->getUser()->getId());
         if (!$project) {
             throw $this->createNotFoundException('Data not found.');
         }

@@ -45,7 +45,7 @@ class EventController extends GdpRestController
         if (!$list) {
             throw $this->createNotFoundException('Data not found.');
         }
-        $this->existsProjectUser($id,$this->getUser()->getId());
+        $this->existsProjectUser($id, $this->getUser()->getId());
         $view = View::create();
         $view->setData($list)->setStatusCode(200);
         return $view;
@@ -107,7 +107,7 @@ class EventController extends GdpRestController
         $eventRepository = $this->getDoctrine()->getRepository('ReservationBundle:Event');
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id);
-        $this->existsProjectUser($id->getProject()->getId(),$this->getUser()->getId());
+        $this->existsProjectUser($id->getProject()->getId(), $this->getUser()->getId());
         $event = new Event();
         $event->setTitle($paramFetcher->get('title'));
         $event->setDescription($paramFetcher->get('description'));
@@ -156,7 +156,7 @@ class EventController extends GdpRestController
     public function putEventAction($eventId, ParamFetcher $paramFetcher)
     {
         $event = $this->getDoctrine()->getRepository('ReservationBundle:Event')->findOneBy($eventId);
-        $this->existsProjectUser($event->getProject()->getId(),$this->getUser()->getId());
+        $this->existsProjectUser($event->getProject()->getId(), $this->getUser()->getId());
         if ($paramFetcher->get('title')) {
             $event->setTitle($paramFetcher->get('title'));
         }
@@ -205,7 +205,7 @@ class EventController extends GdpRestController
         $event = $repo->findOneBy(
             array('id' => $eventId)
         );
-        $this->existsProjectUser($event->getProject()->getId(),$this->getUser()->getId());
+        $this->existsProjectUser($event->getProject()->getId(), $this->getUser()->getId());
         if (!$event) {
             throw $this->createNotFoundException('Data not found.');
         }
