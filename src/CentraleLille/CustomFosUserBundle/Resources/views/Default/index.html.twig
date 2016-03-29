@@ -57,7 +57,10 @@
         </tr>
         {% for project in projects %}
             <tr>
-                <td>{{ project.name }}</td>
+                <td>{{ project.name }}
+                    (<a href="{{ path('project_show', {'projectId' : project.id}) }}">view</a> /
+                    <a href="{{ path('project_edit', {'projectId' : project.id}) }}">edit</a>)
+                </td>
             </tr>
         {% endfor %}
     </table>
