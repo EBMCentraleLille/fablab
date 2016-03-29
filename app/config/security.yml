@@ -11,8 +11,41 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+            #entity:
+            #    class: CustomFosUserBundle:User
+            #    property: username
 
     firewalls:
+        login:
+           pattern:  ^/api/login
+           stateless: true
+           anonymous: true
+           provider : fos_userbundle
+           form_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+
+        doc:
+            pattern: ^/gdp/api/doc
+            anonymous: true
+
+        api:
+            pattern:   ^/gdp/api
+            provider : fos_userbundle
+            stateless: true
+            lexik_jwt:
+                authorization_header: # check token in Authorization Header
+                    enabled: true
+                    prefix:  Bearer
+                throw_exceptions:        true     # When an authentication failure occurs, return a 401 response immediately
+                create_entry_point:      true      # When no authentication details are provided, create a default entry point that returns a 401 response
+        refresh:
+            pattern:  ^/api/token/refresh
+            stateless: true
+            anonymous: true
+
         main:
             pattern: ^/
             form_login:
@@ -30,4 +63,8 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(.+), role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/gdp, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/login, role: IS_AUTHENTICATED_ANONYMOUSLY }

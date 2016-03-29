@@ -94,7 +94,7 @@ class FablabActivities implements FablabActivitiesInterface
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Activity");
         $activities=$repository->findBy(
-            array('projet'=>$projet),     // Recherche par projets
+            array('project'=>$projet),     // Recherche par projets
             array('date'=>'desc'),        // Tri par date décroissante
             $nb,                          // Selection de $nb activités seulement
             $offset                       // A partir de l'offset

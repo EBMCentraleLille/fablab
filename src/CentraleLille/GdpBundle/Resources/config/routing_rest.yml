@@ -1,0 +1,23 @@
+service_task:
+  type: rest
+  resource: CentraleLille\GdpBundle\Controller\TaskController
+
+service_event:
+  type: rest
+  resource: CentraleLille\GdpBundle\Controller\EventController
+
+service_list:
+  type: rest
+  resource: CentraleLille\GdpBundle\Controller\TaskListController
+
+service_user:
+  type: rest
+  resource: CentraleLille\GdpBundle\Controller\UserController
+
+service_project:
+  type : rest
+  resource: CentraleLille\GdpBundle\Controller\ProjectController
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /doc
