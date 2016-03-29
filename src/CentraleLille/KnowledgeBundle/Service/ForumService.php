@@ -9,7 +9,7 @@ use CentraleLille\KnowledgeBundle\Entity\ForumPost;
  * Date: 29/03/15
  * Time: 08:44
  */
-class CompetenceService
+class ForumService
 {
     protected $em;
     public function __construct(\Doctrine\ORM\EntityManager $entityManager)
@@ -17,12 +17,20 @@ class CompetenceService
         $this->em = $entityManager;
     }
 
-    public function getPostList($forumThread)
+    function getThread($id){
+      return $this->em->getRepository('KnowledgeBundle:ForumThread')->findOneById($id);
+    }
+
+    function getThreadList(){
+      return $this->em->getRepository('KnowledgeBundle:forumThread')->findAll();
+    }
+
+    public function getPostList($thread_id)
     {
         if ($forumThread == null) {
             return false;
         } else {
-            return $this->em->getRepository('KnowledgeBundle:ForumPost')->findByForumThread($forumThread->getId());
+            return $this->em->getRepository('KnowledgeBundle:ForumPost')->findByForumThread($thread_id);
         }
     }
 

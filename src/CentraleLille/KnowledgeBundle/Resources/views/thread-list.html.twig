@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Forum {% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h2>Liste des sujets</h2>
+                <div class="list-group"></div>
+                {% for thread in threads %}
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">{{thread.title}} - <em>par {{thread.author.name}}</em></h4>
+                  <p class="list-group-item-text">{{thread.content}}</p>
+                </li>
+                {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+{% endblock %}
