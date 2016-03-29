@@ -1,3 +1,14 @@
+<div class="row local-header">
+    <div class="col-md-10 col-md-offset-1">
+        <h1 class="center">Gestion des tâches</h1>
+    </div>
+    <div class="col-md-1 list-management">
+        <button class="btn btn-warning new-task"
+                ng-click="doCancelButton()"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+
+</div>
+
 <div ng-repeat="taskgroup in taskLists"
      class="col-md-3 taskspace">
      <div
@@ -14,8 +25,7 @@
 
                      <button class="btn btn-success new-task"
                              ng-click="showTaskCreated=!showTaskCreated;"><span class="glyphicon glyphicon-plus"></span></button>
-                     <button class="btn btn-warning new-task"
-                             ng-click="showTaskListDelete=!showTaskListDelete;"><span class="glyphicon glyphicon-remove"></span></button>
+
              </div>
              <div class="spacer"></div>
          </div>

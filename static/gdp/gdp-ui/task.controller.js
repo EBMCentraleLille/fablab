@@ -3,7 +3,6 @@ var uiModule = require('./_index');
 uiModule.controller('taskController',['$scope','rq','toastr',taskController]);
 
 function taskController($scope,rq,toastr) {
-    $scope.showTaskCreated=false;
 
 
     $scope.newTask = {'title':'','body':'','endDate':''};
@@ -22,6 +21,9 @@ function taskController($scope,rq,toastr) {
     $scope.selectedDay = Date.today()
 
     /* Temporary */
+
+
+
 
     $scope.onDragOver = function(data,taskgroup) {
     }
@@ -51,6 +53,8 @@ function taskController($scope,rq,toastr) {
     $scope.userProjects=[];
     $scope.newTaskListName="";
     $scope.showTaskListDelete = false;
+    $scope.showTaskCreated=false;
+
 
     /* Scope functions */
 
@@ -60,6 +64,7 @@ function taskController($scope,rq,toastr) {
     $scope.assignTaskToUser = assignTaskToUser;
     $scope.createTaskList = createTaskList;
     $scope.deleteTaskList = deleteTaskList;
+    $scope.doCancelButton = doCancelButton;
 
     /* Init */
 
@@ -78,9 +83,20 @@ function taskController($scope,rq,toastr) {
 
     /* Controller functions */
 
+    function doCancelButton() {
+        if ($scope.showTaskListDelete || $scope.showTaskCreated) {
+            $scope.showTaskListDelete = false;
+            $scope.showTaskCreated = false;
+        }
+        else
+            $scope.showTaskListDelete=true;
+    }
 
-    function createTask() {
+
+
+    function createTask(taskListId) {
         $scope.newTask.endDate=$scope.selectedDay.toString();
+        $scope.newTask.taskList=taskListId;
         rq.createTask($scope.currentProject.id,$scope.newTask,function() {
             toastr.success(['Tâche',$scope.newTask.title,'créée!'].join(" "));
             $scope.newTask = {'title':'','body':'','endDate':''};
@@ -132,6 +148,7 @@ function taskController($scope,rq,toastr) {
         var data = {'name': $scope.newTaskListName, "project_id":$scope.currentProject.id}
         rq.createTaskList(data,function(res) {
             toastr.success(['Liste de tâches',data.name,'créée.'].join(" "));
+            $scope.newTaskListName="";
             getTaskLists()
         })
     }
@@ -146,6 +163,7 @@ function taskController($scope,rq,toastr) {
     function getTaskLists() {
         rq.getTaskLists($scope.currentProject.id,function(res) {
             $scope.taskLists=res.data;
+            console.log(res.data)
         });
     }
 
