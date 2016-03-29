@@ -71,7 +71,7 @@ class Task
     /* @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
      * @ORM\JoinColumn(name="tasklist_id",referencedColumnName="id")
      */
-    private $taskList;
+    private $taskLists;
 
 
     /**
