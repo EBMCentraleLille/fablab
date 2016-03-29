@@ -8,7 +8,6 @@
 
 namespace CentraleLille\GdpBundle\Controller;
 
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use CentraleLille\CustomFosUserBundle\Entity\User;
@@ -38,7 +37,7 @@ class UserController extends FOSRestController
     {
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:ProjectUser');
         $projectUsers = $projectRepository->findByProject($id);
-        foreach($projectUsers as $projectUser){
+        foreach ($projectUsers as $projectUser) {
             $users[]=['id'=>$projectUser->getUser()->getId(),
                 'username'=>$projectUser->getUser()->getUsername(),
                 'firstName'=>$projectUser->getUser()->getFirstname(),
@@ -73,7 +72,7 @@ class UserController extends FOSRestController
     {
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:ProjectUser');
         $projectUsers = $projectRepository->findByUser($id);
-        foreach($projectUsers as $projectUser){
+        foreach ($projectUsers as $projectUser) {
             $projects[]=['id'=>$projectUser->getProject()->getId(),'name'=>$projectUser->getProject()->getName()];
         }
         if (!$projects) {
