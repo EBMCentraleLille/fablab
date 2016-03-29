@@ -155,8 +155,7 @@ class Task
      */
     public function setStatus($status)
     {
-        if(TaskStatus::isValidValue($status))
-        {
+        if (TaskStatus::isValidValue($status)) {
             $this->status = $status;
         }
 
