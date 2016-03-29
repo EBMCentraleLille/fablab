@@ -14,18 +14,22 @@ services:
         tags:
             - { name: form.type, alias: app_user_profile }
 
-    # app.project.member_voter:
-    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter
-    #     arguments: ['@security.access.decision_manager']
-    #     tags:
-    #         - { name: security.voter }
-    #     # small performance boost
-    #     # public: false
-    #
-    # app.project.leader_voter:
-    #     class: CentraleLille\CustomFosUserBundle\Security\ProjectLeaderVoter
-    #     arguments: ['@security.access.decision_manager']
-    #     tags:
-    #         - { name: security.voter }
-        # small performance boost
-        # public: false
+    app.competence.service:
+        class:  CentraleLille\KnowledgeBundle\Service\CompetenceService
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    form.type.string_search:
+        class: CentraleLille\SearchBundle\Form\SearchStringType
+        tags:
+            - { name: form.type, alias: string_search_type }
+
+    centrale.reservation.calendar_listener:
+        class: CentraleLille\ReservationBundle\Event\CalendarEventListener
+        arguments: ['@doctrine.orm.entity_manager', '@request_stack']
+        tags:
+            - { name: kernel.event_listener, event: calendar.load_events, method: loadEvents}
+
+    centrale.reservation.event_booker:
+        class: CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookManager
+        tags:
+            - { name: event_booker }

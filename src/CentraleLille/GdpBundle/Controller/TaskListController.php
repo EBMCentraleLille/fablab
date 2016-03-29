@@ -28,6 +28,7 @@ class TaskListController extends FOSRestController
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
      * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
+     * @RequestParam(project_id="project_id", nullable=false, strict=true, description="Project id")
      *
      * @return View
      */
@@ -36,6 +37,11 @@ class TaskListController extends FOSRestController
         $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $taskList = new TaskList();
         $taskList->setTitle($paramFetcher->get('name'));
+        // assign the list to a project
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
+        $project_id = $paramFetcher->get('project_id')
+        $project = $projectRepository->find($project_id);
+        $taskList->setProject($project);
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
@@ -196,6 +202,34 @@ class TaskListController extends FOSRestController
         $em->flush();
         $view = View::create();
         $view->setData($task)->setStatusCode(200);
+        return $view;
+     }
+
+    /**
+     * Return all the tasklists for a specific project
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Return all task lists for a given project",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the project is not found"
+     *   }
+     * )
+     *
+     * @param int $id id
+     *
+     * @return View
+     */
+     public function getProjectListsAction($id)
+     {
+        $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $list = $repoTaskLists->findByProject($id);
+        if (!$list) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $view = View::create();
+        $view->setData($list)->setStatusCode(200);
         return $view;
      }
 

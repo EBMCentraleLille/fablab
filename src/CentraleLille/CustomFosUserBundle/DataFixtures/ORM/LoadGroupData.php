@@ -14,10 +14,21 @@ use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use CentraleLille\CustomFosUserBundle\Repository;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
+class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     public function load(ObjectManager $manager)
     {
         $role_manager = ProjectRole::PROJECT_ROLE_LEADER;
@@ -43,6 +54,7 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
 
         $project = new Project();
         $project->setName('Project2');
+        $this->addReference('Project2', $project);
         $manager->persist($project);
 
         $projectUser = new ProjectUser();
@@ -57,8 +69,9 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->flush();
 
-        $repo = $manager->getRepository('CustomFosUserBundle:Project');
-        $repo->addUserToProject(
+        $projectService = $this->container->get('app.project.service');
+        $projectService->setUserToProjectLeader($this->getReference('user3'), $this->getReference('Project2'));
+        $projectService->addUserToProject(
             $this->getReference('user1'),
             $manager->getRepository('CustomFosUserBundle:Project')->findOneByName('Project2')
         );

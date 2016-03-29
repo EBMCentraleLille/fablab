@@ -40,7 +40,7 @@ class CentraleLilleExtension extends Extension
      *
      * Fonction d'injection de dépendance
      *
-     * @param array            $configs
+     * @param array            $configs   configuration
      * @param ContainerBuilder $container container de service
      *
      * @return void
