@@ -1,4 +1,4 @@
-centrale_lille_gdp:
+centrale_lille_gdp_api:
     resource: "@CentraleLilleGdpBundle/Resources/config/routing_rest.yml"
     prefix:   /gdp/api
 
