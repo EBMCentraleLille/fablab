@@ -226,11 +226,14 @@ class TaskListController extends GdpRestController
     {
         $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $list = $repoTaskLists->findByProject($id);
-        if (!$list) {
+        foreach ( $list as $tasklist){
+            $tasklists[] = ['id'=>$tasklist->getId(),'name'=>$tasklist->getName(),'tasks'=>$tasklist->getTasks()];
+        }
+        if (!$tasklists) {
             throw $this->createNotFoundException('Data not found.');
         }
         $view = View::create();
-        $view->setData($list)->setStatusCode(200);
+        $view->setData($tasklists)->setStatusCode(200);
 
         return $view;
     }
