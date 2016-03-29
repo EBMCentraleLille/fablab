@@ -51,7 +51,6 @@ class ProjectPageController extends Controller
      */
     public function displayProjectAction($projectId, Request $request)
     {
-
         
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -64,7 +63,11 @@ class ProjectPageController extends Controller
 
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 10);     
+        $activities=$activityService->getActivityProjet($project, 10);
+
+        //Récupération des catégories du projet
+        $categoryService=$this->container->get('fablab_newsfeed.categories');
+        $categories=$categoryyService->getActivityProjet($project, 10);
 
         //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
         //pour accéder à l'user

@@ -64,6 +64,8 @@ class StarProjectController extends Controller
             //Récupération des star project
             $starProjectService=$this->container->get('fablab_homepage.starProject');
             $starProjects=$starProjectService->getAllStarProjects();
+            
+            $starProjects= array_reverse($starProjects);
 
             return $this->render(
                 'CentraleLilleHomepageBundle:starproject.html.twig',
