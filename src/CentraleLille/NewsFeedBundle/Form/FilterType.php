@@ -48,7 +48,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class FilterType extends AbstractType
 {
 
-    private _$thematics = array();
+    private $thematics = array();
 
 
     /**
