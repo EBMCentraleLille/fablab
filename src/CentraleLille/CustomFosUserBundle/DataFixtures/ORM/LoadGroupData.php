@@ -43,6 +43,7 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
 
         $project = new Project();
         $project->setName('Project2');
+        $this->addReference('Project2', $project);
         $manager->persist($project);
 
         $projectUser = new ProjectUser();
@@ -58,6 +59,7 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
 
         $repo = $manager->getRepository('CustomFosUserBundle:Project');
+        $repo->setUserToProjectLeader($this->getReference('user3'), $this->getReference('Project2'));
         $repo->addUserToProject(
             $this->getReference('user1'),
             $manager->getRepository('CustomFosUserBundle:Project')->findOneByName('Project2')
