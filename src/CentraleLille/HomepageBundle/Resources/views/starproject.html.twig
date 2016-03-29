@@ -18,19 +18,23 @@
 				      <th>Nom du projet</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-			        	{% for starProject in starProjects %}
-					       	<tr>
-								<td>{{ loop.index }}</td>
-								<td>{{ starProject.content }}</td>
-								<td>{{ starProject.projectName }}
-								    {% if loop.index == 1 %}
-								      	<div style="color:red">Actuel</div>
-								    {% endif %}
-			        			</td>
-							</tr>
-		        		{% endfor %}
-		        	</tbody>
+				  {% if starProject is defined %}
+					  <tbody>
+				        	{% for starProject in starProjects %}
+						       	<tr>
+									<td>{{ loop.index }}</td>
+									<td>{{ starProject.content }}</td>
+									<td>{{ starProject.projectName }}
+									    {% if loop.index == 1 %}
+									      	<div style="color:red">Actuel</div>
+									    {% endif %}
+				        			</td>
+								</tr>
+			        		{% endfor %}
+			        	</tbody>
+			        {% else %}
+			        	Il n'y a pas encore de projet star. Créez en un !
+			        {% endif %}
 		        </table>
 	        </div>
 	    	<div class="col-md-2"></div>
