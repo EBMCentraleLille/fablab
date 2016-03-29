@@ -4,52 +4,18 @@ uiModule.controller('taskController',['$scope','rq','toastr',taskController]);
 
 function taskController($scope,rq,toastr) {
 
-
     $scope.newTask = {'title':'','body':'','endDate':''};
-
-
-    $scope.status = {
-        isopen: false
-    };
-
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.status.isopen = !$scope.status.isopen;
-    };
-
-
-    /* Temporary */
-
-    $scope.onDragOver = function(data,taskgroup) {
-    }
-
-    $scope.tasks=[
-        {
-            "name":"à faire",
-            "data":[],
-            "space":1
-        },
-        {
-            "name":"en cours",
-            "data":[],
-            "space":2
-        },
-        {
-            "name":"fait",
-            "data":[],
-            "space":3
-        }
-    ]
-
     $scope.taskLists=[];
     $scope.projectUsers=[]
     $scope.currentProject={};
+    $scope.editTask={};
     $scope.userProjects=[];
     $scope.newTaskListName="";
     $scope.showTaskListDelete = false;
     $scope.showTaskCreated=false;
+    $scope.taskEdit={};
     $scope.selectedDay = Date.today();
+    $scope.status = {isopen: false};
 
 
     /* Scope functions */
@@ -61,6 +27,11 @@ function taskController($scope,rq,toastr) {
     $scope.createTaskList = createTaskList;
     $scope.deleteTaskList = deleteTaskList;
     $scope.doCancelButton = doCancelButton;
+    $scope.setTaskEdit = setTaskEdit;
+    $scope.saveEditTask = saveEditTask;
+    $scope.toggleDropdown = toggleDropdown;
+    $scope.cancelEditTask = cancelEditTask;
+
 
     /* Init */
 
@@ -69,15 +40,17 @@ function taskController($scope,rq,toastr) {
         getProjects(function() {
             getTaskLists();
             getProjectUsers();
-            /*for(var t in $scope.tasks) {
-                var taskgroup = $scope.tasks[t];
-                $scope.spaceData[taskgroup.space-1]=taskgroup;
-            }*/
         })
 
     })();
 
     /* Controller functions */
+
+    function toggleDropdown($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
+    }
 
     function doCancelButton() {
         if ($scope.showTaskListDelete || $scope.showTaskCreated) {
@@ -88,7 +61,29 @@ function taskController($scope,rq,toastr) {
             $scope.showTaskListDelete=true;
     }
 
+    function setTaskEdit(task,taskgroup) {
+       $scope.editTask=task;
+       $scope.taskEdit[taskgroup.id]=true;
+       $scope.selectedDay = new Date(task.end_date);
+    }
 
+    function saveEditTask() {
+        $scope.editTask.endDate=$scope.selectedDay.toString();
+        rq.saveEditTask($scope.editTask.id,$scope.editTask,function(res) {
+            $scope.editTask = {};
+            $scope.taskEdit={};
+            $scope.selectedDay=Date.today();
+            getTaskLists();
+        })
+    }
+
+    function cancelEditTask(e,taskgroup) {
+        e.preventDefault();
+        $scope.editTask = {};
+        $scope.selectedDay=Date.today();
+        $scope.taskEdit[taskgroup.id]=false;
+        $scope.taskEdit={};
+    }
 
     function createTask(taskListId) {
         $scope.newTask.endDate=$scope.selectedDay.toString();
@@ -110,9 +105,7 @@ function taskController($scope,rq,toastr) {
     function dropTaskInList(data,taskgroup) {
         data = data['json/task'];
         if(!data) return;
-        console.log(taskgroup.id,data.id)
         rq.addTaskToList(taskgroup.id,data.id,function(res) {
-            console.log(res)
             getTaskLists()
         })
     }
@@ -162,7 +155,6 @@ function taskController($scope,rq,toastr) {
     function getTaskLists() {
         rq.getTaskLists($scope.currentProject.id,function(res) {
             $scope.taskLists=res.data;
-            console.log($scope.taskLists)
         });
     }
 

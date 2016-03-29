@@ -15,7 +15,8 @@ function getRequester($http,toastr) {
         'createTaskList': createTaskList,
         'getTaskLists': getTaskLists,
         'addTaskToList': addTaskToList,
-        'deleteTaskList':deleteTaskList
+        'deleteTaskList':deleteTaskList,
+        'saveEditTask':saveEditTask
     }
 
     return service;
@@ -44,6 +45,7 @@ function getRequester($http,toastr) {
         return {
             'login':'/api/login_check',
             'tasks':'/gdp/api/projects/'+id+'/tasks',
+            'taskEdit':'/gdp/api/tasks/'+id,
             'listCreate':'/gdp/api/lists',
             'lists':'/gdp/api/projects/'+id+'/lists',
             'deleteTask': '/gdp/api/tasks/'+id,
@@ -88,6 +90,11 @@ function getRequester($http,toastr) {
     function deleteTask(id,cb) {
         var r = new Resolver(id);
         del_request(r.deleteTask,cb);
+    }
+
+    function saveEditTask(id,data,cb) {
+        var r = new Resolver(id);
+        put_request(r.taskEdit,data,cb);
     }
 
 

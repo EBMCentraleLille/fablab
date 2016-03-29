@@ -58,8 +58,9 @@
              <div class="spacer"></div>
          </div>
 
-         <edit-task ng-show="showTaskCreated"></edit-task><div ng-show="newTaskListName.length>3">
-     </div>
+         <new-task ng-show="showTaskCreated"></new-task>
+         <edit-task ng-show="taskEdit[taskgroup.id]"></edit-task>
+
          <div ng-show="showTaskListDelete">
              <button class="btn btn-warning btn-group-justified" ng-click="deleteTaskList(taskgroup.id)">Supprimer liste de tâches</button>
          </div>
@@ -70,12 +71,12 @@
                  draggable-type="task"
                  draggable-data="{id: task.id}">
 
-                <div class="panel panel-default">
+                <div class="panel panel-default" ng-hide="editTask.id==task.id">
                     <div class="panel-heading">
                         <div class="task-title">{{task.title}}</div>
                         <div class="task-actions">
                             <div class="btn-group" uib-dropdown>
-                                <button id="split-button" type="button" class="btn btn-primary right">
+                                <button id="split-button" type="button" ng-click="setTaskEdit(task,taskgroup)" class="btn btn-primary right">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                                 <button type="button" class="btn btn-primary" uib-dropdown-toggle>
@@ -95,6 +96,8 @@
 
                         </div>
                         <div class="task-user">{{task.in_charge_user.firstname}}</div>
+                        <div class="task-user">{{task.status}}</div>
+
 
                         <div class="spacer"></div>
                     </div>
