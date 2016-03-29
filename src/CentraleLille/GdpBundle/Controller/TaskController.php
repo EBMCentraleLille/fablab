@@ -83,7 +83,7 @@ class TaskController extends GdpRestController
         $task->setBody($paramFetcher->get('body'));
         $task->setAuthor($this->getUser());
         $task->setProject($project);
-        $task->setEndDate(new \DateTime($paramFetcher->get('endDate')));
+        $task->setEndDate(new \DateTime(strstr($paramFetcher->get('endDate')," (",true)));
         $taskList = $taskListRepository->findOneBy(array("id" => $paramFetcher->get('taskList')));
         $task->setTaskList($taskList);
         $taskList->addTask($task);
