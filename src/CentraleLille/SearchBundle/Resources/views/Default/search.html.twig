@@ -15,240 +15,136 @@
 <div class="container" style="margin-top:50px;">
 
   <div class="col-lg-3" style="margin-top:50px;">
-  
-  <div>
-    {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
-    {{ form_errors(form) }}
-    <div class="form-group">
-      {{ form_label(form.stringSearch, " ", {'label_attr': {'class': 'control-label'}}) }}
-      {{ form_widget(form.stringSearch, {'attr': {'class': 'form-control'}})}}
-      {{ form_errors(form.stringSearch) }}
-       {{ form_widget(form.search, {'attr': {'class': 'btn btn-primary', 'style': 'margin-top:10px'}})}}
+    <div id="filters">
+      <div class="filterblock">
+        <input id="check4" type="checkbox" name="check" value="projet" class="category" {% if result_project|length > 0 %}checked{% endif %}>
+        <label for="check4">Projet ({{ result_project|length }})</label>
+      </div>
+      <div class="filterblock">
+        <input id="check1" type="checkbox" name="check" value="machine" class="category" {% if result_machine|length > 0 %}checked{% endif %}>
+        <label for="check1">Machine ({{ result_machine|length }})</label>
+      </div>
+      <div class="filterblock">
+        <input id="check2" type="checkbox" name="check" value="user" class="category" {% if result_user|length > 0 %}checked{% endif %}>
+        <label for="check2">Utilisateur ({{ result_user|length }})</label>
+      </div>
+      <div class="filterblock">
+        <input id="check3" type="checkbox" name="check" value="competence" class="category" {% if result_competence|length > 0 %}checked{% endif %}>
+        <label for="check3">Compétence ({{ result_competence|length }})</label>
+      </div>
     </div>
-   
-    {{ form_end(form) }}
   </div>
 
+  <div class="col-lg-6">
+    <div class="results">
+      {% if search is null %}
+      <h4 style="margin-top:50px">Aucun résultat</h4>
+      {% else %}
 
-  <div id="filters">
-<div class="filterblock">
-<input id="check1" type="checkbox" name="check" value="machine" class="category" checked>
-<label for="check1">Machine ({{ result_machine|length }})</label>
-</div>
-
-<div class="filterblock">
-<input id="check2" type="checkbox" name="check" value="user" class="category" checked>
-<label for="check2">Utilisateur ({{ result_user|length }})</label>
-</div>
-
-<div class="filterblock">
-<input id="check3" type="checkbox" name="check" value="competence" class="category" checked>
-<label for="check3">Compétence ({{ result_competence|length }})</label>
-</div>
-
-<div class="filterblock">
-<input id="check4" type="checkbox" name="check" value="projet" class="category" checked>
-<label for="check4">Projet ({{ result_project|length }})</label>
-</div>
- 
-</div>
-</div>
-
-<div class="col-lg-6">
-  <div class="results">
-    {% if search is null %}
-    <h4 style="margin-top:50px">Aucun résultat</h4>
-
-    {% else %}
+      <div class="result" data-tag="projet">
 
 
+        {% if result_project|length > 0 %}
 
-    <div class="result" data-tag="projet">
-  
-     
-      {% if result_project|length > 0 %}
+        <h3>Projets - {{ result_project|length }} résultats </h3>
 
-       <h3>Projets - {{ result_project|length }} résultats </h3>
-     
         <div class="panel panel-default">
           <div class="panel-body">
 
 
             {% for project in result_project %}
-             <a href="../users/project/show/{{ project.id }}">
-             <div class="col-lg-10">
-            <h4>{{ project.name }}</h4>
-            {% if project.summary is defined %}
-            <p>{{ project.summary }}</p>
-            {% endif %}
-            </div>
-            <div class="col-lg-2">
-           <h5>{{ "now"|date('d/m/Y') }}</h5>
-            </div>
+            <a href="{{ path('project_show', {'projectId': project.id}) }}">
+              <div class="col-lg-10">
+                <h4>{{ project.name }}</h4>
+                {% if project.summary is defined %}
+                <p>{{ project.summary }}</p>
+                {% endif %}
+              </div>
+              <div class="col-lg-2">
+                <h5>{{ "now"|date('d/m/Y') }}</h5>
+              </div>
             </a>
-
-
-             {% endfor %}
+            {% endfor %}
           </div>
         </div>
-      
-     
+        {% else %}
+        {% endif %}
+      </div>
 
-      {% else %}
-      {% endif %}
-    </div>
+      <div class="result" data-tag="competence">
 
+        {% if result_competence|length > 0 %}
+        <h3>Compétences - {{ result_competence|length }} résultats</h3>
 
-
-
-    <div class="result" data-tag="competence">
-     
-      {% if result_competence|length > 0 %}
- <h3>Compétences - {{ result_competence|length }} résultats</h3>
-      
         <div class="panel panel-default">
           <div class="panel-body">
-          {% for competence in result_competence %}
-      <a href="#">
-            <h4>{{ competence.name }}</h4>
-             </a>
-      {% endfor %}
-          </div>
-        </div>
-     
-
-      {% else %}
-      
-      {% endif %}
-    </div>
-
-
-
-
-    <div class="result" data-tag="machine">
-      {% if result_machine|length > 0 %}
-       <h3>Machines - {{ result_machine|length }} résultats</h3> 
-        <div class="panel panel-default">
-          <div class="panel-body">
-          {% for machine in result_machine %}
-      <a href="../booking/resource/view/machine/{{ machine.id }}">
-      <div class="col-lg-9">
-            <h4>{{ machine.name }}</h4> 
-            </div>
-            <div class="col-lg-3">
-            <p><h5>{{ machine.statut }}</h5></p>
-            </div>
+            {% for competence in result_competence %}
+            <a href="{{ path('project_show', {'projectId': project.id}) }}">
+              <h4>{{ competence.name }}</h4>
             </a>
-      {% endfor %}
+            {% endfor %}
           </div>
         </div>
-      
-
-      {% else %}
-      
-      {% endif %}
-    </div>
+        {% else %}
+        {% endif %}
+      </div>
 
 
-
-    <div class="result" data-tag="user">
-      
-      {% if result_user|length > 0 %}
-
-     <h3>Utilisateurs - {{ result_user|length }} résultats </h3>
+      <div class="result" data-tag="machine">
+        {% if result_machine|length > 0 %}
+        <h3>Machines - {{ result_machine|length }} résultats</h3>
         <div class="panel panel-default">
           <div class="panel-body">
-           {% for user in result_user %}
-      <a href="#">
-            <h4>{{ user.username }}</h4>
-            <p>{{ user.email }}</p>
-             </a>
-      {% endfor %}
+            {% for machine in result_machine %}
+            <a href="{{ path('centrale_lille_view_resource', {'resourceType': 'machine', 'id': machine.id}) }}">
+              <div class="col-lg-9">
+                <h4>{{ machine.name }}</h4>
+              </div>
+              <div class="col-lg-3">
+                <p><h5>{{ machine.statut }}</h5></p>
+              </div>
+            </a>
+            {% endfor %}
           </div>
         </div>
-     
+        {% else %}
 
-      {% else %}
+        {% endif %}
+      </div>
+
+
+
+      <div class="result" data-tag="user">
+
+        {% if result_user|length > 0 %}
+
+        <h3>Utilisateurs - {{ result_user|length }} résultats </h3>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {% for user in result_user %}
+            <a href="#">
+              <h4>{{ user.username }}</h4>
+              <p>{{ user.email }}</p>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+
+        {% else %}
+        {% endif %}
+      </div>
+
       {% endif %}
     </div>
-
-    {% endif %}
-  </div>
   </div>
   <div class="col-lg-3">
   </div>
 
 </div>
 
-
-<script src="{{ asset('js/vendor/autocomplete/jquery.easy-autocomplete.min.js') }}"></script>
-<script type="text/javascript">
-var options = {
-
-  preparePostData: function(data) {
-    data.phrase = $("#stringSearch").val();
-    return data;
-  },
-
-  url: function(phrase) {
-    return "{{ path('autocomplete') }}";
-  },
-
-  categories: [{
-    listLocation: "user",
-    maxNumberOfElements: 4,
-    header: "Utilisateur"
-  }, 
-  {
-    listLocation: "machine",
-    maxNumberOfElements: 4,
-    header: "Machine"
-  },
-  {
-    listLocation: "competence",
-    maxNumberOfElements: 4,
-    header: "Compétences"
-  },
-  {
-  listLocation: "projet",
-    maxNumberOfElements: 4,
-    header: "Projet"
-  }],
-
-  getValue: function(element) {
-    return element.name;
-  },
-
-  template: {
-    type: "links",
-    fields: {
-      link: "link"
-    }
-  },
-
-  list: {
-    maxNumberOfElements: 20,
-    match: {
-      enabled: true
-    },
-    sort: {
-      enabled: true
-    }
-  },
-
-  ajaxSettings: {
-    dataType: "json",
-    method: "POST",
-    data: {
-      dataType: "json"
-    }
-  },
-
-  requestDelay: 150
-};
-
-$("#stringSearch").easyAutocomplete(options);
-</script>
+{#<script src="{{ asset('js/vendor/autocomplete/jquery.easy-autocomplete.min.js') }}"></script>
+<script src="{{ path('js_search') }}"></script>#}
 <script type="text/javascript">
 var category_list = [];
 $('#filters :input:checked').each(function(){
@@ -259,12 +155,10 @@ $('#filters :input:checked').each(function(){
 $('.result').each(function(){
   var item = $(this).attr('data-tag');
   if(jQuery.inArray(item,category_list) > -1)//Check if data-tag's value exist in array
-    $(this).fadeIn('slow');
+  $(this).fadeIn('slow');
   else
-    $(this).hide();
+  $(this).hide();
 });
-
-
 
 $(document).ready(function(){
   $('.category').on('change', function(){
@@ -275,18 +169,18 @@ $(document).ready(function(){
     });
 
     if(category_list.length == 0)
-        $('.result').fadeIn();
+    $('.result').fadeIn();
     else {
       $('.result').each(function(){
         var item = $(this).attr('data-tag');
         if(jQuery.inArray(item,category_list) > -1) //Check if data-tag's value is in array
-          $(this).fadeIn('slow');
+        $(this).fadeIn('slow');
 
         else
-          $(this).hide();
+        $(this).hide();
       });
 
     }});
-});
-</script>
+  });
+  </script>
 {% endblock body %}
