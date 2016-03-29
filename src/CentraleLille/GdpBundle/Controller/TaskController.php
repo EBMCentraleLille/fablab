@@ -139,7 +139,7 @@ class TaskController extends GdpRestController
             $task->setStatus($paramFetcher->get('status'));
         }
         if ($paramFetcher->get('endDate')) {
-            $task->setEndDate($paramFetcher->get('endDate'));
+            $task->setEndDate(new \DateTime(strstr($paramFetcher->get('endDate'), " (", true)));
         }
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Update'));
