@@ -33,6 +33,12 @@ class TaskList
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     */
+    private $project;
+
     public function __construct() {
         $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -88,6 +94,22 @@ class TaskList
     public function addTask($task)
     {
         $this->task[] = $task;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param mixed $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
     }
 }
 
