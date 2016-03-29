@@ -11,13 +11,15 @@ matrix:
     - php: hhvm
 
 services:
+  - elasticsearch
   - mysql
 
 before_script:
+  - sleep 10
   - mysql -u root -e "CREATE DATABASE fablab"
   - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - ./composer.phar -v update -n
-  - ./composer.phar -v install -n
+  - composer -v update -n
+  - composer -v install -n
   - php app/console doctrine:schema:create
   - php app/console doctrine:fixtures:load -n
 

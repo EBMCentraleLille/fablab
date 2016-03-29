@@ -4,9 +4,11 @@ imports:
     - { resource: services.yml }
     - { resource: "@CentraleLilleGdpBundle/Resources/config/services.yml" }
     - { resource: "@CustomFosUserBundle/Resources/config/services.yml" }
+    - { resource: "@CentraleLilleKnowledgeBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleHomepageBundle/Resources/config/services.yml" }
     - { resource: "@ProjectPageBundle/Resources/config/services.yml" }
     - { resource: "@CentraleLilleNewsFeedBundle/Resources/config/services.yml" }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -88,11 +90,37 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
+# ElasticSearch Bundle configuration
+fos_elastica:
+    serializer: ~
+    clients:
+        default: { host: 127.0.0.1 , port: 9200 }
+    indexes:
+        fablab:
+            client: default
+            types:
+                user:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\CustomFosUserBundle\Entity\User
+                        provider: ~
+                        listener: ~
+                        finder: ~
 
+                Machine:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\ReservationBundle\Entity\Machine
+                        provider: ~
+                        listener: ~
+                        finder: ~
 twig:
     form:
         resources:['bootstrap_3_layout.html.twig']
-
 
 sensio_framework_extra:
     view:   {   annotations: false }

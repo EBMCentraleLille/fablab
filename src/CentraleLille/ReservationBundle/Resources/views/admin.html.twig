@@ -10,11 +10,11 @@
 
     <div class=" col-lg-offset-3 col-md-offset-3 col-lg-4 col-md-4">
         <div class="btn-group" role="toolbar">
-       <button type="button" class="btn btn-primary"aria-hidden="true" onclick="location.href = './machine/add';">
+       <button type="button" class="btn btn-primary"aria-hidden="true" onclick="location.href = '{{ path('centrale_lille_add_machine') }}'">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
            </button>
 
-        <button type="button" class="btn btn-primary" aria-hidden="true" onclick="location.href = './machine/add';">
+        <button type="button" class="btn btn-primary" aria-hidden="true" onclick="location.href = '{{ path('centrale_lille_add_machine') }}'">
             Ajouter machine
         </button>
 
@@ -30,10 +30,11 @@
             <li> {{ machine.description }}</li>
     </ul>
             <div class="btn-group" role="toolbar">
-                <button type="button" class="btn btn-danger" aria-hidden="true" onclick="location.href ='./machine/delete/{{ machine.id }}';">
+                <button type="button" class="btn btn-danger" aria-hidden="true"
+                        onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.id}) }}'">
                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                 </button>
-                <button class="btn btn-danger" aria-hidden="true" onclick=""location.href = './machine/delete/{{ machine.id }}'>
+                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.id}) }}'">
                     Supprimer la machine
                 </button>
             </div>
