@@ -199,6 +199,34 @@ class TaskListController extends FOSRestController
         return $view;
      }
 
+    /**
+     * Return all the tasklists for a specific project
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Return all task lists for a given project",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the project is not found"
+     *   }
+     * )
+     *
+     * @param int $id id
+     *
+     * @return View
+     */
+     public function getProjectListsAction($id)
+     {
+        $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $list = $repoTaskLists->findByProject($id);
+        if (!$list) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $view = View::create();
+        $view->setData($list)->setStatusCode(200);
+        return $view;
+     }
+
      /**
      * Get the validation errors
      *
