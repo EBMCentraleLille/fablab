@@ -1,4 +1,41 @@
-<div class="row">
+<div class="container-fluid">
+    <div class="row local-header">
+        <div class="col-md-4 view-navigation">
+            <div class="btn-group nav-items">
+                <button type="button" class="btn btn-default" ui-sref="tasks">
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Tâches
+                </button>
+
+                <button type="button" class="btn btn-default active" ui-sref="planning">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Planning
+                </button>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <h1 class="center">Vue Planning</h1>
+        </div>
+        <div class="col-md-4 list-management">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                           ng-model="newTaskListName" placeholder="Nouvelle liste">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success"
+                                ng-class="(newTaskListName.length>3)?'':'disabled'"
+                                ng-click="createTaskList()">Créer</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-warning new-task" ng-click="doCancelButton()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    &nbsp;Supprimer listes
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
