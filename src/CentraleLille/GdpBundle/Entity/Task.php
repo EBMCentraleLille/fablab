@@ -68,10 +68,10 @@ class Task
     private $inChargeUser;
 
 
-    /* @ORM\ManyToMany(targetEntity="TaskList", inversedBy="tasks")
+    /* @ORM\OneToMany(targetEntity="TaskList", inversedBy="tasks")
      * @ORM\    JoinTable(name="tasks_lists")
      */
-    private $taskLists;
+    private $taskList;
 
 
     /**
@@ -84,7 +84,6 @@ class Task
     public function __construct()
     {
         $this->createdDate = new \DateTime();
-        $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -284,9 +283,9 @@ class Task
     /**
      * @param mixed $taskList
      */
-    public function addTaskList($taskList)
+    public function setTaskList($taskList)
     {
-        $this->taskLists[] = $taskList;
+        $this->taskList = $taskList;
     }
 
     /**
@@ -294,6 +293,6 @@ class Task
      */
     public function getTaskList()
     {
-        return $this->taskLists;
+        return $this->taskList;
     }
 }
