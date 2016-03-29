@@ -96,8 +96,10 @@ class ProjectController extends Controller
      * @param $projectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($projectId)
+    public function editAction($projectId, Request $request)
     {
+        $session = new Session();
+
         $em = $this->getDoctrine()->getManager();
         $project = $em
             ->getRepository('CustomFosUserBundle:Project')
@@ -110,17 +112,25 @@ class ProjectController extends Controller
          */
         $this->denyAccessUnlessGranted(ProjectRole::PROJECT_ROLE_MEMBER, $project);
 
-        $form = $this->get('form.factory')->create(new ProjectFormType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectFormType('edit'), $project);
+
+        $error = $session->get('error');
+        $success = $session->get('success');
 
         if ($form->handleRequest($request)->isValid()) {
             $em->flush();
-            return $this->redirect($this->generateUrl('project_edit'));
+            $session->set('success', "Project updated successfully");
+            return $this->redirect($this->generateUrl('project_edit', array('projectId' => $projectId)));
+        } elseif ($request->isMethod('POST')) {
+            $session->set('error', "Could not update project");
         }
 
         return $this->render('CustomFosUserBundle:Project:edit.html.twig', array(
             'form' => $form->createview(),
             'project' => $project,
-            'currentUser' => $currentUser
+            'currentUser' => $currentUser,
+            'error' => $error,
+            'success' => $success
         ));
     }
 
@@ -131,7 +141,7 @@ class ProjectController extends Controller
     public function newAction(Request $request)
     {
         $project = new Project("hello");
-        $form = $this->get('form.factory')->create(new ProjectFormType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectFormType('create'), $project);
 
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
