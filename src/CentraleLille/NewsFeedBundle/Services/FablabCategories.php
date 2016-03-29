@@ -176,5 +176,4 @@ class FablabCategories implements FablabCategoriesInterface
         $this->em->flush();
         return $this;
     }
-
 }

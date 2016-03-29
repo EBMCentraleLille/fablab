@@ -40,6 +40,8 @@ class HomepageController extends Controller
     * Cette fonction récupère les informations des projets récents
     * pour les afficher sur la homepage.
     *
+    * @param Request $request Http
+    *
     * @return Twig La vue Twig à display
     */
     public function indexAction(Request $request)
@@ -118,7 +120,8 @@ class HomepageController extends Controller
     *
     * Cette fonction récupère et affiche les informations de l'activité ciblée
     *
-    * @param Object $category Entité catégorie à afficher
+    * @param Request $request  Http
+    * @param Object  $category Entité catégorie à afficher
     *
     * @return Twig La vue Twig à display
     */
@@ -138,8 +141,11 @@ class HomepageController extends Controller
             }
         } else {
             $em = $this->getDoctrine()->getManager();
-            $cat=$em->getRepository("CentraleLilleNewsFeedBundle:"
-                    ."Category")->findOneBy(array('name'=>$category));
+            $cat=$em->getRepository(
+                "CentraleLilleNewsFeedBundle:"
+                ."Category"
+            )
+                ->findOneBy(array('name'=>$category));
 
             //Le user est-il abonné à cette catégorie?
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
