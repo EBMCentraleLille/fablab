@@ -19,9 +19,10 @@
             <div class="col-md-8">
                 <div class="input-group">
                     <input type="text" class="form-control"
-                           ng-model="newTaskListName" placeholder="Nouvelle liste">
+                           ng-model="newTaskListName" placeholder="Nouvelle liste" required>
                     <span class="input-group-btn">
                         <button class="btn btn-success"
+                                ng-disabled="(newTaskListName.length<3)?true:false;"
                                 ng-class="(newTaskListName.length>3)?'':'disabled'"
                                 ng-click="createTaskList()">Créer</button>
                     </span>
