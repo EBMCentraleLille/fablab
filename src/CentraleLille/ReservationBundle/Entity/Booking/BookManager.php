@@ -1,8 +1,9 @@
 <?php
 
-namespace CentraleLille\ReservationBundle\Entity\Booking\Strategy;
+namespace CentraleLille\ReservationBundle\Entity\Booking;
 
-use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
+use CentraleLille\ReservationBundle\Entity\Booking;
+use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookStrategy;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 

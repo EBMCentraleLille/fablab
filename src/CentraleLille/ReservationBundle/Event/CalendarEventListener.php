@@ -4,9 +4,16 @@ namespace CentraleLille\ReservationBundle\Event;
 
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use ADesigns\CalendarBundle\Entity\EventEntity;
+use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\ReservationBundle\Entity\Bookables\Machine;
+use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookMachine;
+use CentraleLille\ReservationBundle\Entity\Booking\BookManager;
+use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookStrategy;
 use Doctrine\ORM\EntityManager;
 use CentraleLille\ReservationBundle\Entity\Booking\Event;
 use Symfony\Component\HttpFoundation\RequestStack;
+use CentraleLille\CustomFosUserBundle\Entity\User;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Event Class Doc
@@ -24,6 +31,7 @@ class CalendarEventListener
 {
     private $entityManager;
     private $requestStack;
+    private $user;
 
     public function __construct(EntityManager $entityManager, RequestStack $requestStack)
     {
@@ -39,11 +47,11 @@ class CalendarEventListener
         $description = $request->get('description');
         $start = $request->get('start');
         $end = $request->get('end');
+        $userId = $request->get('userId');
 
-        $idMachine = $this->requestStack->getMasterRequest()->get('id');
-        $idMachine = 2;
+        $idMachine = $request->get('machineId');
 
-        if ($title && $description && $start && $end) {
+        if ($title && $description && $start && $end && $userId) {
             //converting unix timestamp from ms to s (because javascript provide ms)
             $start = \DateTime::createFromFormat('U', $start/1000);
             $end = \DateTime::createFromFormat('U', $end/1000);
@@ -51,6 +59,10 @@ class CalendarEventListener
             $em = $this->entityManager;
             $repository = $em->getRepository('ReservationBundle:Bookables\Machine');
             $resource = $repository ->find($idMachine);
+
+            $repository = $em->getRepository('CustomFosUserBundle:User');
+            $user = $repository->find($userId);
+            //$project = new Project();
 
             $event = new \CentraleLille\ReservationBundle\Entity\Booking\Event();
 
@@ -62,10 +74,10 @@ class CalendarEventListener
             $event->setStartDateTime($start);
             $event->setEndDateTime($end);
             $event->setStatus('');
+            //$event->setUser($user);
 
-            //$booker = $this->get('event_booker');
-
-            //$booker->book();
+            //$booker = new BookManager(new BookMachine($em));
+            //$booker->getBookStrategy()->book($user, $project, $start, $end, $resource);
 
             $em->persist($event);
             $em->flush();

@@ -39,6 +39,10 @@ $(function () {
                 var title =  $('#eventTitle').val();
                 start = start.getTime();
                 end = end.getTime();
+                var str = window.location.href.split("/");
+                var userId = str[str.length-1];
+                var str2 = window.location.href.split("/");
+                var machineId = str2[str2.length-2];
                 var e = {
                         title: title,
                         description: description,
@@ -49,7 +53,7 @@ $(function () {
                 if(e.title){
                     $.ajax({
                         url: Routing.generate('fullcalendar_loader'),
-                        data: 'title='+ e.title+'&start='+ e.start +'&end='+ e.end +'&description='+ e.description,
+                        data: 'title='+ e.title+'&start='+ e.start +'&end='+ e.end +'&description='+ e.description + '&userId=' + userId + '&machineId=' + machineId,
                         type: "POST",
                         success: function(json) {
                             $('#eventDescription').val('');

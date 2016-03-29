@@ -54,6 +54,8 @@ class EventController extends Controller
 
         $types = $em->getRepository('ReservationBundle:Bookables\Type');
 
+        $user = $this->getUser();
+
         // machines fitering
 
         $machinesAvailables = array();
@@ -86,12 +88,13 @@ class EventController extends Controller
                 'machinesUnavailables'=>$machinesUnavailables,
                 'machinesOutOfOrder'=>$machinesOutOfOrder,
                 'machinesBeingTested'=>$machinesOutOfOrder,
-                'types'=>$types
+                'types'=>$types,
+                'user'=>$user,
                 )
         );
     }
 
-    public function viewResourceAction($resourceType, $id)
+    public function viewResourceAction($resourceType, $id, $userId)
     {
         switch ($resourceType) {
             case 'machine':
@@ -103,12 +106,15 @@ class EventController extends Controller
                     if (! is_null($machine)) { //if machine id is good, display planning
                         return $this->render(
                             'ReservationBundle::resourceBooking.html.twig',
-                            array('machine'=>$machine)
+                            array(
+                                'machine'=>$machine,
+                                'userId'=>$userId
+                                )
                         );
                     } else { //if this machine id does not return something, do smthg else
                         $machines = $repository->findAll();
                         return $this->render(
-                            'ReservationBundle::reservation.html.twig',
+                            'ReservationBundle::resourcesList.html.twig',
                             array('machines'=>$machines)
                         );
                     }
@@ -116,7 +122,7 @@ class EventController extends Controller
                 } else { // if id is not a number, go back
                     $machines = $repository->findAll();
                     return $this->render(
-                        'ReservationBundle::reservation.html.twig',
+                        'ReservationBundle::resourcesList.html.twig',
                         array('machines'=>$machines)
                     );
                 }

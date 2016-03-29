@@ -51,13 +51,16 @@ class ResourceController extends Controller
 
         $casiers = $repository->findAll();
 
+        $user = $this->getUser();
+
 
         return $this->render(
             '@Reservation/resourcesList.html.twig',
             array(
                 'machines'=>$machines,
                 'rooms'=>$rooms,
-                'casiers'=>$casiers
+                'casiers'=>$casiers,
+                'user'=>$user
             )
         );
     }
