@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Réservation
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+    <div class="row" >
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+
+            {% if resourcetype == "machine" %}
+                <h3>Machine {{ bookable.name }}</h3>
+                <li>
+                    Description : {{ bookable.description }}
+                </li>
+                <li>
+                    Pré-requis : {{ bookable.requirements }}
+                </li>
+            {% elseif resourcetype == "salle" %}
+                <h3>Salle {{ bookable.name }}</h3>
+                Description : {{ bookable.description }}
+            {% elseif resourcetype == "casier" %}
+                <h3>Casier {{ bookable.name }}</h3>
+                Description : {{ bookable.description }}
+            {% endif %}
+
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+
+
+
+    {% block javascripts %}
+
+    {% endblock %}
+
+{% endblock body %}
