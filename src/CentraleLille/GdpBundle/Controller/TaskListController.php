@@ -205,7 +205,7 @@ class TaskListController extends GdpRestController
         }
         $this->existsProjectUser($taskList->getProject()->getId(), $this->getUser()->getId());
         $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
-        $taskList->addTask($task);
+        $task->setTaskList($taskList);
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
         $em->flush();
