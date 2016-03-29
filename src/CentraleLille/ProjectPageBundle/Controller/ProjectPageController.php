@@ -60,12 +60,12 @@ class ProjectPageController extends Controller
             ->findOneBy(array('id'=>$projectId));
 
         if (!$project) {
-        throw $this->createNotFoundException('Ce projet n\'existe pas !');
+            throw $this->createNotFoundException('Ce projet n\'existe pas !');
         }
 
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 10);     
+        $activities=$activityService->getActivityProjet($project, 10);
 
 
         //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
@@ -79,7 +79,7 @@ class ProjectPageController extends Controller
         }
         */
 
-        if($user){
+        if ($user) {
             if ($user->hasProject($project->getName())) {
 
                 //Récupération des abonnements du user
@@ -95,15 +95,14 @@ class ProjectPageController extends Controller
                     array_push($abo, $abonnementsProjet);
                 }
                 foreach ($abonnements as $abonnement) {
-                if (in_array($abonnement, $abo)) {
-                    $aboProjet = array($abonnement->getName() => 1);
-                    $likes = array_merge($likes, $aboProjet);
-                } 
-                else {
-                    $aboProjet = array($abonnement->getName() => 0);
-                    $likes = array_merge($likes, $aboProjet);
+                    if (in_array($abonnement, $abo)) {
+                        $aboProjet = array($abonnement->getName() => 1);
+                        $likes = array_merge($likes, $aboProjet);
+                    } else {
+                        $aboProjet = array($abonnement->getName() => 0);
+                        $likes = array_merge($likes, $aboProjet);
+                    }
                 }
-                } 
                 
                 //affichage du formulaire et gestion de la requête
                 $activity = new Activity();
@@ -126,24 +125,24 @@ class ProjectPageController extends Controller
                     
                     return $this->redirect(
                         $this->generateUrl(
-                            'project_page_homepage', 
+                            'project_page_homepage',
                             array(
                                 'projectId' => $projectId
                                 )
                         )
-                    );   
+                    );
                 }
                 
-            return $this->render(
-                'ProjectPageBundle:Default:projectpage.html.twig',
-                array(
+                return $this->render(
+                    'ProjectPageBundle:Default:projectpage.html.twig',
+                    array(
                     'project' => $project,
                     'recentActivities' => $activities,
                     'form' => $form->createView(),
                     'projectUsers' => $projectUsers,
                     'likes' => $likes
-                )
-            );
+                    )
+                );
             }
             return $this->render(
                 'ProjectPageBundle:Default:projectpage.html.twig',
@@ -154,16 +153,15 @@ class ProjectPageController extends Controller
                     'likes' => $likes
                 )
             );
-        }
-        else{
+        } else {
             return $this->render(
-                'ProjectPageBundle:Default:projectpage.html.twig', 
+                'ProjectPageBundle:Default:projectpage.html.twig',
                 array(
                     'project' => $project,
                     'recentActivities' => $activities,
                     'projectUsers' => $projectUsers
                     )
-                );
+            );
         }
     }
 }

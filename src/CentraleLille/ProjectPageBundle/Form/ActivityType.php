@@ -78,7 +78,7 @@ class ActivityType extends AbstractType
             )*/
             ->add(
                 'Content',
-                TextareaType::class, 
+                TextareaType::class,
                 array(
                     'label' => 'Activité',
                 )
