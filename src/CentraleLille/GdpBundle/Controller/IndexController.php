@@ -8,11 +8,13 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        var_dump('weed');
+        // Call jwt_manager service & create the token
+        $token = $this->get('lexik_jwt_authentication.jwt_manager')->create($this->getUser());
+
         return $this->render(
-            'CentraleLilleGdpBundle:index.html.twig',
+            'CentraleLilleGdpBundle:Default:index.html.twig',
             [
-                'token' => 'temporary'
+                'token' => $token
             ]
         );
     }

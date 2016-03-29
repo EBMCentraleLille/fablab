@@ -1,3 +1,20 @@
 news_feed:
     path:     /
     defaults: { _controller: CentraleLilleNewsFeedBundle:NewsFeed:index }
+news_feed_subscribe:
+  path:  /follow
+  defaults: { _controller: CentraleLilleNewsFeedBundle:NewsFeed:index }
+  requirements:
+    methods: POST
+centrale_lille_newsfeed_activity:
+    path:     /activity
+    defaults: { _controller: CentraleLilleNewsFeedBundle:Activity:index }
+centrale_lille_newsfeed_new_activity:
+    path:     /activity/new
+    defaults: { _controller: CentraleLilleNewsFeedBundle:Activity:create }
+centrale_lille_newsfeed_abonnements:
+    path:     /abonnements
+    defaults: { _controller: CentraleLilleNewsFeedBundle:Abonnement:index }
+centrale_lille_newsfeed_abonnements_follow:
+    path:     /abonnements/follow
+    defaults: { _controller: CentraleLilleNewsFeedBundle:Abonnement:index }

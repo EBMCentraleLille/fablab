@@ -65,6 +65,7 @@ class TaskController extends FOSRestController
      *
      * @RequestParam(name="title", nullable=false, strict=true, description="Title.")
      * @RequestParam(name="body", nullable=false, strict=true, description="Body.")
+     * @RequestParam(name="endDate", nullable=false, strict=true, description="End date.")
      *
      * @return View
      */
@@ -79,6 +80,7 @@ class TaskController extends FOSRestController
         $task->setAuthor($this->getUser());
         $task->setProject($project);
         $task->setStatus(false);
+        $task->setEndDate($paramFetcher->get('endDate'));
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
@@ -112,6 +114,7 @@ class TaskController extends FOSRestController
      * @RequestParam(name="title", nullable=true, strict=true, description="Title.")
      * @RequestParam(name="body", nullable=true, strict=true, description="Body.")
      * @RequestParam(name="status", nullable=true, strict=true, description="Status.")
+     * @RequestParam(name="endDate", nullable=false, strict=true, description="End date.")
      *
      * @return View
      */
@@ -127,6 +130,7 @@ class TaskController extends FOSRestController
         if ($paramFetcher->get('status')) {
             $task->setStatus($paramFetcher->get('status'));
         }
+        $task->setEndDate($paramFetcher->get('endDate'));
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Update'));
         if (count($errors) == 0) {

@@ -1,6 +1,6 @@
 centrale_lille_machine:
     path: /
-    defaults: {_controller:ReservationBundle:Event:reserver}
+    defaults: {_controller:ReservationBundle:Event:book}
 
 centrale_lille_add_machine:
     path: /machine/add
@@ -14,16 +14,40 @@ centrale_lille_casier:
     path: /casier
     defaults: {_controller:ReservationBundle:Default:casier}
 
-centrale_lille_administration:
+centrale_lille_administration_resources:
+    path: machine/admin
+    defaults: {_controller:ReservationBundle:Admin:adminResources}
+
+centrale_lille_administration_events:
     path: /admin
-    defaults: {_controller:ReservationBundle:Default:admin}
+    defaults: {_controller:ReservationBundle:Admin:adminEvents}
 
 centrale_lille_delete_machine:
     path: /machine/delete/{id}
     defaults: {_controller:ReservationBundle:Machine:deleteMachine}
 
-centrale_lille_profil:
-    path: /profil
-    defaults: {_controller:ReservationBundle:Default:profil}
+centrale_lille_my_booking:
+    path: /list
+    defaults: {_controller:ReservationBundle:Default:bookingList}
+
+centrale_lille_display_resources:
+        path: /resource/calendar/view/{resourceType}/{id}
+        defaults: {_controller:ReservationBundle:Event:viewResource}
+
+centrale_lille_types:
+    path: /type/add
+    defaults: {_controller:ReservationBundle:Type:create}
+
+centrale_lille_list_types:
+    path: /type/list
+    defaults: {_controller:ReservationBundle:Type:list}
+
+centrale_lille_list_resources:
+    path: /resource/list
+    defaults: {_controller:ReservationBundle:Resource:list}
+
+centrale_lille_view_resource:
+    path: /resource/view/{resourceType}/{id}
+    defaults: {_controller:ReservationBundle:Resource:view}
 
 
