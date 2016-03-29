@@ -24,17 +24,17 @@
                                     <strong>{{ abonnementCategorie.name }}</strong>
                                 </div>
                                 <div class="panel panel-default">
-                            	   <a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
-                                    	<div class="projectPicture" style="background-image:url('{{ abonnementCategorie.picture }}');"></div>
-                                	</a>
+                                   <a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
+                                        <div class="projectPicture" style="background-image:url('{{ abonnementCategorie.picture }}');"></div>
+                                    </a>
                                     <div class="panel-footer">
                                         <div class="row">
-                                        	<a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
-                                            	<div class="col-md-6">
-                                                	<object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
-                                                	Page catégorie
-                                            	</div>
-                                        	</a>
+                                            <a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
+                                                <div class="col-md-6">
+                                                    <object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
+                                                    Page catégorie
+                                                </div>
+                                            </a>
                                             <div class="col-md-6">
                                                 <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
                                                 <div class ="{{ abonnementCategorie.name }}" id="follow">Ne plus suivre</div>
@@ -47,6 +47,7 @@
                     {% endif %}
                 </div>
             </div>
+            
             <div class="row panel panel-primary">
                 <div class="panel-heading">
                     <h4>Projets</h4>

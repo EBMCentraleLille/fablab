@@ -10,16 +10,16 @@
 	        	<a href="{{ path("centrale_lille_homepage_star_project_new") }}" class="btn btn-primary"> 
 	        		Ajouter un Projet Star
 	        	</a>
-	        	<table class="table table-striped table-hover ">
-				  <thead>
-				    <tr>
-				      <th>#</th>
-				      <th>Contenu</th>
-				      <th>Nom du projet</th>
-				    </tr>
-				  </thead>
-				  {% if starProject is defined %}
-					  <tbody>
+	        	{% if starProjects is defined %}
+		        	<table class="table table-striped table-hover ">
+					  <thead>
+					    	<tr>
+					      		<th>#</th>
+					      		<th>Contenu</th>
+					      		<th>Nom du projet</th>
+					    	</tr>
+					   </thead>
+					   <tbody>
 				        	{% for starProject in starProjects %}
 						       	<tr>
 									<td>{{ loop.index }}</td>
@@ -32,10 +32,10 @@
 								</tr>
 			        		{% endfor %}
 			        	</tbody>
-			        {% else %}
-			        	Il n'y a pas encore de projet star. Créez en un !
-			        {% endif %}
-		        </table>
+		        	</table>
+		        {% else %}
+			        Il n'y a pas encore de projet star. Créez en un !
+			    {% endif %}
 	        </div>
 	    	<div class="col-md-2"></div>
 	    </div>
