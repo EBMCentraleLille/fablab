@@ -1,4 +1,4 @@
-# fablab
+﻿# fablab
 Site de gestion du FabLab de CentraleLille
 
 ## Installation
@@ -11,13 +11,21 @@ npm install -g bower
 bower install
 ```
 
+Install ElasticSearch :
+
+Downdload & dezip V1.7.5 => https://www.elastic.co/downloads/past-releases/elasticsearch-1-7-5
+Launch Elasticsearch
+
+
 Bower will install bootstrap for layout.
 
 ## Dev
 
 ###Integration
 
-Local serv at : 172.31.4.227
+Local server at : http://172.31.4.227
+
+It actualizes from GitHub once every day.
 
 
 ###Tests
@@ -96,7 +104,7 @@ Ex : ProjectController
 Il suffit d'ajouter dans le template la ligne suivante:
 
 ```
-{% if currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
+{% if project_service.isAllowedLeader(currentUser, project) %}
     <p>This part is visible only by the PROJECT_LEADER</p>
 {% endif %}
 ```

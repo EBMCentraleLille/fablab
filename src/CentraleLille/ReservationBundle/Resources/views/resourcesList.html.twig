@@ -1,0 +1,79 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Réservation
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+    <div class="row" >
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h3>Liste des ressources</h3>
+            <div class="well">
+
+                <h3>Machines</h3>
+                {% for resource in machines %}
+                    <div class="well">
+                        <h4>{{ resource.name}}</h4>
+                        <ul>
+                            <li> {{ resource.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_view_resource', {'resourceType': 'machine', 'id': resource.id}) }}'">
+                                Voir les détails
+                            </button>
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': resource.id}) }}'">
+                                Voir les disponibilités
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h3>Salles</h3>
+                {% for resource in rooms %}
+                    <div class="well">
+                        <h4>{{ resource.name}}</h4>
+                        <ul>
+                            <li> {{ resource.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_view_resource', {'id': resource.id, 'type': 'room'}) }}'">
+                                Voir les détails
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h3>Casiers</h3>
+                {% for resource in casiers %}
+                    <div class="well">
+                        <h4>{{ resource.name}}</h4>
+                        <ul>
+                            <li> {{ resource.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_view_resource', {'id': resource.id, 'type': 'casier'}) }}'">
+                                Voir les détails
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+
+
+
+    {% block javascripts %}
+
+    {% endblock %}
+
+{% endblock body %}

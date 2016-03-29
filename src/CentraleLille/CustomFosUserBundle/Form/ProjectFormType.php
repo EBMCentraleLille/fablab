@@ -29,8 +29,8 @@ class ProjectFormType extends AbstractType
             ->add('dateBegin', 'text', array("label" => "Date de début"))
             ->add('dateEnd', 'text', array("label" => "Date de fin"))
             ->add('picture', 'text', array("label" => "Image"))
-            ->add('summary', 'text', array("label" => "Résumé"))
-            ->add('description', 'text', array("label" => "Description"))
+            ->add('summary', 'textarea', array("label" => "Résumé"))
+            ->add('description', 'textarea', array("label" => "Description"))
             ->add('save', 'submit', array('label' => 'Créer projet'));
     }
 

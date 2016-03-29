@@ -30,7 +30,7 @@ centrale_lille_homepage:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /reservation
+    prefix: /booking
 
 app:
     resource: "@AppBundle/Controller/"
@@ -58,3 +58,9 @@ fos_user_change_password:
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
+
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+fos_js_routing:
+      resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

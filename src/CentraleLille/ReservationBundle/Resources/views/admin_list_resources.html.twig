@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Admin - Index {% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+        <div class="row" >
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h3>Liste des machines</h3>
+                <div class=" col-lg-offset-3 col-md-offset-3 col-lg-4 col-md-4">
+                    <div class="btn-group" role="toolbar">
+                        <button type="button" class="btn btn-primary"aria-hidden="true" onclick="location.href = '{{ path('centrale_lille_add_machine') }}'">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary" aria-hidden="true" onclick="location.href = '{{ path('centrale_lille_add_machine') }}'">
+                            Ajouter machine
+                        </button>
+                    </div>
+                </div>
+
+                {% for type in types %}
+
+                    <h3> {{ type.getName() }}</h3>
+
+                    {% for machine in machines if machine.getType() == type %}
+
+                        <div class="well">
+                            <ul>
+                                <li> {{ machine.name}}</li>
+                                <li> {{ machine.description }}</li>
+                            </ul>
+                            <div class="btn-group" role="toolbar">
+                                <button type="button" class="btn btn-danger" aria-hidden="true"
+                                        onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getId()}) }}'">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_machine', {'id': machine.getId()}) }}'">
+                                    Supprimer la machine
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+{% endblock %}

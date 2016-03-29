@@ -1,0 +1,91 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Réservation
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+    <div class="row" >
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h3>  Réserver une machine </h3>
+            <div class="well">
+
+                <h3>Machines disponibles</h3>
+                {% for machine in machinesAvailables %}
+                    <div class="well">
+                        <h4>{{ machine.name}}</h4>
+                        <ul>
+                            <li> {{ machine.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                                Voir les disponibilités
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h3>Machines indisponibles</h3>
+                {% for machine in machinesUnavailables %}
+                    <div class="well">
+                        <h4>{{ machine.name}}</h4>
+                        <ul>
+                            <li> {{ machine.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                                Voir les disponibilités
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h3>Machines hors d'usage </h3>
+                {% for machine in machinesOutOfOrder %}
+                    <div class="well">
+                        <h4>{{ machine.name}}</h4>
+                        <ul>
+                            <li> {{ machine.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                                Voir les disponibilités
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h3>Machines en test</h3>
+                {% for machine in machinesBeingTested %}
+                    <div class="well">
+                        <h4>{{ machine.name}}</h4>
+                        <ul>
+                            <li> {{ machine.description }}</li>
+                        </ul>
+                        <div class="btn-group" role="toolbar">
+                            <button class="btn" aria-hidden="true"
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                                Voir les disponibilités
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+
+
+
+    {% block javascripts %}
+
+    {% endblock %}
+
+{% endblock body %}
