@@ -237,10 +237,9 @@ class FablabAbonnements implements FablabAbonnementsInterface
         foreach ($categoriesAbo as $categoryAbo) {
             if ($categoryAbo->getName() == $category->getName()) {
                 return 1;
-            } else {
-                return 0;
             }
         }
+        return 0;
     }
 
     /**

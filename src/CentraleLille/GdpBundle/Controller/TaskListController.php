@@ -37,7 +37,7 @@ class TaskListController extends GdpRestController
      public function postListAction(ParamFetcher $paramFetcher)
      {
         $taskList = new TaskList();
-        $taskList->setTitle($paramFetcher->get('name'));
+        $taskList->setName($paramFetcher->get('name'));
         // assign the list to a project
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $projectId = $paramFetcher->get('project_id');
@@ -53,7 +53,7 @@ class TaskListController extends GdpRestController
         $view->setData($taskList)->setStatusCode(201);
         return $view;
      }
-     
+
 
 
     /**

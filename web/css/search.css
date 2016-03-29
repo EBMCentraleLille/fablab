@@ -6,6 +6,27 @@ a h4, a p{
   color: black;
 }
 
+.resultcount{
+  color: #DD4814;
+  font-size: 80%;
+  float: right;
+  margin-top: 1%;
+}
+
+.resultcountsmall{
+  color: #DD4814;
+  font-size: 80%;
+}
+
+.right{
+  float: right;
+}
+
+.left{
+  position: absolute;
+  margin-left: 0px;
+}
+
 #search{
   width: 100%;
 }

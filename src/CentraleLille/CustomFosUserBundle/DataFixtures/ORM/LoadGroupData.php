@@ -71,6 +71,8 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface, 
 
         $projectService = $this->container->get('app.project.service');
         $projectService->setUserToProjectLeader($this->getReference('user3'), $this->getReference('Project2'));
+        $projectService->setUserToProjectLeader($this->getReference('user-'
+            .'gregoire'), $this->getReference('projet-gregoire'));
         $projectService->addUserToProject(
             $this->getReference('user1'),
             $manager->getRepository('CustomFosUserBundle:Project')->findOneByName('Project2')
@@ -83,6 +85,6 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 }

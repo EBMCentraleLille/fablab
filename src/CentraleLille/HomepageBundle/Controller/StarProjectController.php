@@ -53,7 +53,7 @@ class StarProjectController extends Controller
                 'notice',
                 "Vous devez être connecté pour accéder à cette page."
             );
-            return $this->redirectToRoute('fos_user_security_login ');
+            return $this->redirectToRoute('fos_user_security_login');
         } elseif (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
             $session=$request->getSession()->getFlashBag()->add(
                 'notice',
@@ -64,6 +64,8 @@ class StarProjectController extends Controller
             //Récupération des star project
             $starProjectService=$this->container->get('fablab_homepage.starProject');
             $starProjects=$starProjectService->getAllStarProjects();
+            
+            $starProjects= array_reverse($starProjects);
 
             return $this->render(
                 'CentraleLilleHomepageBundle:starproject.html.twig',

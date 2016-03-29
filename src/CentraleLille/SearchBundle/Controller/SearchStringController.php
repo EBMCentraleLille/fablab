@@ -142,18 +142,19 @@ class SearchStringController extends Controller
             $fieldQuery2 = new \Elastica\Query\Match();
             $fieldQuery9 = new \Elastica\Query\Match();
             $fieldQuery10 = new \Elastica\Query\Match();
+           
 
             $fieldQuery->setFieldQuery('email', $search);
-            $fieldQuery->setFieldFuzziness('email', 0.7);
+            $fieldQuery->setFieldFuzziness('email', 0.2);
             $query_part_user->addShould($fieldQuery);
             $fieldQuery9->setFieldQuery('firstname', $search);
-            $fieldQuery9->setFieldFuzziness('firstname', 0.7);
+            $fieldQuery9->setFieldFuzziness('firstname', 0.2);
             $query_part_user->addShould($fieldQuery9);
             $fieldQuery10->setFieldQuery('lastname', $search);
-            $fieldQuery10->setFieldFuzziness('lastname', 0.7);
+            $fieldQuery10->setFieldFuzziness('lastname', 0.2);
             $query_part_user->addShould($fieldQuery10);
             $fieldQuery2->setFieldQuery('username', $search);
-            $fieldQuery2->setFieldFuzziness('username', 0.7);
+            $fieldQuery2->setFieldFuzziness('username', 0.2);
 
             $query_part_user->addShould($fieldQuery2);
             $filters = new \Elastica\Filter\Bool();
@@ -167,7 +168,7 @@ class SearchStringController extends Controller
             $fieldQuery3 = new \Elastica\Query\Match();
             $fieldQuery4 = new \Elastica\Query\Match();
             $fieldQuery3->setFieldQuery('name', $search);
-            $fieldQuery3->setFieldFuzziness('name', 0.7);
+            $fieldQuery3->setFieldFuzziness('name', 0.2);
             $fieldQuery3->setFieldMinimumShouldMatch('name', '80%');
             $query_part_machine->addShould($fieldQuery3);
             $fieldQuery4->setFieldQuery('description', $search);
@@ -209,7 +210,7 @@ class SearchStringController extends Controller
             $fieldQuery6 = new \Elastica\Query\Match();
             $fieldQuery7 = new \Elastica\Query\Match();
             $fieldQuery6->setFieldQuery('name', $search);
-            $fieldQuery6->setFieldFuzziness('name', 0.7);
+            $fieldQuery6->setFieldFuzziness('name', 0.2);
             $fieldQuery6->setFieldMinimumShouldMatch('name', '80%');
             $query_part_projet->addShould($fieldQuery6);
             $fieldQuery7->setFieldQuery('summary', $search);
