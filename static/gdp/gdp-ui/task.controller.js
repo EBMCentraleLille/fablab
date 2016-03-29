@@ -44,7 +44,6 @@ function taskController($scope,rq,toastr) {
 
     $scope.taskLists=[];
     $scope.projectUsers=[]
-    //$scope.spaceData=[{},{},{}];
     $scope.currentProject={};
     $scope.userProjects=[];
     $scope.newTaskListName="";
@@ -97,22 +96,25 @@ function taskController($scope,rq,toastr) {
         rq.createTask($scope.currentProject.id,$scope.newTask,function() {
             toastr.success(['Tâche',$scope.newTask.title,'créée!'].join(" "));
             $scope.newTask = {'title':'','body':'','endDate':''};
-            getTasks();
+            getTaskLists()
         })
     }
 
     function deleteTask(id,title) {
         rq.deleteTask(id,function(res) {
             toastr.success(['Task',title,'has been removed.'].join(" "));
-            getTasks();
+            getTaskLists()
         });
     }
 
     function dropTaskInList(data,taskgroup) {
         data = data['json/task'];
         if(!data) return;
-        taskgroup.data.push(data.name)
-        $scope.tasks[data.sourceGroup].data.splice(data.sourceTask,1);
+        console.log(taskgroup.id,data.id)
+        rq.addTaskToList(taskgroup.id,data.id,function(res) {
+            console.log(res)
+            getTaskLists()
+        })
     }
 
     function getTasks() {
@@ -137,7 +139,7 @@ function taskController($scope,rq,toastr) {
 
     function assignTaskToUser(taskId,userId) {
         rq.assignTaskToUser(taskId,userId,function(res) {
-            getTasks()
+            getTaskLists()
         })
     }
 
@@ -160,7 +162,7 @@ function taskController($scope,rq,toastr) {
     function getTaskLists() {
         rq.getTaskLists($scope.currentProject.id,function(res) {
             $scope.taskLists=res.data;
-            console.log(res.data)
+            console.log($scope.taskLists)
         });
     }
 

@@ -68,7 +68,7 @@
                  draggable="true"
                  effect-allowed="move"
                  draggable-type="task"
-                 draggable-data="{name: task,sourceGroup:$parent.$index,sourceTask:$index}">
+                 draggable-data="{id: task.id}">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -94,7 +94,7 @@
                             </div>
 
                         </div>
-                        <div class="task-user">Responsable: {{task.in_charge_user.firstname}}</div>
+                        <div class="task-user">{{task.in_charge_user.firstname}}</div>
 
                         <div class="spacer"></div>
                     </div>

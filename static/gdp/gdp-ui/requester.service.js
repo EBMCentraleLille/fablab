@@ -50,7 +50,7 @@ function getRequester($http,toastr) {
             'users': '/gdp/api/projects/'+id+'/users',
             'projects' :'/gdp/api/users/project',
             'assignTask': '/gdp/api/tasks/'+id+'/users/'+id2,
-            'taskListAdd': '/gdp/api/lists'+id+'/adds/'+id2,
+            'taskListAdd': '/gdp/api/lists/'+id+'/adds/'+id2,
             'taskListDelete': '/gdp/api/lists/'+id
         }
     }
