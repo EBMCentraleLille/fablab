@@ -8,8 +8,8 @@ angular.element(document).ready(activate);
 
 function activate() {
     var requirements = [
-        'appGDP.uiModule',
-        'appGDP.routerModule'
+        'appGDP.routerModule',
+        'appGDP.uiModule'
         //'appGDP.authModule'
     ];
     window.appCentralink = angular.module('appGDP',requirements);
