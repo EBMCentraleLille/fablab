@@ -3,8 +3,9 @@ knowledge_forum:
     defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:index}
 
 knowledge_thread:
-    path: /forum/{id}
+    path: /forum/thread/{id}
     defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:viewThread}
+
 
 knowledge_mythreads:
     path: /forum/mythreads
