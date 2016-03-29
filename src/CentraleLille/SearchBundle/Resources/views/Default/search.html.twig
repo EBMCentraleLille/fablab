@@ -56,14 +56,15 @@
 
             {% for project in result_project %}
             <a href="{{ path('project_show', {'projectId': project.id}) }}">
-              <div class="col-lg-10">
+              <div class="col-lg-7">
                 <h4>{{ project.name }}</h4>
                 {% if project.summary is defined %}
                 <p>{{ project.summary }}</p>
                 {% endif %}
               </div>
-              <div class="col-lg-2">
-                <h5 class="right"> {{ "now"|date('d/m/Y') }} </h5>
+              <div class="col-lg-5">
+                <h5 class="right" style="color:grey; opacity:0.5"> Créé le {{ project.date_begin }}
+                 </h5>
               </div>
             </a>
             {% endfor %}
@@ -105,8 +106,8 @@
               <div class="col-lg-3">
                 {% if machine.statut == "Disponible" %}
                   <h5 class="right" style="color:#5EAB08">Disponible</h5>
-                {% else %} {{ machine.statut }}
-                  <h5 class="right" style="color:#5EAB08">{{ machine.statut }}</h5>
+                {% else %}
+                  <h5 class="right" style="color:red">{{ machine.statut }}</h5>
                 {% endif %}
               </div>
             </a>
