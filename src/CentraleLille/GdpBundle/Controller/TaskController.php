@@ -67,13 +67,14 @@ class TaskController extends GdpRestController
      * @RequestParam(name="title", nullable=false, strict=true, description="Title.")
      * @RequestParam(name="body", nullable=false, strict=true, description="Body.")
      * @RequestParam(name="endDate", nullable=false, strict=true, description="End date.")
+     * @RequestParam(name="taskList", nullable=false, strict=true, description="Task list containing the task")
      *
      * @return View
      */
     public function postProjectTaskAction($id, ParamFetcher $paramFetcher)
     {
         $this->existsProjectUser($id,$this->getUser()->getId());
-        $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+        $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id,$this->getUser()->getId());
         $task = new Task();
@@ -83,11 +84,15 @@ class TaskController extends GdpRestController
         $task->setProject($project);
         $task->setStatus(false);
         $task->setEndDate($paramFetcher->get('endDate'));
+        $taskList = $taskListRepository->find($paramFetcher->get('taskList'));
+        $task->setTaskList($taskList);
+        $taskList->addTask($task);
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
+            $em->persist($taskList);
             $em->flush();
             $view->setData($task)->setStatusCode(201);
             return $view;
