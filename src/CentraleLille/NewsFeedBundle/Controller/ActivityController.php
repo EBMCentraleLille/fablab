@@ -66,7 +66,7 @@ class ActivityController extends Controller
             $activities=$activityService->getActivities(30);
             
             return $this->render(
-                'CentraleLilleNewsFeedBundle:activity.html.twig',
+                'CentraleLilleNewsFeedBundle:Default:activity.html.twig',
                 [
                     'recentActivities' => $activities
                 ]
@@ -122,7 +122,7 @@ class ActivityController extends Controller
             }
             
             return $this->render(
-                'CentraleLilleNewsFeedBundle:newactivity.html.twig',
+                'CentraleLilleNewsFeedBundle:Default:newactivity.html.twig',
                 array(
                 'form' => $form->createView()
                 )

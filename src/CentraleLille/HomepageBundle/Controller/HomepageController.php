@@ -104,7 +104,7 @@ class HomepageController extends Controller
         }
 
         return $this->render(
-            'CentraleLilleHomepageBundle:index.html.twig',
+            'CentraleLilleHomepageBundle:Default:index.html.twig',
             [
                 'starProject'      => $starProject,
                 'recentActivities' => $recentActivities,
@@ -195,7 +195,7 @@ class HomepageController extends Controller
         }
 
         return $this->render(
-            'CentraleLilleHomepageBundle:category.html.twig',
+            'CentraleLilleHomepageBundle:Default:category.html.twig',
             [
                 'projects' => $projects,
                 'users'    => $users,
