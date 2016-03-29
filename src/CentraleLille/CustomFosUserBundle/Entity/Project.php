@@ -8,6 +8,7 @@
 
 namespace CentraleLille\CustomFosUserBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,14 +32,14 @@ class Project
     protected $name;
 
     /**
-     * @var string
-     * @ORM\Column(name="dateBegin", type="string", nullable=true)
+     * @var date
+     * @ORM\Column(name="dateBegin", type="date", nullable=true)
      */
     protected $dateBegin;
 
     /**
-     * @var string
-     * @ORM\Column(name="dateEnd", type="string", nullable=true)
+     * @var date
+     * @ORM\Column(name="dateEnd", type="date", nullable=true)
      */
     protected $dateEnd;
 
@@ -50,7 +51,7 @@ class Project
 
     /**
      * @var string
-     * @ORM\Column(name="picture", type="string", length=80, nullable=true)
+     * @ORM\Column(name="picture", type="string", length=2000, nullable=true)
      */
     protected $picture;
 
@@ -70,7 +71,7 @@ class Project
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\ProjectUser", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="CentraleLille\CustomFosUserBundle\Entity\ProjectUser", mappedBy="project")
      */
     protected $projectUsers;
 

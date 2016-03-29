@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <br><br><br>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="text-primary text-center">
+                        <img src="{{ asset('img/access_forbidden.png') }}" style="width:300px; height:auto; margin-right:40px;" ><br>
+                        Accès refusé
+                    </h1>
+                    <div class="alert alert-danger" role="alert">
+                        <p>
+                            Vous n'avez pas les droits suffisants pour accéder à cette page.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
