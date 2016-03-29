@@ -55,9 +55,9 @@
                     {% endif %}
                   </li>
                   <li>
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" action="{{ path('centrale_lille_search') }}" method="get">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Rechercher sur le site">
+                        <input type="text" id="searchForm" name="searchForm" class="form-control" placeholder="Rechercher sur le site">
                       </div>
                     </form>
                   </li>
@@ -82,6 +82,8 @@
         </div>
     {% block body %}{% endblock %}
       <script src="http://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+      <script src="{{ asset('js/vendor/autocomplete/jquery.easy-autocomplete.min.js') }}"></script>
+      <script src="{{ path('js_search') }}"></script>
       <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
       <script type="text/javascript" src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
       <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
