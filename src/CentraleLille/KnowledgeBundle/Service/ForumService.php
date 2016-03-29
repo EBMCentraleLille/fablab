@@ -19,43 +19,44 @@ class CompetenceService
 
     public function getPostList($forumThread)
     {
-      if($forumThread == null){
-        return false;
-      }else{
-        return $this->em->getRepository('KnowledgeBundle:ForumPost')->findByForumThread($forumThread->getId());
-      }
+        if ($forumThread == null) {
+            return false;
+        } else {
+            return $this->em->getRepository('KnowledgeBundle:ForumPost')->findByForumThread($forumThread->getId());
+        }
     }
 
-    public function createThread($author,$title,$content,$status = 'open',$tags)
+    public function createThread($author, $title, $content, $tags, $status = 'open')
     {
-      if ($author == null || $title == null || $content = null || $tags == null){
-        return false;
-      }else{
-        $thread = new ForumThread();
-        $thread->setAuthor($author);
-        $thread->setTitle($title);
-        $thread->setContent($content);
-        $thread->setStatus($status);
-        $thread->setTags($tags);
+        if ($author == null || $title == null || $content = null || $tags == null) {
+            return false;
+        } else {
+            $thread = new ForumThread();
+            $thread->setAuthor($author);
+            $thread->setTitle($title);
+            $thread->setContent($content);
+            $thread->setStatus($status);
+            $thread->setTags($tags);
 
-        $this->em->persist($thread);
-        $this->em->flush();
-        return true;
-      }
+            $this->em->persist($thread);
+            $this->em->flush();
+            return true;
+        }
     }
 
-    public function addPostToThread($thread,$author,$content){
-      if ($thread == null || $thread == null || $content == null){
-        return null;
-      }else{
-        $post = new ForumPost();
-        $post->setAuthor($author);
-        $post->setThread($thread);
-        $post->setContent($content);
+    public function addPostToThread($thread, $author, $content)
+    {
+        if ($thread == null || $thread == null || $content == null) {
+            return null;
+        } else {
+            $post = new ForumPost();
+            $post->setAuthor($author);
+            $post->setThread($thread);
+            $post->setContent($content);
 
-        $this->em->persist($post);
-        $this->em->flush();
-        return true;
-      }
+            $this->em->persist($post);
+            $this->em->flush();
+            return true;
+        }
     }
 }
