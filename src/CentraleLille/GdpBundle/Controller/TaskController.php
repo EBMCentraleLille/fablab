@@ -127,7 +127,7 @@ class TaskController extends GdpRestController
      */
     public function putTaskAction($taskId, ParamFetcher $paramFetcher)
     {
-        $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy($taskId);
+        $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy(array('id' =>$taskId);
         $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
         if ($paramFetcher->get('title')) {
             $task->setTitle($paramFetcher->get('title'));
