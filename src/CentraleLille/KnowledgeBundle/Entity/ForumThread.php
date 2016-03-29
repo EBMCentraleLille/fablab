@@ -30,6 +30,13 @@ class ForumThread
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="text")
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="text")
      */
     private $content;

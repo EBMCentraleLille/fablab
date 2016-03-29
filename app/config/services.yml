@@ -18,6 +18,10 @@ services:
         class:  CentraleLille\KnowledgeBundle\Service\CompetenceService
         arguments: [ "@doctrine.orm.entity_manager" ]
 
+    app.forum.service:
+        class:  CentraleLille\KnowledgeBundle\Service\ForumService
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
     form.type.string_search:
         class: CentraleLille\SearchBundle\Form\SearchStringType
         tags:
