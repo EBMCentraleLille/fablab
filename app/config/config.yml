@@ -94,51 +94,51 @@ services:
         alias: doctrine
 
 # ElasticSearch Bundle configuration
-fos_elastica:
-    serializer: ~
-    clients:
-        default: { host: 127.0.0.1 , port: 9200 }
-    indexes:
-        fablab:
-            client: default
-            types:
-                user:
-                    serializer:
-                        groups: [elastica, Default]
-                    persistence:
-                        driver: orm
-                        model: CentraleLille\CustomFosUserBundle\Entity\User
-                        provider: ~
-                        listener: ~
-                        finder: ~
-
-                machine:
-                    serializer:
-                        groups: [elastica, Default]
-                    persistence:
-                        driver: orm
-                        model: CentraleLille\ReservationBundle\Entity\Bookables\Machine
-                        provider: ~
-                        listener: ~
-                        finder: ~
-                projet:
-                    serializer:
-                        groups: [elastica, Default]
-                    persistence:
-                        driver: orm
-                        model: CentraleLille\CustomFosUserBundle\Entity\Project
-                        provider: ~
-                        listener: ~
-                        finder: ~
-                competence:
-                    serializer:
-                        groups: [elastica, Default]
-                    persistence:
-                        driver: orm
-                        model: CentraleLille\KnowledgeBundle\Entity\Competence
-                        provider: ~
-                        listener: ~
-                        finder: ~
+# fos_elastica:
+#     serializer: ~
+#     clients:
+#         default: { host: 127.0.0.1 , port: 9200 }
+#     indexes:
+#         fablab:
+#             client: default
+#             types:
+#                 user:
+#                     serializer:
+#                         groups: [elastica, Default]
+#                     persistence:
+#                         driver: orm
+#                         model: CentraleLille\CustomFosUserBundle\Entity\User
+#                         provider: ~
+#                         listener: ~
+#                         finder: ~
+#
+#                 machine:
+#                     serializer:
+#                         groups: [elastica, Default]
+#                     persistence:
+#                         driver: orm
+#                         model: CentraleLille\ReservationBundle\Entity\Bookables\Machine
+#                         provider: ~
+#                         listener: ~
+#                         finder: ~
+#                 projet:
+#                     serializer:
+#                         groups: [elastica, Default]
+#                     persistence:
+#                         driver: orm
+#                         model: CentraleLille\CustomFosUserBundle\Entity\Project
+#                         provider: ~
+#                         listener: ~
+#                         finder: ~
+#                 competence:
+#                     serializer:
+#                         groups: [elastica, Default]
+#                     persistence:
+#                         driver: orm
+#                         model: CentraleLille\KnowledgeBundle\Entity\Competence
+#                         provider: ~
+#                         listener: ~
+#                         finder: ~
 twig:
     form:
         resources:['bootstrap_3_layout.html.twig']
