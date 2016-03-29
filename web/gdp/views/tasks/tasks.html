@@ -1,10 +1,22 @@
 <div class="row local-header">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-3">
         <h1 class="center">Gestion des tâches</h1>
     </div>
-    <div class="col-md-1 list-management">
-        <button class="btn btn-warning new-task"
-                ng-click="doCancelButton()"><span class="glyphicon glyphicon-remove"></span></button>
+    <div class="col-md-3 list-management">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="newTaskListName" placeholder="Nouvelle liste">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" ng-class="(newTaskListName.length>3)?'':'disabled'" ng-click="createTaskList()">Créer</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-warning new-task" ng-click="doCancelButton()">
+                <span class="glyphicon glyphicon-remove"></span>
+                &nbsp;Supprimer listes de tâches
+            </button>
+        </div>
     </div>
 
 </div>
@@ -30,7 +42,9 @@
              <div class="spacer"></div>
          </div>
 
-         <edit-task ng-show="showTaskCreated"></edit-task>
+         <edit-task ng-show="showTaskCreated"></edit-task><div ng-show="newTaskListName.length>3">
+                <button class="btn btn-success form-control " ng-click="createTaskList()">Créer</button>
+            </div>
          <div ng-show="showTaskListDelete">
              <button class="btn btn-warning btn-group-justified" ng-click="deleteTaskList(taskgroup.id)">Supprimer liste de tâches</button>
          </div>
@@ -77,18 +91,4 @@
             </div>
          </div>
      </div>
-</div>
-
-<div class="col-md-3">
-    <div class="panel panel-primary task-title">
-        <div class="panel-heading">
-            Actions
-        </div>
-        <div class="panel-body">
-            <input type="text" class="form-control" ng-model="newTaskListName" placeholder="Nouvelle liste">
-            <div ng-show="newTaskListName.length>3">
-                <button class="btn btn-success form-control " ng-click="createTaskList()">Créer</button>
-            </div>
-        </div>
-    </div>
 </div>
