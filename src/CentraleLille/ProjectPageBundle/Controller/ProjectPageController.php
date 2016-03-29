@@ -63,11 +63,7 @@ class ProjectPageController extends Controller
 
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 10);
-
-        //Récupération des catégories du projet
-        $categoryService=$this->container->get('fablab_newsfeed.categories');
-        $categories=$categoryyService->getActivityProjet($project, 10);
+        $activities=$activityService->getActivityProjet($project, 0);
 
         //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
         //pour accéder à l'user
@@ -246,7 +242,7 @@ class ProjectPageController extends Controller
                 }
                 //Récupération des activités
                 $activityService=$this->container->get('fablab_newsfeed.activities');
-                $activities=$activityService->getActivityProjet($project, 10);
+                $activities=$activityService->getActivityProjet($project, 0);
                 return $this->render(
                     'ProjectPageBundle:Default:projectpage.html.twig',
                     array(
@@ -261,7 +257,7 @@ class ProjectPageController extends Controller
         }
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 10);
+        $activities=$activityService->getActivityProjet($project, 0);
         $isAbo = 0;
         return $this->render(
             'ProjectPageBundle:Default:projectpage.html.twig',
