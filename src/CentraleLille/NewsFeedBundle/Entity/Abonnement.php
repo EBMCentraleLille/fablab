@@ -178,6 +178,7 @@ class Abonnement
     public function removeCategory(\CentraleLille\NewsFeedBundle\Entity\Category $category)
     {
         $this->categories->removeElement($category);
+        $category->removeUser($this->getUser());
     }
 
     /**

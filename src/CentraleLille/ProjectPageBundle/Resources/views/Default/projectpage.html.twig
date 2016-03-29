@@ -1,24 +1,118 @@
 {% extends "layout.html.twig" %}
-
+{% if form is defined %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% endif %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/projectpage.css') }}" />
+{% endblock stylesheets %}
 {% block body %}
-<div class="row" style="margin-top:75px">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-        <h1> {{ projectId }} </h1><br>
-        <div id="projCarousel">
-            Carousel ici
-
+    <div class="newsFeed">
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <div class="h2">
+                {{ project.getName() }}
+                {% if app.user %}
+                    {% if not isAbo %}
+                        <div class="btn btn-primary">
+                        <div class ="{{ project.name }}">Suivre</div>
+                        </div>
+                    {% else %}
+                        <div class="btn btn-primary">
+                            <div class ="{{ project.name }}">Ne plus suivre</div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+            {% if form is defined %}
+                {{ form_start(form) }}
+                        {{ form_row(form.Content) }}
+                        <input type="submit" value="Publier l'activité"
+                            class="btn btn-primary" />
+                {{ form_end(form) }}
+            {% endif %}
+            <div class="panel panel-default">
+                <a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+                    <div class="recentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
+                </a>
+            </div>
+            <h2>Dernières activités</h2>
+            {% if not recentActivities %}
+                    Aucune activité n'est lié à ce projet.
+            {% else %}
+                {% for recentActivity in recentActivities %}
+                    <div class="news row">
+                        <div class="project-name">
+                            <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
+                            </a>
+                            <div class="time-elapsed">
+                                Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}
+                            </div>
+                            <div class="activity-content">
+                                {{ recentActivity.content }}
+                            </div>
+                            {% if form is defined %}
+                                <a href="{{ path("project_page_delete_activity", { 'activityId': recentActivity.id, 'projectId': project.id }) }}">
+                                    Supprimer
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
-            Page projet
-    </div>
-    <div  style="margin-left:30px">
-    <div class="btn-group btn-group-justified">
-        <a href="#" class="btn btn-default">Détails</a>
-        <a href="#" class="btn btn-default">Fichiers</a>
-        <a href="#" class="btn btn-default">Commentaires</a>
-        <a href="#" class="btn btn-default">Thématiques</a>
-    </div>
-    </div>
-</div>
+        <div class="col-md-3">
+            <div class="right-menu">
+            <div class="panel panel-primary ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Membres du projet</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {% if projectUsers is defined %}
+                            {% for projectUser in projectUsers %}
+                                
+                                <li class="list-group-item">
+                                    {% if project_service.isAllowedLeader(projectUser.user, project) %}
+                                        <span class="badge">Leader</span>
+                                    {% endif %}
+                                        {{ projectUser.user.firstname }}
+                                        {{ projectUser.user.lastname }}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
 
-{% endblock %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Résumé du projet</h3>
+                </div>
+                <div class="panel-body">
+                    {{ project.summary }}
+                </div>
+            </div>
+            {% if form is defined %}
+            <div class="button-right-menu">
+                <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
+                    <div class="panel-body">
+                        Editer le projet / Ajouter des membres
+                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+    <div class="col-md-2"></div>
+</div>
+<script src="{{ asset('jquery.js') }}"></script>
+<script src="{{ asset('js/oXHR.js') }}"></script>
+{{ include('like.html.twig') }}
+<script>
+    $('[class="' + "{{ project.name }}" + '"]').click(function() {
+        likefunction($('[class="' + "{{ project.name }}" + '"]'), "{{ project.name }}","{{ path('project_page_homepage', { 'projectId': project.name }) }}");
+    });
+</script>
+{% endblock body %}
+

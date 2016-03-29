@@ -53,7 +53,7 @@
                                 </a>
                                 <div class="panel-footer">
                                     <div class="row">
-                                        <div class="col-md-6 recentProject">
+                                        <div class="recentProject {{ recentActivity.project.name }}">
                                             {% if not likes[recentActivity.project.name] %}
                                                 <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
                                                 <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
@@ -62,9 +62,6 @@
                                                 <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
                                             {% endif %}
                                         </div>
-                                        <div class="col-md-6 recentProject">
-                                            <object data="{{ asset('icons/message.svg') }}" type="image/svg+xml"></object></br>Commenter
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -72,37 +69,31 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            
         </div>
         <div class="col-md-3">
             <div class="right-menu">
-                <div class="row">
-                    <form role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Personnes,thématiques, projets...">
+                <div class="button-right-menu">
+                    <a href="{{ path("fos_user_profile_show")}}">
+                        <div class="panel-body">
+                            Mon Profil
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
                         </div>
-                    </form>
+                    </a>
                 </div>
 
                 <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mon Profil
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
-                </div>
-
-                <div class="button-right-menu">
-                    <div class="panel-body">
-                        Mes Projets
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
+                    <a href="#">
+                        <div class="panel-body">
+                            Mes Projets
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
                 </div>
                 <div class="button-right-menu">
                     <a href="{{ path("centrale_lille_newsfeed_abonnements")}}">
                         <div class="panel-body">
                             Mes Abonnements
                             <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                        </div>
                         </div>
                     </a>
                 </div>

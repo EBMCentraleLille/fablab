@@ -2,14 +2,14 @@
 /**
  * ActivityForm.php File Doc
  *
- * Formulaire de création d'une Activité
+ * Formulaire de filtrage d'actualités
  *
  * PHP Version 5.6
  *
  * @category   File
  * @package    CentraleLille:NewsfeedBundle
  * @subpackage Form
- * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @author     Hyot James <james.hyot@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
@@ -67,41 +67,62 @@ class FilterType extends AbstractType
      * Formulaire de filtrage d'Actualités du newsfeed
      *
      * @param FormBuilderInterface $builder FormBuilder
+     * @param Array                $options Options
      *
      * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('creation', CheckboxType::class, array(
-                'label'    => 'Création',
-                'required' => false,
-            ))
-            ->add('update', CheckboxType::class, array(
-                'label'    => 'Mise à jour',
-                'required' => false,
-            ));
+            ->add(
+                'creation',
+                CheckboxType::class,
+                array(
+                    'label'    => 'Création',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'update',
+                CheckboxType::class,
+                array(
+                    'label'    => 'Mise à jour',
+                    'required' => false,
+                )
+            );
         for ($i = 0; $i < count($this->thematics); $i++) {
             $builder
-                ->add($this->thematics[$i]->getId(), CheckboxType::class, array(
-                    'label' => $this->thematics[$i]->getName(),
-                    'required' => false,
-                )); //adding thematics one by one to builder
+                ->add(
+                    $this->thematics[$i]->getId(),
+                    CheckboxType::class,
+                    array(
+                        'label' => $this->thematics[$i]->getName(),
+                        'required' => false,
+                    )
+                ); //adding thematics one by one to builder
         }
 
         $builder
-            ->add('dateMin', DateType::class, array(
-            'input'  => 'datetime',
-            'widget' => 'choice',
-            'label' => 'Entre le ...',
-            'data' => new \DateTime('2016-01-01'),
-                ))
-            ->add('dateMax', DateType::class, array(
-            'input'  => 'datetime',
-            'widget' => 'choice',
-            'label' => 'Et le ...',
-            'data' => new \DateTime(),
-            ));
+            ->add(
+                'dateMin',
+                DateType::class,
+                array(
+                    'input'  => 'datetime',
+                    'widget' => 'choice',
+                    'label' => 'Entre le ...',
+                    'data' => new \DateTime('2016-01-01')
+                )
+            )
+            ->add(
+                'dateMax',
+                DateType::class,
+                array(
+                    'input'  => 'datetime',
+                    'widget' => 'choice',
+                    'label' => 'Et le ...',
+                    'data' => new \DateTime()
+                )
+            );
 
 
     }
