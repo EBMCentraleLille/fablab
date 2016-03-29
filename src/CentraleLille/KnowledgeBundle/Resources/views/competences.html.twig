@@ -12,15 +12,9 @@
                 {% for competence in competences %}
                     <div class="well">
                         <ul>
-                            <h4>{{ competence.name}}</h4>
-                            <div class="btn-group" role="toolbar">
-                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href =''">
-                                    Modifier
-                                </button>
-                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href =''">
-                                    Supprimer
-                                </button>
-                            </div>
+                            <p> {{ competence.name }}
+                                <a href="delComp/{{ competence.id }}"> Supprimer </a>
+                            </p>
                         </ul>
                     </div>
                 {% endfor %}

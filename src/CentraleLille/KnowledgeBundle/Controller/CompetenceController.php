@@ -20,7 +20,6 @@ class CompetenceController extends Controller
         $form = $this->get('form.factory')->create(new CompetenceType(), $competence);
 
         if ($form->handleRequest($request)->isValid()) {
-
             //Vérification doublon
             $competenceinDB = $this->getDoctrine()
                 ->getRepository('CentraleLilleKnowledgeBundle:Competence')
@@ -49,5 +48,30 @@ class CompetenceController extends Controller
             array('competences'=>$competences)
         );
 
+    }
+    /**
+     * @Route("/delComp/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('CentraleLilleKnowledgeBundle:Competence');
+        $competence = $repository->find($id);
+
+        $listUserCompetences = $em
+            ->getRepository('CentraleLilleKnowledgeBundle:UserCompetence')
+            ->findAllCompetencesInUserCompetencesDQL($competence);
+
+        foreach($listUserCompetences as $userCompetence){
+            $this->container->get('app.competence.service')->deleteCompetenceToUser($userCompetence);
+        }
+
+        $this->container->get('app.competence.service')->deleteCompetence($competence);
+
+        return $this->redirect(
+            $this->generateUrl(
+                'centrale_lille_knowledge_competences'
+            )
+        );
     }
 }

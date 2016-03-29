@@ -23,4 +23,21 @@
 		<a href={{path('fos_user_profile_edit')}} class="btn btn-primary">Modifier</a>
 	</div>
 </div>
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<h1 class="text-primary text-center">Mes compétences</h1>
+		</br>
+		<div class="fos_user_user_show">
+			{% for competence in competencesUser %}
+			<p> {{ competence.name }}</p>
+			{% endfor %}
+		</div>
+		</br>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<a href={{path('fos_user_profile_edit_competences')}} class="btn btn-primary">Modifier Mes compétences</a>
+	</div>
+</div>
 {% endblock body %}
