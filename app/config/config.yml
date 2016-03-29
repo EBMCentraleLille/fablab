@@ -112,12 +112,30 @@ fos_elastica:
                         listener: ~
                         finder: ~
 
-                Machine:
+                machine:
                     serializer:
                         groups: [elastica, Default]
                     persistence:
                         driver: orm
                         model: CentraleLille\ReservationBundle\Entity\Bookables\Machine
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                projet:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\CustomFosUserBundle\Entity\Project
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                competence:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\KnowledgeBundle\Entity\Competence
                         provider: ~
                         listener: ~
                         finder: ~

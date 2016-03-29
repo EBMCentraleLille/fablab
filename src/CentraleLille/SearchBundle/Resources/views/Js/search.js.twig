@@ -1,0 +1,66 @@
+var options = {
+
+  preparePostData: function(data) {
+    data.phrase = $("#searchForm").val();
+    return data;
+  },
+
+  url: function(phrase) {
+    return "{{ path('autocomplete') }}";
+  },
+
+  categories: [{
+    listLocation: "projet",
+    maxNumberOfElements: 4,
+    header: "Projet"
+  },
+  {
+    listLocation: "competence",
+    maxNumberOfElements: 4,
+    header: "Compétences"
+  },
+  {
+    listLocation: "machine",
+    maxNumberOfElements: 4,
+    header: "Machine"
+  },
+  {
+    listLocation: "user",
+    maxNumberOfElements: 4,
+    header: "Utilisateur"
+  }
+],
+
+getValue: function(element) {
+  return element.name;
+},
+
+template: {
+  type: "links",
+  fields: {
+    link: "link"
+  }
+},
+
+list: {
+  maxNumberOfElements: 20,
+  match: {
+    enabled: true
+  },
+  sort: {
+    enabled: true
+  }
+},
+
+ajaxSettings: {
+  dataType: "json",
+  method: "POST",
+  data: {
+    dataType: "json"
+  }
+},
+
+requestDelay: 150
+};
+
+$("#searchForm").easyAutocomplete(options);
