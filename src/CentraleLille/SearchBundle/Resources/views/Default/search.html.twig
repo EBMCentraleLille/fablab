@@ -83,7 +83,7 @@
           <div class="panel-body">
             {% for competence in result_competence %}
             <a href="{{ path('project_show', {'projectId': competence.id}) }}">
-              <h4>{{ competence.name }}</h4>
+              <h4 class="col-lg-9">{{ competence.name }}</h4>
             </a>
             {% endfor %}
           </div>
@@ -101,7 +101,7 @@
             {% for machine in result_machine %}
             <a href="{{ path('centrale_lille_view_resource', {'resourceType': 'machine', 'id': machine.id}) }}">
               <div class="col-lg-9">
-                <h4>{{ machine.name }}</h4>
+                <h4 class="left">{{ machine.name }}</h4>
               </div>
               <div class="col-lg-3">
                 {% if machine.statut == "Disponible" %}
@@ -130,8 +130,8 @@
           <div class="panel-body">
             {% for user in result_user %}
             <a href="#">
-              <h4>{{ user.username }}</h4>
-              <p>{{ user.email }}</p>
+              <h4 class="col-lg-9">{{ user.username }}</h4>
+              <p class="col-lg-9">{{ user.email }}</p>
             </a>
             {% endfor %}
           </div>

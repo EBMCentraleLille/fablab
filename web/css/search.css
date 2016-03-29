@@ -22,6 +22,11 @@ a h4, a p{
   float: right;
 }
 
+.left{
+  position: absolute;
+  margin-left: 0px;
+}
+
 #search{
   width: 100%;
 }
