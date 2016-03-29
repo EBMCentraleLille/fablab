@@ -39,8 +39,8 @@ class TaskListController extends FOSRestController
         $taskList->setTitle($paramFetcher->get('name'));
         // assign the list to a project
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
-        $project_id = $paramFetcher->get('project_id')
-        $project = $projectRepository->find($project_id);
+        $projectId = $paramFetcher->get('project_id');
+        $project = $projectRepository->find($projectId);
         $taskList->setProject($project);
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
