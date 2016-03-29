@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $usernameData = array();
         $form = $this->createFormBuilder($usernameData)
             ->add('username', 'text')
-            ->add('roles','choice', array(
+            ->add('roles', 'choice', array(
                 'choices'  => array(
                     1 => null,
                     2 => 'PROJECT_LEADER'
@@ -68,7 +68,7 @@ class ProjectController extends Controller
                     ->findOneByUsername($username);
                 if ($user != null) {
                     $projectUser = $projectService->addUserToProject($user, $project);
-                    if($data['roles'] == 2){
+                    if ($data['roles'] == 2) {
                         $projectService->setUserToProjectLeaderWithProjectUser($projectUser);
                     }
                     $session->set('error', "");
