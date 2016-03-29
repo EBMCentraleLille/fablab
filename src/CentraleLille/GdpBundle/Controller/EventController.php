@@ -66,10 +66,10 @@ class EventController extends FOSRestController
      *
      * @return View
      */
-    public function getEventAction($id)
+    public function getEventAction($eventId)
     {
         $eventRepository = $this->getDoctrine()->getRepository('ReservationBundle:Event');
-        $event = $eventRepository->find($id);
+        $event = $eventRepository->find($eventId);
         if (!$event) {
             throw $this->createNotFoundException('Data not found.');
         }
