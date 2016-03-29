@@ -155,7 +155,6 @@ class NewsFeedController extends Controller
                         }
                     }
                 }
-
                 return $this->render(
                     'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
                     [

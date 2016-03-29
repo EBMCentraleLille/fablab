@@ -87,13 +87,6 @@ interface FablabCategoriesInterface
     /**
      * Supprime un projet d'une catégorie
      *
-     * @param string $categoryName Nom de la catégorie à supprimer
-     *
-     * @return void
-     */
-    /**
-     * Supprime un projet d'une catégorie
-     *
      * @param string $categoryName Nom de la catégorie
      * @param array  $projet       Entité Projet à supprimer de la catégorie
      *
