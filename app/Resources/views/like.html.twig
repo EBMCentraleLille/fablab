@@ -1,0 +1,33 @@
+<script src="{{ asset('jquery.js') }}"></script>
+<script src="{{ asset('js/oXHR.js') }}"></script>
+<script>
+    function likefunction(projectLike, projectLikeName, route) {
+        var xhr = getXMLHttpRequest();
+        if (projectLike.eq(0).text() == "Suivre") { 
+            projectLike.text("Ne Plus Suivre");
+            projectLike.prev().attr('data',"{{ asset('icons/likeOn.svg') }}");
+        } else {
+            projectLike.text("Suivre");
+            projectLike.prev().attr('data',"{{ asset('icons/like.svg') }}");
+        }
+        xhr.open("POST", route, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("projet=" + projectLikeName);
+        xhr.send(null);
+    };
+
+    function likeCategoryfunction(categoryLike, categoryLikeName,route) {
+        var xhr = getXMLHttpRequest();
+        if (categoryLike.eq(0).text() == "Suivre") {
+            categoryLike.text("Ne Plus Suivre");
+            categoryLike.prev().attr('data',"{{ asset('icons/likeOn.svg') }}");
+        } else {
+            categoryLike.text("Suivre");
+            categoryLike.prev().attr('data',"{{ asset('icons/like.svg') }}");
+        }
+        xhr.open("POST", route, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("category=" + categoryLikeName);
+        xhr.send(null);
+    };
+</script>

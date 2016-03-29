@@ -1,8 +1,11 @@
-{{ project.name }}
+{% extends 'layout.html.twig' %}
 
-{% if currentUser != null and currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
+{% block body %}
+<br><br><br>
+<h1 class="text-primary text-center">{{ project.name }}</h1>
 
-    <br>
-    You are the leader!!!!
-
+{% if project_service.isAllowedLeader(currentUser, project) %}
+    <p>You are leader of this project</p>
 {% endif %}
+
+{% endblock body %}

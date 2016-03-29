@@ -34,7 +34,7 @@ centrale_lille_homepage:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /reservation
+    prefix: /booking
 
 app:
     resource: "@AppBundle/Controller/"
@@ -69,3 +69,9 @@ api_login_check:
 gesdinet_jwt_refresh_token:
     path:     /api/token/refresh
     defaults: { _controller: gesdinet.jwtrefreshtoken:refresh }
+
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+fos_js_routing:
+      resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

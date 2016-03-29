@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Réservation
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+        <div class="row" >
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h3>Créer une réservation pour {{ machine.name}}</h3>
+                <p>Prérequis: {{ machine.requirements}}</p>
+
+                <div>
+                    {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Réservation</h4>
+                            </div>
+                            <div class="modal-body">
+                                Nom de l'évenement : <input type="text" readonly value="Project name" id="eventTitle"/>
+                                Description : <textarea id="eventDescription"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="submitEvent">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    {% block javascripts %}
+
+    {% endblock %}
+
+{% endblock body %}
