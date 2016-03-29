@@ -43,7 +43,7 @@
                                     <li role="menuitem"><a href="#">Assigner à</a></li>
                                     <li role="menuitem"><ul>
                                         <li ng-repeat="user in projectUsers">
-                                            <a ng-click="assignTaskToUser(task.id,user.id)">{{user.lastName}}</a>
+                                            <a ng-click="assignTaskToUser(task.id,user.id)">{{user.firstname}}</a>
                                         </li>
                                     </ul></li>
                                     <li class="divider"></li>
@@ -52,6 +52,8 @@
                             </div>
 
                         </div>
+                        <div class="task-user">Responsable: {{task.in_charge_user.firstname}}</div>
+
                         <div class="spacer"></div>
                     </div>
                     <div class="panel-body">
@@ -65,12 +67,15 @@
 </div>
 
 <div class="col-md-3">
-    <div class="panel panel-default task-title">
+    <div class="panel panel-primary task-title">
         <div class="panel-heading">
-            Echeances
+            Actions
         </div>
         <div class="panel-body">
-
+            <input type="text" class="form-control" ng-model="newTaskListName" placeholder="Nouvelle liste">
+            <div ng-show="newTaskListName.length>3">
+                <button class="btn btn-success form-control " ng-click="createTaskList()">Créer</button>
+            </div>
         </div>
     </div>
 </div>

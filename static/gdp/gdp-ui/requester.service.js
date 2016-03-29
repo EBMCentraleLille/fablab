@@ -10,7 +10,8 @@ function getRequester($http) {
         'deleteTask': deleteTask,
         'getUsers': getUsers,
         'getProjects':getProjects,
-        'assignTaskToUser':assignTaskToUser
+        'assignTaskToUser':assignTaskToUser,
+        'createTaskList': createTaskList
 
         /*'getPosts': getPosts,
         'deletePost': deletePost,
@@ -47,9 +48,10 @@ function getRequester($http) {
         return {
             'login':'/api/login_check',
             'tasks':'/gdp/api/projects/'+id+'/tasks',
+            'lists':'/gdp/api/lists',
             'deleteTask': '/gdp/api/tasks/'+id,
             'users': '/gdp/api/projects/'+id+'/users',
-            'projects' :'/gdp/api/projects/',
+            'projects' :'/gdp/api/users/project',
             'assignTask': '/gdp/api/tasks/'+id+'/users/'+id2
         }
     }
@@ -92,6 +94,11 @@ function getRequester($http) {
     function assignTaskToUser(taskId,userId,cb) {
         var r = new Resolver(taskId,userId);
         put_request(r.assignTask,{},cb)
+    }
+
+    function createTaskList(data,cb) {
+        var r = new Resolver(null);
+        post_request(r.lists,data,cb);
     }
 
     /* :::::::::::::::::::::::::::::::::::::::: */

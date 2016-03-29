@@ -6,10 +6,8 @@ function taskController($scope,rq,toastr) {
     $scope.showTaskCreated=false;
 
 
-    $scope.newTask = {
-        'title':'',
-        'body':''
-    }
+    $scope.newTask = {'title':'','body':'','endDate':''};
+
 
     $scope.status = {
         isopen: false
@@ -51,10 +49,9 @@ function taskController($scope,rq,toastr) {
     $scope.spaceData=[{},{},{}];
 
 
-    $scope.currentProject={
-        'id':2,
-        'name':'projet_test'
-    }
+    $scope.currentProject={};
+    $scope.userProjects=[];
+    $scope.newTaskListName="";
 
     /* Scope functions */
 
@@ -62,27 +59,31 @@ function taskController($scope,rq,toastr) {
     $scope.deleteTask=deleteTask;
     $scope.onDropTaskInList=dropTaskInList;
     $scope.assignTaskToUser = assignTaskToUser;
+    $scope.createTaskList = createTaskList;
 
     /* Init */
 
     (function() {
         rq.init();
-        getTasks()
-        getProjectUsers()
-        for(var t in $scope.tasks) {
-            var taskgroup = $scope.tasks[t];
-            $scope.spaceData[taskgroup.space-1]=taskgroup;
-        }
+        getProjects(function() {
+            getTasks()
+            getProjectUsers()
+            for(var t in $scope.tasks) {
+                var taskgroup = $scope.tasks[t];
+                $scope.spaceData[taskgroup.space-1]=taskgroup;
+            }
+        })
+
     })();
 
     /* Controller functions */
 
 
     function createTask() {
-
+        $scope.newTask.endDate=$scope.selectedDay.toString();
         rq.createTask($scope.currentProject.id,$scope.newTask,function() {
             toastr.success(['Tâche',$scope.newTask.title,'créée!'].join(" "));
-            $scope.newTask = {'title':'','body':''};
+            $scope.newTask = {'title':'','body':'','endDate':''};
             getTasks();
         })
     }
@@ -111,18 +112,29 @@ function taskController($scope,rq,toastr) {
     function getProjectUsers() {
         rq.getUsers($scope.currentProject.id,function(res) {
             $scope.projectUsers=res.data;
+            console.log($scope.projectUsers)
         })
     }
 
-    function getProjects() {
+    function getProjects(cb) {
         rq.getProjects(function(res) {
-            console.log(res.data)
+            $scope.currentProject=res.data[0];
+            $scope.userProjects = res.data;
+            if(cb) cb();
         })
+
     }
 
     function assignTaskToUser(taskId,userId) {
         rq.assignTaskToUser(taskId,userId,function(res) {
             getTasks()
+        })
+    }
+
+    function createTaskList() {
+        var data = {'name': $scope.newTaskListName, "project_id":$scope.currentProject.id}
+        rq.createTaskList(data,function(res) {
+            toastr.success(['List de tâches',data.name,'créée.'].join(" "));
         })
     }
 

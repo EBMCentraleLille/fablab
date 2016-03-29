@@ -80,7 +80,7 @@ class TaskController extends FOSRestController
         $task->setAuthor($this->getUser());
         $task->setProject($project);
         $task->setStatus(false);
-        $task->setEndDate($paramFetcher->get('endDate'));
+        $task->setEndDate(new \DateTime($paramFetcher->get('endDate')));
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
