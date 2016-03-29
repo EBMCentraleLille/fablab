@@ -69,7 +69,8 @@ class Task
     private $inChargeUser;
 
 
-    /* @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
+    /**
+     * @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
      * @ORM\JoinColumn(name="tasklist_id",referencedColumnName="id")
      */
     private $taskLists;
@@ -289,7 +290,7 @@ class Task
      */
     public function setTaskList($taskList)
     {
-        $this->taskList = $taskList;
+        $this->taskLists = $taskList;
     }
 
     /**
@@ -297,6 +298,6 @@ class Task
      */
     public function getTaskList()
     {
-        return $this->taskList;
+        return $this->taskLists;
     }
 }
