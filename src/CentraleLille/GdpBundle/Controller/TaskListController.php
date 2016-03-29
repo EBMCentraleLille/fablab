@@ -231,7 +231,7 @@ class TaskListController extends GdpRestController
         $tasklists = [];
         foreach ($list as $tasklist) {
             $tasks = $repoTask->findByTaskLists($tasklist->getid());
-            $tasklists[] = ['id'=>$tasklist->getId(),'name'=>$tasklist->getName(),'tasks'=>$tasksgt ];
+            $tasklists[] = ['id'=>$tasklist->getId(),'name'=>$tasklist->getName(),'tasks'=>$tasks ];
         }
         $view = View::create();
         $view->setData($tasklists)->setStatusCode(200);
