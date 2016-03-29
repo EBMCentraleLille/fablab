@@ -1,0 +1,14 @@
+<div class="col-md-4">
+
+    Tâches
+
+    <br>
+    <create-task></create-task>
+
+    <div class="panel panel-primary" ng-repeat="task in tasks">
+
+        <div class="panel-heading"><h4>{{task.title}}</h4></div>
+        <div class="panel-body">{{task.body}}</div>
+
+    </div>
+</div>
