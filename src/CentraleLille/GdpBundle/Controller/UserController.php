@@ -41,8 +41,8 @@ class UserController extends FOSRestController
         foreach($projectUsers as $projectUser){
             $users[]=['id'=>$projectUser->getUser()->getId(),
                 'username'=>$projectUser->getUser()->getUsername(),
-                'firstName'=>$projectUser->getUser()->getFirstname(),
-                'lastName'=>$projectUser->getUser()->getLastname(),
+                'firstname'=>$projectUser->getUser()->getFirstname(),
+                'lastname'=>$projectUser->getUser()->getLastname(),
                 ];
         }
         if (!$users) {
@@ -65,13 +65,12 @@ class UserController extends FOSRestController
      *   }
      * )
      *
-     * @param int $id id
-     *
      * @return View
      */
-    public function getUsersProjectAction($id)
+    public function getUsersProjectAction()
     {
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:ProjectUser');
+        $id= $this->getUser()->getId();
         $projectUsers = $projectRepository->findByUser($id);
         foreach($projectUsers as $projectUser){
             $projects[]=['id'=>$projectUser->getProject()->getId(),'name'=>$projectUser->getProject()->getName()];
