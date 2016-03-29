@@ -141,6 +141,9 @@ class ProjectController extends Controller
             $em->persist($projectUser);
 
             $em->flush();
+
+            $this->container->get('app.project.service')->addUserToProject($user, $project);
+            $this->container->get('app.project.service')->setUserToProjectLeader($user, $project);
             return $this->redirect($this->generateUrl('project_new'));
 
         } else {
