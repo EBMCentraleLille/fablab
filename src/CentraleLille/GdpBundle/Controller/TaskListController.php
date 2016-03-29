@@ -28,6 +28,7 @@ class TaskListController extends FOSRestController
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
      * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
+     * @RequestParam(project_id="project_id", nullable=false, strict=true, description="Project id")
      *
      * @return View
      */
@@ -36,6 +37,11 @@ class TaskListController extends FOSRestController
         $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $taskList = new TaskList();
         $taskList->setTitle($paramFetcher->get('name'));
+        // assign the list to a project
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
+        $project_id = $paramFetcher->get('project_id')
+        $project = $projectRepository->find($project_id);
+        $taskList->setProject($project);
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
