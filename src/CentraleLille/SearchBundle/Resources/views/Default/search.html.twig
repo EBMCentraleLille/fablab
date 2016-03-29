@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('css/search.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/vendor/autocomplete/easy-autocomplete.min.css') }}" >
 <link rel="stylesheet" href="{{ asset('css/vendor/autocomplete/easy-autocomplete.themes.min.css') }}" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 {% endblock stylesheets %}
 
 
@@ -16,21 +17,22 @@
 
   <div class="col-lg-3" style="margin-top:50px;">
     <div id="filters">
+      <h3>Filtres</h3>
       <div class="filterblock">
         <input id="check4" type="checkbox" name="check" value="projet" class="category" {% if result_project|length > 0 %}checked{% endif %}>
-        <label for="check4">Projet ({{ result_project|length }})</label>
+        <label for="check4"> Projet <span class="resultcountsmall">({{ result_project|length }})</span></label>
       </div>
       <div class="filterblock">
         <input id="check1" type="checkbox" name="check" value="machine" class="category" {% if result_machine|length > 0 %}checked{% endif %}>
-        <label for="check1">Machine ({{ result_machine|length }})</label>
-      </div>
-      <div class="filterblock">
-        <input id="check2" type="checkbox" name="check" value="user" class="category" {% if result_user|length > 0 %}checked{% endif %}>
-        <label for="check2">Utilisateur ({{ result_user|length }})</label>
+        <label for="check1"> Machine <span class="resultcountsmall">({{ result_machine|length }})</span></label>
       </div>
       <div class="filterblock">
         <input id="check3" type="checkbox" name="check" value="competence" class="category" {% if result_competence|length > 0 %}checked{% endif %}>
-        <label for="check3">Compétence ({{ result_competence|length }})</label>
+        <label for="check3"> Compétence  <span class="resultcountsmall">({{ result_competence|length }})</span></label>
+      </div>
+      <div class="filterblock">
+        <input id="check2" type="checkbox" name="check" value="user" class="category" {% if result_user|length > 0 %}checked{% endif %}>
+        <label for="check2"> Utilisateur <span class="resultcountsmall">({{ result_user|length }})</span></label>
       </div>
     </div>
   </div>
@@ -46,7 +48,7 @@
 
         {% if result_project|length > 0 %}
 
-        <h3>Projets - {{ result_project|length }} résultats </h3>
+        <h3><i class="fa fa-bar-chart" style="color:#F5A623"></i> Projets  <span class="resultcount"> {{ result_project|length }} {% if result_project|length == 1 %}résultat{% else %}résultats{% endif %}</span></h3>
 
         <div class="panel panel-default">
           <div class="panel-body">
@@ -61,7 +63,7 @@
                 {% endif %}
               </div>
               <div class="col-lg-2">
-                <h5>{{ "now"|date('d/m/Y') }}</h5>
+                <h5 class="right"> {{ "now"|date('d/m/Y') }} </h5>
               </div>
             </a>
             {% endfor %}
@@ -74,7 +76,7 @@
       <div class="result" data-tag="competence">
 
         {% if result_competence|length > 0 %}
-        <h3>Compétences - {{ result_competence|length }} résultats</h3>
+        <h3> <i class="fa fa-graduation-cap" style="color:#5EAB08"></i> Compétences <span class="resultcount"> {{ result_competence|length }} {% if result_competence|length == 1 %}résultat{% else %}résultats{% endif %}</span></h3>
 
         <div class="panel panel-default">
           <div class="panel-body">
@@ -92,7 +94,7 @@
 
       <div class="result" data-tag="machine">
         {% if result_machine|length > 0 %}
-        <h3>Machines - {{ result_machine|length }} résultats</h3>
+        <h3> <i class="fa fa-cogs" style="color:#607D8B"></i> Machines <span class="resultcount"> {{ result_machine|length }} {% if result_machine|length == 1 %}résultat{% else %}résultats{% endif %}</span></h3>
         <div class="panel panel-default">
           <div class="panel-body">
             {% for machine in result_machine %}
@@ -101,7 +103,11 @@
                 <h4>{{ machine.name }}</h4>
               </div>
               <div class="col-lg-3">
-                <p><h5>{{ machine.statut }}</h5></p>
+                {% if machine.statut == "Disponible" %}
+                  <h5 class="right" style="color:#5EAB08">Disponible</h5>
+                {% else %} {{ machine.statut }}
+                  <h5 class="right" style="color:#5EAB08">{{ machine.statut }}</h5>
+                {% endif %}
               </div>
             </a>
             {% endfor %}
@@ -118,7 +124,7 @@
 
         {% if result_user|length > 0 %}
 
-        <h3>Utilisateurs - {{ result_user|length }} résultats </h3>
+        <h3> <i class="fa fa-user" style="color:#4A90E2"></i> Utilisateurs <span class="resultcount"> {{ result_user|length }} {% if result_user|length == 1 %}résultat{% else %}résultats{% endif %}</span></h3>
         <div class="panel panel-default">
           <div class="panel-body">
             {% for user in result_user %}
