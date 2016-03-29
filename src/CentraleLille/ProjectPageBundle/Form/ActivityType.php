@@ -49,33 +49,7 @@ class ActivityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder/*->add(
-            'type',
-            ChoiceType::class,
-            array(
-                'choices' => array(
-                    'creation' => 'Création de projet',
-                    'update' => 'Modification de projet',
-                    'custom' => 'Personnalisée'
-                )
-            )
-        )
-            ->add(
-                'user',
-                EntityType::class,
-                array(
-                    'class' => 'CustomFosUserBundle:User',
-                    'choice_label' => 'firstname',
-                )
-            )
-            ->add(
-                'project',
-                EntityType::class,
-                array(
-                    'class' => 'CustomFosUserBundle:Project',
-                    'choice_label' => 'name',
-                )
-            )*/
+        $builder
             ->add(
                 'Content',
                 TextareaType::class,

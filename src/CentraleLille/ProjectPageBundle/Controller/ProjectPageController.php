@@ -39,7 +39,7 @@ use CentraleLille\CustomFosUserBundle\Entity\ProjectRole;
 class ProjectPageController extends Controller
 {
     /**
-     * displayProjectAction
+     * DisplayProjectAction
      *
      * Affiche une page projet en utilisant l'ID du projet et en supposant récupérer les données du
      * projet grâce à un service
@@ -51,7 +51,6 @@ class ProjectPageController extends Controller
      */
     public function displayProjectAction($projectId, Request $request)
     {
-
         
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -77,7 +76,7 @@ class ProjectPageController extends Controller
         }
         */
 
-        if($user){
+        if ($user) {
             //Le user est-il abonné à ce projet?
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $isAbo = $abonnementService->isAboProjet($user, $project);
@@ -139,7 +138,7 @@ class ProjectPageController extends Controller
         }
         $isAbo = 0;
         return $this->render(
-            'ProjectPageBundle:Default:projectpage.html.twig', 
+            'ProjectPageBundle:Default:projectpage.html.twig',
             array(
                 'project'          => $project,
                 'recentActivities' => $activities,
@@ -148,6 +147,18 @@ class ProjectPageController extends Controller
                 )
         );
     }
+
+    /**
+     * DeleteActivityAction
+     *
+     * Supprime une activité
+     *
+     * @param String  $projectId  Id unique de projet, attribué à la création par le groupe Projet
+     * @param String  $activityId Id unique d'activité
+     * @param Request $request    Requête http
+     *
+     * @return Response Une réponse à afficher
+     */
     public function deleteActivityAction($projectId, $activityId, Request $request)
     {
         $user = $this->getUser();
@@ -156,7 +167,7 @@ class ProjectPageController extends Controller
             ->getRepository('CustomFosUserBundle:Project')
             ->findOneBy(array('id'=>$projectId));
         if (!$project) {
-        throw $this->createNotFoundException('Ce projet n\'existe pas !');
+            throw $this->createNotFoundException('Ce projet n\'existe pas !');
         }
 
         //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
@@ -170,7 +181,7 @@ class ProjectPageController extends Controller
         }
         */
 
-        if($user){
+        if ($user) {
             //Le user est-il abonné à ce projet?
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
             $isAbo = $abonnementService->isAboProjet($user, $project);
@@ -249,7 +260,7 @@ class ProjectPageController extends Controller
         $activities=$activityService->getActivityProjet($project, 0);
         $isAbo = 0;
         return $this->render(
-            'ProjectPageBundle:Default:projectpage.html.twig', 
+            'ProjectPageBundle:Default:projectpage.html.twig',
             array(
                 'project'          => $project,
                 'recentActivities' => $activities,

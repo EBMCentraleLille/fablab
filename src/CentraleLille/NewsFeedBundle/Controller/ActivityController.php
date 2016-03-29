@@ -45,7 +45,6 @@ class ActivityController extends Controller
     *
     * @return Twig La vue Twig à display
     */
-
     public function indexAction(Request $request)
     {
         $user = $this->getUser();

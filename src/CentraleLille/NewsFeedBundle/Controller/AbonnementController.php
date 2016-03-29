@@ -38,6 +38,8 @@ class AbonnementController extends Controller
     *
     * Affichage des abonnements d'un utilisateur
     *
+    * @param Request $request requête http
+    *
     * @return Twig La vue Twig à display
     */
     public function indexAction(Request $request)
@@ -69,8 +71,11 @@ class AbonnementController extends Controller
             $categoryName = $request->request->get('category');
             if ($categoryName) {
                 $em = $this->getDoctrine()->getManager();
-                $category=$em->getRepository("CentraleLilleNewsFeedBundle:"
-                    ."Category")->findOneBy(array('name'=>$categoryName));
+                $category=$em->getRepository(
+                    "CentraleLilleNewsFeedBundle:"
+                    ."Category"
+                )
+                    ->findOneBy(array('name'=>$categoryName));
                 
                 //Abonnement/désabonnement du user au projet en question
                 $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
