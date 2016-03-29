@@ -64,7 +64,7 @@ class ProjectPageController extends Controller
 
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 10);
+        $activities=$activityService->getActivityProjet($project, 0);
 
         //Récupération des users du project (Entity = ProjectUser, il faut utiliser ->user
         //pour accéder à l'user
@@ -189,16 +189,6 @@ class ProjectPageController extends Controller
                 } else {
                     $recentActivities=$abonnementService->addAboProjet($user, $projet);
                 }
-<<<<<<< HEAD
-                foreach ($abonnements as $abonnement) {
-                    if (in_array($abonnement, $abo)) {
-                        $aboProjet = array($abonnement->getName() => 1);
-                        $likes = array_merge($likes, $aboProjet);
-                    } else {
-                        $aboProjet = array($abonnement->getName() => 0);
-                        $likes = array_merge($likes, $aboProjet);
-                    }
-=======
             }
 
             if ($user->hasProject($project->getName())) {
@@ -209,7 +199,6 @@ class ProjectPageController extends Controller
                 if ($activitydeleted) {
                     $em->remove($activitydeleted);
                     $em->flush();
->>>>>>> 766d32e6768bc12bbfcc6fd76fd9ccf7d4dcd917
                 }
                 
 
@@ -240,41 +229,9 @@ class ProjectPageController extends Controller
                         )
                     );
                 }
-<<<<<<< HEAD
-                
-                return $this->render(
-                    'ProjectPageBundle:Default:projectpage.html.twig',
-                    array(
-                    'project' => $project,
-                    'recentActivities' => $activities,
-                    'form' => $form->createView(),
-                    'projectUsers' => $projectUsers,
-                    'likes' => $likes
-                    )
-                );
-            }
-            return $this->render(
-                'ProjectPageBundle:Default:projectpage.html.twig',
-                array(
-                    'project' => $project,
-                    'recentActivities' => $activities,
-                    'projectUsers' => $projectUsers,
-                    'likes' => $likes
-                )
-            );
-        } else {
-            return $this->render(
-                'ProjectPageBundle:Default:projectpage.html.twig',
-                array(
-                    'project' => $project,
-                    'recentActivities' => $activities,
-                    'projectUsers' => $projectUsers
-                    )
-            );
-=======
                 //Récupération des activités
                 $activityService=$this->container->get('fablab_newsfeed.activities');
-                $activities=$activityService->getActivityProjet($project, 10);
+                $activities=$activityService->getActivityProjet($project, 0);
                 return $this->render(
                     'ProjectPageBundle:Default:projectpage.html.twig',
                     array(
@@ -286,11 +243,10 @@ class ProjectPageController extends Controller
                     )
                 );
             }
->>>>>>> 766d32e6768bc12bbfcc6fd76fd9ccf7d4dcd917
         }
         //Récupération des activités
         $activityService=$this->container->get('fablab_newsfeed.activities');
-        $activities=$activityService->getActivityProjet($project, 10);
+        $activities=$activityService->getActivityProjet($project, 0);
         $isAbo = 0;
         return $this->render(
             'ProjectPageBundle:Default:projectpage.html.twig', 

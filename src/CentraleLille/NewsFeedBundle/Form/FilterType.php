@@ -2,14 +2,14 @@
 /**
  * ActivityForm.php File Doc
  *
- * Formulaire de création d'une Activité
+ * Formulaire de filtrage d'actualités
  *
  * PHP Version 5.6
  *
  * @category   File
  * @package    CentraleLille:NewsfeedBundle
  * @subpackage Form
- * @author     Lechaptois Martin <martin.lechaptois@gmail.com>
+ * @author     Hyot James <james.hyot@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link       https://github.com/EBMCentraleLille/fablab
  */
