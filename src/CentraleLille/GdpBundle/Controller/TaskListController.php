@@ -11,7 +11,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 /**
  * Abstract list of tasks.
  */
-class TaskListController extends FOSRestController
+class TaskListController extends GdpRestController
 {
     /**
      * Create a Task List from the submitted data.<br/>
@@ -34,7 +34,6 @@ class TaskListController extends FOSRestController
      */
      public function postListAction(ParamFetcher $paramFetcher)
      {
-        $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $taskList = new TaskList();
         $taskList->setTitle($paramFetcher->get('name'));
         // assign the list to a project
@@ -42,18 +41,15 @@ class TaskListController extends FOSRestController
         $projectId = $paramFetcher->get('project_id');
         $project = $projectRepository->find($projectId);
         $taskList->setProject($project);
+
+        $this->existsProjectUser($projectId,$this->getUser()->getId());
+
         $view = View::create();
-        $errors = $this->get('validator')->validate($task, array('Registration'));
-        if (count($errors) == 0) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($taskList);
-            $em->flush();
-            $view->setData($taskList)->setStatusCode(201);
-            return $view;
-        } else {
-            $view = $this->getErrorsView($errors);
-            return $view;
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($taskList);
+        $em->flush();
+        $view->setData($taskList)->setStatusCode(201);
+        return $view;
      }
      
      /**
@@ -81,6 +77,8 @@ class TaskListController extends FOSRestController
           if (!$taskList) {
             throw $this->createNotFoundException('Data not found.');
           }
+          $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+
           $em = $this->getDoctrine()->getManager();
           $em->remove($taskList);
           $em->flush();
@@ -109,26 +107,19 @@ class TaskListController extends FOSRestController
      *
      * @return View
      */
-     public function putListAction($taskListId, ParamFetcher $param)
+     public function putListAction($taskListId, ParamFetcher $paramFetcher)
      {
-          $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
+          $taskList = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
           if ($paramFetcher->get('name')) {
             $taskList->setName($paramFetcher->get('name'));
           }
-          $view = View::create();
-          $errors = $this->get('validator')->validate($task, array('Update'));
-          if (count($errors) == 0) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($taskList);
-            $em->flush();
-            $view->setData($taskList)->setStatusCode(200);
-            return $view;
-          }
-          else 
-          {
-            $view = $this->getErrorsView($errors);
-            return $view;
-          }
+         $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+         $view = View::create();
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($taskList);
+         $em->flush();
+         $view->setData($taskList)->setStatusCode(200);
+         return $view;
      }
     /**
      * Return the tasks corresponding to the given task list id
@@ -152,6 +143,7 @@ class TaskListController extends FOSRestController
           $taskList = $repo->findOneBy(
                array('id' => $taskListId)
           );
+          $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
           if (!$taskList) {
             throw $this->createNotFoundException('Data not found.');
           }
@@ -194,6 +186,9 @@ class TaskListController extends FOSRestController
         if (!$taskList) {
             throw $this->createNotFoundException('Task list not found.');
         }
+
+        $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
         $taskList->addTask($task);
         $task->addTaskList($taskList);
         $em = $this->getDoctrine()->getManager();

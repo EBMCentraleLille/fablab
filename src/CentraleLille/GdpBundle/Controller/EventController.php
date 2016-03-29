@@ -20,7 +20,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class EventController extends FOSRestController
+class EventController extends GdpRestController
 {
   /**
    * Return the overall event list.
@@ -45,6 +45,7 @@ class EventController extends FOSRestController
         if (!$list) {
             throw $this->createNotFoundException('Data not found.');
         }
+        $this->existsProjectUser($id,$this->getUser()->getId());
         $view = View::create();
         $view->setData($list)->setStatusCode(200);
         return $view;
@@ -78,6 +79,7 @@ class EventController extends FOSRestController
         $eventRepository = $this->getDoctrine()->getRepository('ReservationBundle:Event');
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id);
+        $this->existsProjectUser($id->getProject()->getId(),$this->getUser()->getId());
         $event = new Event();
         $event->setTitle($paramFetcher->get('title'));
         $event->setDescription($paramFetcher->get('description'));
@@ -126,6 +128,7 @@ class EventController extends FOSRestController
     public function putTaskAction($eventId, ParamFetcher $paramFetcher)
     {
         $event = $this->getDoctrine()->getRepository('ReservationBundle:Event')->findOneBy($eventId);
+        $this->existsProjectUser($event->getProject()->getId(),$this->getUser()->getId());
         if ($paramFetcher->get('title')) {
             $event->setTitle($paramFetcher->get('title'));
         }
@@ -174,6 +177,7 @@ class EventController extends FOSRestController
         $event = $repo->findOneBy(
             array('id' => $eventId)
         );
+        $this->existsProjectUser($event->getProject()->getId(),$this->getUser()->getId());
         if (!$event) {
             throw $this->createNotFoundException('Data not found.');
         }
