@@ -4,13 +4,14 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor.css">
 {% endblock stylesheets %}
-{% block token %}
-    <script>
-        const JWTTOKEN = "{{token}}";
-    </script>
-{% endblock %}
 {% block body %}
+    <div ng-include src="'views/header/header.html'"></div>
     <div ui-view></div>
+    {% block token %}
+        <script>
+            const JWTTOKEN = "{{token}}";
+        </script>
+    {% endblock %}
     {% block javascripts %}
         <script type="application/javascript" src="vendor.js"></script>
         <script type="application/javascript" src="app.js"></script>

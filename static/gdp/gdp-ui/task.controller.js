@@ -50,6 +50,7 @@ function taskController($scope,rq,toastr) {
     $scope.currentProject={};
     $scope.userProjects=[];
     $scope.newTaskListName="";
+    $scope.showTaskListDelete = false;
 
     /* Scope functions */
 
@@ -58,13 +59,14 @@ function taskController($scope,rq,toastr) {
     $scope.onDropTaskInList=dropTaskInList;
     $scope.assignTaskToUser = assignTaskToUser;
     $scope.createTaskList = createTaskList;
+    $scope.deleteTaskList = deleteTaskList;
 
     /* Init */
 
     (function() {
         rq.init();
         getProjects(function() {
-            getTasks();
+            getTaskLists();
             getProjectUsers();
             for(var t in $scope.tasks) {
                 var taskgroup = $scope.tasks[t];
@@ -129,12 +131,20 @@ function taskController($scope,rq,toastr) {
     function createTaskList() {
         var data = {'name': $scope.newTaskListName, "project_id":$scope.currentProject.id}
         rq.createTaskList(data,function(res) {
-            toastr.success(['List de tâches',data.name,'créée.'].join(" "));
+            toastr.success(['Liste de tâches',data.name,'créée.'].join(" "));
+            getTaskLists()
+        })
+    }
+
+    function deleteTaskList(taskListId) {
+        rq.deleteTaskList(taskListId,function(res) {
+            toastr.success('Liste de tâches supprimée.');
+            getTaskLists()
         })
     }
 
     function getTaskLists() {
-        rq.getTaskLists(function(res) {
+        rq.getTaskLists($scope.currentProject.id,function(res) {
             $scope.taskLists=res.data;
         });
     }

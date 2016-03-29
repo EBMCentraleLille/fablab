@@ -34,6 +34,7 @@ function planningController($scope,rq,toastr) {
 
 
     (function() {
+        console.log('test')
         rq.init();
         getProjects(function() {
             getTasks();

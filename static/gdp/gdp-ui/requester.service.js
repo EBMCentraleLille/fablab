@@ -14,7 +14,8 @@ function getRequester($http) {
         'getTaskLists':getTaskLists,
         'createTaskList': createTaskList,
         'getTaskLists': getTaskLists,
-        'addTaskToList': addTaskToList
+        'addTaskToList': addTaskToList,
+        'deleteTaskList':deleteTaskList
     }
 
     return service;
@@ -49,7 +50,8 @@ function getRequester($http) {
             'users': '/gdp/api/projects/'+id+'/users',
             'projects' :'/gdp/api/users/project',
             'assignTask': '/gdp/api/tasks/'+id+'/users/'+id2,
-            'taskListAdd': '/gdp/api/lists'+id+'/adds/'+id2
+            'taskListAdd': '/gdp/api/lists'+id+'/adds/'+id2,
+            'taskListDelete': '/gdp/api/lists/'+id
         }
     }
 
@@ -60,6 +62,18 @@ function getRequester($http) {
         if(JWTTOKEN) // JWTOKEN is declared by Symfony
             $http.defaults.headers.common.Authorization = 'Bearer '+JWTTOKEN;
     }
+
+    function getUsers(id,cb) {
+        var r = new Resolver(id);
+        get_request(r.users,cb);
+    }
+
+    function getProjects(cb) {
+        var r = new Resolver(null);
+        get_request(r.projects,cb);
+    }
+
+    /* ::::::   Task related routes  :::::: */
 
     function createTask(project_id,data,cb) {
         var r = new Resolver(project_id);
@@ -76,15 +90,6 @@ function getRequester($http) {
         del_request(r.deleteTask,cb);
     }
 
-    function getUsers(id,cb) {
-        var r = new Resolver(id);
-        get_request(r.users,cb);
-    }
-
-    function getProjects(cb) {
-        var r = new Resolver(null);
-        get_request(r.projects,cb);
-    }
 
     function assignTaskToUser(taskId,userId,cb) {
         var r = new Resolver(taskId,userId);
@@ -106,6 +111,11 @@ function getRequester($http) {
     function addTaskToList(taskListId,taskId,cb) {
         var r = new Resolver(taskListId,taskId);
         put_request(r.taskListAdd,{},cb);
+    }
+
+    function deleteTaskList(taskListId,cb) {
+        var r = new Resolver(taskListId);
+        del_request(r.taskListDelete,cb);
     }
 
     /* :::::::::::::::::::::::::::::::::::::::: */

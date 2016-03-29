@@ -1,4 +1,4 @@
-<div ng-repeat="taskgroup in spaceData"
+<div ng-repeat="taskgroup in taskLists"
      class="col-md-3 taskspace">
      <div
          drop="onDropTaskInList($data, taskgroup)"
@@ -12,17 +12,20 @@
 
                  <!-- New task -->
 
-                 <div class="panel panel-default">
                      <button class="btn btn-success new-task"
-                             ng-click="showTaskCreated=true;"><span class="glyphicon glyphicon-plus"</button>
-                 </div>
+                             ng-click="showTaskCreated=!showTaskCreated;"><span class="glyphicon glyphicon-plus"></span></button>
+                     <button class="btn btn-warning new-task"
+                             ng-click="showTaskListDelete=!showTaskListDelete;"><span class="glyphicon glyphicon-remove"></span></button>
              </div>
              <div class="spacer"></div>
          </div>
 
          <edit-task ng-show="showTaskCreated"></edit-task>
+         <div ng-show="showTaskListDelete">
+             <button class="btn btn-warning btn-group-justified" ng-click="deleteTaskList(taskgroup.id)">Supprimer liste de tâches</button>
+         </div>
          <div class="panel-body taskgroup">
-            <div ng-repeat="task in taskgroup.data"
+            <div ng-repeat="task in taskgroup.tasks"
                  draggable="true"
                  effect-allowed="move"
                  draggable-type="task"
