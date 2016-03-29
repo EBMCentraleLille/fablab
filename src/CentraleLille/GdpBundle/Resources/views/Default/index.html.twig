@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Outil de gestion de projet</title>
-    <script type="application/javascript" src="vendor.js"></script>
-    <script type="application/javascript" src="app.js"></script>
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
     <link rel="stylesheet" href="styles.css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor.css">
-    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon" />
+{% endblock stylesheets %}
+{% block token %}
     <script>
         const JWTTOKEN = "{{token}}";
     </script>
-</head>
-<body>
-<div ui-view></div>
-</body>
-</html>
+{% endblock %}
+{% block body %}
+    <div ui-view></div>
+{% endblock body %}
+{% block javascripts %}
+    <script type="application/javascript" src="vendor.js"></script>
+    <script type="application/javascript" src="app.js"></script>
+{% endblock %}
