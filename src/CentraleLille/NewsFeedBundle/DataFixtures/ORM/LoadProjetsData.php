@@ -41,7 +41,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class LoadProjetsData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
-    private _$container;
+    private $container;
 
     /**
      * Fonction chargeants le container de service
