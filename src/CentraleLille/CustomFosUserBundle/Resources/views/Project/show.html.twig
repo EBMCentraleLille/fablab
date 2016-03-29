@@ -15,9 +15,9 @@
             </div>
         {% endif %}
 
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="text-primary">Membres du projet</h4>
+                <h4 class="text-center">Membres du projet</h4>
             </div>
             <div class="panel-body">
                 <table class="table table-striped">
@@ -69,9 +69,9 @@
             </div>
         </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
-            <h4 class="text-primary">Ajouter un utilisateur</h4>
+            <h4 class="text-center">Ajouter un utilisateur</h4>
         </div>
         <div class="panel-body">
             {{ form_start(formUsername, {'method': 'post', 'action': path('project_show',{'projectId':project.id})}) }}
