@@ -28,7 +28,7 @@ class TaskListController extends FOSRestController
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
      * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
-     * @RequestParam(project_id="project_id", nullable=false, strict=true, description="Project id")
+     * @RequestParam(name="project_id", nullable=false, strict=true, description="Project id")
      *
      * @return View
      */
