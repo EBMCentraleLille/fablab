@@ -22,7 +22,7 @@ class TaskList
     private $id;
 
     /**
-     * @@ORM\ManyToOne(targetEntity="Task", mappedBy="taskList")
+     * @@ORM\OneToMany(targetEntity="Task", mappedBy="taskList")
      */
     private $tasks;
 

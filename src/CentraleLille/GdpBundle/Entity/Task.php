@@ -68,8 +68,8 @@ class Task
     private $inChargeUser;
 
 
-    /* @ORM\OneToMany(targetEntity="TaskList", inversedBy="tasks")
-     * @ORM\    JoinTable(name="tasks_lists")
+    /* @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
+     * @ORM\JoinColumn(name="tasklist_id",referencedColumnName="id")
      */
     private $taskList;
 
