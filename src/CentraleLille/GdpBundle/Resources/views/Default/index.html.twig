@@ -11,8 +11,8 @@
 {% endblock %}
 {% block body %}
     <div ui-view></div>
+    {% block javascripts %}
+        <script type="application/javascript" src="vendor.js"></script>
+        <script type="application/javascript" src="app.js"></script>
+    {% endblock %}
 {% endblock body %}
-{% block javascripts %}
-    <script type="application/javascript" src="vendor.js"></script>
-    <script type="application/javascript" src="app.js"></script>
-{% endblock %}
