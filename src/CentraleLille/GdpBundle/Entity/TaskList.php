@@ -22,7 +22,7 @@ class TaskList
     private $id;
 
     /**
-     * @@ORM\OneToMany(targetEntity="Task", mappedBy="taskList")
+     * @@ORM\OneToMany(targetEntity="Task", mappedBy="taskLists")
      */
     private $tasks;
 
@@ -102,10 +102,9 @@ class TaskList
      */
     public function removeTask($task)
     {
-        $pos = array_search($task,$this->tasks);
-        if ($pos)
-        {
-            $this->tasks= array_slice($this->tasks,$pos,1);
+        $pos = array_search($task, $this->tasks);
+        if ($pos) {
+            $this->tasks= array_slice($this->tasks, $pos, 1);
         }
 
     }

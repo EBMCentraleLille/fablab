@@ -21,13 +21,14 @@ class GdpRestController extends FOSRestController
      * @param $projectId
      * @param $userId
      */
-    public function existsProjectUser($projectId,$userId){
+    public function existsProjectUser($projectId, $userId)
+    {
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:ProjectUser');
         $projectUser = $projectRepository->findBy(
-          array('user'=>$userId,'project'=>$projectId)
+            array('user'=>$userId,'project'=>$projectId)
         );
-        if(!$projectUser){
-            throw new HttpException(401,'User can not access this project');
+        if (!$projectUser) {
+            throw new HttpException(401, 'User can not access this project');
         }
     }
 }

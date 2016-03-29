@@ -34,6 +34,7 @@ class TaskListController extends GdpRestController
      *
      * @return View
      */
+
      public function postListAction(ParamFetcher $paramFetcher)
      {
         // Check if no list already exists with this name
@@ -54,7 +55,7 @@ class TaskListController extends GdpRestController
         $project = $projectRepository->find($projectId);
         $taskList->setProject($project);
 
-        $this->existsProjectUser($projectId,$this->getUser()->getId());
+        $this->existsProjectUser($projectId, $this->getUser()->getId());
 
         $view = View::create();
         $em = $this->getDoctrine()->getManager();
@@ -62,7 +63,7 @@ class TaskListController extends GdpRestController
         $em->flush();
         $view->setData($taskList)->setStatusCode(201);
         return $view;
-     }
+    }
 
 
 
@@ -90,8 +91,8 @@ class TaskListController extends GdpRestController
         );
         if (!$taskList) {
             throw $this->createNotFoundException('Data not found.');
-          }
-          $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
+        }
+          $this->existsProjectUser($taskList->getProject()->getId(), $this->getUser()->getId());
 
           $em = $this->getDoctrine()->getManager();
           $em->remove($taskList);
@@ -99,7 +100,7 @@ class TaskListController extends GdpRestController
           $view = View::create();
           $view->setData("Task list deteled.")->setStatusCode(200);
           return $view;
-     }
+    }
 
     /**
      * Add a list specified by id to the taskList.<br/>
@@ -121,20 +122,20 @@ class TaskListController extends GdpRestController
      *
      * @return View
      */
-     public function putListAction($taskListId, ParamFetcher $paramFetcher)
-     {
-          $taskList = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
-          if ($paramFetcher->get('name')) {
+    public function putListAction($taskListId, ParamFetcher $paramFetcher)
+    {
+         $taskList = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList')->findOneBy($taskListId);
+        if ($paramFetcher->get('name')) {
             $taskList->setName($paramFetcher->get('name'));
-          }
-         $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
-         $view = View::create();
-         $em = $this->getDoctrine()->getManager();
-         $em->persist($taskList);
-         $em->flush();
-         $view->setData($taskList)->setStatusCode(200);
-         return $view;
-     }
+        }
+            $this->existsProjectUser($taskList->getProject()->getId(), $this->getUser()->getId());
+            $view = View::create();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($taskList);
+            $em->flush();
+            $view->setData($taskList)->setStatusCode(200);
+            return $view;
+    }
 
     /**
      * Return the tasks corresponding to the given task list id
@@ -152,14 +153,15 @@ class TaskListController extends GdpRestController
      *
      * @return View
      */
-	public function getListAction($taskListId)
-     {
-          $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
-          $taskList = $repo->findOneBy(
-               array('id' => $taskListId)
-          );
-          $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
-          if (!$taskList) {throw $this->createNotFoundException('Data not found.');
+    public function getListAction($taskListId)
+    {
+        $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $taskList = $repo->findOneBy(
+            array('id' => $taskListId)
+        );
+        $this->existsProjectUser($taskList->getProject()->getId(), $this->getUser()->getId());
+        if (!$taskList) {
+            throw $this->createNotFoundException('Data not found.');
         }
         $view = View::create();
         $view->setData($taskList);
@@ -201,8 +203,8 @@ class TaskListController extends GdpRestController
         if (!$taskList) {
             throw $this->createNotFoundException('Task list not found.');
         }
-        $this->existsProjectUser($taskList->getProject()->getId(),$this->getUser()->getId());
-        $this->existsProjectUser($task->getProject()->getId(),$this->getUser()->getId());
+        $this->existsProjectUser($taskList->getProject()->getId(), $this->getUser()->getId());
+        $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
         $task->getTaskList()->removeTask($task);
         $taskList->addTask($task);
         $task->setTaskList($taskList);
@@ -235,10 +237,12 @@ class TaskListController extends GdpRestController
     public function getProjectListsAction($id)
     {
         $repoTaskLists = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $repoTask = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $list = $repoTaskLists->findByProject($id);
         $tasklists = [];
-        foreach ( $list as $tasklist){
-            $tasklists[] = ['id'=>$tasklist->getId(),'name'=>$tasklist->getName(),'tasks'=>$tasklist->getTasks()];
+        foreach ($list as $tasklist) {
+            $tasks = $repoTask->findByTaskLists($tasklist->getid());
+            $tasklists[] = ['id'=>$tasklist->getId(),'name'=>$tasklist->getName(),'tasks'=>$tasks ];
         }
         $view = View::create();
         $view->setData($tasklists)->setStatusCode(200);
