@@ -82,7 +82,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             {% for competence in result_competence %}
-            <a href="{{ path('project_show', {'projectId': project.id}) }}">
+            <a href="{{ path('project_show', {'projectId': competence.id}) }}">
               <h4>{{ competence.name }}</h4>
             </a>
             {% endfor %}
