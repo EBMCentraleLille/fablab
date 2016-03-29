@@ -4,11 +4,13 @@ uiModule.factory('rq',['$http',getRequester]);
 
 function getRequester($http) {
     var service = {
+        'init':init,
         'createTask': createTask,
         'getTasks': getTasks,
         'deleteTask': deleteTask,
         'getUsers': getUsers,
-        'getProjects':getProjects
+        'getProjects':getProjects,
+        'assignTaskToUser':assignTaskToUser
 
         /*'getPosts': getPosts,
         'deletePost': deletePost,
@@ -41,16 +43,26 @@ function getRequester($http) {
 
     /* :::::::::::::::::::::::::::::::::::::::: */
 
-    function Resolver(id) {
+    function Resolver(id,id2) {
         return {
+            'login':'/api/login_check',
             'tasks':'/gdp/api/projects/'+id+'/tasks',
             'deleteTask': '/gdp/api/tasks/'+id,
             'users': '/gdp/api/projects/'+id+'/users',
-            'projects' :'/gdp/api/projects/'
+            'projects' :'/gdp/api/projects/',
+            'assignTask': '/gdp/api/tasks/'+id+'/users/'+id2
         }
     }
 
     /* :::::::::::::::::::::::::::::::::::::::: */
+
+
+    function init() {
+        if(JWTTOKEN)
+            $http.defaults.headers.common.Authorization = 'Bearer '+JWTTOKEN;
+        else
+            console.log("WARNING: NO TOKEN FOUND")
+    }
 
     function createTask(project_id,data,cb) {
         var r = new Resolver(project_id);
@@ -76,10 +88,11 @@ function getRequester($http) {
         var r = new Resolver(null);
         get_request(r.projects,cb);
     }
-    /*function getPosts(cb) {
-        var r = new Resolver();
-        get_request(r.posts, cb);
-    }*/
+
+    function assignTaskToUser(taskId,userId,cb) {
+        var r = new Resolver(taskId,userId);
+        put_request(r.assignTask,{},cb)
+    }
 
     /* :::::::::::::::::::::::::::::::::::::::: */
 
