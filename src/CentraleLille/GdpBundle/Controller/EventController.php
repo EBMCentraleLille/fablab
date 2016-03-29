@@ -51,6 +51,34 @@ class EventController extends GdpRestController
         return $view;
     }
 
+    /**
+     * Return an event.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Return a single event",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when no events are found"
+     *   }
+     * )
+     *
+     * @param int $id EventID
+     *
+     * @return View
+     */
+    public function getEventAction($eventId)
+    {
+        $eventRepository = $this->getDoctrine()->getRepository('ReservationBundle:Event');
+        $event = $eventRepository->find($eventId);
+        if (!$event) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $view = View::create();
+        $view->setData($event)->setStatusCode(200);
+        return $view;
+    }
+
   /**
    * Create a Event from the submitted data.<br/>
    *
@@ -125,7 +153,7 @@ class EventController extends GdpRestController
    *
    * @return View
    */
-    public function putTaskAction($eventId, ParamFetcher $paramFetcher)
+    public function putEventAction($eventId, ParamFetcher $paramFetcher)
     {
         $event = $this->getDoctrine()->getRepository('ReservationBundle:Event')->findOneBy($eventId);
         $this->existsProjectUser($event->getProject()->getId(),$this->getUser()->getId());
