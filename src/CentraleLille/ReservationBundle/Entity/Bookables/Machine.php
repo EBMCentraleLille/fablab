@@ -14,6 +14,7 @@ use CentraleLille\ReservationBundle\Entity\Bookables\Type;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use CentraleLille\ReservationBundle\Entity\Bookables\Bookable;
+
 /**
  * Entity Class Doc
  *
