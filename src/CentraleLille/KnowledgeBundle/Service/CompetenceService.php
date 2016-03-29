@@ -48,7 +48,7 @@ class CompetenceService
 
     public function getCompetenceList()
     {
-        return $this->em->getRepository('KnowledgeBundle:Competence')->find();
+        return $this->em->getRepository('CentraleLilleKnowledgeBundle:Competence')->findAll();
     }
 
     public function getUserCompetenceList($user)
@@ -57,6 +57,6 @@ class CompetenceService
             return $item->getCompetence();
 
         };
-        return array_map($funk, $this->em->getRepository('KnowledgeBundle:UserCompetence')->findByUser($user->getId()));
+        return array_map($funk, $this->em->getRepository('CentraleLilleKnowledgeBundle:UserCompetence')->findByUser($user->getId()));
     }
 }
