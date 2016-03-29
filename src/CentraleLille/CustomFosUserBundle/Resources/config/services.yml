@@ -5,7 +5,7 @@ services:
 
     app.project.service:
         class:  CentraleLille\CustomFosUserBundle\Service\ProjectService
-        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@logger" ]
 
     app.project.member_voter:
         class: CentraleLille\CustomFosUserBundle\Security\ProjectMemberVoter

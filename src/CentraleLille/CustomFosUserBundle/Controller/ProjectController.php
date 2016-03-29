@@ -67,10 +67,10 @@ class ProjectController extends Controller
                     ->getRepository('CustomFosUserBundle:User')
                     ->findOneByUsername($username);
                 if ($user != null) {
-                    $projectService->addUserToProject($user, $project);
-                    $logger = $this->get('logger');
-                    $logger->info('TEST : '.$data['roles']);
-                        $projectService->setUserToProjectLeader($user, $project);
+                    $projectUser = $projectService->addUserToProject($user, $project);
+                    if($data['roles'] == 2){
+                        $projectService->setUserToProjectLeaderWithProjectUser($projectUser);
+                    }
                     $session->set('error', "");
                 } else {
                     $session->set('error', "Cet utilisateur n'existe pas.");
