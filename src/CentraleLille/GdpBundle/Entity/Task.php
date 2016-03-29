@@ -3,6 +3,7 @@
 namespace CentraleLille\GdpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use CentraleLille\GdpBundle\Enum\TaskStatus;
 
 //use CentraleLille\CustomFosUserBundle\Entity\User as User;
 
@@ -40,7 +41,7 @@ class Task
     /**
      * @var bool
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="string", length=255)
      */
     private $status;
 
@@ -84,6 +85,7 @@ class Task
     public function __construct()
     {
         $this->createdDate = new \DateTime();
+        $this->status = TaskStatus::PLANIFIE;
     }
 
     /**
@@ -153,7 +155,10 @@ class Task
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        if(TaskStatus::isValidValue($status))
+        {
+            $this->status = $status;
+        }
 
         return $this;
     }

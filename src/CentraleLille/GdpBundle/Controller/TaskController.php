@@ -15,6 +15,7 @@ use FOS\RestBundle\Request\ParamFetcher;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Validator\ConstraintViolationList;
+use CentraleLille\GdpBundle\Enum\TaskStatus;
 
 class TaskController extends GdpRestController
 {
@@ -82,7 +83,6 @@ class TaskController extends GdpRestController
         $task->setBody($paramFetcher->get('body'));
         $task->setAuthor($this->getUser());
         $task->setProject($project);
-        $task->setStatus(false);
         $task->setEndDate(new \DateTime($paramFetcher->get('endDate')));
         $taskList = $taskListRepository->find($paramFetcher->get('taskList'));
         $task->setTaskList($taskList);
@@ -136,7 +136,7 @@ class TaskController extends GdpRestController
         if ($paramFetcher->get('body')) {
             $task->setBody($paramFetcher->get('body'));
         }
-        if ($paramFetcher->get('status')) {
+        if ($paramFetcher->get('status') && TaskStatus::isValidValue($paramFetcher->get('status'))) {
             $task->setStatus($paramFetcher->get('status'));
         }
         $task->setEndDate($paramFetcher->get('endDate'));
