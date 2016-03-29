@@ -34,10 +34,21 @@ class TaskListController extends GdpRestController
      *
      * @return View
      */
-    public function postListAction(ParamFetcher $paramFetcher)
-    {
+
+     public function postListAction(ParamFetcher $paramFetcher)
+     {
+        // Check if no list already exists with this name
+        $name = $paramFetcher->get('name');
+        $listRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $alreadyExists = $listRepository->findOneBy(array('name' => $name));
+        if($alreadyExists)
+        {
+            $view = View::create();
+            $view->setData(Array('error' => 'Name already in use'))->setStatusCode(400);
+            return $view;
+        }
         $taskList = new TaskList();
-        $taskList->setName($paramFetcher->get('name'));
+        $taskList->setName($name);
         // assign the list to a project
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $projectId = $paramFetcher->get('project_id');

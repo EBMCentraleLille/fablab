@@ -86,6 +86,7 @@ class Task
     public function __construct()
     {
         $this->createdDate = new \DateTime();
+        $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = TaskStatus::PLANIFIE;
     }
 
