@@ -16,35 +16,34 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class TaskListController extends GdpRestController
 {
     /**
-     * Create a Task List from the submitted data.<br/>
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Creates a new task list from the submitted data.",
-     *   statusCodes = {
-     *     201 = "Returned when successful",
-     *     400 = "Returned when the form has errors"
-     *   }
-     * )
-     *
-     * @param ParamFetcher $paramFetcher Paramfetcher
-     *
-     * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
-     * @RequestParam(name="project_id", nullable=false, strict=true, description="Project id")
-     *
-     * @return View
-     */
+    * Create a Task List from the submitted data.<br/>
+    *
+    * @ApiDoc(
+    *   resource = true,
+    *   description = "Creates a new task list from the submitted data.",
+    *   statusCodes = {
+    *     201 = "Returned when successful",
+    *     400 = "Returned when the form has errors"
+    *   }
+    * )
+    *
+    * @param ParamFetcher $paramFetcher Paramfetcher
+    *
+    * @RequestParam(name="name", nullable=false, strict=true, description="Name.")
+    * @RequestParam(name="project_id", nullable=false, strict=true, description="Project id")
+    *
+    * @return View
+    */
 
-     public function postListAction(ParamFetcher $paramFetcher)
-     {
+    public function postListAction(ParamFetcher $paramFetcher)
+    {
         // Check if no list already exists with this name
         $name = $paramFetcher->get('name');
         $listRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
         $alreadyExists = $listRepository->findOneBy(array('name' => $name));
-        if($alreadyExists)
-        {
+        if ($alreadyExists) {
             $view = View::create();
-            $view->setData(Array('error' => 'Name already in use'))->setStatusCode(400);
+            $view->setData(array('error' => 'Name already in use'))->setStatusCode(400);
             return $view;
         }
         $taskList = new TaskList();
