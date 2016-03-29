@@ -18,13 +18,13 @@ const DEST_BASEDIR = "web/gdp/";
 /* Vendor JS files are compiled and resolved by browserify */
 
 var vendorJS = [
-    './node_modules/angular/angular.js',
+    './node_modules/angular/angular.min.js',
     './node_modules/angular-ui-router/release/angular-ui-router.min.js',
     './node_modules/angular-cookies/angular-cookies.min.js',
     './node_modules/angular-sanitize/angular-sanitize.min.js',
     './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
     './node_modules/angular-toastr/dist/angular-toastr.tpls.min.js',
-    './node_modules/angular-draganddrop/angular-draganddrop.js',
+    './node_modules/angular-draganddrop/angular-draganddrop.min.js',
     './static/vendor/date-fr-FR.js'
 ];
 

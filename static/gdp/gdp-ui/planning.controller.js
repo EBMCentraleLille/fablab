@@ -30,28 +30,34 @@ function planningController($scope,rq,toastr) {
 
     }
 
-    $scope.currentProject={
-        'id':3,
-        'name':'projet_test'
-    };
+    $scope.currentProject={};
 
 
     (function() {
-        getTasks();
-        generateCalendar();
+        rq.init();
+        getProjects(function() {
+            getTasks();
+            generateCalendar();
+        });
     })()
 
+    function getProjects(cb) {
+        rq.getProjects(function(res) {
+            $scope.currentProject=res.data[0];
+            $scope.userProjects = res.data;
+            if(cb) cb();
+        })
+    }
 
     function getTasks() {
         rq.getTasks($scope.currentProject.id,function(res) {
             for (var task in res.data) {
-                var date = new Date(res.data[task].date);
+                var date = new Date(res.data[task].end_date);
                 if(!$scope.tasks[date])
                     $scope.tasks[date]=[];
                 $scope.tasks[date].push(res.data[task]);
             }
-
-            processWeek(0)
+            processWeek(0);
         })
     }
 

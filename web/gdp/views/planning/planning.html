@@ -20,9 +20,7 @@
                  ng-repeat="day in daysWeek track by $index" class="week">
 
                 <div class="panel-heading">
-                    <span class="center"
-                    ng-class="{'otherMonth':!(day.getMonth()==currentDate.getMonth())}"
-                    >{{day.toString("dddd dd")}}</span>
+                    <span class="center">{{day.toString("dddd dd")}}</span>
                 </div>
                 <div class="panel-body planning-task-list">
                     <div ng-show="tasks[day][0]">

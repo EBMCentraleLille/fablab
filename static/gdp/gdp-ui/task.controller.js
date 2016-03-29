@@ -66,8 +66,8 @@ function taskController($scope,rq,toastr) {
     (function() {
         rq.init();
         getProjects(function() {
-            getTasks()
-            getProjectUsers()
+            getTasks();
+            getProjectUsers();
             for(var t in $scope.tasks) {
                 var taskgroup = $scope.tasks[t];
                 $scope.spaceData[taskgroup.space-1]=taskgroup;
@@ -122,7 +122,6 @@ function taskController($scope,rq,toastr) {
             $scope.userProjects = res.data;
             if(cb) cb();
         })
-
     }
 
     function assignTaskToUser(taskId,userId) {

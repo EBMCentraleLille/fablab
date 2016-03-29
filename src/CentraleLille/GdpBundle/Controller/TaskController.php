@@ -72,7 +72,7 @@ class TaskController extends GdpRestController
      */
     public function postProjectTaskAction($id, ParamFetcher $paramFetcher)
     {
-        $this->existsProjectUser($id);
+        $this->existsProjectUser($id,$this->getUser()->getId());
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id,$this->getUser()->getId());

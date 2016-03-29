@@ -11,15 +11,10 @@ function getRequester($http) {
         'getUsers': getUsers,
         'getProjects':getProjects,
         'assignTaskToUser':assignTaskToUser,
-        'createTaskList': createTaskList
-
-        /*'getPosts': getPosts,
-        'deletePost': deletePost,
-        'savePost': savePost,
-        'addPost': addPost,
-        'validatePost': validatePost,
-        'rejectPost': rejectPost,
-        'getVersion':getVersion*/
+        'getTaskLists':getTaskLists,
+        'createTaskList': createTaskList,
+        'getTaskLists': getTaskLists,
+        'addTaskToList': addTaskToList
     }
 
     return service;
@@ -48,11 +43,13 @@ function getRequester($http) {
         return {
             'login':'/api/login_check',
             'tasks':'/gdp/api/projects/'+id+'/tasks',
-            'lists':'/gdp/api/lists',
+            'listCreate':'/gdp/api/lists',
+            'lists':'/gdp/api/projects/'+id+'/lists',
             'deleteTask': '/gdp/api/tasks/'+id,
             'users': '/gdp/api/projects/'+id+'/users',
             'projects' :'/gdp/api/users/project',
-            'assignTask': '/gdp/api/tasks/'+id+'/users/'+id2
+            'assignTask': '/gdp/api/tasks/'+id+'/users/'+id2,
+            'taskListAdd': '/gdp/api/lists'+id+'/adds/'+id2
         }
     }
 
@@ -60,10 +57,8 @@ function getRequester($http) {
 
 
     function init() {
-        if(JWTTOKEN)
+        if(JWTTOKEN) // JWTOKEN is declared by Symfony
             $http.defaults.headers.common.Authorization = 'Bearer '+JWTTOKEN;
-        else
-            console.log("WARNING: NO TOKEN FOUND")
     }
 
     function createTask(project_id,data,cb) {
@@ -93,12 +88,24 @@ function getRequester($http) {
 
     function assignTaskToUser(taskId,userId,cb) {
         var r = new Resolver(taskId,userId);
-        put_request(r.assignTask,{},cb)
+        put_request(r.assignTask,{},cb);
     }
+
+    /* ::::::   TaskList related routes  :::::: */
 
     function createTaskList(data,cb) {
         var r = new Resolver(null);
-        post_request(r.lists,data,cb);
+        post_request(r.listCreate,data,cb);
+    }
+
+    function getTaskLists(project_id,cb) {
+        var r = new Resolver(project_id);
+        get_request(r.lists,cb);
+    }
+
+    function addTaskToList(taskListId,taskId,cb) {
+        var r = new Resolver(taskListId,taskId);
+        put_request(r.taskListAdd,{},cb);
     }
 
     /* :::::::::::::::::::::::::::::::::::::::: */
