@@ -11,7 +11,9 @@ namespace CentraleLille\GdpBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
+use CentraleLille\CustomFosUserBundle\Entity\User;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\CustomFosUserBundle\Entity\ProjectUser;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class UserController extends FOSRestController
@@ -34,8 +36,15 @@ class UserController extends FOSRestController
      */
     public function getProjectUsersAction($id)
     {
-        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
-        $users = $projectRepository->find($id)->getProjectUsers();
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:ProjectUser');
+        $projectUsers = $projectRepository->findByProject($id);
+        foreach($projectUsers as $projectUser){
+            $users[]=['id'=>$projectUser->getUser()->getId(),
+                'username'=>$projectUser->getUser()->getUsername(),
+                'firstName'=>$projectUser->getUser()->getFirstname(),
+                'lastName'=>$projectUser->getUser()->getLastname(),
+                ];
+        }
         if (!$users) {
             throw $this->createNotFoundException('Data not found.');
         }
@@ -44,5 +53,34 @@ class UserController extends FOSRestController
         return $view;
     }
 
-
+    /**
+     * Return the project associated to a user.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Return the project members",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when no users are found"
+     *   }
+     * )
+     *
+     * @param int $id id
+     *
+     * @return View
+     */
+    public function getUsersProjectAction($id)
+    {
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:ProjectUser');
+        $projectUsers = $projectRepository->findByUser($id);
+        foreach($projectUsers as $projectUser){
+            $projects[]=['id'=>$projectUser->getProject()->getId(),'name'=>$projectUser->getProject()->getName()];
+        }
+        if (!$projects) {
+            throw $this->createNotFoundException('Data not found.');
+        }
+        $view = View::create();
+        $view->setData($projects)->setStatusCode(200);
+        return $view;
+    }
 }
