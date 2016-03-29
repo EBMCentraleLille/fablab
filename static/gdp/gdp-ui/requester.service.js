@@ -1,8 +1,8 @@
 var uiModule = require('./_index');
 
-uiModule.factory('rq',['$http',getRequester]);
+uiModule.factory('rq',['$http','toastr',getRequester]);
 
-function getRequester($http) {
+function getRequester($http,toastr) {
     var service = {
         'init':init,
         'createTask': createTask,
@@ -122,6 +122,7 @@ function getRequester($http) {
 
 
     function handleError(err) {
-        console.log(err);
+        console.log(err)
+        toastr.error(['Erreur:',err].join(" "));
     }
 }

@@ -18,12 +18,8 @@ function taskController($scope,rq,toastr) {
         $scope.status.isopen = !$scope.status.isopen;
     };
 
-    $scope.selectedDay = Date.today()
 
     /* Temporary */
-
-
-
 
     $scope.onDragOver = function(data,taskgroup) {
     }
@@ -48,12 +44,13 @@ function taskController($scope,rq,toastr) {
 
     $scope.taskLists=[];
     $scope.projectUsers=[]
-    $scope.spaceData=[{},{},{}];
+    //$scope.spaceData=[{},{},{}];
     $scope.currentProject={};
     $scope.userProjects=[];
     $scope.newTaskListName="";
     $scope.showTaskListDelete = false;
     $scope.showTaskCreated=false;
+    $scope.selectedDay = Date.today();
 
 
     /* Scope functions */
@@ -73,10 +70,10 @@ function taskController($scope,rq,toastr) {
         getProjects(function() {
             getTaskLists();
             getProjectUsers();
-            for(var t in $scope.tasks) {
+            /*for(var t in $scope.tasks) {
                 var taskgroup = $scope.tasks[t];
                 $scope.spaceData[taskgroup.space-1]=taskgroup;
-            }
+            }*/
         })
 
     })();

@@ -15,25 +15,6 @@
         <div class="col-md-4">
             <h1 class="center">Vue Planning</h1>
         </div>
-        <div class="col-md-4 list-management">
-            <div class="col-md-8">
-                <div class="input-group">
-                    <input type="text" class="form-control"
-                           ng-model="newTaskListName" placeholder="Nouvelle liste">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success"
-                                ng-class="(newTaskListName.length>3)?'':'disabled'"
-                                ng-click="createTaskList()">Créer</button>
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-warning new-task" ng-click="doCancelButton()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    &nbsp;Supprimer listes
-                </button>
-            </div>
-        </div>
     </div>
 
 
@@ -71,7 +52,6 @@
                     <div ng-hide="tasks[day][0]">
                         Aucune tâche
                     </div>
-                    <!-- Liste des écheances pour ce jour -->
                 </div>
             </div>
         </div>
