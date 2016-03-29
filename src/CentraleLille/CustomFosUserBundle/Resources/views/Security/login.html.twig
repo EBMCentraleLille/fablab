@@ -7,6 +7,7 @@
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -50,7 +51,6 @@
                     <a href=" {{ path('fos_user_registration_register') }}">Inscription</a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

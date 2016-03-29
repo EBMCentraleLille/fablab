@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "4362b87726d86700068f334ec98b1b61",
+    "content-hash": "58a445f37e150b453d0180f1e8c04f19",
     "packages": [
         {
             "name": "adesigns/calendar-bundle",
