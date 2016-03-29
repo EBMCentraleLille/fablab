@@ -18,23 +18,53 @@ class ForumService
     }
 
     function getThread($id){
-      return $this->em->getRepository('KnowledgeBundle:ForumThread')->findOneById($id);
+      return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findOneById($id);
     }
 
     function getThreadList(){
-      return $this->em->getRepository('KnowledgeBundle:forumThread')->findAll();
+      return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findAll();
+    }
+
+    /**
+     * Retourne les threads récemment créés
+     *
+     * @param integer $limit nombre de threads retournés
+     *
+     * @return array $recentThreads
+     */
+    public function getRecentThreads($limit)
+    {
+        $repository = $this->em->getRepository("CentraleLilleKnowledgeBundle:ForumThread");
+        $query = $repository->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery();
+        $recentProjects = $query->getResult();
+
+        return $recentProjects;
+    }
+
+    public function getUserThreads($user_id)
+    {
+        if ($user_id == null) {
+            return false;
+        } else {
+            return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findByAuthor($user_id);
+        }
+
+        return $userProjects;
     }
 
     public function getPostList($thread_id)
     {
-        if ($forumThread == null) {
+        if ($thread_id == null) {
             return false;
         } else {
-            return $this->em->getRepository('KnowledgeBundle:ForumPost')->findByForumThread($thread_id);
+            return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumPost')->findByThread($thread_id);
         }
     }
 
-    public function createThread($author, $title, $content, $tags, $status = 'open')
+    public function createThread($author, $title, $content, $tags, $status = 'Ouvert')
     {
         if ($author == null || $title == null || $content = null || $tags == null) {
             return false;
