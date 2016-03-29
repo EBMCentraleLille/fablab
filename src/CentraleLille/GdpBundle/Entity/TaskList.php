@@ -39,7 +39,8 @@ class TaskList
      */
     private $project;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -112,5 +113,3 @@ class TaskList
         $this->project = $project;
     }
 }
-
-    

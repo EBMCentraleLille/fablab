@@ -57,19 +57,19 @@ class Activity
     private $date;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-    **/
+     * @ORM\ManyToOne (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     */
     private $project;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
+    * @ORM\ManyToOne (targetEntity="CentraleLille\CustomFosUserBundle\Entity\User"), cascade={"persist"})
     **/
     private $user;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="Type", type="integer")
+     * @ORM\Column(name="Name", type="string", length=255)
      */
     private $type;
 
@@ -118,7 +118,7 @@ class Activity
     /**
      * Set project
      *
-     * @param string $project Objet Projet
+     * @param string $project Objet Project
      *
      * @return Activity
      */
@@ -166,7 +166,7 @@ class Activity
     /**
      * Set type
      *
-     * @param integer $type Type de l'actualité: Création/Update/Personnalisé
+     * @param string $type Type de l'actualité: Création/Update/Personnalisé
      *
      * @return Activity
      */
@@ -180,7 +180,7 @@ class Activity
     /**
      * Get type
      *
-     * @return int
+     * @return string
      */
     public function getType()
     {
@@ -222,10 +222,11 @@ class Activity
     /**
      * Add project
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
      *
      * @return Activity
      */
+    //public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     public function addProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->project[] = $project;
@@ -236,10 +237,11 @@ class Activity
     /**
      * Remove project
      *
-     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Projet
+     * @param \CentraleLille\CustomFosUserBundle\Entity\Project $project Objet Project
      *
      * @return void
      */
+    //public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     public function removeProject(\CentraleLille\CustomFosUserBundle\Entity\Project $project)
     {
         $this->project->removeElement($project);

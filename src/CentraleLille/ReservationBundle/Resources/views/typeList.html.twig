@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} {{ parent() }} - Types de machine {% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+        <div class="row" >
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h3>  Types de machine </h3>
+                <div>
+                {% for type in types %}
+                    <div class="well">
+                        <ul>
+                            <li>Type : {{ type.getName }} </li>
+                            <li>Description : {{ type.getDescription }} </li>
+
+                        </ul>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+{% endblock body %}

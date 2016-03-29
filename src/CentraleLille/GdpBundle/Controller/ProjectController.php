@@ -76,5 +76,4 @@ class ProjectController extends FOSRestController
         $view->setData($project)->setStatusCode(200);
         return $view;
     }
-
 }
