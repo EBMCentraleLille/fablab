@@ -44,11 +44,9 @@ function taskController($scope,rq,toastr) {
         }
     ]
 
+    $scope.taskLists=[];
     $scope.projectUsers=[]
-
     $scope.spaceData=[{},{},{}];
-
-
     $scope.currentProject={};
     $scope.userProjects=[];
     $scope.newTaskListName="";
@@ -105,14 +103,12 @@ function taskController($scope,rq,toastr) {
     function getTasks() {
         rq.getTasks($scope.currentProject.id,function(res) {
             $scope.tasks[0].data=res.data;
-            console.log(res.data)
         })
     }
 
     function getProjectUsers() {
         rq.getUsers($scope.currentProject.id,function(res) {
-            $scope.projectUsers=res.data;
-            console.log($scope.projectUsers)
+            $scope.projectUsers=res.data
         })
     }
 
@@ -135,6 +131,12 @@ function taskController($scope,rq,toastr) {
         rq.createTaskList(data,function(res) {
             toastr.success(['List de tâches',data.name,'créée.'].join(" "));
         })
+    }
+
+    function getTaskLists() {
+        rq.getTaskLists(function(res) {
+            $scope.taskLists=res.data;
+        });
     }
 
 }
