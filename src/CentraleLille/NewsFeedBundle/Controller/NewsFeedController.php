@@ -155,9 +155,8 @@ class NewsFeedController extends Controller
                         }
                     }
                 }
-
                 return $this->render(
-                    'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
+                    'CentraleLilleNewsFeedBundle:Default:newsFeed.html.twig',
                     [
                         'recentActivities' => $recentActivities,
                         'abonnements' => $abonnementsProjet,
@@ -169,7 +168,7 @@ class NewsFeedController extends Controller
             }
 
             return $this->render(
-                'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
+                'CentraleLilleNewsFeedBundle:Default:newsFeed.html.twig',
                 [
                     'recentActivities' => $recentActivities,
                     'abonnements' => $abonnements,

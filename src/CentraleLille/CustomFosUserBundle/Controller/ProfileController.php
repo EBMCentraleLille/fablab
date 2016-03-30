@@ -28,6 +28,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
+
 class ProfileController extends BaseController
 {
     /**
@@ -40,16 +41,22 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+
         $listUserCompetences = $this->container->get('app.competence.service')->getUserCompetenceList($user);
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
             'user' => $user,
             'competencesUser' => $listUserCompetences
         ));
+        // return $this->render('FOSUserBundle:Profile:show.html.twig', array(
+        //     'user' => $user,
+        //     'projects' => $user->getProjectUsers()
+        // ));
     }
 
     /**
      * @Route("/profile/edit" , name="fos_user_profile_edit")
+     * Edit the user
      */
     public function editAction(Request $request)
     {
@@ -90,7 +97,12 @@ class ProfileController extends BaseController
                 $response = new RedirectResponse($url);
             }
 
+
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            // $dispatcher->dispatch(
+            //     FOSUserEvents::PROFILE_EDIT_COMPLETED,
+            //     new FilterUserResponseEvent($user, $request, $response)
+            // );
 
             return $response;
         }
@@ -99,5 +111,4 @@ class ProfileController extends BaseController
             'form' => $form->createView()
         ));
     }
-
 }

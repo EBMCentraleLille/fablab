@@ -1,0 +1,44 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+{% endblock stylesheets %}
+{% block body %}
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-2"></div>
+	        <div class="col-md-8">
+	        	<h4>Liste des activités</h4>
+	        	<a href="{{ path("centrale_lille_newsfeed_new_activity") }}" class="btn btn-primary"> 
+	        		Ajouter une activité
+	        	</a>
+	        	{% if recentActivities is defined %}
+	        		<table class="table table-striped table-hover ">
+					  	<thead>
+						    <tr>
+						      <th>#</th>
+						      <th>Date</th>
+						      <th>Contenu</th>
+						      <th>Nom du projet</th>
+						      <th>Nom du user</th>
+						    </tr>
+					  	</thead>
+					<tbody>
+						{% for recentActivity in recentActivities %}
+				        	<tr>
+						      	<td>{{ loop.index }}</td>
+						      	<td>{{ recentActivity.date|date('Y-m-d') }}</td>
+						      	<td>{{ recentActivity.content }}</td>
+							  	<td>{{ recentActivity.project.name }}</td>
+							    <td>{{ recentActivity.user.firstname }} </td>
+						    </tr>
+			        	{% endfor %}
+			        </tbody>
+		        </table>
+		       	{% else %}
+			       	Il n'y a pas encore d'activité. Créez en une !
+			    {% endif %}
+	        </div>
+	    	<div class="col-md-2"></div>
+	    </div>	
+	</div>
+{% endblock body %}

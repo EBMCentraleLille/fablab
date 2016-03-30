@@ -1,0 +1,43 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block body %}
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-2"></div>
+	        <div class="col-md-8">
+	        	<h4>Liste des projets 'stars'</h4>
+	        	<a href="{{ path("centrale_lille_homepage_star_project_new") }}" class="btn btn-primary"> 
+	        		Ajouter un Projet Star
+	        	</a>
+	        	{% if starProjects is defined %}
+		        	<table class="table table-striped table-hover ">
+					  <thead>
+					    	<tr>
+					      		<th>#</th>
+					      		<th>Contenu</th>
+					      		<th>Nom du projet</th>
+					    	</tr>
+					   </thead>
+					   <tbody>
+				        	{% for starProject in starProjects %}
+						       	<tr>
+									<td>{{ loop.index }}</td>
+									<td>{{ starProject.content }}</td>
+									<td>{{ starProject.projectName }}
+									    {% if loop.index == 1 %}
+									      	<div style="color:red">Actuel</div>
+									    {% endif %}
+				        			</td>
+								</tr>
+			        		{% endfor %}
+			        	</tbody>
+		        	</table>
+		        {% else %}
+			        Il n'y a pas encore de projet star. Créez en un !
+			    {% endif %}
+	        </div>
+	    	<div class="col-md-2"></div>
+	    </div>
+	</div>
+{% endblock body %}

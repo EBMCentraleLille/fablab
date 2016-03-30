@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block body %}
+	<div style="margin-top:75px">
+		<div class="row" >
+			<div class="col-md-3"></div>
+	        <div class="col-md-6">
+	        	<div class="h2">Changer le projet Star</div>
+	        	{{ form_start(form) }}
+					{{ form_widget(form) }}
+					<input type="submit" value="Ajouter le projet star"
+           				class="btn btn-primary" />
+				{{ form_end(form) }}
+				<a class="btn btn-default" href="{{ path("centrale_lille_homepage_star_project")}}">
+						Retour
+				</a>
+	        </div>
+	    	<div class="col-md-3"></div>
+	    </div>	
+	</div>
+{% endblock body %}

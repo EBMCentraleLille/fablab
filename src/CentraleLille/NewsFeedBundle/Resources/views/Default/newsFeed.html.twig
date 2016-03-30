@@ -1,0 +1,120 @@
+{% extends "layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/newsFeed.css') }}" />
+{% endblock stylesheets %}
+{% block body %}
+    <div class="newsFeed">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 filter-menu">
+            <h3>Filtres</h3>
+            <form action="">
+                {{ form_start(form) }}
+                <h4>Type d'activité</h4>
+                    <div class = chkbox-filter>
+                        {{ form_row(form.creation) }}
+                        {{ form_row(form.update) }}
+                    </div>
+                <h4>Thématiques</h4>
+                <div class = chkbox-filter>
+                    {% for category in categories %}
+                        {{ form_row(attribute(form, category.id))}}
+                    {% endfor %}
+                </div>
+                <h4>Date</h4>
+                {{ form_row(form.dateMin) }}
+                {{ form_row(form.dateMax) }}
+                <input type="submit" value="Appliquer les filtres"
+                       class="btn btn-primary" />
+                {{ form_end(form) }}
+            <form/>
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h2>Fil d'actualité</h2>
+                {% if not recentActivities %}
+                    Vous n'avez aucune activité à afficher. N'hésitez pas à suivre des projets où des catégories pour voir leurs actualités.
+                {% else %}
+                    {% for recentActivity in recentActivities %}
+                        <div class="news row">
+                            <div class="project-name">
+                                <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
+                                    {{ recentActivity.project.name }}
+                                </a>
+                                <div class="time-elapsed">Le {{ recentActivity.date|date('Y-m-d') }} à {{ recentActivity.date|date('H:i') }}</div>
+                            <div class="activity-content">
+                                    {{ recentActivity.content }}
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <a href="{{ path("project_page_homepage", { 'projectId': recentActivity.project.id }) }}">
+                                    <div class="recentProjectPicture" style="background-image:url('{{ recentActivity.project.picture }}');"></div>
+                                </a>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="recentProject {{ recentActivity.project.name }}">
+                                            {% if not likes[recentActivity.project.name] %}
+                                                <object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+                                                <div class ="{{ recentActivity.project.name }}" id="follow">Suivre</div>
+                                            {% else %}
+                                                <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                                <div class ="{{ recentActivity.project.name }}" id="follow">Ne Plus Suivre</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="right-menu">
+                <div class="button-right-menu">
+                    <a href="{{ path("fos_user_profile_show")}}">
+                        <div class="panel-body">
+                            Mon Profil
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="button-right-menu">
+                    <a href="#">
+                        <div class="panel-body">
+                            Mes Projets
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
+                </div>
+                <div class="button-right-menu">
+                    <a href="{{ path("centrale_lille_newsfeed_abonnements")}}">
+                        <div class="panel-body">
+                            Mes Abonnements
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-1"></div>
+</div>
+<script src="{{ asset('jquery.js') }}"></script>
+<script src="{{ asset('js/oXHR.js') }}"></script>
+{{ include('like.html.twig') }}
+<script>
+    var projectsName = [];
+    {% for recentActivity in recentActivities %}
+        if (projectsName.indexOf("{{ recentActivity.project.name }}") == -1) {
+            projectsName.push("{{ recentActivity.project.name }}");
+
+            $('[class="' + "{{ recentActivity.project.name }}" + '"]').click(function() {
+                likefunction($('[class="' + "{{ recentActivity.project.name }}" + '"]'), "{{ recentActivity.project.name }}","{{ path('news_feed_subscribe') }}");
+            });
+        };
+    {% endfor %}
+</script>
+{% endblock body %}
+
