@@ -3,6 +3,7 @@
 namespace CentraleLille\GdpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use CentraleLille\GdpBundle\Enum\TaskStatus;
 
 //use CentraleLille\CustomFosUserBundle\Entity\User as User;
 
@@ -40,7 +41,7 @@ class Task
     /**
      * @var bool
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="string", length=255)
      */
     private $status;
 
@@ -52,20 +53,41 @@ class Task
     private $author;
 
     /**
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="createdDate", type="date")
      */
-    private $date;
+    private $createdDate;
 
     /**
-     * @ORM\OneToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
+     * @ORM\Column(name="endDate", type="date")
+     */
+    private $endDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User")
      * @ORM\JoinColumn(name="in_charge_user_id", referencedColumnName="id")
      */
     private $inChargeUser;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
+     * @ORM\JoinColumn(name="tasklist_id",referencedColumnName="id")
+     */
+    private $taskLists;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     */
+    private $project;
+
+
     public function __construct()
     {
-        $this->date = new \DateTime();
+        $this->createdDate = new \DateTime();
+        $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = TaskStatus::PLANIFIE;
     }
 
     /**
@@ -135,7 +157,9 @@ class Task
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        if (TaskStatus::isValidValue($status)) {
+            $this->status = $status;
+        }
 
         return $this;
     }
@@ -175,25 +199,49 @@ class Task
     }
 
     /**
-     * Set date
+     * Set createdDate
      *
-     * @param \DateTime $date
+     * @param \DateTime $ate
      *
      * @return Task
      */
-    public function setDate($date)
+    public function setCreatedDate($date)
     {
-        $this->date = $date;
+        $this->createdDate = $date;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get createdDate
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $date
+     *
+     * @return Task
+     */
+    public function setEndDate($date)
+    {
+        $this->endDate = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
     {
         return $this->date;
     }
@@ -220,5 +268,37 @@ class Task
     public function getInChargeUser()
     {
         return $this->inChargeUser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param mixed $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+    /**
+     * @param mixed $taskList
+     */
+    public function setTaskList($taskList)
+    {
+        $this->taskLists = $taskList;
+    }
+
+    /**
+     * @return \CentraleLille\GdpBundle\Entity\User
+     */
+    public function getTaskList()
+    {
+        return $this->taskLists;
     }
 }

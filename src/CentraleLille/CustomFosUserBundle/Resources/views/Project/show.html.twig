@@ -1,8 +1,100 @@
-{{ project.name }}
+{% extends 'layout.html.twig' %}
 
-{% if currentUser != null and currentUser.hasRoleWithinProject(constant('\\CentraleLille\\CustomFosUserBundle\\Entity\\ProjectRole::PROJECT_ROLE_LEADER'), project) %}
+{% block body %}
+<br><br><br>
+    <div class="container-fluid">
+        <h1 class="text-primary text-center">{{ project.name }}</h1>
 
-    <br>
-    You are the leader!!!!
+        {% if project_service.isAllowedLeader(currentUser, project) %}
+            <p>You are leader of this project</p>
+        {% endif %}
 
-{% endif %}
+        {% if error is not empty %}
+            <div class="alert alert-danger">
+                <strong>{{ error }}</strong>
+            </div>
+        {% endif %}
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="text-center">Membres du projet</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Username</th>
+                        <th>Projets</th>
+                        <th>Rôles</th>
+                        <th>Retirer</th>
+                    </tr>
+                    {% for user in projectUsers %}
+                        <tr>
+                            <td style="vertical-align: middle;">{{ user.username }}
+                            </td>
+                            <td style="vertical-align: middle">
+                                {% for pu in user.projectUsers %}
+                                    <a href="{{ path('project_show', {'projectId' : pu.project.id}) }}"> {{ pu.project.name }}</a>
+                                    <br>
+                                {% endfor %}
+                            </td>
+                            <td style="vertical-align: middle">
+                                <b>Global: </b>
+                                {% for role in user.roles %}
+                                    {{role}}
+                                    {% if not loop.last %}
+                                        -
+                                    {% endif %}
+                                {% endfor %}
+                                <br>
+                                {% for pu in user.projectUsers %}
+                                    {% if pu.roles is not empty %}
+                                        <b>{{ pu.project.name }}: </b>
+                                        {% for pRole in pu.roles %}
+                                            {{ pRole.name }}
+                                            {% if not loop.last %}
+                                                -
+                                            {% endif %}
+                                        {% endfor %}
+                                        <br>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a class="btn" href="{{ path('project_remove_user', {'projectId':project.id, 'userId':user.id}) }}"><img style="width:30px;height:auto;" src="{{ asset('img/remove-user.png') }}"></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="text-center">Ajouter un utilisateur</h4>
+        </div>
+        <div class="panel-body">
+            {{ form_start(formUsername, {'method': 'post', 'action': path('project_show',{'projectId':project.id})}) }}
+            <div class="row">
+                <div class="form-group col-md-4">
+                    {{ form_errors(formUsername.username) }}
+                    {{ form_label(formUsername.username, 'Nom utilisateur', {'label_attr':{'class': 'control-label'}}) }}
+                    {{ form_widget(formUsername.username, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form_errors(formUsername.roles) }}
+                    {{ form_label(formUsername.roles, 'Rôle', {'label_attr':{'class': 'control-label'}}) }}
+                    {{ form_widget(formUsername.roles, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <input class="btn btn-primary btn-block" type="submit" value="Ajouter" />
+                </div>
+            </div>
+            {{ form_end(formUsername) }}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

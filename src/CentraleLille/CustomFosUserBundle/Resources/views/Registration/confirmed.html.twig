@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+<br><br><br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-dismissible alert-success">
+                <p><strong>Félicitations {{ user.username }}</strong>, ton compte est maintenant <strong>activé</strong>.</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="{{ path('fos_user_profile_show') }}">Voir mon profil</a>
+        </div>
+    </div>
+
+{% endblock body %}

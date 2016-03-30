@@ -17,6 +17,7 @@
 
 namespace CentraleLille\NewsFeedBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use CentraleLille\NewsFeedBundle\Entity\Abonnement;
 use CentraleLille\CustomFosUserBundle\Entity\Project;
 use CentraleLille\NewsFeedBundle\ServicesInterfaces\FablabAbonnementsInterface;
@@ -38,13 +39,13 @@ class FablabAbonnements implements FablabAbonnementsInterface
     /**
      * Fonction construct de la classe FablabAbonnements
      *
-     * @param \Doctrine\ORM\EntityManager $entityManager Entity Manager de Doctrine
+     * @param ObjectManager $manager Entity Manager de Doctrine
      *
      * @return void
      */
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(ObjectManager $manager)
     {
-        $this->em = $entityManager;
+        $this->em = $manager;
     }
     
     //
@@ -60,13 +61,13 @@ class FablabAbonnements implements FablabAbonnementsInterface
      */
     public function addAboCategory($user, $category)
     {
-        $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-        if (! $abonnement->findOneBy(array('user'=>$user))) {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        if (! $repository->findOneBy(array('user'=>$user))) {
             $abonnement = new Abonnement;
             $abonnement->setUser($user);
             $abonnement->setCategories($category);
         } else {
-            $abonnement=$abonnement->findOneBy(
+            $abonnement=$repository->findOneBy(
                 array('user'=>$user)
             );
             $abonnement->addCategory($category);
@@ -88,13 +89,13 @@ class FablabAbonnements implements FablabAbonnementsInterface
      */
     public function addAboProjet($user, $projet)
     {
-        $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-        if (! $abonnement->findOneBy(array('user'=>$user))) {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        if (! $repository->findOneBy(array('user'=>$user))) {
             $abonnement = new Abonnement;
             $abonnement->setUser($user);
             $abonnement->setProjects($projet);
         } else {
-            $abonnement=$abonnement->findOneBy(
+            $abonnement=$repository->findOneBy(
                 array('user'=>$user)
             );
             $abonnement->addProject($projet);
@@ -117,9 +118,16 @@ class FablabAbonnements implements FablabAbonnementsInterface
     public function getAboCategory($user)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-        $abonnement=$repository->findOneBy(
-            array('user'=>$user)
-        );
+        if (! $repository->findOneBy(array('user'=>$user))) {
+            $abonnement = new Abonnement;
+            $abonnement->setUser($user);
+            $this->em->persist($abonnement);
+            $this->em->flush();
+        } else {
+            $abonnement=$repository->findOneBy(
+                array('user'=>$user)
+            );
+        }
         return $abonnement->getCategories();
     }
     /**
@@ -135,9 +143,17 @@ class FablabAbonnements implements FablabAbonnementsInterface
     public function getAboProjet($user)
     {
         $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
-        $abonnement=$repository->findOneBy(
-            array('user'=>$user)
-        );
+        if (! $repository->findOneBy(array('user'=>$user))) {
+            $abonnement = new Abonnement;
+            $abonnement->setUser($user);
+            $this->em->persist($abonnement);
+            $this->em->flush();
+        } else {
+        
+            $abonnement=$repository->findOneBy(
+                array('user'=>$user)
+            );
+        }
         return $abonnement->getProjects();
     }
     
@@ -154,27 +170,78 @@ class FablabAbonnements implements FablabAbonnementsInterface
     public function getAboAll($user)
     {
         $projets=[];
-        $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement")->findOneBy(
-            array('user'=>$user)
-        );
-        $aboCategories=$this->getAboCategory($user);
-        $aboProjets=$this->getAboProjet($user);
-        foreach ($aboProjets as $aboProjet) {
-            array_push($projets, $aboProjet->getId());
-        }
-        foreach ($aboCategories as $aboCategory) {
-            $projetsCat=$this->em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(
-                array('name'=>$aboCategory->getName())
-            )->getProjets();
-            foreach ($projetsCat as $projetCat) {
-                if (! in_array($projetCat->getId(), $projets)) {
-                    array_push($projets, $projetCat->getId());
+        $abonnement=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        if (! $abonnement->findOneBy(array('user'=>$user))) {
+            $abonnement = new Abonnement;
+            $abonnement->setUser($user);
+            $this->em->persist($abonnement);
+            $this->em->flush();
+        } else {
+            $aboCategories=$this->getAboCategory($user);
+            $aboProjets=$this->getAboProjet($user);
+            foreach ($aboProjets as $aboProjet) {
+                array_push($projets, $aboProjet);
+            }
+            foreach ($aboCategories as $aboCategory) {
+                $projetsCat=$this->em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(
+                    array('name'=>$aboCategory->getName())
+                )->getProjects();
+                foreach ($projetsCat as $projetCat) {
+                    if (! in_array($projetCat, $projets)) {
+                        array_push($projets, $projetCat);
+                    }
                 }
             }
         }
         return $projets;
     }
     
+    /**
+     * Permet de savoir si un user est déja abonné à un projet
+     *
+     * @param array $user   Entité User
+     * @param array $projet Entité Projet
+     *
+     * @return boolean
+     */
+    public function isAboProjet($user, $projet)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        $projectsAbo=$repository->findOneBy(
+            array('user'=>$user)
+        )->getProjects();
+        
+        foreach ($projectsAbo as $projectAbo) {
+            if ($projectAbo->getId() == $projet->getId()) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Permet de savoir si un user est déja abonné à une catégorie
+     *
+     * @param array $user     Entité User
+     * @param array $category Entité Category
+     *
+     * @return boolean
+     */
+    public function isAboCategory($user, $category)
+    {
+        $repository=$this->em->getRepository("CentraleLilleNewsFeedBundle:Abonnement");
+        $categoriesAbo=$repository->findOneBy(
+            array('user'=>$user)
+        )->getCategories();
+        
+        foreach ($categoriesAbo as $categoryAbo) {
+            if ($categoryAbo->getName() == $category->getName()) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     /**
      * Fonction de suppression d'un abonnement catégorie d'un user
      *

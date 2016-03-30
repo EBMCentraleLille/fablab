@@ -1,3 +1,18 @@
-centrale_lille_homepage_homepage:
+centrale_lille_homepage:
     path:     /
     defaults: { _controller: CentraleLilleHomepageBundle:Homepage:index }
+centrale_lille_homepage_subscribe:
+    path:     /follow
+    defaults: { _controller: CentraleLilleHomepageBundle:Homepage:index }
+centrale_lille_homepage_category:
+    path:     /category/{category}
+    defaults: { _controller: CentraleLilleHomepageBundle:Homepage:category }
+centrale_lille_homepage_category_follow:
+    path:     /category/follow/{category}
+    defaults: { _controller: CentraleLilleHomepageBundle:Homepage:category }
+centrale_lille_homepage_star_project:
+    path:     /starproject
+    defaults: { _controller: CentraleLilleHomepageBundle:StarProject:index }
+centrale_lille_homepage_star_project_new:
+    path:     /starproject/new
+    defaults: { _controller: CentraleLilleHomepageBundle:StarProject:create }

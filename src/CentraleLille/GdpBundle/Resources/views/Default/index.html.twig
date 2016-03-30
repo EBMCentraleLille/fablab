@@ -1,0 +1,18 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('gdp/styles.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('gdp/vendor.css') }}"/>
+{% endblock stylesheets %}
+{% block body %}
+    <div ui-view></div>
+    {% block token %}
+        <script>
+            const JWTTOKEN = "{{token}}";
+        </script>
+    {% endblock %}
+    {% block javascripts %}
+        <script type="application/javascript" src="{{ asset('gdp/vendor.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('gdp/app.js') }}"></script>
+    {% endblock %}
+{% endblock body %}

@@ -1,0 +1,104 @@
+.abonnements{
+	margin-top: 75px; 
+}
+
+.project-name{
+  margin-bottom: 10px;
+}
+.recentProject{
+	text-align: center;
+}
+
+.projectPicture{
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+	height:250px;
+}
+.like{
+  cursor: pointer;
+  
+}
+.like:hover{
+    color:red;
+}
+
+#follow:hover{
+  text-decoration: underline;
+  cursor: hand;
+}
+
+.right-menu{
+  margin-top: 60px;
+  width:100%;
+
+}
+
+.recent-news{
+    overflow:scroll;
+    height:375px;
+    border: 1px solid;
+    border-color: #dddddd;
+    border-radius: 3px;
+}
+
+.list-group-items {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #ffffff;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+.list-group-items:hover{
+    background-color: #ecf0f1;
+}
+
+
+/* Suggestions */
+.recentProjectPicture{
+  background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  height:50px;
+  width:50px;
+}
+.news{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #dddddd;
+    border-radius: 3px;
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-left: 10px;
+}
+
+.recent-news{
+    overflow:scroll;
+    height:375px;
+    border: 1px solid;
+    border-color: #dddddd;
+    border-radius: 3px;
+}
+
+.list-group-items {
+    position: relative;
+    display: block;
+    padding: 10px;
+    margin-bottom: -1px;
+    background-color: #ffffff;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+.list-group-items:hover{
+    background-color: #ecf0f1;
+}
+
+.categories{
+    padding-right: 0px;
+    padding-left: 0px;
+}

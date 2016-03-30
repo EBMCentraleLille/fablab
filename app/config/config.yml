@@ -42,6 +42,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+#    form:
+#        resources:['bootstrap_3_layout.html.twig']
+    globals:
+        project_service: '@app.project.service'
 
 # Doctrine Configuration
 doctrine:
@@ -53,6 +57,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        mapping_types:
+          enum:    string
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -79,9 +85,6 @@ fos_user:
     user_class: CentraleLille\CustomFosUserBundle\Entity\User
     group:
         group_class: CentraleLille\CustomFosUserBundle\Entity\Project
-    registration:
-        form:
-            type: CentraleLille\CustomFosUserBundle\Form\RegistrationType
     profile:
         form:
             type: CentraleLille\CustomFosUserBundle\Form\ProfileType
@@ -90,7 +93,7 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
-# ElasticSearch Bundle configuration
+#ElasticSearch Bundle configuration
 fos_elastica:
     serializer: ~
     clients:
@@ -109,12 +112,30 @@ fos_elastica:
                         listener: ~
                         finder: ~
 
-                Machine:
+                machine:
                     serializer:
                         groups: [elastica, Default]
                     persistence:
                         driver: orm
-                        model: CentraleLille\ReservationBundle\Entity\Machine
+                        model: CentraleLille\ReservationBundle\Entity\Bookables\Machine
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                projet:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\CustomFosUserBundle\Entity\Project
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                competence:
+                    serializer:
+                        groups: [elastica, Default]
+                    persistence:
+                        driver: orm
+                        model: CentraleLille\KnowledgeBundle\Entity\Competence
                         provider: ~
                         listener: ~
                         finder: ~
@@ -160,3 +181,13 @@ assetic:
 
 nelmio_api_doc:
     name: API Documentation
+
+lexik_jwt_authentication:
+    private_key_path: %jwt_private_key_path%
+    public_key_path:  %jwt_public_key_path%
+    pass_phrase:      %jwt_key_pass_phrase%
+    token_ttl:        %jwt_token_ttl%
+
+gesdinet_jwt_refresh_token:
+    ttl: %jwt_token_refresh_ttl%
+    ttl_update: true

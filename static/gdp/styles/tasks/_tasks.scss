@@ -1,0 +1,35 @@
+.taskActions li {
+  list-style-type:none;
+  a {
+    cursor:pointer;
+  }
+}
+
+.task-title, .task-user {
+  float:left;
+  width:70%;
+  font-size:1.3em;
+}
+.task-actions {
+  float:right;
+  width:30%;
+}
+
+.task-title {
+  font-weight: 500;
+}
+
+.task-user {
+  font-size:12px;
+}
+
+.list-management {
+  margin-top:15px;
+}
+
+.view-navigation {
+  margin-top:15px;
+  .nav-items {
+    margin-left:10px;
+  }
+}

@@ -1,4 +1,4 @@
 php app/console doctrine:database:drop --force
-php app/console doctrine:database:create
+mysql -uroot -proot -e "CREATE DATABASE fablab"
 php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load
+php app/console doctrine:fixtures:load -n

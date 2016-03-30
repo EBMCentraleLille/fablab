@@ -1,0 +1,140 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/abonnements.css') }}" />
+
+{% endblock stylesheets %}
+
+{% block body %}
+    <div class="abonnements">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+                <h2>Abonnements</h2>
+                </br>
+                <div class="row panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Catégories</h4>
+                    </div>
+                <div class="panel-body">
+                    {% if abonnementsCategorie is empty %}
+                        Vous n'avez aucun abonnement à une catégorie.
+                    {% else %}
+                        {% for abonnementCategorie in abonnementsCategorie %}
+                            <div id="project-column" class="col-md-3">
+                                <div class="project-name">
+                                    <strong>{{ abonnementCategorie.name }}</strong>
+                                </div>
+                                <div class="panel panel-default">
+                                   <a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
+                                        <div class="projectPicture" style="background-image:url('{{ abonnementCategorie.picture }}');"></div>
+                                    </a>
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <a href="{{ path("centrale_lille_homepage_category", { 'category': abonnementCategorie.name }) }}">
+                                                <div class="col-md-6">
+                                                    <object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
+                                                    Page catégorie
+                                                </div>
+                                            </a>
+                                            <div class="col-md-6">
+                                                <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                                <div class ="{{ abonnementCategorie.name }}" id="follow">Ne plus suivre</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Projets</h4>
+                </div>
+                <div class="panel-body">
+                    {% if abonnementsProjet is empty %}
+                        Vous n'avez aucun abonnement à un projet.
+                    {% else %}
+                        {% for abonnementProjet in abonnementsProjet %}
+                            <div id="project-column" class="col-md-3">
+                                <div class="project-name">
+                                    <a href="{{ path("project_page_homepage", { 'projectId': abonnementProjet.id }) }}">
+                                        <strong>{{ abonnementProjet.name }}</strong>
+                                    </a>
+                                </div>
+                                <div class="panel panel-default">
+                                    <a href="{{ path("project_page_homepage", { 'projectId': abonnementProjet.id }) }}">
+                                        <div class="projectPicture" style="background-image:url('{{ abonnementProjet.picture }}');"></div>
+                                    </a>
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <a href="{{ path("project_page_homepage", { 'projectId': abonnementProjet.id }) }}">
+                                                <div class="col-md-6">
+                                                    <object data="{{ asset('icons/file.svg') }}" type="image/svg+xml"></object></br>
+                                                    Page projet
+                                                </div>
+                                            </a>
+                                            <div class="col-md-6">
+                                                <object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+                                                <div class ="{{ abonnementProjet.name }}" id="follow">Ne plus suivre</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="right-menu">
+                <div class="row">
+                    <ul class="list-group" >
+                        <div class="list-group-item active">
+                            <h4>Suggestions</h4>
+                        </div>
+                        <div class="recent-news">
+                            {% for recentProject in recentProjects %}
+                                <a href="{{ path("project_page_homepage", { 'projectId': recentProject.id }) }}">
+                                    <li class="list-group-items">
+                                        <div class="row">
+                                            <div class="news col-md-3" style="background-image:url('{{ recentProject.picture }}')"></div>
+                                            <div class="col-md-9">
+                                                <strong>{{ recentProject.name }}</strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        <div class="col-md-1"></div>
+    </div>
+    {{ include('like.html.twig') }}
+    <script>
+        var projectsName = [];
+        {% for abonnementProjet in abonnementsProjet %}
+            if (projectsName.indexOf("{{ abonnementProjet.name }}") == -1) {
+                projectsName.push("{{ abonnementProjet.name }}");
+
+                $('[class="' + "{{ abonnementProjet.name }}" + '"]').click(function() {
+                    likefunction($('[class="' + "{{ abonnementProjet.name }}" + '"]'), "{{ abonnementProjet.name }}","{{ path('centrale_lille_newsfeed_abonnements') }}");
+                });
+            };
+        {% endfor %}
+        var categoryName = [];
+        {% for abonnementCategory in abonnementsCategorie %}
+            if (categoryName.indexOf("{{ abonnementCategory.name }}") == -1) {
+                categoryName.push("{{ abonnementCategory.name }}");
+
+                $('[class="' + "{{ abonnementCategory.name }}" + '"]').click(function() {
+                    likeCategoryfunction($('[class="' + "{{ abonnementCategory.name }}" + '"]'), "{{ abonnementCategory.name }}","{{ path('centrale_lille_newsfeed_abonnements') }}");
+                });
+            };
+        {% endfor %}
+    </script>
+{% endblock body %}

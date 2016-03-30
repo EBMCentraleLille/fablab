@@ -1,3 +1,7 @@
+centrale_lille_gdp_api:
+    resource: "@CentraleLilleGdpBundle/Resources/config/routing_rest.yml"
+    prefix:   /gdp/api
+
 centrale_lille_search:
     resource: "@CentraleLilleSearchBundle/Controller/"
     type:     annotation
@@ -30,7 +34,7 @@ centrale_lille_homepage:
 
 centrale_lille_reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix: /reservation
+    prefix: /booking
 
 app:
     resource: "@AppBundle/Controller/"
@@ -58,3 +62,16 @@ fos_user_change_password:
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
+
+api_login_check:
+    path: /api/login_check
+
+gesdinet_jwt_refresh_token:
+    path:     /api/token/refresh
+    defaults: { _controller: gesdinet.jwtrefreshtoken:refresh }
+
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+fos_js_routing:
+      resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

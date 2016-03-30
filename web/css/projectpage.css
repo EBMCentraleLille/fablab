@@ -1,0 +1,90 @@
+.newsFeed{
+	margin-top: 75px; 
+}
+
+.news{
+	border-radius: 4px;
+	border: 1px solid;
+    border-color: #dddddd;
+    padding:10px;
+    background-color: #FCFCFC;
+  margin-bottom:10px; 
+  margin-top:10px; 
+}
+
+.filter-menu{
+}
+
+.right-menu{
+  margin-top: 60px;
+  width:100%;
+
+}
+
+.time-elapsed{
+  float: right;
+}
+.project-name{
+  margin-bottom: 10px;
+}
+.recentProject{
+	text-align: center;
+}
+.recentProjectPicture{
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+	height:250px;
+}
+.like{
+  cursor: pointer;
+  
+}
+.like:hover{
+    color:red;
+}
+
+#follow:hover{
+  text-decoration: underline;
+  cursor: hand;
+}
+
+.button-right-menu {
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border-color: #dddddd;
+      -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.button-right-menu:hover{
+	background-color: #f39c12;
+  color: white;
+}
+.arrow-right{
+ 	float: right;
+}
+
+.add{
+  float:right;
+  font-size: 60px;
+  color:grey;
+  margin-top: -15px;
+  text-align: center;
+}
+
+.chkbox-filter{
+    padding-left: 20px;
+    font-weight: normal;
+
+}

@@ -17,7 +17,10 @@
 
 namespace CentraleLille\NewsFeedBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use CentraleLille\CustomFosUserBundle\Entity\Project;
+use CentraleLille\NewsFeedBundle\Form\FilterType;
 
 /**
  * NewsFeedController Class Doc
@@ -38,84 +41,142 @@ class NewsFeedController extends Controller
     *
     * Fonction qui charge les premières actualités d'un utilisateurs en fonction de ses abonnements
     *
+    * @param Request $request Requête http
+    *
     * @return Twig
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $recentProjects=[
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'likes'=>19,
-                'messages'=>3,
-                'files'=>4,
-                'date'=>"25/10/2011"
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'likes'=>19,
-                'messages'=>3,
-                'files'=>4,
-                'date'=>"25/10/2011"
-            ],
-            [
-                'userName'=>'Martin Lechaptois',
-                'projectName'=>'Project De Martin',
-                'projectPic'=>'http://thingiverse-production-new.s3.amazonaws.com'
-                . '/renders/71/73/1f/f0/10/1c60646068ae96e9d944ead31ad3c6ec_preview_featured.jpg',
-                'likes'=>19,
-                'messages'=>3,
-                'files'=>4,
-                'date'=>"25/10/2011"
-            ]];
-        $suggestions=[
-            [
-                'type'=>1,
-                'name'=>'Project De Martin'
-            ],
-            [
-                'type'=>2,
-                'name'=>'Catégorie Charles'
-            ],
-            [
-                'type'=>1,
-                'name'=>'Project De James'
-            ],
-            [
-                'type'=>2,
-                'name'=>'Catégorie Roger'
-            ],
-            [
-                'type'=>1,
-                'name'=>'Project De Martin'
-            ]
-            ];
-            $em=$this->getDoctrine()->getManager();
-            //$user=$em->getRepository('CentraleLilleCustomFosUserBundle:User')->findOneBy(array('name'=>'Martin'));
-            //$projet=$em->getRepository('CentraleLilleDemoBundle:Projet')->findOneBy(array('name'=>'projet2'));
-            $category=$em->getRepository('CentraleLilleNewsFeedBundle:Category')->findOneBy(array('name'=>'category1'));
+        $user = $this->getUser();
+        if (!$user) {
+            $session = $request->getSession()->getFlashBag()->add(
+                'notice',
+                "Vous devez être connecté pour accéder votre Fil d'Actualité."
+            );
+            return $this->redirectToRoute('fos_user_security_login');
+        } else {
+            //récupération du projet liké/déliké
+            $projectName = $request->request->get('projet');
+            if ($projectName) {
+                $em = $this->getDoctrine()->getManager();
+                $projet=$em->getRepository("CustomFosUserBundle:Project")->findOneBy(array('name'=>$projectName));
+                
+                //Abonnement/désabonnement du user au projet en question
+                $abonnementService=$this->container->get('fablab_newsfeed.abonnements');
+                if ($abonnementService->isAboProjet($user, $projet)) {
+                    $recentActivities=$abonnementService->removeAboProjet($user, $projet);
+                } else {
+                    $recentActivities=$abonnementService->addAboProjet($user, $projet);
+                }
+            }
 
+            //Récupération des abonnements du user
             $abonnementService = $this->container->get('fablab_newsfeed.abonnements');
-            //$abonnementService->addAboProjet($user,$projet);
-            //$abonnementService->addAboCategory($user,$category);
-            //$projets=$abonnementService->getAboProjet($user);
-            //$categories=$abonnementService->getAboCategory($user);
-            //$projets=$abonnementService->getAboAll($user);
-            //$abonnementService->removeAboProjet($user,$projet);
-            //$abonnementService->removeAboCategory($user,$category);
-            //var_dump($projets);die;
+            $abonnements = $abonnementService->getAboAll($user);
+            $abonnementsProjets = $abonnementService->getAboProjet($user);
+            $likes=[];
+            $abo=[];
+            
+            //récupération des likes
+            foreach ($abonnementsProjets as $abonnementsProjet) {
+                array_push($abo, $abonnementsProjet);
+            }
+            foreach ($abonnements as $abonnement) {
+                if (in_array($abonnement, $abo)) {
+                    $aboProjet = array($abonnement->getName() => 1);
+                    $likes = array_merge($likes, $aboProjet);
+                } else {
+                    $aboProjet = array($abonnement->getName() => 0);
+                    $likes = array_merge($likes, $aboProjet);
+                }
+            }
+            $count=0;
+            foreach ($abonnements as $abonnement) {
+                $count++;
+                break;
+            }
+            if ($count != 0) {
+                //Récupération des dernières actualités
+                $activityService = $this->container->get('fablab_newsfeed.activities');
+                $recentActivities = $activityService->getActivitiesNewsFeed($abonnements, 10);
+            } else {
+                $recentActivities=[];
+            }
 
-        return $this->render(
-            'CentraleLilleNewsFeedBundle::newsFeed.html.twig',
-            [
-                'recentProjects' => $recentProjects,
-                'suggestions' => $suggestions
-            ]
-        );
+            //Récupération des catégories pour le filtre
+            $categoryService = $this->container->get('fablab_newsfeed.categories');
+            $categories = $categoryService->getCategories();
+
+            $filter = [];
+            $form = $this
+                ->get('form.factory')
+                ->create(new FilterType($categories), $filter);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $data = $form->getData();
+
+                foreach ($recentActivities as $index => $recentActivity) {
+                    $isDeleted = false;
+                    foreach ($data as $key => $datavalue) {
+                        if (!$isDeleted) {
+                            switch ($key) {
+                                case 'creation':
+                                    if ($recentActivity->getType() != 'Creation') {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                case 'update':
+                                    if ($recentActivity->getType() != 'update') {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                case 'dateMin':
+                                    if ($recentActivity->getDate() <= $datavalue['dateMin']) {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                case 'dateMax':
+                                    if ($recentActivity->getDate() >= $datavalue['dateMax']) {
+                                        unset($recentActivities[$index]);
+                                        $isDeleted = true;
+                                    }
+                                    break;
+                                default:
+                                    if (is_numeric($key)) {
+                                        /*if&& $recentActivity->getProject()->getCategory() !== $thematics*/
+                                        //unset($recentActivity);
+                                        //$isDeleted = true;
+                                    }
+                            }
+                        }
+                    }
+                }
+                return $this->render(
+                    'CentraleLilleNewsFeedBundle:Default:newsFeed.html.twig',
+                    [
+                        'recentActivities' => $recentActivities,
+                        'abonnements' => $abonnementsProjet,
+                        'thematics' => $thematics,
+                        'form' => $form->createView(),
+                        'likes' => $likes,
+                    ]
+                );
+            }
+
+            return $this->render(
+                'CentraleLilleNewsFeedBundle:Default:newsFeed.html.twig',
+                [
+                    'recentActivities' => $recentActivities,
+                    'abonnements' => $abonnements,
+                    'categories' => $categories,
+                    'form' => $form->createView(),
+                    'likes' => $likes,
+                ]
+            );
+        }
     }
 }

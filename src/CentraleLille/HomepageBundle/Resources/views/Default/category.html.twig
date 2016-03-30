@@ -1,0 +1,101 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
+{% endblock stylesheets %}
+{% block body %}
+	<br><br>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="h2">{{ category }}
+					{% if app.user %}
+						{% if not isAbo %}
+			                <div class="btn btn-primary">
+			                <div class ="{{ category }}">Suivre</div>
+			                </div>
+			            {% else %}
+			                <div class="btn btn-primary">
+			                	<div class ="{{ category }}">Ne plus suivre</div>
+			                </div>
+			            {% endif %}
+			        {% endif %}
+				</div>
+			</div>
+			<div class="row panel panel-primary ">
+				<div class="panel-heading">
+					<h4>Projets dans cette catégorie</h4>
+				</div>
+				<div class="panel-body">
+					{% if projects is empty %}
+                        Il n'y a aucun projet dans cette catégorie.
+                    {% else %}
+						{% for project in projects %}
+							<div class="col-md-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+										  	{{ project.name }}
+										</a>
+									</div>
+									<a href="{{ path("project_page_homepage", { 'projectId': project.id }) }}">
+										<div class="RecentProjectPicture" style="background-image:url('{{ project.picture }}');"></div>
+									</a>
+									<div class="panel-footer">
+										<div class="row">
+										  	<div class="recentProject">
+										  		{% if app.user %}
+												  	{% if not likes[project.name] %}
+				                                      	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+				                                      	<div class ="{{ project.name }}" id="follow">Suivre</div>
+				                                  	{% else %}
+				                                      	<object id="like" data="{{ asset('icons/likeOn.svg') }}" type="image/svg+xml"></object>
+				                                      	<div class ="{{ project.name }}" id="follow">Ne Plus Suivre</div>
+				                                  	{% endif %}
+				                                {% else %}
+				                                	<object id="like" data="{{ asset('icons/like.svg') }}" type="image/svg+xml"></object>
+				                                {% endif %}
+			                                </div>
+			                            </div>
+									</div>
+								</div>		
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="row panel panel-primary ">
+				<div class="panel-heading">
+					<h4> Utilisateurs abonnés </h4>
+				</div>
+				<div class="panel-body">
+					{% if users is empty %}
+                        Il n'y a aucun utilisateur abonné à cette catégorie. Soyez le premier ! :)
+                    {% else %}
+						{% for user in users %}
+							<div class="col-md-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">{{ user }}</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+{{ include('like.html.twig') }}
+<script>
+$('[class="' + "{{ category }}" + '"]').click(function() {
+    likeCategoryfunction($('[class="' + "{{ category }}" + '"]'), "{{ category }}","{{ path('centrale_lille_homepage_category_follow', { 'category': category }) }}");
+});
+var projectsName = [];
+    {% for project in projects %}
+        $('[class="' + "{{ project.name }}" + '"]').click(function() {
+        	likefunction($('[class="' + "{{ project.name }}" + '"]'), "{{ project.name }}","{{ path('centrale_lille_homepage_category_follow', { 'category': category }) }}");
+        });
+    {% endfor %}
+</script>
+	
+{% endblock body %}

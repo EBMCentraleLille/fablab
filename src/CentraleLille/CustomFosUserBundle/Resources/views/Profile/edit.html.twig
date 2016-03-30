@@ -1,14 +1,43 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'layout.html.twig' %}
 
-
-{% block fos_user_content %}
-
-<div class="row">
+{% block body %}
+<br><br><br>
 	<div class="col-md-4 col-md-offset-4">
+		<h1 class="text-primary">Modifier mon profil</h1>
+	</div>
+<div class="row">
+	<div class="col-md-3 col-md-offset-4">
+		<br>
+		{{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit'}}) }}
+		<div class="form-group">
+			{{ form_errors(form.username) }}
+			{{ form_label(form.username, 'Nom d\'utilsateur', {'label_attr':{'class': 'control-label'}}) }}
+			{{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+		</div>
+		<div class="form-group">
+			{{ form_errors(form.email) }}
+			{{ form_label(form.email, 'Email', {'label_attr':{'class': 'control-label'}}) }}
+			{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+		</div>
+		<div class="form-group">
+			{{ form_errors(form.promo) }}
+			{{ form_label(form.promo, 'Promotion', {'label_attr':{'class': 'control-label'}}) }}
+			{{ form_widget(form.promo, { 'attr': {'class': 'form-control'} }) }}
+		</div>
+		<div class="form-group">
+			{{ form_errors(form.phone) }}
+			{{ form_label(form.phone, 'Téléphone', {'label_attr':{'class': 'control-label'}}) }}
+			{{ form_widget(form.phone, { 'attr': {'class': 'form-control'} }) }}
+		</div>
+
+		<div>
+
 		</br>
-		{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-		</br>
+			<input type="submit" class="btn btn-primary btn-block" value="Modifier" />
+		</div>
+		{{ form_end(form) }}
+		<br>
 	</div>
 </div>
 
-{% endblock fos_user_content %}
+{% endblock body %}

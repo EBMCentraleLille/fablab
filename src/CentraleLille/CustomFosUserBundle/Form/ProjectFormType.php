@@ -18,20 +18,29 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProjectFormType extends AbstractType
 {
-    public function __construct()
+    protected $edit;
+
+    public function __construct($edit)
     {
+        $this->edit=$edit;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', 'text', array("label" => "Nom"))
-            ->add('dateBegin', 'text', array("label" => "Date de début"))
-            ->add('dateEnd', 'text', array("label" => "Date de fin"))
+            ->add('dateBegin', 'date', array("label" => "Date de début"))
+            ->add('dateEnd', 'date', array("label" => "Date de fin"))
             ->add('picture', 'text', array("label" => "Image"))
-            ->add('summary', 'text', array("label" => "Résumé"))
-            ->add('description', 'text', array("label" => "Description"))
-            ->add('save', 'submit', array('label' => 'Créer projet'));
+            ->add('summary', 'textarea', array("label" => "Résumé"))
+            ->add('description', 'textarea', array("label" => "Description"));
+        if ($this->edit == 'create') {
+            $builder
+                ->add('save', 'submit', array('label' => 'Créer projet'));
+        } elseif ($this->edit == 'edit') {
+            $builder
+                ->add('save', 'submit', array('label' => 'Editer projet'));
+        }
     }
 
     public function getName()

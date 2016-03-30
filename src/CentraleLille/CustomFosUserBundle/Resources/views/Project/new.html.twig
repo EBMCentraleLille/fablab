@@ -1,5 +1,59 @@
-{% extends "CustomFosUserBundle::layout.html.twig"  %}
+{% extends 'layout.html.twig' %}
 
-{% block fos_user_content %}
-{% include "CustomFosUserBundle:Project:new_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block body %}
+    <br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary" style="margin-top:50px;">
+                    <div class="panel-heading text-center">
+                        <h1>Nouveau projet</h1>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form, { 'action': path('project_new')}) }}
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                {{ form_errors(form.name) }}
+                                {{ form_label(form.name, 'Nom du projet', {'label_attr':{'class': 'control-label'}}) }}
+                                {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                {{ form_errors(form.picture) }}
+                                {{ form_label(form.picture, 'Image', {'label_attr':{'class': 'control-label'}}) }}
+                                {{ form_widget(form.picture, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ form_errors(form.dateBegin) }}
+                                {{ form_label(form.dateBegin, 'Date de début', {'label_attr':{'class': 'control-label'}}) }}
+                                {{ form_widget(form.dateBegin) }}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ form_errors(form.dateEnd) }}
+                                {{ form_label(form.dateEnd, 'Date de fin', {'label_attr':{'class': 'control-label'}}) }}
+                                {{ form_widget(form.dateEnd) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                {{ form_errors(form.summary) }}
+                                {{ form_label(form.summary, 'Résumé', {'label_attr':{'class': 'control-label'}}) }}
+                                {{ form_widget(form.summary, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                {{ form_errors(form.description) }}
+                                {{ form_label(form.description, 'Descriptif', {'label_attr':{'class': 'control-label'}}) }}
+                                {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 col-md-offset-4">
+                            {{ form_widget(form.save, { 'attr': {'class': 'btn btn-primary btn-block'} }) }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

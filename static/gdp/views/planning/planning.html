@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row local-header">
+        <div class="col-md-4 view-navigation">
+            <div class="btn-group nav-items">
+                <button type="button" class="btn btn-default" ui-sref="tasks">
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Tâches
+                </button>
+
+                <button type="button" class="btn btn-default active" ui-sref="planning">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Planning
+                </button>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <h1 class="center">Vue Planning</h1>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="planning-month">
+                <a class="left" ng-click="processWeek(-1)">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <span>{{currentDate.toString('MMMM yyyy')}}</span>
+                <a class="right" ng-click="processWeek(1)">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+            <div class="planning-day" ng-repeat="d in daysWeek track by $index"></div>
+            <div class="panel panel-primary planning-day"
+                 ng-class="{'date-today':(day.equals(today))}"
+                 ng-repeat="day in daysWeek track by $index" class="week">
+
+                <div class="panel-heading">
+                    <span class="center">{{day.toString("dddd dd")}}</span>
+                </div>
+                <div class="panel-body planning-task-list">
+                    <div ng-show="tasks[day][0]">
+                        <div ng-repeat="t in tasks[day]">
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    {{t.title}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-hide="tasks[day][0]">
+                        Aucune tâche
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

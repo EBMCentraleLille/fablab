@@ -1,10 +1,11 @@
-{% extends 'CustomFosUserBundle::base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block body %}
+<br><br><br>
 <div class="container-fluid">
-<h2>List of users</h2>
+<h2>Utilisateurs</h2>
 {% if currentUser %}
-<p> Vous êtes connecté en tant que : {{ currentUser.username }}</p>
+<p> Vous êtes connecté en tant que : <strong>{{ currentUser.username }}</strong></p>
 {% endif %}
 <table class="table table-striped">
     <tr>
@@ -49,14 +50,17 @@
     {% endfor %}
 </table>
 
-<h2>List of projects</h2>
+<h2>Projets</h2>
     <table class="table table-striped">
         <tr>
             <th>Nom du projet</th>
         </tr>
         {% for project in projects %}
             <tr>
-                <td>{{ project.name }}</td>
+                <td>{{ project.name }}
+                    (<a href="{{ path('project_show', {'projectId' : project.id}) }}">view</a> /
+                    <a href="{{ path('project_edit', {'projectId' : project.id}) }}">edit</a>)
+                </td>
             </tr>
         {% endfor %}
     </table>

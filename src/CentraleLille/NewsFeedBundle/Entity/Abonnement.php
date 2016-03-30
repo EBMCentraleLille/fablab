@@ -3,7 +3,7 @@
  * Abonnements.php File Doc
  *
  * Entité Abonnement qui décrit les abonnements
- * aux projets ainsi qu'aux catégories des utilisateurs
+ * aux Projects ainsi qu'aux catégories des utilisateurs
  *
  * PHP Version 5.6
  *
@@ -57,8 +57,9 @@ class Abonnement
     private $categories;
 
     /**
-    * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
-    **/
+     *
+     * @ORM\ManyToMany (targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project"), cascade={"persist"})
+     */
     private $projects;
 
 
@@ -123,7 +124,7 @@ class Abonnement
     /**
      * Set projects
      *
-     * @param string $projects Objet projets
+     * @param string $projects Objet Projects
      *
      * @return Abonnement
      */
@@ -162,6 +163,7 @@ class Abonnement
     public function addCategory(\CentraleLille\NewsFeedBundle\Entity\Category $category)
     {
         $this->categories[] = $category;
+        $category->addUser($this->getUser());
 
         return $this;
     }
@@ -176,6 +178,7 @@ class Abonnement
     public function removeCategory(\CentraleLille\NewsFeedBundle\Entity\Category $category)
     {
         $this->categories->removeElement($category);
+        $category->removeUser($this->getUser());
     }
 
     /**

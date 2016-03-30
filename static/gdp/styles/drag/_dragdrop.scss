@@ -1,0 +1,44 @@
+$flat-ui-silver:#bdc3c7;
+
+.task-group {
+  overflow:hidden;
+  border:1px dotted black;
+}
+
+.taskgroup-add {
+    float:right;
+}
+
+.task {
+  min-width:20vw;
+  min-height:20vh;
+  float:left;
+  clear:both;
+}
+
+.taskgroup-title {
+  font-size:1.2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align:center;
+  float:left;
+}
+
+.over {
+  background: $flat-ui-silver;
+}
+
+.taskspace {
+
+}
+
+
+
+.drag-over-accept-task {
+  & .taskgroup {
+    background: #ffcc00;
+  }
+}
+.spacer {
+  clear:both;
+}

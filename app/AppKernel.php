@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new CentraleLille\GdpBundle\CentraleLilleGdpBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            // new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new CentraleLille\CustomFosUserBundle\CustomFosUserBundle(),
@@ -34,6 +34,10 @@ class AppKernel extends Kernel
             new CentraleLille\HomepageBundle\CentraleLilleHomepageBundle(),
             new CentraleLille\ProjectPageBundle\ProjectPageBundle(),
             new CentraleLille\NewsFeedBundle\CentraleLilleNewsFeedBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

@@ -4,9 +4,11 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <style href="{{ assets("css/bootstrap.min.css") }}"></style>
+            <style href="{{ asset("css/bootstrap.min.css") }}"></style>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block token %}
+        {% endblock %}
     </head>
     <body>
         {% block body %}

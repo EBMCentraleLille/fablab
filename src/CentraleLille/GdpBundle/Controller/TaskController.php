@@ -15,8 +15,9 @@ use FOS\RestBundle\Request\ParamFetcher;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Validator\ConstraintViolationList;
+use CentraleLille\GdpBundle\Enum\TaskStatus;
 
-class TaskController extends FOSRestController
+class TaskController extends GdpRestController
 {
     /**
      * Return the overall user list.
@@ -30,12 +31,15 @@ class TaskController extends FOSRestController
      *   }
      * )
      *
+     * @param int $id id
+     *
      * @return View
      */
-    public function getTasksAction()
+    public function getProjectTasksAction($id)
     {
+        $this->existsProjectUser($id, $this->getUser()->getId());
         $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
-        $list = $taskRepository->findAll();
+        $list = $taskRepository->findByProject($id);
         if (!$list) {
             throw $this->createNotFoundException('Data not found.');
         }
@@ -57,27 +61,38 @@ class TaskController extends FOSRestController
      *   }
      * )
      *
+     * @param int $id id
+     *
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
      * @RequestParam(name="title", nullable=false, strict=true, description="Title.")
      * @RequestParam(name="body", nullable=false, strict=true, description="Body.")
+     * @RequestParam(name="endDate", nullable=false, strict=true, description="End date.")
+     * @RequestParam(name="taskList", nullable=false, strict=true, description="Task list containing the task")
      *
      * @return View
      */
-    public function postTaskAction(ParamFetcher $paramFetcher)
+    public function postProjectTaskAction($id, ParamFetcher $paramFetcher)
     {
-        $taskRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
+        $this->existsProjectUser($id, $this->getUser()->getId());
+        $taskListRepository = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:TaskList');
+        $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
+        $project = $projectRepository->find($id, $this->getUser()->getId());
         $task = new Task();
         $task->setTitle($paramFetcher->get('title'));
         $task->setBody($paramFetcher->get('body'));
-        // TODO get current user
-        $task->setAuthor('JunkOS');
-        $task->setStatus(false);
+        $task->setAuthor($this->getUser());
+        $task->setProject($project);
+        $task->setEndDate(new \DateTime(strstr($paramFetcher->get('endDate'), " (", true)));
+        $taskList = $taskListRepository->findOneBy(array("id" => $paramFetcher->get('taskList')));
+        $task->setTaskList($taskList);
+        $taskList->addTask($task);
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Registration'));
         if (count($errors) == 0) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
+            $em->persist($taskList);
             $em->flush();
             $view->setData($task)->setStatusCode(201);
             return $view;
@@ -99,28 +114,32 @@ class TaskController extends FOSRestController
      *   }
      * )
      *
+     * @param int $taskId TaskId
+     *
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
-     * @RequestParam(name="id", nullable=false, strict=true, description="Id.")
      * @RequestParam(name="title", nullable=true, strict=true, description="Title.")
      * @RequestParam(name="body", nullable=true, strict=true, description="Body.")
      * @RequestParam(name="status", nullable=true, strict=true, description="Status.")
+     * @RequestParam(name="endDate", nullable=true, strict=true, description="End date.")
      *
      * @return View
      */
-    public function putTaskAction(ParamFetcher $paramFetcher)
+    public function putTaskAction($taskId, ParamFetcher $paramFetcher)
     {
-        $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy(
-            array('id' => $paramFetcher->get('id'))
-        );
+        $task = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task')->findOneBy(array('id' =>$taskId));
+        $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
         if ($paramFetcher->get('title')) {
             $task->setTitle($paramFetcher->get('title'));
         }
         if ($paramFetcher->get('body')) {
             $task->setBody($paramFetcher->get('body'));
         }
-        if ($paramFetcher->get('status')) {
+        if ($paramFetcher->get('status') && TaskStatus::isValidValue($paramFetcher->get('status'))) {
             $task->setStatus($paramFetcher->get('status'));
+        }
+        if ($paramFetcher->get('endDate')) {
+            $task->setEndDate(new \DateTime(strstr($paramFetcher->get('endDate'), " (", true)));
         }
         $view = View::create();
         $errors = $this->get('validator')->validate($task, array('Update'));
@@ -144,20 +163,21 @@ class TaskController extends FOSRestController
      *   description = "Delete a task identified by id",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     404 = "Returned when the user is not found"
+     *     404 = "Returned when the task is not found"
      *   }
      * )
      *
-     * @param int $id id
+     * @param int $taskId id
      *
      * @return View
      */
-    public function deleteTaskAction($id)
+    public function deleteTaskAction($taskId)
     {
         $repo = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
         $task = $repo->findOneBy(
-            array('id' => $id)
+            array('id' => $taskId)
         );
+        $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
         if (!$task) {
             throw $this->createNotFoundException('Data not found.');
         }
@@ -186,13 +206,15 @@ class TaskController extends FOSRestController
      *
      * @return View
      */
-    public function putTaskAssignUserAction($taskId, $userId)
+    public function putTaskUserAction($taskId, $userId)
     {
         $repoTasks = $this->getDoctrine()->getRepository('CentraleLilleGdpBundle:Task');
-        $repoUsers = $this->getDoctrine()->getRepository('CentraleLilleCustomFosUserBundle:User');
+        $repoUsers = $this->getDoctrine()->getRepository('CustomFosUserBundle:User');
+
         $task = $repoTasks->findOneBy(
             array('id' => $taskId)
         );
+        $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
         // Retrieves task & user
         if (!$task) {
             throw $this->createNotFoundException('Task not found.');
@@ -203,6 +225,7 @@ class TaskController extends FOSRestController
         if (!$user) {
             throw $this->createNotFoundException('User not found.');
         }
+        $this->existsProjectUser($task->getProject()->getId(), $user->getid());
         $task->setInChargeUser($user);
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
@@ -217,7 +240,7 @@ class TaskController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Assign a task to an user",
+     *   description = "Unassign a task",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
@@ -237,6 +260,7 @@ class TaskController extends FOSRestController
         if (!$task) {
             throw $this->createNotFoundException('Task not found.');
         }
+        $this->existsProjectUser($task->getProject()->getId(), $this->getUser()->getId());
         $task->setInChargeUser(null);
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
@@ -265,5 +289,6 @@ class TaskController extends FOSRestController
         $view = View::create($msgs);
         $view->setStatusCode(400);
         return $view;
+        return $this->render('CentraleLilleGdpBundle:Tasks:tasks.html.twig');
     }
 }

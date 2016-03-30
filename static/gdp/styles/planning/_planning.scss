@@ -1,0 +1,56 @@
+$flat-ui-silver:#bdc3c7;
+
+.planning-day {
+  width: 14%;
+  float:left;
+  text-align:center;
+  margin-right:2px;
+}
+
+.other-month {
+}
+.planning-month {
+  width: 80%;
+  margin:auto;
+  text-align:center;
+  font-size:1.6em;
+}
+
+.planning-month  {
+  cursor:pointer;
+  a.left:hover, a.right:hover {
+    text-decoration:none;
+  }
+
+  a.left {
+    cursor:pointer;
+    float:left;
+  }
+  a.right {
+    cursor:pointer;
+    float:right;
+  }
+}
+
+.date-today.panel {
+  background:$flat-ui-silver;
+}
+
+.planning-task-list {
+  height:80vh;
+  overflow: auto;
+}
+
+.week {
+  overflow:hidden;
+}
+
+.task-edit-content {
+  width:100%;
+  height: 100px;
+}
+
+.center {
+  width: 100%;
+  text-align:center;
+}
