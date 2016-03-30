@@ -93,7 +93,7 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
-# ElasticSearch Bundle configuration
+#ElasticSearch Bundle configuration
 fos_elastica:
     serializer: ~
     clients:

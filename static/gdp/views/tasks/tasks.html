@@ -1,4 +1,43 @@
-<div ng-repeat="taskgroup in spaceData"
+<div class="container-fluid">
+    <div class="row local-header">
+        <div class="col-md-4 view-navigation">
+            <div class="btn-group nav-items">
+                <button type="button" class="btn btn-default active" ui-sref="tasks">
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Tâches
+                </button>
+
+                <button type="button" class="btn btn-default" ui-sref="planning">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Planning
+                </button>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <h1 class="center">Vue Gestion des tâches</h1>
+        </div>
+        <div class="col-md-4 list-management">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                           ng-model="newTaskListName" placeholder="Nouvelle liste" required>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success"
+                                ng-disabled="(newTaskListName.length<3)?true:false;"
+                                ng-class="(newTaskListName.length>3)?'':'disabled'"
+                                ng-click="createTaskList()">Créer</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-warning new-task" ng-click="doCancelButton()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    &nbsp;Supprimer listes
+                </button>
+            </div>
+        </div>
+    </div>
+
+<div ng-repeat="taskgroup in taskLists"
      class="col-md-3 taskspace">
      <div
          drop="onDropTaskInList($data, taskgroup)"
@@ -12,28 +51,32 @@
 
                  <!-- New task -->
 
-                 <div class="panel panel-default">
                      <button class="btn btn-success new-task"
-                             ng-click="showTaskCreated=true;"><span class="glyphicon glyphicon-plus"</button>
-                 </div>
+                             ng-click="showTaskCreated=!showTaskCreated;"><span class="glyphicon glyphicon-plus"></span></button>
+
              </div>
              <div class="spacer"></div>
          </div>
 
-         <edit-task ng-show="showTaskCreated"></edit-task>
+         <new-task ng-show="showTaskCreated"></new-task>
+         <edit-task ng-show="taskEdit[taskgroup.id]"></edit-task>
+
+         <div ng-show="showTaskListDelete">
+             <button class="btn btn-warning btn-group-justified" ng-click="deleteTaskList(taskgroup.id)">Supprimer liste de tâches</button>
+         </div>
          <div class="panel-body taskgroup">
-            <div ng-repeat="task in taskgroup.data"
+            <div ng-repeat="task in taskgroup.tasks"
                  draggable="true"
                  effect-allowed="move"
                  draggable-type="task"
-                 draggable-data="{name: task,sourceGroup:$parent.$index,sourceTask:$index}">
+                 draggable-data="{id: task.id}">
 
-                <div class="panel panel-default">
+                <div class="panel panel-default" ng-hide="editTask.id==task.id">
                     <div class="panel-heading">
                         <div class="task-title">{{task.title}}</div>
                         <div class="task-actions">
                             <div class="btn-group" uib-dropdown>
-                                <button id="split-button" type="button" class="btn btn-primary right">
+                                <button id="split-button" type="button" ng-click="setTaskEdit(task,taskgroup)" class="btn btn-primary right">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                                 <button type="button" class="btn btn-primary" uib-dropdown-toggle>
@@ -43,7 +86,7 @@
                                     <li role="menuitem"><a href="#">Assigner à</a></li>
                                     <li role="menuitem"><ul>
                                         <li ng-repeat="user in projectUsers">
-                                            <a ng-click="assignTaskToUser(task.id,user.id)">{{user.lastName}}</a>
+                                            <a ng-click="assignTaskToUser(task.id,user.id)">{{user.firstname}}</a>
                                         </li>
                                     </ul></li>
                                     <li class="divider"></li>
@@ -52,6 +95,10 @@
                             </div>
 
                         </div>
+                        <div class="task-user">{{task.in_charge_user.firstname}}</div>
+                        <div class="task-user">{{task.status}}</div>
+
+
                         <div class="spacer"></div>
                     </div>
                     <div class="panel-body">
@@ -63,14 +110,4 @@
          </div>
      </div>
 </div>
-
-<div class="col-md-3">
-    <div class="panel panel-default task-title">
-        <div class="panel-heading">
-            Echeances
-        </div>
-        <div class="panel-body">
-
-        </div>
-    </div>
 </div>

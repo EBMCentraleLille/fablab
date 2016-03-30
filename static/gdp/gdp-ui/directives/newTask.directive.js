@@ -2,12 +2,12 @@ var uiModule = require('../_index');
 var origin = document.location.origin+'/gdp/';
 
 
-uiModule.directive('editTask',editTask);
+uiModule.directive('newTask',newTask);
 
-function editTask() {
+function newTask() {
     return {
         restrict: 'E',
-        templateUrl: origin+'views/tasks/edit-task.html'
+        templateUrl: origin+'views/tasks/new-task.html'
     }
 };
 

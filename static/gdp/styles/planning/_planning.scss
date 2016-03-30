@@ -8,7 +8,6 @@ $flat-ui-silver:#bdc3c7;
 }
 
 .other-month {
-  background:green;
 }
 .planning-month {
   width: 80%;
@@ -38,7 +37,8 @@ $flat-ui-silver:#bdc3c7;
 }
 
 .planning-task-list {
-  height:60vh;
+  height:80vh;
+  overflow: auto;
 }
 
 .week {
