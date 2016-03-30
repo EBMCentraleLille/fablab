@@ -22,7 +22,7 @@ class TaskList
     private $id;
 
     /**
-     * @@ORM\ManyToMany(targetEntity="Task", mappedBy="taskLists")
+     * @@ORM\OneToMany(targetEntity="Task", mappedBy="taskLists")
      */
     private $tasks;
 
@@ -94,7 +94,19 @@ class TaskList
      */
     public function addTask($task)
     {
-        $this->task[] = $task;
+        $this->tasks[] = $task;
+    }
+
+    /**
+     *
+     */
+    public function removeTask($task)
+    {
+        $pos = array_search($task, $this->tasks);
+        if ($pos) {
+            $this->tasks= array_slice($this->tasks, $pos, 1);
+        }
+
     }
 
     /**

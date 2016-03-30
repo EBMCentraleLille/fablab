@@ -97,7 +97,7 @@ class AbonnementController extends Controller
             $recentProjects=$recentProjectService->getRecentProjects(15);
 
             return $this->render(
-                'CentraleLilleNewsFeedBundle:abonnements.html.twig',
+                'CentraleLilleNewsFeedBundle:Default:abonnements.html.twig',
                 [
                     'abonnementsProjet' => $abonnementsProjet,
                     'abonnementsCategorie' => $abonnementsCategorie,

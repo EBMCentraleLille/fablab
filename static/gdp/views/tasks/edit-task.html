@@ -1,24 +1,25 @@
-<!-- Task edit -->
+<!-- Edit Task -->
 
 <form >
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="form-group">
-                <input type="text" ng-model="newTask.title" placeholder="Titre" required>
+                <input type="text" ng-model="editTask.title" placeholder="Titre" required>
             </div>
         </div>
         <div class="panel-body">
             <div class="form-group">
-                <textarea class="task-edit-content" ng-model="newTask.body" placeholder="contenu" required></textarea>
+                <textarea class="task-edit-content" ng-model="editTask.body" placeholder="contenu" required></textarea>
             </div>
         </div>
         <div class="form-group">
-            <date-pick></date-pick>
+            <date-pick min="0" max="60"></date-pick>
         </div>
 
 
         <div class="form-group">
-            <button class="btn btn-primary" ng-click="createTask(); showTaskCreated=false;">Créer</button>
+            <button class="btn btn-success btn-lg" ng-click="saveEditTask();">Sauvegarder</button>
+            <button class="btn btn-warning btn-lg" ng-click="cancelEditTask($event,taskgroup.id);">Annuler</button>
         </div>
 
     </div>

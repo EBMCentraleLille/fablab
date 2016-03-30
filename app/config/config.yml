@@ -85,9 +85,6 @@ fos_user:
     user_class: CentraleLille\CustomFosUserBundle\Entity\User
     group:
         group_class: CentraleLille\CustomFosUserBundle\Entity\Project
-    registration:
-        form:
-            type: CentraleLille\CustomFosUserBundle\Form\RegistrationType
     profile:
         form:
             type: CentraleLille\CustomFosUserBundle\Form\ProfileType
@@ -96,7 +93,7 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
-# ElasticSearch Bundle configuration
+#ElasticSearch Bundle configuration
 fos_elastica:
     serializer: ~
     clients:
