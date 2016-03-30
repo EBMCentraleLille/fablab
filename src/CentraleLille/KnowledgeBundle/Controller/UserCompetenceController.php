@@ -25,15 +25,15 @@ class UserCompetenceController extends Controller
 
         $listUserCompetences = $this->container->get('app.competence.service')->getUserCompetenceFromUserList($user);
         $listNotUserCompetences = array();
-        foreach ($listCompetences as $competence){
+        foreach ($listCompetences as $competence) {
             $match = false;
-            foreach($listUserCompetences as $userCompetence){
-                if($userCompetence->getCompetence() == $competence ){
+            foreach ($listUserCompetences as $userCompetence) {
+                if ($userCompetence->getCompetence() == $competence) {
                     $match = true;
                 }
             }
-            if($match == false){
-                array_push($listNotUserCompetences,$competence);
+            if ($match == false) {
+                array_push($listNotUserCompetences, $competence);
             }
         }
 
@@ -47,9 +47,9 @@ class UserCompetenceController extends Controller
                 ->getRepository('CentraleLilleKnowledgeBundle:Competence')
                 ->findOneByName($competence->getName());
 
-            if(is_null($competenceinDB)){
+            if (is_null($competenceinDB)) {
                 $this->addFlash('notice', 'Cette compétence n\'existe pas!');
-            }else{
+            } else {
                 var_dump($listUserCompetences);
                 exit();
 
@@ -59,10 +59,11 @@ class UserCompetenceController extends Controller
                         $match = true;
                     }
                 }
-                if($match == false){
-                    $this->container->get('app.competence.service')->addCompetenceToUser($competenceinDB, $user, $level = 1);
+                if ($match == false) {
+                    $this->container->get('app.competence.service')
+                        ->addCompetenceToUser($competenceinDB, $user, $level = 1);
                     $this->addFlash('notice', 'Compétence ajoutée');
-                }else{
+                } else {
                     $this->addFlash('notice', 'Compétence déjà attribuée');
                 }
 

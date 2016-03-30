@@ -17,12 +17,14 @@ class ForumService
         $this->em = $entityManager;
     }
 
-    function getThread($id){
-      return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findOneById($id);
+    public function getThread($id)
+    {
+        return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findOneById($id);
     }
 
-    function getThreadList(){
-      return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findAll();
+    public function getThreadList()
+    {
+        return $this->em->getRepository('CentraleLilleKnowledgeBundle:ForumThread')->findAll();
     }
 
     /**

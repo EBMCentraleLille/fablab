@@ -98,7 +98,10 @@ class ProfileController extends BaseController
             }
 
 
-            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            $dispatcher->dispatch(
+                FOSUserEvents::PROFILE_EDIT_COMPLETED,
+                new FilterUserResponseEvent($user, $request, $response)
+            );
             // $dispatcher->dispatch(
             //     FOSUserEvents::PROFILE_EDIT_COMPLETED,
             //     new FilterUserResponseEvent($user, $request, $response)

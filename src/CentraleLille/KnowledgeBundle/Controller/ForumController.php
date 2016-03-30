@@ -43,14 +43,15 @@ class ForumController extends Controller
      * View thread
      * @return Redirect
      */
-    public function viewThreadAction($id){
-      $thread = $this->container->get('app.forum.service')->getThread($id);
-      $posts = $this->container->get('app.forum.service')->getPostList($id);
+    public function viewThreadAction($id)
+    {
+        $thread = $this->container->get('app.forum.service')->getThread($id);
+        $posts = $this->container->get('app.forum.service')->getPostList($id);
 
-      return $this->render(
-          'CentraleLilleKnowledgeBundle::post-list.html.twig',
-          array('thread'=>$thread,'posts'=>$posts)
-      );
+        return $this->render(
+            'CentraleLilleKnowledgeBundle::post-list.html.twig',
+            array('thread'=>$thread,'posts'=>$posts)
+        );
     }
 
     /**
@@ -156,20 +157,20 @@ class ForumController extends Controller
             $form = $formBuilder->getForm();
             $form->handleRequest($request);
 
-            if ($form->isValid() && $forumpost != null) {
-                $this ->addFlash('notice', 'Votre réponse a bien été enregistrée.');
-                $forumpost->setAuthor($this->getUser());
-                $forumpost->setThread($this->container->get('app.forum.service')->getThread($id));
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($forumpost);
-                $em->flush();
+        if ($form->isValid() && $forumpost != null) {
+            $this ->addFlash('notice', 'Votre réponse a bien été enregistrée.');
+            $forumpost->setAuthor($this->getUser());
+            $forumpost->setThread($this->container->get('app.forum.service')->getThread($id));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($forumpost);
+            $em->flush();
 
-                return $this->redirect(
-                    $this->generateUrl(
-                        'knowledge_forum'
-                    )
-                );
-            }
+            return $this->redirect(
+                $this->generateUrl(
+                    'knowledge_forum'
+                )
+            );
+        }
 
             return $this->render(
                 'CentraleLilleKnowledgeBundle::addPost.html.twig',
@@ -202,5 +203,4 @@ class ForumController extends Controller
                 )
             );
     }
-
 }

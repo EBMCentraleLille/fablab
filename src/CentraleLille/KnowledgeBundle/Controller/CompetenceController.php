@@ -24,11 +24,11 @@ class CompetenceController extends Controller
             $competenceinDB = $this->getDoctrine()
                 ->getRepository('CentraleLilleKnowledgeBundle:Competence')
                 ->findOneByName($competence->getName());
-            if(is_null($competenceinDB)){
+            if (is_null($competenceinDB)) {
                 //persist de la compétence
                 $this->container->get('app.competence.service')->createCompetence($competence->getName());
                 $request->getSession()->getFlashBag()->add('notice', 'Compétence bien enregistrée.');
-            }else{
+            } else {
                 $request->getSession()->getFlashBag()->add('notice', 'Cette compétence existe déjà.');
             }
         }
@@ -40,7 +40,8 @@ class CompetenceController extends Controller
     /**
      * @Route("/competences", name="centrale_lille_knowledge_competences")
      */
-    public function listCompetencesAction(){
+    public function listCompetencesAction()
+    {
 
         $competences = $this->container->get('app.competence.service')->getCompetenceList();
         return $this->render(
@@ -62,7 +63,7 @@ class CompetenceController extends Controller
             ->getRepository('CentraleLilleKnowledgeBundle:UserCompetence')
             ->findAllCompetencesInUserCompetencesDQL($competence);
 
-        foreach($listUserCompetences as $userCompetence){
+        foreach ($listUserCompetences as $userCompetence) {
             $this->container->get('app.competence.service')->deleteCompetenceToUser($userCompetence);
         }
 
