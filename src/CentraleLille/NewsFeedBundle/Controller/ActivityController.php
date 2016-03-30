@@ -61,6 +61,20 @@ class ActivityController extends Controller
             );
             return $this->redirectToRoute('fos_user_profile_show');
         } else {
+            //suppression de l'activité
+            $activity = $request->request->get('activity');
+            if ($activity) {
+                $em = $this->getDoctrine()->getManager();
+                $activityDeleted = $em->getRepository("CentraleLilleNewsFeedBundle:Activity")->find($activity);
+                if ($activityDeleted) {
+                    $em->remove($activityDeleted);
+                    $em->flush();
+                    $session = $request->getSession()->getFlashBag()->add(
+                        'notice',
+                        "L'activité a bien été supprimée"
+                    );
+                }
+            }
             //Récupération des activités
             $activityService=$this->container->get('fablab_newsfeed.activities');
             $activities=$activityService->getActivities(30);
