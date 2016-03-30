@@ -30,6 +30,15 @@ class CompetenceService
             return true;
         }
     }
+    public function deleteCompetence($competence)
+    {
+        if ($competence == null) {
+            return false;
+        } else {
+            $this->em->remove($competence);
+            $this->em->flush();
+        }
+    }
 
     public function addCompetenceToUser($competence, $user, $level = 1)
     {
@@ -45,10 +54,20 @@ class CompetenceService
             return true;
         }
     }
+    public function deleteCompetenceToUser($usercompetence)
+    {
+        if ($usercompetence == null) {
+            return false;
+        } else {
+            $this->em->remove($usercompetence);
+            $this->em->flush();
+            return true;
+        }
+    }
 
     public function getCompetenceList()
     {
-        return $this->em->getRepository('KnowledgeBundle:Competence')->find();
+        return $this->em->getRepository('CentraleLilleKnowledgeBundle:Competence')->findAll();
     }
 
     public function getUserCompetenceList($user)
@@ -57,6 +76,22 @@ class CompetenceService
             return $item->getCompetence();
 
         };
-        return array_map($funk, $this->em->getRepository('KnowledgeBundle:UserCompetence')->findByUser($user->getId()));
+        return array_map(
+            $funk,
+            $this->em->getRepository('CentraleLilleKnowledgeBundle:UserCompetence')
+                ->findByUser($user->getId())
+        );
+    }
+
+    public function getUserCompetenceFromUserList($user)
+    {
+        $funk = function ($item) {
+            return $item;
+        };
+        return array_map(
+            $funk,
+            $this->em->getRepository('CentraleLilleKnowledgeBundle:UserCompetence')
+            ->findByUser($user->getId())
+        );
     }
 }

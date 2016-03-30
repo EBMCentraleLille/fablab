@@ -2,6 +2,9 @@
 
 namespace CentraleLille\KnowledgeBundle\Repository;
 
+use CentraleLille\CustomFosUserBundle\Entity\User;
+use CentraleLille\KnowledgeBundle\Entity\Competence;
+
 /**
  * CompetenceRepository
  *

@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} {{ parent() }} - mon profil {% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+    <div class="row" >
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h3>  Les compétences </h3>
+            <div class="well">
+                {% for competence in competences %}
+                    <div class="well">
+                        <ul>
+                            <p> {{ competence.name }}
+                                <a href="delComp/{{ competence.id }}"> Supprimer </a>
+                            </p>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+{% endblock %}

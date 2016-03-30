@@ -30,6 +30,13 @@ class ForumThread
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="text")
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
@@ -37,7 +44,7 @@ class ForumThread
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string")
+     * @ORM\Column(name="status", columnDefinition="ENUM('Ouvert','Resolu','Inactif')")
      */
     private $status;
 
@@ -48,6 +55,20 @@ class ForumThread
      */
     private $tags;
 
+    /**
+     * Thread constructor.
+     * @param $id
+     * @param $author
+     * @param $title
+     * @param $content
+     * @param $status
+     * @param $tags
+     *
+     */
+    public function __construct()
+    {
+
+    }
 
     /**
      * Get id

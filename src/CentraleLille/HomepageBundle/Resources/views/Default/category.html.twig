@@ -3,6 +3,9 @@
 	<link rel="stylesheet" href="{{ asset('css/homepage.css') }}" />
 {% endblock stylesheets %}
 {% block body %}
+	{% for project in projects %}
+		<div style="margin-top:60px">{{ project.name }}</div>
+	{% endfor %}
 	<br><br>
 	<div class="row">
 		<div class="col-md-1"></div>
