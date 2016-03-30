@@ -154,4 +154,22 @@ class EventController extends Controller
             array('machines'=>$machines)
         );
     }
+    
+    public function deleteEventAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('ReservationBundle:Booking\Event');
+        $event = $repository->find($id);
+
+        if ($event == null) {
+            return $this->redirect($this->generateUrl('centrale_lille_my_booking'));
+        }
+        else{
+            $em->remove($event);
+            $em->flush();
+            $this->addFlash("Notice", "Evènement supprimé avec succès");
+
+            return $this->redirect($this->generateUrl('centrale_lille_my_booking'));
+        }
+    }
 }

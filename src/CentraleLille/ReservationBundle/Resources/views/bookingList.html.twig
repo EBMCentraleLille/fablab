@@ -9,25 +9,23 @@
             <div class="col-md-10">
                 <h3>  Mes réservations </h3>
                 <div class="well">
-                    {% if events %}
-                        {% for event in events %}
-                            <div class="well">
-                                <ul>
-                                    <h4>{{ event.title }}</h4>
-                                    <li>Du {{ event.startDateTime|date('d-m-Y H:i')}} au {{ event.endDateTime|date('d-m-Y H:i')}} </li>
-                                    <!--<li>Sur la machine :  event.bookable  </li> it is crashing-->
-                                    <div class="btn-group" role="toolbar">
-                                        <button class="btn btn-danger" aria-hidden="true" onclick="location.href =''">
-                                            Modifier
-                                        </button>
-                                        <button class="btn btn-danger" aria-hidden="true" onclick="location.href =''">
-                                            Supprimer
-                                        </button>
-                                    </div>
-                                </ul>
+                    {% for event in events %}
+                    <div class="well">
+                        <ul>
+                            <h4>{{ event.title }}</h4>
+                            <li>Du {{ event.startDateTime|date('d-m-Y H:i')}} au {{ event.endDateTime|date('d-m-Y H:i')}} </li>
+                            <li>Sur la machine : {{ event.bookable.name }}</li>
+                            <div class="btn-group" role="toolbar">
+                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='#'">
+                                    Modifier
+                                </button>
+                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_event',{'id': event.id}) }}'">
+                                    Supprimer
+                                </button>
                             </div>
-                        {% endfor %}
-                    {% endif %}
+                        </ul>
+                    </div>
+                    {% endfor %}
                 </div>
             <div class="col-md-1"></div>
         </div>

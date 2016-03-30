@@ -51,7 +51,7 @@ class CalendarEventListener
 
         $idMachine = $request->get('machineId');
 
-        if ($title && $description && $start && $end && $userId) {
+        if ($title && $description && $start && $end) {
             //converting unix timestamp from ms to s (because javascript provide ms)
             $start = \DateTime::createFromFormat('U', $start/1000);
             $end = \DateTime::createFromFormat('U', $end/1000);

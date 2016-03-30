@@ -25,8 +25,9 @@
                                 <h4 class="modal-title" id="myModalLabel">Réservation</h4>
                             </div>
                             <div class="modal-body">
-                                Nom de l'évenement : <input type="text" readonly value="Project name" id="eventTitle"/>
+                                Nom de l'évenement : <input type="text" id="eventTitle"/>
                                 Description : <textarea id="eventDescription"></textarea>
+                                <input type="hidden" value="{{ machine.id }}" id="eventMachineId"/>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

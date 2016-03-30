@@ -50,4 +50,8 @@ centrale_lille_view_resource:
     path: /resource/view/{resourceType}/{id}
     defaults: {_controller:ReservationBundle:Resource:view}
 
+centrale_lille_delete_event:
+    path: /event/delete/{id}
+    defaults: {_controller:ReservationBundle:Event:deleteEvent}
+
 
