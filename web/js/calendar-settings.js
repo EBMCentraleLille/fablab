@@ -4,6 +4,11 @@ $(function () {
     var m = date.getMonth();
     var y = date.getFullYear();
 
+    var str = window.location.href.split("/");
+    var userId = str[str.length-1];
+    var str2 = window.location.href.split("/");
+    var machineId = str2[str2.length-2];
+
     $('#calendar-holder').fullCalendar({
         header: {
             left: 'prev, next',
@@ -24,6 +29,8 @@ $(function () {
                 type: 'POST',
                 // A way to add custom filters to your event listeners
                 data: {
+                    'userId': userId,
+                    'machineId': machineId
                 },
                 error: function() {
                    //alert('Erreur de récupération du calendrier, merci de recharger la page');
@@ -39,10 +46,6 @@ $(function () {
                 var title =  $('#eventTitle').val();
                 start = start.getTime();
                 end = end.getTime();
-                var str = window.location.href.split("/");
-                var userId = str[str.length-1];
-                var str2 = window.location.href.split("/");
-                var machineId = str2[str2.length-2];
                 var e = {
                         title: title,
                         description: description,
