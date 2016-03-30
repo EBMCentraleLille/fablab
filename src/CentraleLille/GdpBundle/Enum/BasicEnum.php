@@ -2,7 +2,6 @@
 
 namespace CentraleLille\GdpBundle\Enum;
 
-
 abstract class BasicEnum
 {
     private static $constCacheArray = null;
