@@ -1,0 +1,28 @@
+<!-- New Task -->
+
+<form >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="form-group">
+                <input type="text" ng-model="newTask.title" placeholder="Titre" required>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <textarea class="task-edit-content" ng-model="newTask.body" placeholder="contenu" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Date de fin</label>
+                <date-pick min="0" max="60"></date-pick>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <button class="btn btn-success btn-lg" ng-click="createTask(taskgroup.id); showTaskCreated=false;">Créer</button>
+
+        </div>
+
+    </div>
+</form>
