@@ -3,58 +3,20 @@ var uiModule = require('./_index');
 uiModule.controller('taskController',['$scope','rq','toastr',taskController]);
 
 function taskController($scope,rq,toastr) {
-    $scope.showTaskCreated=false;
 
-
-    $scope.newTask = {
-        'title':'',
-        'body':''
-    }
-
-    $scope.status = {
-        isopen: false
-    };
-
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.status.isopen = !$scope.status.isopen;
-    };
-
-    $scope.selectedDay = Date.today()
-
-    /* Temporary */
-
-    $scope.onDragOver = function(data,taskgroup) {
-    }
-
-    $scope.tasks=[
-        {
-            "name":"à faire",
-            "data":[],
-            "space":1
-        },
-        {
-            "name":"en cours",
-            "data":[],
-            "space":2
-        },
-        {
-            "name":"fait",
-            "data":[],
-            "space":3
-        }
-    ]
-
+    $scope.newTask = {'title':'','body':'','endDate':''};
+    $scope.taskLists=[];
     $scope.projectUsers=[]
+    $scope.currentProject={};
+    $scope.editTask={};
+    $scope.userProjects=[];
+    $scope.newTaskListName="";
+    $scope.showTaskListDelete = false;
+    $scope.showTaskCreated=false;
+    $scope.taskEdit={};
+    $scope.selectedDay = Date.today();
+    $scope.status = {isopen: false};
 
-    $scope.spaceData=[{},{},{}];
-
-
-    $scope.currentProject={
-        'id':2,
-        'name':'projet_test'
-    }
 
     /* Scope functions */
 
@@ -62,68 +24,138 @@ function taskController($scope,rq,toastr) {
     $scope.deleteTask=deleteTask;
     $scope.onDropTaskInList=dropTaskInList;
     $scope.assignTaskToUser = assignTaskToUser;
+    $scope.createTaskList = createTaskList;
+    $scope.deleteTaskList = deleteTaskList;
+    $scope.doCancelButton = doCancelButton;
+    $scope.setTaskEdit = setTaskEdit;
+    $scope.saveEditTask = saveEditTask;
+    $scope.toggleDropdown = toggleDropdown;
+    $scope.cancelEditTask = cancelEditTask;
+
 
     /* Init */
 
     (function() {
         rq.init();
-        getTasks()
-        getProjectUsers()
-        for(var t in $scope.tasks) {
-            var taskgroup = $scope.tasks[t];
-            $scope.spaceData[taskgroup.space-1]=taskgroup;
-        }
+        getProjects(function() {
+            getTaskLists();
+            getProjectUsers();
+        })
+
     })();
 
     /* Controller functions */
 
+    function toggleDropdown($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
+    }
 
-    function createTask() {
+    function doCancelButton() {
+        if ($scope.showTaskListDelete || $scope.showTaskCreated) {
+            $scope.showTaskListDelete = false;
+            $scope.showTaskCreated = false;
+        }
+        else
+            $scope.showTaskListDelete=true;
+    }
 
+    function setTaskEdit(task,taskgroup) {
+       $scope.editTask=task;
+       $scope.taskEdit[taskgroup.id]=true;
+       $scope.selectedDay = new Date(task.end_date);
+    }
+
+    function saveEditTask() {
+        $scope.editTask.endDate=$scope.selectedDay.toString();
+        rq.saveEditTask($scope.editTask.id,$scope.editTask,function(res) {
+            $scope.editTask = {};
+            $scope.taskEdit={};
+            $scope.selectedDay=Date.today();
+            getTaskLists();
+        })
+    }
+
+    function cancelEditTask(e,taskgroup) {
+        e.preventDefault();
+        $scope.editTask = {};
+        $scope.selectedDay=Date.today();
+        $scope.taskEdit[taskgroup.id]=false;
+        $scope.taskEdit={};
+    }
+
+    function createTask(taskListId) {
+        $scope.newTask.endDate=$scope.selectedDay.toString();
+        $scope.newTask.taskList=taskListId;
         rq.createTask($scope.currentProject.id,$scope.newTask,function() {
             toastr.success(['Tâche',$scope.newTask.title,'créée!'].join(" "));
-            $scope.newTask = {'title':'','body':''};
-            getTasks();
+            $scope.newTask = {'title':'','body':'','endDate':''};
+            getTaskLists()
         })
     }
 
     function deleteTask(id,title) {
         rq.deleteTask(id,function(res) {
             toastr.success(['Task',title,'has been removed.'].join(" "));
-            getTasks();
+            getTaskLists()
         });
     }
 
     function dropTaskInList(data,taskgroup) {
         data = data['json/task'];
         if(!data) return;
-        taskgroup.data.push(data.name)
-        $scope.tasks[data.sourceGroup].data.splice(data.sourceTask,1);
+        rq.addTaskToList(taskgroup.id,data.id,function(res) {
+            getTaskLists()
+        })
     }
 
     function getTasks() {
         rq.getTasks($scope.currentProject.id,function(res) {
             $scope.tasks[0].data=res.data;
-            console.log(res.data)
         })
     }
 
     function getProjectUsers() {
         rq.getUsers($scope.currentProject.id,function(res) {
-            $scope.projectUsers=res.data;
+            $scope.projectUsers=res.data
         })
     }
 
-    function getProjects() {
+    function getProjects(cb) {
         rq.getProjects(function(res) {
-            console.log(res.data)
+            $scope.currentProject=res.data[0];
+            $scope.userProjects = res.data;
+            if(cb) cb();
         })
     }
 
     function assignTaskToUser(taskId,userId) {
         rq.assignTaskToUser(taskId,userId,function(res) {
-            getTasks()
+            getTaskLists()
         })
+    }
+
+    function createTaskList() {
+        var data = {'name': $scope.newTaskListName, "project_id":$scope.currentProject.id}
+        rq.createTaskList(data,function(res) {
+            toastr.success(['Liste de tâches',data.name,'créée.'].join(" "));
+            $scope.newTaskListName="";
+            getTaskLists()
+        })
+    }
+
+    function deleteTaskList(taskListId) {
+        rq.deleteTaskList(taskListId,function(res) {
+            toastr.success('Liste de tâches supprimée.');
+            getTaskLists()
+        })
+    }
+
+    function getTaskLists() {
+        rq.getTaskLists($scope.currentProject.id,function(res) {
+            $scope.taskLists=res.data;
+        });
     }
 
 }

@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Outil de gestion de projet</title>
-    <script type="application/javascript" src="vendor.js"></script>
-    <script type="application/javascript" src="app.js"></script>
-    <link rel="stylesheet" href="styles.css"/>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendor.css">
-    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon" />
-    <script>
-        const JWTTOKEN = "{{token}}";
-    </script>
-</head>
-<body>
-<div ui-view></div>
-</body>
-</html>
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('gdp/styles.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('gdp/vendor.css') }}"/>
+{% endblock stylesheets %}
+{% block body %}
+    <div ui-view></div>
+    {% block token %}
+        <script>
+            const JWTTOKEN = "{{token}}";
+        </script>
+    {% endblock %}
+    {% block javascripts %}
+        <script type="application/javascript" src="{{ asset('gdp/vendor.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('gdp/app.js') }}"></script>
+    {% endblock %}
+{% endblock body %}

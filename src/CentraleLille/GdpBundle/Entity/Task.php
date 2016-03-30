@@ -3,6 +3,7 @@
 namespace CentraleLille\GdpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use CentraleLille\GdpBundle\Enum\TaskStatus;
 
 //use CentraleLille\CustomFosUserBundle\Entity\User as User;
 
@@ -40,7 +41,7 @@ class Task
     /**
      * @var bool
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="string", length=255)
      */
     private $status;
 
@@ -68,8 +69,9 @@ class Task
     private $inChargeUser;
 
 
-    /* @ORM\ManyToMany(targetEntity="TaskList", inversedBy="tasks")
-     * @ORM\    JoinTable(name="tasks_lists")
+    /**
+     * @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
+     * @ORM\JoinColumn(name="tasklist_id",referencedColumnName="id")
      */
     private $taskLists;
 
@@ -85,6 +87,7 @@ class Task
     {
         $this->createdDate = new \DateTime();
         $this->taskLists = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = TaskStatus::PLANIFIE;
     }
 
     /**
@@ -154,7 +157,9 @@ class Task
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        if (TaskStatus::isValidValue($status)) {
+            $this->status = $status;
+        }
 
         return $this;
     }
@@ -284,9 +289,9 @@ class Task
     /**
      * @param mixed $taskList
      */
-    public function addTaskList($taskList)
+    public function setTaskList($taskList)
     {
-        $this->taskLists[] = $taskList;
+        $this->taskLists = $taskList;
     }
 
     /**

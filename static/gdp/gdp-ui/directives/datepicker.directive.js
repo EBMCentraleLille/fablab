@@ -1,11 +1,12 @@
 var uiModule = require('../_index');
+var origin = document.location.origin+'/gdp/';
 
 uiModule.directive('datePick',getDatepicker);
 
 function getDatepicker() {
     return {
         restrict: 'EA',
-        templateUrl: 'views/datepicker.html',
+        templateUrl: origin+'views/datepicker.html',
         link: function (scope, element, attrs) {
             scope.shiftMonth=shiftMonth;
             scope.pick=pickDay;

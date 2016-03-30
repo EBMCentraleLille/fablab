@@ -20,7 +20,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class ProjectController extends FOSRestController
+class ProjectController extends GdpRestController
 {
     /**
      * Return the overall project list.
@@ -69,6 +69,7 @@ class ProjectController extends FOSRestController
     {
         $projectRepository = $this->getDoctrine()->getRepository('CustomFosUserBundle:Project');
         $project = $projectRepository->find($id);
+        $this->existsProjectUser($id, $this->getUser()->getId());
         if (!$project) {
             throw $this->createNotFoundException('Data not found.');
         }
