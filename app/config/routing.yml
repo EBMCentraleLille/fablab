@@ -8,8 +8,7 @@ centrale_lille_search:
     prefix:   /search
 
 centrale_lille_knowledge:
-    resource: "@CentraleLilleKnowledgeBundle/Controller/"
-    type:     annotation
+    resource: "@CentraleLilleKnowledgeBundle/Resources/config/routing.yml"
     prefix:   /knowledge
 
 centrale_lille_gdp:

@@ -20,16 +20,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Controller\ProfileController as BaseController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Controller managing the user profile
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
-class ProfileController extends Controller
+
+class ProfileController extends BaseController
 {
     /**
-     * Show the user
+     * @Route("/profile" , name="fos_user_profile_show")
      */
     public function showAction()
     {
@@ -38,13 +41,21 @@ class ProfileController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+
+        $listUserCompetences = $this->container->get('app.competence.service')->getUserCompetenceList($user);
+
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
             'user' => $user,
-            'projects' => $user->getProjectUsers()
+            'competencesUser' => $listUserCompetences
         ));
+        // return $this->render('FOSUserBundle:Profile:show.html.twig', array(
+        //     'user' => $user,
+        //     'projects' => $user->getProjectUsers()
+        // ));
     }
 
     /**
+     * @Route("/profile/edit" , name="fos_user_profile_edit")
      * Edit the user
      */
     public function editAction(Request $request)
@@ -86,10 +97,15 @@ class ProfileController extends Controller
                 $response = new RedirectResponse($url);
             }
 
+
             $dispatcher->dispatch(
                 FOSUserEvents::PROFILE_EDIT_COMPLETED,
                 new FilterUserResponseEvent($user, $request, $response)
             );
+            // $dispatcher->dispatch(
+            //     FOSUserEvents::PROFILE_EDIT_COMPLETED,
+            //     new FilterUserResponseEvent($user, $request, $response)
+            // );
 
             return $response;
         }

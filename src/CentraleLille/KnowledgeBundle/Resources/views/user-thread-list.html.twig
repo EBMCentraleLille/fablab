@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Forum {% endblock %}
+
+{% block body %}
+    <div style="margin-top:75px">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h2>Mes sujets</h2>
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                <div class="list-group"></div>
+                {% for thread in userThreads %}
+                <a href="forum/{{ thread.id }}" class="list-group-item">
+                    <h4 class="list-group-item-heading">{{thread.title}} - <em> par {{thread.author.username}}</em></h4>
+                    <p class="list-group-item-text">{{thread.content}}</p></a>
+                    <a href="thread/del/{{ thread.id }}"> Supprimer </a>
+                </li>
+                {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+{% endblock %}

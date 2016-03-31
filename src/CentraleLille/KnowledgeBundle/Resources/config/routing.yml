@@ -1,0 +1,29 @@
+knowledge_forum:
+    path: /forum
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:index}
+
+knowledge_thread:
+    path: /forum/thread/{id}
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:viewThread}
+
+
+knowledge_mythreads:
+    path: /forum/mythreads
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:viewUserThreads}
+
+knowledge_add_thread:
+    path: /thread/add
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:addThread}
+
+knowledge_del_thread:
+    path: /thread/del/{id}
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:delThread}
+
+knowledge_add_post:
+    path: forum/post/add/{id}
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:addPost}
+
+knowledge_del_post:
+    path: /delete_post/{id}
+    defaults: {_controller:CentraleLilleKnowledgeBundle:Forum:delPost}
+

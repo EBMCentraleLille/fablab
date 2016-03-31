@@ -2,6 +2,8 @@
 
 namespace CentraleLille\KnowledgeBundle\Repository;
 
+use CentraleLille\KnowledgeBundle\Entity\Competence;
+
 /**
  * UserCompetenceRepository
  *
@@ -10,4 +12,14 @@ namespace CentraleLille\KnowledgeBundle\Repository;
  */
 class UserCompetenceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllCompetencesInUserCompetencesDQL(Competence $competence)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT c FROM CentraleLilleKnowledgeBundle:UserCompetence c JOIN c.competence b WHERE b.id = :competence'
+        );
+        $query->setParameter('competence', $competence->getId());
+        $results = $query->getResult();
+
+        return $results;
+    }
 }
