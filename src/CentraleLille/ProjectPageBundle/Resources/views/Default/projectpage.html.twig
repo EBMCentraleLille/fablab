@@ -83,7 +83,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Résumé du projet</h3>
@@ -93,14 +92,22 @@
                 </div>
             </div>
             {% if form is defined %}
-            <div class="button-right-menu">
-                <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
-                    <div class="panel-body">
-                        Editer le projet / Ajouter des membres
-                        <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
-                    </div>
-                </a>
-            </div>
+                <div class="button-right-menu">
+                    <a href="{{ path("project_edit", { 'projectId': project.id }) }}">
+                        <div class="panel-body">
+                            Editer le projet
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
+                </div>
+                <div class="button-right-menu">
+                    <a href="{{ path("project_show", { 'projectId': project.id }) }}">
+                        <div class="panel-body">
+                            Ajouter des membres
+                            <object data="{{ asset('icons/arrow-right.svg') }}" type="image/svg+xml" class="arrow-right"></object>
+                        </div>
+                    </a>
+                </div>
             {% endif %}
             </div>
         </div>

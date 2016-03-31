@@ -68,7 +68,7 @@ class StarProjectController extends Controller
             $starProjects= array_reverse($starProjects);
 
             return $this->render(
-                'CentraleLilleHomepageBundle:starproject.html.twig',
+                'CentraleLilleHomepageBundle:Default:starproject.html.twig',
                 [
                     'starProjects' => $starProjects
                 ]
@@ -124,7 +124,7 @@ class StarProjectController extends Controller
             }
             
             return $this->render(
-                'CentraleLilleHomepageBundle:newstarproject.html.twig',
+                'CentraleLilleHomepageBundle:Default:newstarproject.html.twig',
                 array(
                 'form' => $form->createView()
                 )

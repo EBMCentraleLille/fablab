@@ -5,12 +5,17 @@
 {% block body %}
 	<div style="margin-top:75px">
 		<div class="row" >
-			<div class="col-md-2"></div>
-	        <div class="col-md-8">
+			<div class="col-md-1"></div>
+	        <div class="col-md-10">
 	        	<h4>Liste des activités</h4>
 	        	<a href="{{ path("centrale_lille_newsfeed_new_activity") }}" class="btn btn-primary"> 
 	        		Ajouter une activité
 	        	</a>
+	        	{% for flash_message in app.session.flashbag.get('notice') %}
+				    <div class="alert alert-dismissible alert-success">
+				        {{ flash_message }}
+				    </div>
+				{% endfor %}
 	        	{% if recentActivities is defined %}
 	        		<table class="table table-striped table-hover ">
 					  	<thead>
@@ -18,8 +23,9 @@
 						      <th>#</th>
 						      <th>Date</th>
 						      <th>Contenu</th>
-						      <th>Nom du projet</th>
-						      <th>Nom du user</th>
+						      <th>Projet</th>
+						      <th>User</th>
+						      <th></th>
 						    </tr>
 					  	</thead>
 					<tbody>
@@ -30,6 +36,12 @@
 						      	<td>{{ recentActivity.content }}</td>
 							  	<td>{{ recentActivity.project.name }}</td>
 							    <td>{{ recentActivity.user.firstname }} </td>
+							    <td>
+							    	<form action="{{ path("centrale_lille_newsfeed_activity") }}" method="post">
+							    		<input type="hidden" name="activity" value="{{ recentActivity.id }}">
+							    		<input class="btn btn-link" type="submit" value="Supprimer">
+							    	</form>
+							    </td>
 						    </tr>
 			        	{% endfor %}
 			        </tbody>
@@ -38,7 +50,7 @@
 			       	Il n'y a pas encore d'activité. Créez en une !
 			    {% endif %}
 	        </div>
-	    	<div class="col-md-2"></div>
+	    	<div class="col-md-1"></div>
 	    </div>	
 	</div>
 {% endblock body %}
