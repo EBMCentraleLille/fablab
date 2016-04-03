@@ -93,7 +93,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="CentraleLille\ReservationBundle\Entity\Bookables\Bookable",
-     *     cascade={"persist","remove"})
+     *     cascade={"persist"})
      *
      */
     protected $bookable;
@@ -104,12 +104,12 @@ class Event
     protected $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\User", cascade={"persist"})
      */
     protected $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="CentraleLille\CustomFosUserBundle\Entity\Project", cascade={"persist"})
      */
     protected $user;
 

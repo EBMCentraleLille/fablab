@@ -15,6 +15,7 @@ use CentraleLille\CustomFosUserBundle\Entity\Project;
 use Symfony\Component\Validator\Constraints\DateTime;
 use CentraleLille\CustomFosUserBundle\Entity\User;
 use Doctrine\ORM\Mapping;
+use CentraleLille\ReservationBundle\Entity\Booking\Strategy\BookStrategy;
 
 class BookMachine extends BookStrategy
 {
@@ -24,7 +25,7 @@ class BookMachine extends BookStrategy
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->repository = $em->getRepository('ReservationBundle:Machine');
+        $this->repository = $em->getRepository('ReservationBundle:Bookables\Machine');
     }
 
     public function book(User $user, Project $project, DateTime $start, DateTime $end, Bookable $machine)

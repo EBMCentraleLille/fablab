@@ -54,6 +54,8 @@ class EventController extends Controller
 
         $types = $em->getRepository('ReservationBundle:Bookables\Type');
 
+        $user = $this->getUser();
+
         // machines fitering
 
         $machinesAvailables = array();
@@ -86,12 +88,13 @@ class EventController extends Controller
                 'machinesUnavailables'=>$machinesUnavailables,
                 'machinesOutOfOrder'=>$machinesOutOfOrder,
                 'machinesBeingTested'=>$machinesOutOfOrder,
-                'types'=>$types
+                'types'=>$types,
+                'user'=>$user,
                 )
         );
     }
 
-    public function viewResourceAction($resourceType, $id)
+    public function viewResourceAction($resourceType, $id, $userId)
     {
         switch ($resourceType) {
             case 'machine':
@@ -103,12 +106,15 @@ class EventController extends Controller
                     if (! is_null($machine)) { //if machine id is good, display planning
                         return $this->render(
                             'ReservationBundle::resourceBooking.html.twig',
-                            array('machine'=>$machine)
+                            array(
+                                'machine'=>$machine,
+                                'userId'=>$userId
+                                )
                         );
                     } else { //if this machine id does not return something, do smthg else
                         $machines = $repository->findAll();
                         return $this->render(
-                            'ReservationBundle::reservation.html.twig',
+                            'ReservationBundle::resourcesList.html.twig',
                             array('machines'=>$machines)
                         );
                     }
@@ -116,7 +122,7 @@ class EventController extends Controller
                 } else { // if id is not a number, go back
                     $machines = $repository->findAll();
                     return $this->render(
-                        'ReservationBundle::reservation.html.twig',
+                        'ReservationBundle::resourcesList.html.twig',
                         array('machines'=>$machines)
                     );
                 }
@@ -147,5 +153,23 @@ class EventController extends Controller
             'admin_list_resources.html.twig',
             array('machines'=>$machines)
         );
+    }
+    
+    public function deleteEventAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('ReservationBundle:Booking\Event');
+        $event = $repository->find($id);
+
+        if ($event == null) {
+            return $this->redirect($this->generateUrl('centrale_lille_my_booking'));
+        }
+        else{
+            $em->remove($event);
+            $em->flush();
+            $this->addFlash("Notice", "Evènement supprimé avec succès");
+
+            return $this->redirect($this->generateUrl('centrale_lille_my_booking'));
+        }
     }
 }

@@ -14,12 +14,12 @@
                         <ul>
                             <h4>{{ event.title }}</h4>
                             <li>Du {{ event.startDateTime|date('d-m-Y H:i')}} au {{ event.endDateTime|date('d-m-Y H:i')}} </li>
-                            <li>Sur la machine : {{ event.bookable.getName()  }}</li>
+                            <li>Sur la machine : {{ event.bookable.name }}</li>
                             <div class="btn-group" role="toolbar">
-                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href =''">
+                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='#'">
                                     Modifier
                                 </button>
-                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href =''">
+                                <button class="btn btn-danger" aria-hidden="true" onclick="location.href ='{{ path('centrale_lille_delete_event',{'id': event.id}) }}'">
                                     Supprimer
                                 </button>
                             </div>

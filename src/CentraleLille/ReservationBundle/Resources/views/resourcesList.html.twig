@@ -25,7 +25,7 @@
                                 Voir les détails
                             </button>
                             <button class="btn" aria-hidden="true"
-                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': resource.id}) }}'">
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': resource.id, 'userId': user.id}) }}'">
                                 Voir les disponibilités
                             </button>
                         </div>

@@ -21,7 +21,7 @@
                         </ul>
                         <div class="btn-group" role="toolbar">
                             <button class="btn" aria-hidden="true"
-                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
+                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id, 'userId': user.id}) }}'">
                                 Voir les disponibilités
                             </button>
                         </div>
@@ -35,12 +35,6 @@
                         <ul>
                             <li> {{ machine.description }}</li>
                         </ul>
-                        <div class="btn-group" role="toolbar">
-                            <button class="btn" aria-hidden="true"
-                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
-                                Voir les disponibilités
-                            </button>
-                        </div>
                     </div>
                 {% endfor %}
 
@@ -51,12 +45,6 @@
                         <ul>
                             <li> {{ machine.description }}</li>
                         </ul>
-                        <div class="btn-group" role="toolbar">
-                            <button class="btn" aria-hidden="true"
-                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
-                                Voir les disponibilités
-                            </button>
-                        </div>
                     </div>
                 {% endfor %}
 
@@ -67,11 +55,6 @@
                         <ul>
                             <li> {{ machine.description }}</li>
                         </ul>
-                        <div class="btn-group" role="toolbar">
-                            <button class="btn" aria-hidden="true"
-                                    onclick="location.href ='{{ path('centrale_lille_display_resources', {'resourceType': 'machine','id': machine.id}) }}'">
-                                Voir les disponibilités
-                            </button>
                         </div>
                     </div>
                 {% endfor %}
